@@ -9,7 +9,7 @@ export function Separator({ orientation = 'horizontal' }: SeparatorProps) {
   return (
     <div
       className={twMerge([
-        'bg-muted-foreground shrink-0',
+        'shrink-0 bg-muted-foreground',
         orientation === 'horizontal' ? 'h-[1px] w-full' : 'h-5 w-[1px]',
       ])}
     />
