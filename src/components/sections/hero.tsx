@@ -29,13 +29,13 @@ export function Hero() {
             <h2 className="text-5xl font-bold">Nathan Santos</h2>
           </div>
 
-          <p className="text-lg text-muted-foreground">
+          <Section.Description className="lg:text-start">
             Desenvolvedor Full Stack, movido por café, tecnologia e desafios.
             Curioso por natureza e apaixonado por resolver problemas, estou
             sempre aprendendo e criando. Meu objetivo? Ajudar pessoas e empresas
             a tirarem projetos do papel e, de quebra, deixar minha marca no
             mundo da tecnologia.
-          </p>
+          </Section.Description>
 
           <div className="flex items-center justify-center gap-2 lg:justify-start">
             <Button
