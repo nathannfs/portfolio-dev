@@ -1,5 +1,6 @@
 'use client'
 
+import { motion } from 'framer-motion'
 import { Moon, Sun } from 'lucide-react'
 import { useTheme } from 'next-themes'
 
@@ -9,14 +10,16 @@ export function ThemeToggle() {
   const { setTheme, theme } = useTheme()
 
   return (
-    <Button
-      variant="ghost"
-      size="icon"
-      onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
-    >
-      <Sun className="block dark:hidden" />
-      <Moon className="hidden dark:block" />
-      <span className="sr-only">Toggle theme</span>
-    </Button>
+    <motion.div whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.97 }}>
+      <Button
+        variant="ghost"
+        size="icon"
+        onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
+      >
+        <Sun className="block dark:hidden" />
+        <Moon className="hidden dark:block" />
+        <span className="sr-only">Mudar tema</span>
+      </Button>
+    </motion.div>
   )
 }

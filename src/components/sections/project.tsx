@@ -81,7 +81,7 @@ export function Project() {
                 .filter(Boolean)
                 .pop() || 1
             }
-            className="flex w-full max-w-3xl flex-col items-center"
+            className="flex w-full max-w-3xl flex-col md:items-center"
           >
             {projects.slice(0, 4).map((project, idx) => (
               <TimelineItem
@@ -100,8 +100,8 @@ export function Project() {
                     />
                   </TimelineIndicator>
                 </TimelineHeader>
-                <TimelineContent className="flex flex-col gap-2">
-                  <div className="w-[400px] text-muted-foreground">
+                <TimelineContent className="flex w-full flex-col gap-2 md:w-[500px]">
+                  <div className="w-full text-muted-foreground">
                     {project.description}
                   </div>
                   <div className="flex gap-2">

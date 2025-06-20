@@ -1,5 +1,6 @@
 'use client'
 
+import { motion } from 'framer-motion'
 import { Code, List } from 'lucide-react'
 import { usePathname } from 'next/navigation'
 import { useEffect, useState } from 'react'
@@ -104,59 +105,67 @@ export function Header() {
       </Button>
 
       <nav className="hidden items-center justify-center gap-2 md:flex">
-        <Button
-          variant="ghost"
-          onClick={() => handleNavigation('home')}
-          className={
-            isHomePage && activeSection === 'home'
-              ? 'border-b-2 border-blue-500'
-              : ''
-          }
-        >
-          Home
-        </Button>
+        <motion.div whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.97 }}>
+          <Button
+            variant="ghost"
+            onClick={() => handleNavigation('home')}
+            className={
+              isHomePage && activeSection === 'home'
+                ? 'border-b-2 border-blue-500'
+                : ''
+            }
+          >
+            Home
+          </Button>
+        </motion.div>
 
         <Separator orientation="vertical" />
 
-        <Button
-          variant="ghost"
-          onClick={() => handleNavigation('about')}
-          className={
-            isHomePage && activeSection === 'about'
-              ? 'border-b-2 border-blue-500'
-              : ''
-          }
-        >
-          Sobre
-        </Button>
+        <motion.div whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.97 }}>
+          <Button
+            variant="ghost"
+            onClick={() => handleNavigation('about')}
+            className={
+              isHomePage && activeSection === 'about'
+                ? 'border-b-2 border-blue-500'
+                : ''
+            }
+          >
+            Sobre
+          </Button>
+        </motion.div>
 
         <Separator orientation="vertical" />
 
-        <Button
-          variant="ghost"
-          onClick={() => handleNavigation('project')}
-          className={
-            isHomePage && activeSection === 'project'
-              ? 'border-b-2 border-blue-500'
-              : ''
-          }
-        >
-          Projetos
-        </Button>
+        <motion.div whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.97 }}>
+          <Button
+            variant="ghost"
+            onClick={() => handleNavigation('project')}
+            className={
+              isHomePage && activeSection === 'project'
+                ? 'border-b-2 border-blue-500'
+                : ''
+            }
+          >
+            Projetos
+          </Button>
+        </motion.div>
 
         <Separator orientation="vertical" />
 
-        <Button
-          variant="ghost"
-          onClick={() => handleNavigation('contact')}
-          className={
-            isHomePage && activeSection === 'contact'
-              ? 'border-b-2 border-blue-500'
-              : ''
-          }
-        >
-          Contato
-        </Button>
+        <motion.div whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.97 }}>
+          <Button
+            variant="ghost"
+            onClick={() => handleNavigation('contact')}
+            className={
+              isHomePage && activeSection === 'contact'
+                ? 'border-b-2 border-blue-500'
+                : ''
+            }
+          >
+            Contato
+          </Button>
+        </motion.div>
 
         <Separator orientation="vertical" />
 
@@ -176,65 +185,85 @@ export function Header() {
             <SheetDescription />
 
             <SheetClose asChild>
-              <Button
-                variant="ghost"
-                onClick={() => handleNavigation('home')}
-                className={
-                  isHomePage && activeSection === 'home'
-                    ? 'border-b-2 border-blue-500'
-                    : ''
-                }
+              <motion.div
+                whileHover={{ scale: 1.1 }}
+                whileTap={{ scale: 0.97 }}
               >
-                Home
-              </Button>
+                <Button
+                  variant="ghost"
+                  onClick={() => handleNavigation('home')}
+                  className={
+                    isHomePage && activeSection === 'home'
+                      ? 'border-b-2 border-blue-500'
+                      : ''
+                  }
+                >
+                  Home
+                </Button>
+              </motion.div>
             </SheetClose>
 
             <Separator />
 
             <SheetClose asChild>
-              <Button
-                variant="ghost"
-                className={
-                  isHomePage && activeSection === 'about'
-                    ? 'border-b-2 border-blue-500'
-                    : ''
-                }
-                onClick={() => handleNavigation('about')}
+              <motion.div
+                whileHover={{ scale: 1.1 }}
+                whileTap={{ scale: 0.97 }}
               >
-                Sobre
-              </Button>
+                <Button
+                  variant="ghost"
+                  className={
+                    isHomePage && activeSection === 'about'
+                      ? 'border-b-2 border-blue-500'
+                      : ''
+                  }
+                  onClick={() => handleNavigation('about')}
+                >
+                  Sobre
+                </Button>
+              </motion.div>
             </SheetClose>
 
             <Separator />
 
             <SheetClose asChild>
-              <Button
-                variant="ghost"
-                className={
-                  isHomePage && activeSection === 'project'
-                    ? 'border-b-2 border-blue-500'
-                    : ''
-                }
-                onClick={() => handleNavigation('project')}
+              <motion.div
+                whileHover={{ scale: 1.1 }}
+                whileTap={{ scale: 0.97 }}
               >
-                Projetos
-              </Button>
+                <Button
+                  variant="ghost"
+                  className={
+                    isHomePage && activeSection === 'project'
+                      ? 'border-b-2 border-blue-500'
+                      : ''
+                  }
+                  onClick={() => handleNavigation('project')}
+                >
+                  Projetos
+                </Button>
+              </motion.div>
             </SheetClose>
 
             <Separator />
 
             <SheetClose asChild>
-              <Button
-                variant="ghost"
-                className={
-                  isHomePage && activeSection === 'contact'
-                    ? 'border-b-2 border-blue-500'
-                    : ''
-                }
-                onClick={() => handleNavigation('contact')}
+              <motion.div
+                whileHover={{ scale: 1.1 }}
+                whileTap={{ scale: 0.97 }}
               >
-                Contato
-              </Button>
+                <Button
+                  variant="ghost"
+                  className={
+                    isHomePage && activeSection === 'contact'
+                      ? 'border-b-2 border-blue-500'
+                      : ''
+                  }
+                  onClick={() => handleNavigation('contact')}
+                >
+                  Contato
+                </Button>
+              </motion.div>
             </SheetClose>
 
             <Separator />

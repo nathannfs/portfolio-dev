@@ -1,5 +1,6 @@
 import type { ReactNode } from 'react'
 
+import { Angular } from '@/components/icons/angular'
 import { Css3 } from '@/components/icons/css'
 import { Expo } from '@/components/icons/expo'
 import { Figma } from '@/components/icons/figma'
@@ -7,7 +8,9 @@ import { Git } from '@/components/icons/git'
 import { Github } from '@/components/icons/github'
 import { Html5 } from '@/components/icons/html'
 import { Javascript } from '@/components/icons/javascript'
+import { Nestjs } from '@/components/icons/nest'
 import { Nextjs } from '@/components/icons/nextjs'
+import { Nodejs } from '@/components/icons/node'
 import { React } from '@/components/icons/react'
 import { ReactNative } from '@/components/icons/react-native'
 import { Tailwindcss } from '@/components/icons/tailwindcss'
@@ -42,6 +45,18 @@ export const techs: TechsProps[] = [
   {
     name: 'Next.js',
     icon: <Nextjs />,
+  },
+  {
+    name: 'Nest.js',
+    icon: <Nestjs />,
+  },
+  {
+    name: 'Node.js',
+    icon: <Nodejs />,
+  },
+  {
+    name: 'Angular.js',
+    icon: <Angular />,
   },
   {
     name: 'Tailwind CSS',

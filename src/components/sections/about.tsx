@@ -25,7 +25,7 @@ const certificates: Certificate[] = [
     start: 'Out/2024',
     end: 'Abr/2025',
     type: 'degree',
-    status: 'in_progress',
+    status: 'completed',
   },
   {
     title: 'Tecnólogo em Mecatrônica Industrial',

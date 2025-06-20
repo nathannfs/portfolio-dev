@@ -6,6 +6,7 @@ import { Button } from '@/components/button'
 
 import { Input } from '../input'
 import { Separator } from '../separator'
+import { Textarea } from '../textarea'
 import { Label } from '../ui/label'
 
 export function ContactForm() {
@@ -62,17 +63,18 @@ export function ContactForm() {
           Mensagem
         </Label>
 
-        <div className="flex w-full items-start gap-2 rounded-lg border border-zinc-300 bg-background px-3 py-2 shadow-sm focus-within:border-sky-300 focus-within:ring-4 focus-within:ring-sky-100 dark:border-zinc-700 dark:bg-zinc-800 dark:focus-within:border-sky-500 dark:focus-within:ring-sky-500/20">
-          <MessageCircle className="text-sky-600" />
-          <textarea
+        <Textarea.Root>
+          <Textarea.Prefix>
+            <MessageCircle className="text-sky-600" />
+          </Textarea.Prefix>
+          <Textarea.Control
             id="message"
             name="message"
             placeholder="Digite sua mensagem"
             required
             rows={4}
-            className="flex-1 resize-none border-0 bg-transparent p-0 text-zinc-900 placeholder-zinc-600 outline-none dark:text-zinc-100 dark:placeholder-zinc-400"
           />
-        </div>
+        </Textarea.Root>
       </div>
 
       <Separator />
