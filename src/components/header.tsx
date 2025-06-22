@@ -4,6 +4,7 @@ import { motion } from 'framer-motion'
 import { Code, List } from 'lucide-react'
 import { usePathname } from 'next/navigation'
 import { useEffect, useState } from 'react'
+import { twMerge } from 'tailwind-merge'
 
 import { Button } from './button'
 import { Separator } from './separator'
@@ -25,10 +26,17 @@ export function Header() {
   useEffect(() => {
     if (!isHomePage) return
 
-    const sections = ['home', 'about', 'project', 'contact']
+    const sections = [
+      'home',
+      'about',
+      'specialties',
+      'techs',
+      'project',
+      'contact',
+    ]
     const observerOptions = {
       root: null,
-      rootMargin: '-50% 0px -50% 0px',
+      rootMargin: '-40% 0px -60% 0px',
       threshold: 0,
     }
 
@@ -89,8 +97,25 @@ export function Header() {
     }
   }, [isHomePage])
 
+  const [scrolled, setScrolled] = useState(false)
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setScrolled(window.scrollY > 10)
+    }
+    window.addEventListener('scroll', handleScroll)
+    return () => window.removeEventListener('scroll', handleScroll)
+  }, [])
+
   return (
-    <header className="flex w-full items-center justify-between border-b border-muted px-6 py-4 shadow-sm">
+    <motion.header
+      className={twMerge(
+        'fixed left-0 top-0 z-50 flex w-full items-center justify-between px-6 py-4 transition-all duration-300',
+        scrolled
+          ? 'border-b border-muted/20 bg-background/80 shadow-md backdrop-blur-sm'
+          : 'bg-transparent',
+      )}
+    >
       <Button
         variant="none"
         className="flex items-center gap-3 p-0"
@@ -98,74 +123,100 @@ export function Header() {
       >
         <Code />
 
-        <div className="flex flex-col">
-          <h1 className="text-xl font-bold">Nathan Santos</h1>
-          <span className="text-sm text-zinc-400">Full Stack Developer</span>
+        <div className="flex items-center gap-2">
+          <h1 className="text-lg font-bold">Nathan Santos</h1>
+          <div className="h-4 w-px bg-muted-foreground/30" />
+          <span className="text-sm text-muted-foreground">
+            Full Stack Developer
+          </span>
         </div>
       </Button>
 
       <nav className="hidden items-center justify-center gap-2 md:flex">
-        <motion.div whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.97 }}>
-          <Button
-            variant="ghost"
-            onClick={() => handleNavigation('home')}
-            className={
-              isHomePage && activeSection === 'home'
-                ? 'border-b-2 border-blue-500'
-                : ''
-            }
-          >
+        <div className="relative">
+          <Button variant="ghost" onClick={() => handleNavigation('home')}>
             Home
           </Button>
-        </motion.div>
+          {isHomePage && activeSection === 'home' && (
+            <motion.div
+              className="absolute bottom-[-4px] left-0 right-0 h-0.5 bg-sky-500"
+              layoutId="active-pill"
+            />
+          )}
+        </div>
 
         <Separator orientation="vertical" />
 
-        <motion.div whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.97 }}>
-          <Button
-            variant="ghost"
-            onClick={() => handleNavigation('about')}
-            className={
-              isHomePage && activeSection === 'about'
-                ? 'border-b-2 border-blue-500'
-                : ''
-            }
-          >
+        <div className="relative">
+          <Button variant="ghost" onClick={() => handleNavigation('about')}>
             Sobre
           </Button>
-        </motion.div>
+          {isHomePage && activeSection === 'about' && (
+            <motion.div
+              className="absolute bottom-[-4px] left-0 right-0 h-0.5 bg-sky-500"
+              layoutId="active-pill"
+            />
+          )}
+        </div>
 
         <Separator orientation="vertical" />
 
-        <motion.div whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.97 }}>
+        <div className="relative">
           <Button
             variant="ghost"
-            onClick={() => handleNavigation('project')}
-            className={
-              isHomePage && activeSection === 'project'
-                ? 'border-b-2 border-blue-500'
-                : ''
-            }
+            onClick={() => handleNavigation('specialties')}
           >
+            Especialidades
+          </Button>
+          {isHomePage && activeSection === 'specialties' && (
+            <motion.div
+              className="absolute bottom-[-4px] left-0 right-0 h-0.5 bg-sky-500"
+              layoutId="active-pill"
+            />
+          )}
+        </div>
+
+        <Separator orientation="vertical" />
+
+        <div className="relative">
+          <Button variant="ghost" onClick={() => handleNavigation('project')}>
             Projetos
           </Button>
-        </motion.div>
+          {isHomePage && activeSection === 'project' && (
+            <motion.div
+              className="absolute bottom-[-4px] left-0 right-0 h-0.5 bg-sky-500"
+              layoutId="active-pill"
+            />
+          )}
+        </div>
 
         <Separator orientation="vertical" />
 
-        <motion.div whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.97 }}>
-          <Button
-            variant="ghost"
-            onClick={() => handleNavigation('contact')}
-            className={
-              isHomePage && activeSection === 'contact'
-                ? 'border-b-2 border-blue-500'
-                : ''
-            }
-          >
+        <div className="relative">
+          <Button variant="ghost" onClick={() => handleNavigation('techs')}>
+            Tecnologias
+          </Button>
+          {isHomePage && activeSection === 'techs' && (
+            <motion.div
+              className="absolute bottom-[-4px] left-0 right-0 h-0.5 bg-sky-500"
+              layoutId="active-pill"
+            />
+          )}
+        </div>
+
+        <Separator orientation="vertical" />
+
+        <div className="relative">
+          <Button variant="ghost" onClick={() => handleNavigation('contact')}>
             Contato
           </Button>
-        </motion.div>
+          {isHomePage && activeSection === 'contact' && (
+            <motion.div
+              className="absolute bottom-[-4px] left-0 right-0 h-0.5 bg-sky-500"
+              layoutId="active-pill"
+            />
+          )}
+        </div>
 
         <Separator orientation="vertical" />
 
@@ -180,91 +231,127 @@ export function Header() {
             </Button>
           </SheetTrigger>
 
-          <SheetContent className="flex w-fit flex-col items-center gap-2">
+          <SheetContent className="flex w-fit flex-col items-center gap-2 px-6">
             <SheetTitle />
             <SheetDescription />
 
-            <SheetClose asChild>
-              <motion.div
-                whileHover={{ scale: 1.1 }}
-                whileTap={{ scale: 0.97 }}
-              >
+            <div className="relative w-full text-center">
+              <SheetClose asChild>
                 <Button
                   variant="ghost"
                   onClick={() => handleNavigation('home')}
-                  className={
-                    isHomePage && activeSection === 'home'
-                      ? 'border-b-2 border-blue-500'
-                      : ''
-                  }
+                  className="w-full py-1"
                 >
                   Home
                 </Button>
-              </motion.div>
-            </SheetClose>
+              </SheetClose>
+              {isHomePage && activeSection === 'home' && (
+                <motion.div
+                  className="absolute bottom-[-2px] left-0 right-0 h-0.5 bg-sky-500"
+                  layoutId="active-pill-mobile"
+                />
+              )}
+            </div>
 
             <Separator />
 
-            <SheetClose asChild>
-              <motion.div
-                whileHover={{ scale: 1.1 }}
-                whileTap={{ scale: 0.97 }}
-              >
+            <div className="relative w-full text-center">
+              <SheetClose asChild>
                 <Button
                   variant="ghost"
-                  className={
-                    isHomePage && activeSection === 'about'
-                      ? 'border-b-2 border-blue-500'
-                      : ''
-                  }
                   onClick={() => handleNavigation('about')}
+                  className="w-full py-1"
                 >
                   Sobre
                 </Button>
-              </motion.div>
-            </SheetClose>
+              </SheetClose>
+              {isHomePage && activeSection === 'about' && (
+                <motion.div
+                  className="absolute bottom-[-2px] left-0 right-0 h-0.5 bg-sky-500"
+                  layoutId="active-pill-mobile"
+                />
+              )}
+            </div>
 
             <Separator />
 
-            <SheetClose asChild>
-              <motion.div
-                whileHover={{ scale: 1.1 }}
-                whileTap={{ scale: 0.97 }}
-              >
+            <div className="relative w-full text-center">
+              <SheetClose asChild>
                 <Button
                   variant="ghost"
-                  className={
-                    isHomePage && activeSection === 'project'
-                      ? 'border-b-2 border-blue-500'
-                      : ''
-                  }
+                  onClick={() => handleNavigation('specialties')}
+                  className="w-full py-1"
+                >
+                  Especialidades
+                </Button>
+              </SheetClose>
+              {isHomePage && activeSection === 'specialties' && (
+                <motion.div
+                  className="absolute bottom-[-2px] left-0 right-0 h-0.5 bg-sky-500"
+                  layoutId="active-pill-mobile"
+                />
+              )}
+            </div>
+
+            <Separator />
+
+            <div className="relative w-full text-center">
+              <SheetClose asChild>
+                <Button
+                  variant="ghost"
                   onClick={() => handleNavigation('project')}
+                  className="w-full py-1"
                 >
                   Projetos
                 </Button>
-              </motion.div>
-            </SheetClose>
+              </SheetClose>
+              {isHomePage && activeSection === 'project' && (
+                <motion.div
+                  className="absolute bottom-[-2px] left-0 right-0 h-0.5 bg-sky-500"
+                  layoutId="active-pill-mobile"
+                />
+              )}
+            </div>
 
             <Separator />
 
-            <SheetClose asChild>
-              <motion.div
-                whileHover={{ scale: 1.1 }}
-                whileTap={{ scale: 0.97 }}
-              >
+            <div className="relative w-full text-center">
+              <SheetClose asChild>
                 <Button
                   variant="ghost"
-                  className={
-                    isHomePage && activeSection === 'contact'
-                      ? 'border-b-2 border-blue-500'
-                      : ''
-                  }
+                  onClick={() => handleNavigation('techs')}
+                  className="w-full py-1"
+                >
+                  Tecnologias
+                </Button>
+              </SheetClose>
+              {isHomePage && activeSection === 'techs' && (
+                <motion.div
+                  className="absolute bottom-[-2px] left-0 right-0 h-0.5 bg-sky-500"
+                  layoutId="active-pill-mobile"
+                />
+              )}
+            </div>
+
+            <Separator />
+
+            <div className="relative w-full text-center">
+              <SheetClose asChild>
+                <Button
+                  variant="ghost"
                   onClick={() => handleNavigation('contact')}
+                  className="w-full py-1"
                 >
                   Contato
                 </Button>
-              </motion.div>
-            </SheetClose>
+              </SheetClose>
+              {isHomePage && activeSection === 'contact' && (
+                <motion.div
+                  className="absolute bottom-[-2px] left-0 right-0 h-0.5 bg-sky-500"
+                  layoutId="active-pill-mobile"
+                />
+              )}
+            </div>
 
             <Separator />
 
@@ -272,6 +359,6 @@ export function Header() {
           </SheetContent>
         </Sheet>
       </nav>
-    </header>
+    </motion.header>
   )
 }

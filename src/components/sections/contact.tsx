@@ -1,14 +1,48 @@
+import { motion } from 'framer-motion'
 import { Github, Linkedin, Mail, MapPin, Phone } from 'lucide-react'
 import Link from 'next/link'
 
+import { Footer } from '../footer'
 import { ContactForm } from '../form/contact-form'
 import { Section } from '../section'
 
+const leftVariants = {
+  hidden: { opacity: 0, x: -50, rotate: -5, scale: 0.9 },
+  visible: {
+    opacity: 1,
+    x: 0,
+    rotate: 0,
+    scale: 1,
+    transition: { type: 'spring', stiffness: 80, delay: 0.1 },
+  },
+}
+
+const rightVariants = {
+  hidden: { opacity: 0, x: 50, rotate: 5, scale: 0.9 },
+  visible: {
+    opacity: 1,
+    x: 0,
+    rotate: 0,
+    scale: 1,
+    transition: { type: 'spring', stiffness: 80, delay: 0.2 },
+  },
+}
+
 export function Contact() {
   return (
-    <Section.Root id="contact">
-      <div className="grid grid-cols-1 grid-rows-2 flex-col items-center justify-between gap-4 py-4 md:py-20 lg:grid-cols-[1fr_1fr] lg:grid-rows-1">
-        <div className="flex h-full flex-col gap-6 rounded-xl border border-border bg-background p-8 shadow-md">
+    <Section.Root
+      id="contact"
+      className="flex scroll-mt-20 flex-col justify-between md:scroll-mt-0"
+    >
+      <div className="grid w-full grid-cols-1 grid-rows-2 flex-col items-stretch justify-between gap-4 py-4 md:py-20 lg:grid-cols-[1fr_1fr] lg:grid-rows-1">
+        <motion.div
+          className="flex h-full flex-col gap-6 rounded-xl border border-border bg-background p-8 shadow-md"
+          variants={leftVariants}
+          initial="hidden"
+          whileInView="visible"
+          exit="hidden"
+          viewport={{ once: false, amount: 0.2 }}
+        >
           <h2 className="mb-2 text-4xl font-bold">Entre em contato</h2>
           <p className="mb-4 text-lg text-muted-foreground">
             Ficou interessado em trabalhar comigo, tirar dúvidas ou só quer
@@ -53,12 +87,21 @@ export function Contact() {
               Sertãozinho, SP
             </li>
           </ul>
-        </div>
+        </motion.div>
 
-        <div className="h-full rounded-xl border border-border bg-background p-8 shadow-md">
+        <motion.div
+          className="h-full rounded-xl border border-border bg-background p-8 shadow-md"
+          variants={rightVariants}
+          initial="hidden"
+          whileInView="visible"
+          exit="hidden"
+          viewport={{ once: false, amount: 0.2 }}
+        >
           <ContactForm />
-        </div>
+        </motion.div>
       </div>
+
+      <Footer />
     </Section.Root>
   )
 }

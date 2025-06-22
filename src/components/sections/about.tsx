@@ -26,6 +26,8 @@ const certificates: Certificate[] = [
     end: 'Abr/2025',
     type: 'degree',
     status: 'completed',
+    description:
+      'Minha formação em Engenharia de Software me proporcionou uma base sólida em lógica, algoritmos e estrutura de dados, princípios que aplico diariamente no desenvolvimento de software.',
   },
   {
     title: 'Tecnólogo em Mecatrônica Industrial',
@@ -34,6 +36,8 @@ const certificates: Certificate[] = [
     end: 'Dez/2023',
     type: 'degree',
     status: 'completed',
+    description:
+      'Minha formação em Mecatrônica me proporcionou uma base sólida em lógica, automação e resolução de problemas complexos, princípios que aplico diariamente no desenvolvimento de software.',
   },
   {
     title: 'ReactJS',
@@ -81,140 +85,215 @@ function statusColor(status: Certificate['status']) {
   }
 }
 
+const sectionVariants = {
+  hidden: { opacity: 0, y: 50, scale: 0.95 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    scale: 1,
+    transition: {
+      duration: 0.5,
+      ease: 'easeInOut',
+    },
+  },
+}
+
 export function About() {
   return (
-    <Section.Root id="about">
-      <Tabs defaultValue="about" className="items-center justify-center">
-        <TabsList className="mb-6 flex justify-center gap-1 bg-transparent">
-          <TabsTrigger
-            value="about"
-            className="rounded-full data-[state=active]:bg-primary data-[state=active]:text-primary-foreground data-[state=active]:shadow-none"
-          >
-            Sobre mim
-          </TabsTrigger>
-          <TabsTrigger
-            value="degree"
-            className="rounded-full data-[state=active]:bg-primary data-[state=active]:text-primary-foreground data-[state=active]:shadow-none"
-          >
-            Formações
-          </TabsTrigger>
-          <TabsTrigger
-            value="certifications"
-            className="rounded-full data-[state=active]:bg-primary data-[state=active]:text-primary-foreground data-[state=active]:shadow-none"
-          >
-            Certificações
-          </TabsTrigger>
-        </TabsList>
+    <Section.Root id="about" className="scroll-mt-20 md:scroll-mt-0">
+      <motion.div
+        className="flex w-full flex-col items-center justify-center"
+        variants={sectionVariants}
+        initial="hidden"
+        whileInView="visible"
+        exit="hidden"
+        viewport={{ once: false, amount: 0.2 }}
+      >
+        <Tabs defaultValue="about" className="items-center justify-center">
+          <TabsList className="mb-6 flex justify-center gap-1 bg-transparent">
+            <TabsTrigger
+              value="about"
+              className="rounded-full data-[state=active]:bg-primary data-[state=active]:text-primary-foreground data-[state=active]:shadow-none"
+            >
+              Sobre mim
+            </TabsTrigger>
+            <TabsTrigger
+              value="degree"
+              className="rounded-full data-[state=active]:bg-primary data-[state=active]:text-primary-foreground data-[state=active]:shadow-none"
+            >
+              Formações
+            </TabsTrigger>
+            <TabsTrigger
+              value="certifications"
+              className="rounded-full data-[state=active]:bg-primary data-[state=active]:text-primary-foreground data-[state=active]:shadow-none"
+            >
+              Certificações
+            </TabsTrigger>
+          </TabsList>
 
-        <div className="flex w-full flex-col items-center justify-start">
-          <Section.Content>
-            <TabsContent value="about" className="w-full">
-              <Section.Block>
-                <Section.Description>
-                  Sou um desenvolvedor Full Stack com sólida experiência em
-                  desenvolvimento web, apaixonado por criar soluções inovadoras
-                  e eficientes. Meu foco é transformar ideias em realidade
-                  através de tecnologia, combinando criatividade, lógica e as
-                  melhores práticas de programação. Tenho entusiasmo por
-                  enfrentar desafios e encontrar soluções para problemas
-                  complexos, sempre buscando impacto positivo e excelência nos
-                  projetos que realizo. Meu trabalho reflete um compromisso com
-                  aprendizado contínuo, inovação e entrega de resultados que
-                  superem expectativas.
-                </Section.Description>
-              </Section.Block>
-            </TabsContent>
+          <div className="flex w-full flex-col items-center justify-start">
+            <Section.Content>
+              <TabsContent value="about" className="w-full">
+                <motion.div
+                  key="about-content"
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -20 }}
+                  transition={{ duration: 0.3 }}
+                >
+                  <Section.Block>
+                    <Section.Description>
+                      Sou um desenvolvedor Full Stack com sólida experiência em
+                      desenvolvimento web, apaixonado por criar soluções
+                      inovadoras e eficientes. Meu foco é transformar ideias em
+                      realidade através de tecnologia, combinando criatividade,
+                      lógica e as melhores práticas de programação. Tenho
+                      entusiasmo por enfrentar desafios e encontrar soluções
+                      para problemas complexos, sempre buscando impacto positivo
+                      e excelência nos projetos que realizo. Meu trabalho
+                      reflete um compromisso com aprendizado contínuo, inovação
+                      e entrega de resultados que superem expectativas.
+                      <br />
+                      <br />
+                      <b>
+                        Atualmente, busco desafios que me permitam crescer e
+                        colaborar em projetos inovadores. Vamos construir algo
+                        incrível juntos?
+                      </b>
+                    </Section.Description>
+                  </Section.Block>
+                </motion.div>
+              </TabsContent>
 
-            <TabsContent value="degree" className="w-full">
-              <Section.Block>
-                <div className="flex flex-col gap-4">
-                  {certificates
-                    .filter((c) => c.type === 'degree')
-                    .map((certificate) => (
-                      <div
-                        key={certificate.title}
-                        className="flex flex-col gap-2 rounded-lg border border-border bg-muted/40 p-4 shadow-sm"
-                      >
-                        <div className="flex items-center justify-between">
-                          <span className="text-lg font-semibold text-foreground">
-                            {certificate.title}
-                          </span>
-                          <span
-                            className={`ml-2 whitespace-nowrap rounded-full px-2 py-0.5 text-xs font-medium ${statusColor(
-                              certificate.status,
-                            )}`}
+              <TabsContent value="degree" className="w-full">
+                <motion.div
+                  key="degree-content"
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -20 }}
+                  transition={{ duration: 0.3 }}
+                >
+                  <Section.Block>
+                    <div className="flex flex-col gap-4">
+                      {certificates
+                        .filter((c) => c.type === 'degree')
+                        .map((certificate) => (
+                          <div
+                            key={certificate.title}
+                            className="flex flex-col gap-2 rounded-lg border border-border bg-muted/40 p-4 shadow-sm"
                           >
-                            {statusLabel(certificate.status)}
-                          </span>
-                        </div>
-                        <div className="flex flex-row items-center gap-2 text-sm text-muted-foreground">
-                          <span className="font-medium">
-                            {certificate.institution}
-                          </span>
-                          <Separator orientation="vertical" className="h-3" />
-                          <span className="text-xs text-zinc-400">
-                            {certificate.start} - {certificate.end}
-                          </span>
-                        </div>
-                      </div>
-                    ))}
-                </div>
-              </Section.Block>
-            </TabsContent>
-
-            <TabsContent value="certifications" className="w-full">
-              <Section.Block>
-                <div className="flex flex-col gap-4">
-                  {certificates
-                    .filter((c) => c.type === 'certification')
-                    .map((certificate) => (
-                      <div
-                        key={certificate.title}
-                        className="flex max-w-lg flex-col gap-2 rounded-lg border border-border bg-muted/40 p-4 shadow-sm"
-                      >
-                        <div className="flex items-center justify-between">
-                          <span className="text-lg font-semibold text-foreground">
-                            {certificate.title}
-                          </span>
-                          <span
-                            className={`ml-2 whitespace-nowrap rounded-full px-2 py-0.5 text-xs font-medium ${statusColor(
-                              certificate.status,
-                            )}`}
-                          >
-                            {statusLabel(certificate.status)}
-                          </span>
-                        </div>
-                        {certificate.description && (
-                          <div className="text-xs text-muted-foreground">
-                            {certificate.description}
+                            <div className="flex items-center justify-between">
+                              <span className="text-lg font-semibold text-foreground">
+                                {certificate.title}
+                              </span>
+                              <span
+                                className={`ml-2 whitespace-nowrap rounded-full px-2 py-0.5 text-xs font-medium ${statusColor(
+                                  certificate.status,
+                                )}`}
+                              >
+                                {statusLabel(certificate.status)}
+                              </span>
+                            </div>
+                            <div className="flex flex-row items-center gap-2 text-sm text-muted-foreground">
+                              <span className="font-medium">
+                                {certificate.institution}
+                              </span>
+                              <Separator
+                                orientation="vertical"
+                                className="h-3"
+                              />
+                              <span className="text-xs text-zinc-400">
+                                {certificate.start} - {certificate.end}
+                              </span>
+                            </div>
+                            {certificate.description && (
+                              <p className="mt-2 text-sm text-muted-foreground">
+                                {certificate.description}
+                              </p>
+                            )}
                           </div>
-                        )}
-                        <div className="flex flex-row items-center gap-2 text-sm text-muted-foreground">
-                          <span className="font-medium">
-                            {certificate.institution}
-                          </span>
-                          <Separator orientation="vertical" className="h-3" />
-                          <span className="text-xs text-zinc-400">
-                            {certificate.hours} horas
-                          </span>
-                        </div>
-                      </div>
-                    ))}
-                </div>
-              </Section.Block>
-            </TabsContent>
+                        ))}
+                    </div>
+                  </Section.Block>
+                </motion.div>
+              </TabsContent>
 
-            <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.97 }}>
-              <Link href="/about">
-                <Button>
-                  Mais sobre mim
-                  <ArrowRight className="size-4" />
-                </Button>
-              </Link>
-            </motion.div>
-          </Section.Content>
-        </div>
-      </Tabs>
+              <TabsContent value="certifications" className="w-full">
+                <motion.div
+                  key="certifications-content"
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -20 }}
+                  transition={{ duration: 0.3 }}
+                >
+                  <Section.Block>
+                    <div className="flex flex-col gap-4">
+                      {certificates
+                        .filter((c) => c.type === 'certification')
+                        .map((certificate) => (
+                          <div
+                            key={certificate.title}
+                            className="flex max-w-lg flex-col gap-2 rounded-lg border border-border bg-muted/40 p-4 shadow-sm"
+                          >
+                            <div className="flex items-center justify-between">
+                              <span className="text-lg font-semibold text-foreground">
+                                {certificate.title}
+                              </span>
+                              <span
+                                className={`ml-2 whitespace-nowrap rounded-full px-2 py-0.5 text-xs font-medium ${statusColor(
+                                  certificate.status,
+                                )}`}
+                              >
+                                {statusLabel(certificate.status)}
+                              </span>
+                            </div>
+                            {certificate.description && (
+                              <div className="text-xs text-muted-foreground">
+                                {certificate.description}
+                              </div>
+                            )}
+                            <div className="flex flex-row items-center gap-2 text-sm text-muted-foreground">
+                              <span className="font-medium">
+                                {certificate.institution}
+                              </span>
+                              <Separator
+                                orientation="vertical"
+                                className="h-3"
+                              />
+                              <span className="text-xs text-zinc-400">
+                                {certificate.hours} horas
+                              </span>
+                            </div>
+                          </div>
+                        ))}
+                    </div>
+                  </Section.Block>
+                </motion.div>
+              </TabsContent>
+
+              <motion.div
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.97 }}
+                animate={{
+                  translateY: [0, -4, 0],
+                }}
+                transition={{
+                  duration: 1.5,
+                  repeat: Infinity,
+                  repeatType: 'loop',
+                }}
+              >
+                <Link href="/about">
+                  <Button>
+                    Mais sobre mim
+                    <ArrowRight className="size-4" />
+                  </Button>
+                </Link>
+              </motion.div>
+            </Section.Content>
+          </div>
+        </Tabs>
+      </motion.div>
     </Section.Root>
   )
 }

@@ -3,7 +3,7 @@ import { motion, useAnimation, useInView, Variants } from 'framer-motion'
 import { ArrowUpRight, Github, Instagram, Linkedin } from 'lucide-react'
 import Image from 'next/image'
 import Link from 'next/link'
-import { useEffect, useRef } from 'react'
+import { useEffect, useRef, useState } from 'react'
 
 import { techs } from '@/utils/techs'
 
@@ -57,6 +57,23 @@ export function Hero() {
     }
   }
 
+  const [displayText, setDisplayText] = useState('')
+  const fullText = 'Desenvolvedor Full Stack | Next.js | Node.js | Prisma'
+
+  useEffect(() => {
+    let index = 0
+    const interval = setInterval(() => {
+      setDisplayText(fullText.slice(0, index + 1))
+      index++
+
+      if (index > fullText.length) {
+        clearInterval(interval)
+      }
+    }, 50)
+
+    return () => clearInterval(interval)
+  }, [])
+
   return (
     <Section.Root id="home">
       <motion.div
@@ -71,68 +88,115 @@ export function Hero() {
           variants={itemVariants}
         >
           <motion.div className="flex flex-col gap-1" variants={itemVariants}>
-            <span className="text-lg">Olá, Eu sou</span>
+            <span className="text-lg">Prazer, eu sou</span>
             <motion.h2 className="text-5xl font-bold" variants={itemVariants}>
               Nathan Santos
             </motion.h2>
+            <motion.p
+              className="min-h-[28px] text-lg font-medium text-muted-foreground"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 0.5 }}
+            >
+              {displayText}
+              <span className="animate-pulse">|</span>
+            </motion.p>
           </motion.div>
 
           <motion.div variants={itemVariants}>
             <Section.Description className="lg:text-start">
-              Desenvolvedor Full Stack, movido por café, tecnologia e desafios.
-              Curioso por natureza e apaixonado por resolver problemas, estou
-              sempre aprendendo e criando. Meu objetivo? Ajudar pessoas e
-              empresas a tirarem projetos do papel e, de quebra, deixar minha
-              marca no mundo da tecnologia.
+              Construo produtos digitais modernos, performáticos e escaláveis.
+              Apaixonado por resolver problemas e transformar ideias em
+              soluções.
             </Section.Description>
           </motion.div>
 
           <motion.div
-            className="flex items-center justify-center gap-2 lg:justify-start"
+            className="flex flex-col items-center justify-center gap-4 lg:flex-row lg:justify-start"
             variants={itemVariants}
           >
-            <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.97 }}>
-              <Button
-                variant="primary"
-                onClick={() => handleNavigation('contact')}
+            <div className="flex items-center gap-2">
+              <motion.div
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.97 }}
+                animate={{
+                  translateY: [0, -4, 0],
+                }}
+                transition={{
+                  duration: 1.5,
+                  repeat: Infinity,
+                  repeatType: 'loop',
+                }}
               >
-                Entre em contato
-                <ArrowUpRight className="size-4" />
-              </Button>
-            </motion.div>
-
-            <motion.div
-              whileHover={{ scale: 1.2, rotate: 10 }}
-              whileTap={{ scale: 0.97 }}
-            >
-              <Link href="https://instagram.com/nathannfs.dev" target="_blank">
-                <Button variant="icon" size="icon">
-                  <Instagram className="size-5" />
+                <Button
+                  variant="primary"
+                  onClick={() => handleNavigation('contact')}
+                >
+                  Entre em contato
+                  <ArrowUpRight className="size-4" />
                 </Button>
-              </Link>
-            </motion.div>
+              </motion.div>
 
-            <motion.div
-              whileHover={{ scale: 1.2, rotate: 10 }}
-              whileTap={{ scale: 0.97 }}
-            >
-              <Link href="https://linkedin.com/in/nathannfs" target="_blank">
-                <Button variant="icon" size="icon">
-                  <Linkedin className="size-5" />
+              <motion.div
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.97 }}
+                animate={{
+                  translateY: [0, -4, 0],
+                }}
+                transition={{
+                  duration: 1.5,
+                  repeat: Infinity,
+                  repeatType: 'loop',
+                  delay: 0.2,
+                }}
+              >
+                <Button
+                  variant="primary"
+                  onClick={() => handleNavigation('project')}
+                >
+                  Ver projetos
+                  <ArrowUpRight className="size-4" />
                 </Button>
-              </Link>
-            </motion.div>
+              </motion.div>
+            </div>
 
-            <motion.div
-              whileHover={{ scale: 1.2, rotate: 10 }}
-              whileTap={{ scale: 0.97 }}
-            >
-              <Link href="https://github.com/nathannfs" target="_blank">
-                <Button variant="icon" size="icon">
-                  <Github className="size-5" />
-                </Button>
-              </Link>
-            </motion.div>
+            <div className="flex items-center gap-2">
+              <motion.div
+                whileHover={{ scale: 1.2, rotate: 10 }}
+                whileTap={{ scale: 0.97 }}
+              >
+                <Link
+                  href="https://instagram.com/nathannfs.dev"
+                  target="_blank"
+                >
+                  <Button variant="icon" size="icon">
+                    <Instagram className="size-5" />
+                  </Button>
+                </Link>
+              </motion.div>
+
+              <motion.div
+                whileHover={{ scale: 1.2, rotate: 10 }}
+                whileTap={{ scale: 0.97 }}
+              >
+                <Link href="https://linkedin.com/in/nathannfs" target="_blank">
+                  <Button variant="icon" size="icon">
+                    <Linkedin className="size-5" />
+                  </Button>
+                </Link>
+              </motion.div>
+
+              <motion.div
+                whileHover={{ scale: 1.2, rotate: 10 }}
+                whileTap={{ scale: 0.97 }}
+              >
+                <Link href="https://github.com/nathannfs" target="_blank">
+                  <Button variant="icon" size="icon">
+                    <Github className="size-5" />
+                  </Button>
+                </Link>
+              </motion.div>
+            </div>
           </motion.div>
 
           <motion.div variants={itemVariants}>

@@ -40,11 +40,8 @@ export default function RootLayout({
         ])}
       >
         <Providers>
-          <div className="grid h-screen w-full grid-rows-[80px_1fr]">
-            <Header />
-
-            {children}
-          </div>
+          <Header />
+          <main className="pt-[80px]">{children}</main>
         </Providers>
       </body>
     </html>
