@@ -96,6 +96,11 @@ export default function RootLayout({
         <meta name="theme-color" content="#0ea5e9" />
         <link rel="canonical" href="https://nathannfs-dev.vercel.app/" />
         <meta name="author" content="Nathan Santos" />
+        <link rel="manifest" href="/manifest.json" />
+        <meta name="apple-mobile-web-app-capable" content="yes" />
+        <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+        <meta name="referrer" content="strict-origin-when-cross-origin" />
+        <meta name="copyright" content="© 2024 Nathan Santos" />
       </Head>
       <body
         className={twMerge([
