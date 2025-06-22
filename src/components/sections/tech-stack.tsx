@@ -74,7 +74,7 @@ export function TechStack() {
                 <div className="text-4xl text-muted-foreground transition-colors group-hover:text-foreground">
                   {tech.icon}
                 </div>
-                <span className="font-medium text-muted-foreground transition-colors group-hover:text-foreground">
+                <span className="text-center font-medium text-muted-foreground transition-colors group-hover:text-foreground">
                   {tech.name}
                 </span>
               </motion.div>
