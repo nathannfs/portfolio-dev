@@ -106,35 +106,35 @@ export function About() {
                 >
                   <Section.Block>
                     <div className="flex flex-col gap-4">
-                      {degrees.map((certificate) => (
+                      {degrees.map((degree) => (
                         <div
-                          key={certificate.title}
+                          key={degree.title}
                           className="flex flex-col gap-2 rounded-lg border border-border bg-muted/40 p-4 shadow-sm"
                         >
                           <div className="flex items-center justify-between">
                             <span className="text-lg font-semibold text-foreground">
-                              {certificate.title}
+                              {degree.title}
                             </span>
                             <span
                               className={`ml-2 whitespace-nowrap rounded-full px-2 py-0.5 text-xs font-medium ${statusColor(
-                                certificate.status,
+                                degree.status,
                               )}`}
                             >
-                              {statusLabel(certificate.status)}
+                              {statusLabel(degree.status)}
                             </span>
                           </div>
                           <div className="flex flex-row items-center gap-2 text-sm text-muted-foreground">
                             <span className="font-medium">
-                              {certificate.institution}
+                              {degree.institution}
                             </span>
                             <Separator orientation="vertical" className="h-3" />
                             <span className="text-xs text-zinc-400">
-                              {certificate.period}
+                              {degree.period}
                             </span>
                           </div>
-                          {certificate.description && (
+                          {degree.description && (
                             <p className="mt-2 text-sm text-muted-foreground">
-                              {certificate.description}
+                              {degree.description}
                             </p>
                           )}
                         </div>
@@ -154,7 +154,7 @@ export function About() {
                 >
                   <Section.Block>
                     <div className="flex flex-col gap-4">
-                      {certifications.map((certificate) => (
+                      {certifications.splice(0, 3).map((certificate) => (
                         <div
                           key={certificate.title}
                           className="flex max-w-lg flex-col gap-2 rounded-lg border border-border bg-muted/40 p-4 shadow-sm"
