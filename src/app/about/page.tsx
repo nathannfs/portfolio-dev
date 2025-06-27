@@ -5,6 +5,7 @@ import { certifications } from '@/utils/certifications'
 import { degrees } from '@/utils/degrees'
 import { experiences } from '@/utils/experiences'
 import { hobbies } from '@/utils/hobbies'
+import { statusLabel } from '@/utils/status'
 
 export default function AboutPage() {
   return (
@@ -15,11 +16,13 @@ export default function AboutPage() {
           alt="Foto de perfil de Nathan"
           width={120}
           height={120}
-          className="rounded-full border-4 border-sky-100"
+          className="rounded-full border-4 border-sky-100 dark:border-sky-800"
         />
-        <Section.Title className="text-sky-900">Sobre mim</Section.Title>
+        <Section.Title className="text-sky-900 dark:text-sky-100">
+          Sobre mim
+        </Section.Title>
 
-        <Section.Description className="text-sky-900/90">
+        <Section.Description className="text-sky-900/90 dark:text-sky-200/90">
           Olá! Sou Nathan Santos, desenvolvedor Full Stack apaixonado por
           tecnologia, inovação e desafios. Tenho experiência sólida em
           desenvolvimento web, sempre buscando criar soluções eficientes,
@@ -31,24 +34,31 @@ export default function AboutPage() {
 
       <Section.Content className="space-y-4">
         <div className="w-full space-y-4">
-          <h2 className="border-l-4 border-sky-100 pl-2 text-xl font-bold text-sky-800">
+          <h2 className="border-l-4 border-sky-100 pl-2 text-xl font-bold text-sky-800 dark:border-sky-700 dark:text-sky-200">
             Formações
           </h2>
           <ul className="space-y-3">
             {degrees.map((degree) => (
-              <li key={degree.title} className="border-l-4 border-sky-100 pl-4">
-                <div className="font-semibold text-sky-900">{degree.title}</div>
-                <div className="text-sm text-sky-800/80">
+              <li
+                key={degree.title}
+                className="border-l-4 border-sky-100 pl-4 dark:border-sky-700"
+              >
+                <div className="font-semibold text-sky-900 dark:text-sky-100">
+                  {degree.title}
+                </div>
+                <div className="text-sm text-sky-800/80 dark:text-sky-200/80">
                   {degree.institution}
                 </div>
-                <div className="text-xs text-sky-700/60">{degree.period}</div>
+                <div className="text-xs text-sky-700/60 dark:text-sky-300/60">
+                  {degree.period}
+                </div>
               </li>
             ))}
           </ul>
         </div>
 
         <div className="w-full space-y-4">
-          <h2 className="border-l-4 border-sky-100 pl-2 text-xl font-bold text-sky-800">
+          <h2 className="border-l-4 border-sky-100 pl-2 text-xl font-bold text-sky-800 dark:border-sky-700 dark:text-sky-200">
             Cursos & Certificações
           </h2>
           <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
@@ -74,7 +84,7 @@ export default function AboutPage() {
                         : 'bg-yellow-100 text-yellow-800 dark:bg-yellow-900 dark:text-yellow-200'
                     }`}
                   >
-                    {cert.status}
+                    {statusLabel(cert.status)}
                   </span>
                 </div>
               </div>
@@ -83,7 +93,7 @@ export default function AboutPage() {
         </div>
 
         <div className="w-full space-y-4">
-          <h2 className="border-l-4 border-sky-100 pl-2 text-xl font-bold text-sky-800">
+          <h2 className="border-l-4 border-sky-100 pl-2 text-xl font-bold text-sky-800 dark:border-sky-700 dark:text-sky-200">
             Experiências Profissionais
           </h2>
 
@@ -127,20 +137,20 @@ export default function AboutPage() {
 
         <div className="grid w-full grid-cols-1 gap-12 space-y-0 md:grid-cols-2">
           <div className="space-y-4">
-            <h2 className="border-l-4 border-sky-100 pl-2 text-xl font-bold text-sky-800">
+            <h2 className="border-l-4 border-sky-100 pl-2 text-xl font-bold text-sky-800 dark:border-sky-700 dark:text-sky-200">
               O que gosto de fazer para relaxar
             </h2>
-            <ul className="list-disc space-y-2 pl-6 text-base text-sky-900/80">
+            <ul className="list-disc space-y-2 pl-6 text-base text-sky-900/80 dark:text-sky-200/80">
               {hobbies.map((hobby) => (
                 <li key={hobby}>{hobby}</li>
               ))}
             </ul>
           </div>
           <div className="space-y-4">
-            <h2 className="border-l-4 border-sky-100 pl-2 text-xl font-bold text-sky-800">
+            <h2 className="border-l-4 border-sky-100 pl-2 text-xl font-bold text-sky-800 dark:border-sky-700 dark:text-sky-200">
               Mais sobre mim
             </h2>
-            <ul className="list-disc space-y-2 pl-6 text-base text-sky-900/90">
+            <ul className="list-disc space-y-2 pl-6 text-base text-sky-900/90 dark:text-sky-200/90">
               <li>Sou curioso e adoro aprender coisas novas.</li>
               <li>
                 Tenho facilidade para trabalhar em equipe e comunicar ideias.
