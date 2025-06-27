@@ -11,7 +11,6 @@ import { Separator } from './separator'
 import { ThemeToggle } from './theme/theme-toggle'
 import {
   Sheet,
-  SheetClose,
   SheetContent,
   SheetDescription,
   SheetTitle,
@@ -22,6 +21,7 @@ export function Header() {
   const pathname = usePathname()
   const isHomePage = pathname === '/'
   const [activeSection, setActiveSection] = useState<string>('home')
+  const [isSheetOpen, setIsSheetOpen] = useState(false)
 
   useEffect(() => {
     if (!isHomePage) return
@@ -71,10 +71,35 @@ export function Header() {
     const element = document.getElementById(id)
     if (element) {
       setActiveSection(id)
-      element.scrollIntoView({
-        behavior: 'smooth',
-        block: 'start',
-      })
+
+      // Fecha o menu mobile se estiver aberto
+      setIsSheetOpen(false)
+
+      const isMobile = window.innerWidth < 768
+
+      if (isMobile) {
+        // Estratégia para mobile: scroll direto
+        const headerHeight = 80
+        const elementPosition = element.offsetTop - headerHeight
+
+        window.scrollTo({
+          top: elementPosition,
+          behavior: 'smooth',
+        })
+      } else {
+        // Estratégia para desktop: scrollIntoView + ajuste
+        element.scrollIntoView({
+          behavior: 'smooth',
+          block: 'start',
+        })
+
+        setTimeout(() => {
+          window.scrollBy({
+            top: -80,
+            behavior: 'smooth',
+          })
+        }, 100)
+      }
     }
   }
 
@@ -85,10 +110,32 @@ export function Header() {
         const element = document.getElementById(sectionToScroll)
         if (element) {
           setTimeout(() => {
-            element.scrollIntoView({
-              behavior: 'smooth',
-              block: 'start',
-            })
+            const isMobile = window.innerWidth < 768
+
+            if (isMobile) {
+              // Estratégia para mobile: scroll direto
+              const headerHeight = 80
+              const elementPosition = element.offsetTop - headerHeight
+
+              window.scrollTo({
+                top: elementPosition,
+                behavior: 'smooth',
+              })
+            } else {
+              // Estratégia para desktop: scrollIntoView + ajuste
+              element.scrollIntoView({
+                behavior: 'smooth',
+                block: 'start',
+              })
+
+              setTimeout(() => {
+                window.scrollBy({
+                  top: -80,
+                  behavior: 'smooth',
+                })
+              }, 100)
+            }
+
             setActiveSection(sectionToScroll)
           }, 100)
         }
@@ -224,7 +271,7 @@ export function Header() {
       </nav>
 
       <nav className="md:hidden">
-        <Sheet>
+        <Sheet open={isSheetOpen} onOpenChange={setIsSheetOpen}>
           <SheetTrigger asChild>
             <Button variant="ghost">
               <List className="size-5" />
@@ -236,15 +283,13 @@ export function Header() {
             <SheetDescription />
 
             <div className="relative w-full text-center">
-              <SheetClose asChild>
-                <Button
-                  variant="ghost"
-                  onClick={() => handleNavigation('home')}
-                  className="w-full py-1"
-                >
-                  Home
-                </Button>
-              </SheetClose>
+              <Button
+                variant="ghost"
+                onClick={() => handleNavigation('home')}
+                className="w-full py-1"
+              >
+                Home
+              </Button>
               {isHomePage && activeSection === 'home' && (
                 <motion.div
                   className="absolute bottom-[-2px] left-0 right-0 h-0.5 bg-sky-500"
@@ -256,15 +301,13 @@ export function Header() {
             <Separator />
 
             <div className="relative w-full text-center">
-              <SheetClose asChild>
-                <Button
-                  variant="ghost"
-                  onClick={() => handleNavigation('about')}
-                  className="w-full py-1"
-                >
-                  Sobre
-                </Button>
-              </SheetClose>
+              <Button
+                variant="ghost"
+                onClick={() => handleNavigation('about')}
+                className="w-full py-1"
+              >
+                Sobre
+              </Button>
               {isHomePage && activeSection === 'about' && (
                 <motion.div
                   className="absolute bottom-[-2px] left-0 right-0 h-0.5 bg-sky-500"
@@ -276,15 +319,13 @@ export function Header() {
             <Separator />
 
             <div className="relative w-full text-center">
-              <SheetClose asChild>
-                <Button
-                  variant="ghost"
-                  onClick={() => handleNavigation('specialties')}
-                  className="w-full py-1"
-                >
-                  Especialidades
-                </Button>
-              </SheetClose>
+              <Button
+                variant="ghost"
+                onClick={() => handleNavigation('specialties')}
+                className="w-full py-1"
+              >
+                Especialidades
+              </Button>
               {isHomePage && activeSection === 'specialties' && (
                 <motion.div
                   className="absolute bottom-[-2px] left-0 right-0 h-0.5 bg-sky-500"
@@ -296,15 +337,13 @@ export function Header() {
             <Separator />
 
             <div className="relative w-full text-center">
-              <SheetClose asChild>
-                <Button
-                  variant="ghost"
-                  onClick={() => handleNavigation('project')}
-                  className="w-full py-1"
-                >
-                  Projetos
-                </Button>
-              </SheetClose>
+              <Button
+                variant="ghost"
+                onClick={() => handleNavigation('project')}
+                className="w-full py-1"
+              >
+                Projetos
+              </Button>
               {isHomePage && activeSection === 'project' && (
                 <motion.div
                   className="absolute bottom-[-2px] left-0 right-0 h-0.5 bg-sky-500"
@@ -316,15 +355,13 @@ export function Header() {
             <Separator />
 
             <div className="relative w-full text-center">
-              <SheetClose asChild>
-                <Button
-                  variant="ghost"
-                  onClick={() => handleNavigation('techs')}
-                  className="w-full py-1"
-                >
-                  Tecnologias
-                </Button>
-              </SheetClose>
+              <Button
+                variant="ghost"
+                onClick={() => handleNavigation('techs')}
+                className="w-full py-1"
+              >
+                Tecnologias
+              </Button>
               {isHomePage && activeSection === 'techs' && (
                 <motion.div
                   className="absolute bottom-[-2px] left-0 right-0 h-0.5 bg-sky-500"
@@ -336,15 +373,13 @@ export function Header() {
             <Separator />
 
             <div className="relative w-full text-center">
-              <SheetClose asChild>
-                <Button
-                  variant="ghost"
-                  onClick={() => handleNavigation('contact')}
-                  className="w-full py-1"
-                >
-                  Contato
-                </Button>
-              </SheetClose>
+              <Button
+                variant="ghost"
+                onClick={() => handleNavigation('contact')}
+                className="w-full py-1"
+              >
+                Contato
+              </Button>
               {isHomePage && activeSection === 'contact' && (
                 <motion.div
                   className="absolute bottom-[-2px] left-0 right-0 h-0.5 bg-sky-500"

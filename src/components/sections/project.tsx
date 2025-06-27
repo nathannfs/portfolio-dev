@@ -1,6 +1,8 @@
 import { motion } from 'framer-motion'
-import { ArrowRight, CheckIcon, ExternalLink, Github } from 'lucide-react'
+import { ArrowRight, CheckIcon } from 'lucide-react'
 import Link from 'next/link'
+
+import { projects } from '@/utils/projects'
 
 import { Button } from '../button'
 import { Section } from '../section'
@@ -16,60 +18,6 @@ import {
   TimelineSeparator,
   TimelineTitle,
 } from '../ui/timeline'
-
-type ProjectItem = {
-  title: string
-  description: string
-  image?: string // opcional, pode usar placeholder
-  techs: string[]
-  year?: string
-  completed?: boolean
-  liveDemoUrl?: string
-  sourceCodeUrl?: string
-}
-
-const projects: ProjectItem[] = [
-  {
-    title: 'SaaS Financeiro',
-    description: 'Plataforma para gestão financeira de pequenas empresas.',
-    techs: ['Next.js', 'Tailwind', 'Stripe'],
-    image: '/projects/to-do-list-interview.png',
-    year: '2024',
-    completed: true,
-    liveDemoUrl: '#',
-    sourceCodeUrl: '#',
-  },
-  {
-    title: 'E-commerce Moderno',
-    description: 'Loja virtual com pagamentos integrados e painel admin.',
-    techs: ['Next.js', 'Stripe', 'Prisma'],
-    image: '/projects/to-do-list-interview.png',
-    year: '2024',
-    completed: true,
-    liveDemoUrl: '#',
-    sourceCodeUrl: '#',
-  },
-  {
-    title: 'Dashboard Analytics',
-    description: 'Dashboard de análise de dados com gráficos interativos.',
-    techs: ['React', 'Recharts', 'Supabase'],
-    image: '/projects/to-do-list-interview.png',
-    year: '2024',
-    completed: false,
-    liveDemoUrl: '#',
-    sourceCodeUrl: '#',
-  },
-  {
-    title: 'App de Agendamentos',
-    description: 'Sistema de agendamentos com integração ao Google Calendar.',
-    techs: ['Next.js', 'Supabase', 'Shadcn UI'],
-    image: '/projects/to-do-list-interview.png',
-    year: '2024',
-    completed: false,
-    liveDemoUrl: '#',
-    sourceCodeUrl: '#',
-  },
-]
 
 const sectionVariants = {
   hidden: { opacity: 0, y: 50, scale: 0.95 },
@@ -124,7 +72,7 @@ export function Project() {
           </Section.Description>
         </Section.Header>
 
-        <Section.Content className="items-center">
+        <Section.Content className="items-center space-y-6 md:space-y-0">
           <ScrollArea className="h-fit w-full max-w-4xl md:h-[60vh]">
             <motion.div
               variants={containerVariants}
@@ -142,7 +90,7 @@ export function Project() {
               >
                 {projects.slice(0, 4).map((project, idx) => (
                   <motion.div
-                    key={project.title}
+                    key={project.name}
                     variants={itemVariants}
                     className="w-full"
                   >
@@ -153,7 +101,7 @@ export function Project() {
                       <TimelineHeader>
                         <TimelineSeparator className="group-data-[orientation=vertical]/timeline:-left-7 group-data-[orientation=vertical]/timeline:h-full" />
                         <TimelineDate>{project.year ?? '2024'}</TimelineDate>
-                        <TimelineTitle>{project.title}</TimelineTitle>
+                        <TimelineTitle>{project.name}</TimelineTitle>
                         <TimelineIndicator className="group-data-completed/timeline-item:border-none group-data-completed/timeline-item:bg-primary group-data-completed/timeline-item:text-primary-foreground flex size-6 items-center justify-center group-data-[orientation=vertical]/timeline:-left-7">
                           <CheckIcon
                             className="group-not-data-completed/timeline-item:hidden"
@@ -172,24 +120,6 @@ export function Project() {
                             </Badge>
                           ))}
                         </div>
-                        <div className="mt-2 flex items-center gap-4">
-                          {project.liveDemoUrl && (
-                            <Link href={project.liveDemoUrl} target="_blank">
-                              <Button variant="ghost" size="sm">
-                                <ExternalLink className="size-4" />
-                                Live Demo
-                              </Button>
-                            </Link>
-                          )}
-                          {project.sourceCodeUrl && (
-                            <Link href={project.sourceCodeUrl} target="_blank">
-                              <Button variant="ghost" size="sm">
-                                <Github className="size-4" />
-                                Código Fonte
-                              </Button>
-                            </Link>
-                          )}
-                        </div>
                       </TimelineContent>
                     </TimelineItem>
                   </motion.div>
@@ -201,7 +131,6 @@ export function Project() {
           <motion.div
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
-            className="mt-6 md:mt-0"
             animate={{
               translateY: [0, -4, 0],
             }}

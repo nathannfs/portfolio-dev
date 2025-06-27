@@ -1,89 +1,17 @@
+'use client'
+
 import { motion } from 'framer-motion'
 import { ArrowRight } from 'lucide-react'
 import Link from 'next/link'
+
+import { certifications } from '@/utils/certifications'
+import { degrees } from '@/utils/degrees'
+import { statusColor, statusLabel } from '@/utils/status'
 
 import { Button } from '../button'
 import { Section } from '../section'
 import { Separator } from '../separator'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '../ui/tabs'
-
-interface Certificate {
-  title: string
-  institution: string
-  start?: string
-  end?: string
-  hours?: number
-  type?: 'degree' | 'certification'
-  status: 'completed' | 'in_progress' | 'planned'
-  description?: string
-}
-
-const certificates: Certificate[] = [
-  {
-    title: 'Pós Graduação em Engenharia de Software',
-    institution: 'Descomplica EAD',
-    start: 'Out/2024',
-    end: 'Abr/2025',
-    type: 'degree',
-    status: 'completed',
-    description:
-      'Minha formação em Engenharia de Software me proporcionou uma base sólida em lógica, algoritmos e estrutura de dados, princípios que aplico diariamente no desenvolvimento de software.',
-  },
-  {
-    title: 'Tecnólogo em Mecatrônica Industrial',
-    institution: 'FATEC',
-    start: 'Jan/2019',
-    end: 'Dez/2023',
-    type: 'degree',
-    status: 'completed',
-    description:
-      'Minha formação em Mecatrônica me proporcionou uma base sólida em lógica, automação e resolução de problemas complexos, princípios que aplico diariamente no desenvolvimento de software.',
-  },
-  {
-    title: 'ReactJS',
-    institution: 'Rocketseat',
-    hours: 50,
-    type: 'certification',
-    status: 'completed',
-    description:
-      'Fundamentos do ReactJS, Criação de SPAs com ReactJS, Consumo de API e performance no ReactJS, Fundamentos do Next.js, Design System e Storybook e Criação de aplicação FullStack com NextJS.',
-  },
-  {
-    title: 'NodeJS',
-    institution: 'Rocketseat',
-    hours: 50,
-    type: 'certification',
-    status: 'completed',
-    description:
-      'Fundamentos do Node.js, Streams, TypeScript, Clean Architecture, Domain-driven Design (DDD), Docker, Pirâmide de Testes, Vitest, Criação de API Rest com Fastify e Knex, Criação de API utilizando Fastify, Prisma, SOLID e autenticação com JWT, Fundamentos do NestJS, além de outros Design Patterns, como repository e factory pattern.',
-  },
-]
-
-function statusLabel(status: Certificate['status']) {
-  switch (status) {
-    case 'completed':
-      return 'Concluído'
-    case 'in_progress':
-      return 'Em andamento'
-    case 'planned':
-      return 'Planejado'
-    default:
-      return ''
-  }
-}
-
-function statusColor(status: Certificate['status']) {
-  switch (status) {
-    case 'completed':
-      return 'bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200'
-    case 'in_progress':
-      return 'bg-yellow-100 text-yellow-800 dark:bg-yellow-900 dark:text-yellow-200'
-    case 'planned':
-      return 'bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-200'
-    default:
-      return ''
-  }
-}
 
 const sectionVariants = {
   hidden: { opacity: 0, y: 50, scale: 0.95 },
@@ -109,8 +37,11 @@ export function About() {
         exit="hidden"
         viewport={{ once: false, amount: 0.2 }}
       >
-        <Tabs defaultValue="about" className="items-center justify-center">
-          <TabsList className="mb-6 flex justify-center gap-1 bg-transparent">
+        <Tabs
+          defaultValue="about"
+          className="items-center justify-center space-y-6"
+        >
+          <TabsList className="flex justify-center gap-1 bg-transparent">
             <TabsTrigger
               value="about"
               className="rounded-full data-[state=active]:bg-primary data-[state=active]:text-primary-foreground data-[state=active]:shadow-none"
@@ -175,44 +106,39 @@ export function About() {
                 >
                   <Section.Block>
                     <div className="flex flex-col gap-4">
-                      {certificates
-                        .filter((c) => c.type === 'degree')
-                        .map((certificate) => (
-                          <div
-                            key={certificate.title}
-                            className="flex flex-col gap-2 rounded-lg border border-border bg-muted/40 p-4 shadow-sm"
-                          >
-                            <div className="flex items-center justify-between">
-                              <span className="text-lg font-semibold text-foreground">
-                                {certificate.title}
-                              </span>
-                              <span
-                                className={`ml-2 whitespace-nowrap rounded-full px-2 py-0.5 text-xs font-medium ${statusColor(
-                                  certificate.status,
-                                )}`}
-                              >
-                                {statusLabel(certificate.status)}
-                              </span>
-                            </div>
-                            <div className="flex flex-row items-center gap-2 text-sm text-muted-foreground">
-                              <span className="font-medium">
-                                {certificate.institution}
-                              </span>
-                              <Separator
-                                orientation="vertical"
-                                className="h-3"
-                              />
-                              <span className="text-xs text-zinc-400">
-                                {certificate.start} - {certificate.end}
-                              </span>
-                            </div>
-                            {certificate.description && (
-                              <p className="mt-2 text-sm text-muted-foreground">
-                                {certificate.description}
-                              </p>
-                            )}
+                      {degrees.map((certificate) => (
+                        <div
+                          key={certificate.title}
+                          className="flex flex-col gap-2 rounded-lg border border-border bg-muted/40 p-4 shadow-sm"
+                        >
+                          <div className="flex items-center justify-between">
+                            <span className="text-lg font-semibold text-foreground">
+                              {certificate.title}
+                            </span>
+                            <span
+                              className={`ml-2 whitespace-nowrap rounded-full px-2 py-0.5 text-xs font-medium ${statusColor(
+                                certificate.status,
+                              )}`}
+                            >
+                              {statusLabel(certificate.status)}
+                            </span>
                           </div>
-                        ))}
+                          <div className="flex flex-row items-center gap-2 text-sm text-muted-foreground">
+                            <span className="font-medium">
+                              {certificate.institution}
+                            </span>
+                            <Separator orientation="vertical" className="h-3" />
+                            <span className="text-xs text-zinc-400">
+                              {certificate.period}
+                            </span>
+                          </div>
+                          {certificate.description && (
+                            <p className="mt-2 text-sm text-muted-foreground">
+                              {certificate.description}
+                            </p>
+                          )}
+                        </div>
+                      ))}
                     </div>
                   </Section.Block>
                 </motion.div>
@@ -228,44 +154,39 @@ export function About() {
                 >
                   <Section.Block>
                     <div className="flex flex-col gap-4">
-                      {certificates
-                        .filter((c) => c.type === 'certification')
-                        .map((certificate) => (
-                          <div
-                            key={certificate.title}
-                            className="flex max-w-lg flex-col gap-2 rounded-lg border border-border bg-muted/40 p-4 shadow-sm"
-                          >
-                            <div className="flex items-center justify-between">
-                              <span className="text-lg font-semibold text-foreground">
-                                {certificate.title}
-                              </span>
-                              <span
-                                className={`ml-2 whitespace-nowrap rounded-full px-2 py-0.5 text-xs font-medium ${statusColor(
-                                  certificate.status,
-                                )}`}
-                              >
-                                {statusLabel(certificate.status)}
-                              </span>
-                            </div>
-                            {certificate.description && (
-                              <div className="text-xs text-muted-foreground">
-                                {certificate.description}
-                              </div>
-                            )}
-                            <div className="flex flex-row items-center gap-2 text-sm text-muted-foreground">
-                              <span className="font-medium">
-                                {certificate.institution}
-                              </span>
-                              <Separator
-                                orientation="vertical"
-                                className="h-3"
-                              />
-                              <span className="text-xs text-zinc-400">
-                                {certificate.hours} horas
-                              </span>
-                            </div>
+                      {certifications.map((certificate) => (
+                        <div
+                          key={certificate.title}
+                          className="flex max-w-lg flex-col gap-2 rounded-lg border border-border bg-muted/40 p-4 shadow-sm"
+                        >
+                          <div className="flex items-center justify-between">
+                            <span className="text-lg font-semibold text-foreground">
+                              {certificate.title}
+                            </span>
+                            <span
+                              className={`ml-2 whitespace-nowrap rounded-full px-2 py-0.5 text-xs font-medium ${statusColor(
+                                certificate.status,
+                              )}`}
+                            >
+                              {statusLabel(certificate.status)}
+                            </span>
                           </div>
-                        ))}
+                          {certificate.description && (
+                            <div className="text-xs text-muted-foreground">
+                              {certificate.description}
+                            </div>
+                          )}
+                          <div className="flex flex-row items-center gap-2 text-sm text-muted-foreground">
+                            <span className="font-medium">
+                              {certificate.institution}
+                            </span>
+                            <Separator orientation="vertical" className="h-3" />
+                            <span className="text-xs text-zinc-400">
+                              {certificate.hours} horas
+                            </span>
+                          </div>
+                        </div>
+                      ))}
                     </div>
                   </Section.Block>
                 </motion.div>

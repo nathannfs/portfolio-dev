@@ -43,8 +43,8 @@ export function Contact() {
           exit="hidden"
           viewport={{ once: false, amount: 0.2 }}
         >
-          <h2 className="mb-2 text-4xl font-bold">Entre em contato</h2>
-          <p className="mb-4 text-lg text-muted-foreground">
+          <h2 className="text-4xl font-bold">Entre em contato</h2>
+          <p className="text-lg text-muted-foreground">
             Ficou interessado em trabalhar comigo, tirar dúvidas ou só quer
             bater um papo sobre tecnologia? Sinta-se à vontade para me chamar em
             qualquer canal abaixo ou envie uma mensagem pelo formulário!

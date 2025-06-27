@@ -16,7 +16,7 @@ export default function Home() {
   return (
     <main
       ref={containerRef}
-      className="min-h-full overflow-y-scroll transition-all ease-in-out md:h-[calc(100vh-80px)] md:snap-y md:snap-mandatory"
+      className="min-h-full overflow-y-auto transition-all ease-in-out md:h-[calc(100vh-80px)] md:snap-y md:snap-mandatory md:overflow-y-scroll"
     >
       <Hero />
 

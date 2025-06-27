@@ -10,8 +10,10 @@ const button = tv({
         'text-zinc-800 hover:text-zinc-950  bg-sky-100 hover:bg-sky-200',
         'dark:text-zinc-200 dark:hover:text-zinc-100 dark:bg-sky-700/80 dark:hover:bg-sky-700',
       ],
-      secondary:
-        'text-sky-800/80 hover:text-sky-800 bg-zinc-950 hover:bg-zinc-800',
+      secondary: [
+        'text-zinc-100 hover:text-white bg-zinc-950 hover:bg-zinc-800',
+        'dark:text-black dark:bg-white dark:hover:text-white',
+      ],
       ghost: [
         'text-muted-foreground hover:text-zinc-950 bg-transparent shadow-none',
         'dark:text-zinc-50/80 dark:hover:text-zinc-50',
