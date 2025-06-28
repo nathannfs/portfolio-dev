@@ -15,6 +15,36 @@ type Project = {
 
 export const projects: Project[] = [
   {
+    id: 'b1e2c3d4-5f6a-4b8c-9d0e-1f2a3b4c5d6l',
+    name: 'CodeGN',
+    description:
+      'Site institucional da CodeGN, empresa de desenvolvimento de software. Projeto moderno, responsivo e otimizado para performance, com foco em presença digital e captação de clientes.',
+    image: '/projects/codegn.png',
+    href: 'https://codegn.com/',
+    techs: ['Next.js', 'TypeScript', 'ShadcnUI', 'TailwindCSS'],
+    year: '2025',
+    completed: true,
+    features: [
+      'Design moderno e responsivo',
+      'SEO otimizado',
+      'Componentização com ShadcnUI',
+      'Estilização com TailwindCSS',
+      'Formulário de contato integrado',
+      'Acessibilidade e performance',
+    ],
+    challenges: [
+      'Garantir alta performance e acessibilidade',
+      'Desenvolvimento de identidade visual própria',
+      'Integração de componentes customizados',
+    ],
+    learnings: [
+      'Boas práticas de Next.js para sites institucionais',
+      'Customização avançada do ShadcnUI',
+      'Aprimoramento em TailwindCSS',
+    ],
+    screenshots: ['/projects/codegn.png'],
+  },
+  {
     id: 'b1e2c3d4-5f6a-4b8c-9d0e-1f2a3b4c5d6e',
     name: 'To do List',
     description:

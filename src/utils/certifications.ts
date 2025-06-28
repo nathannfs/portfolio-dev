@@ -10,12 +10,28 @@ export type Certificate = {
 
 export const certifications: Certificate[] = [
   {
+    title: 'Formação Java',
+    institution: 'Rocketseat',
+    hours: 100,
+    status: 'in_progress',
+    description:
+      'Formação completa em Java com foco em desenvolvimento backend e APIs.',
+  },
+  {
     title: 'Formação C#',
     institution: 'Rocketseat',
     hours: 100,
-    status: 'completed',
+    status: 'in_progress',
     description:
       'Formação completa em C# com foco em desenvolvimento backend e APIs.',
+  },
+  {
+    title: 'Formação NestJS',
+    institution: 'Rocketseat',
+    hours: 12,
+    status: 'completed',
+    description:
+      'Desenvolvimento backend com Nest.js, DDD, Clean Architecture e Solid.',
   },
   {
     title: 'Formação NodeJS',
@@ -24,6 +40,14 @@ export const certifications: Certificate[] = [
     status: 'completed',
     description:
       'Desenvolvimento backend com Node.js, Express e banco de dados.',
+  },
+  {
+    title: 'Formação ReactJS',
+    institution: 'Rocketseat',
+    hours: 50,
+    status: 'completed',
+    description:
+      'Formação completa em React.js com hooks, context API e boas práticas.',
   },
   {
     title: 'Desenvolvimento Web Full Stack',
@@ -80,13 +104,5 @@ export const certifications: Certificate[] = [
     status: 'completed',
     description:
       'Metodologias e ferramentas para gerenciamento eficiente de projetos.',
-  },
-  {
-    title: 'Formação ReactJS',
-    institution: 'Rocketseat',
-    hours: 50,
-    status: 'completed',
-    description:
-      'Formação completa em React.js com hooks, context API e boas práticas.',
   },
 ]
