@@ -18,11 +18,11 @@ const roboto = Roboto({
 export const metadata: Metadata = {
   title: 'Nathan Santos | Portfolio',
   description: 'Portfolio Web - Nathan Santos',
-  metadataBase: new URL('https://nathannfs-dev.vercel.app'),
+  metadataBase: new URL('https://nathannfs.vercel.app'),
   openGraph: {
     title: 'Nathan Santos | Portfolio',
     description: 'Portfolio Web - Nathan Santos',
-    url: 'https://nathannfs-dev.vercel.app',
+    url: 'https://nathannfs.vercel.app',
     siteName: 'Nathan Santos Portfolio',
     images: [
       {
@@ -79,7 +79,7 @@ export const metadata: Metadata = {
     'Web Developer',
     'Dev',
   ],
-  authors: [{ name: 'Nathan Santos', url: 'https://nathannfs-dev.vercel.app' }],
+  authors: [{ name: 'Nathan Santos', url: 'https://nathannfs.vercel.app' }],
   creator: 'Nathan Santos',
   publisher: 'Nathan Santos',
   category: 'technology',
@@ -95,7 +95,7 @@ export default function RootLayout({
       <Head>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta name="theme-color" content="#0ea5e9" />
-        <link rel="canonical" href="https://nathannfs-dev.vercel.app/" />
+        <link rel="canonical" href="https://nathannfs.vercel.app/" />
         <meta name="author" content="Nathan Santos" />
         <link rel="manifest" href="/manifest.json" />
         <meta name="apple-mobile-web-app-capable" content="yes" />

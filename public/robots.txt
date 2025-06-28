@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://nathannfs-dev.vercel.app/sitemap.xml 
+Sitemap: https://nathannfs.vercel.app/sitemap.xml 
