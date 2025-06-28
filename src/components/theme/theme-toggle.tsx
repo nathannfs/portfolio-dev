@@ -10,11 +10,12 @@ export function ThemeToggle() {
   const { setTheme, theme } = useTheme()
 
   return (
-    <motion.div whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.97 }}>
+    <motion.div whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.97 }} className="flex items-center justify-center">
       <Button
         variant="ghost"
-        size="icon"
-        onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
+        onClick={() => setTheme(theme === 'dark'
+          ? 'light'
+          : 'dark')}
       >
         <Sun className="block dark:hidden" />
         <Moon className="hidden dark:block" />

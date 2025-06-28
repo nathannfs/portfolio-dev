@@ -1,4 +1,4 @@
-import { motion } from 'framer-motion'
+import { easeInOut, motion } from 'framer-motion'
 import { ArrowRight, CheckIcon } from 'lucide-react'
 import Link from 'next/link'
 
@@ -27,7 +27,7 @@ const sectionVariants = {
     scale: 1,
     transition: {
       duration: 0.5,
-      ease: 'easeInOut',
+      ease: easeInOut,
     },
   },
 }
@@ -82,7 +82,9 @@ export function Project() {
                 value={
                   projects
                     .slice(0, 4)
-                    .map((p, i) => (p.completed ? i + 1 : 0))
+                    .map((p, i) => (p.completed
+                      ? i + 1
+                      : 0))
                     .filter(Boolean)
                     .pop() || 1
                 }

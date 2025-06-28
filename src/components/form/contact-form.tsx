@@ -8,7 +8,7 @@ import {
   MessageCircle,
   UserIcon,
 } from 'lucide-react'
-import { useState } from 'react'
+import { type ChangeEvent, type FormEvent, useState } from 'react'
 
 import { Button } from '@/components/button'
 
@@ -35,7 +35,7 @@ export function ContactForm() {
   const [errorMessage, setErrorMessage] = useState('')
 
   const handleInputChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
+    e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
   ) => {
     const { name, value } = e.target
     setFormData((prev) => ({
@@ -44,7 +44,7 @@ export function ContactForm() {
     }))
   }
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = async (e: FormEvent) => {
     e.preventDefault()
     setStatus('loading')
     setErrorMessage('')
@@ -67,17 +67,17 @@ export function ContactForm() {
       setStatus('success')
       setFormData({ name: '', email: '', message: '' })
 
-      // Reset status após 3 segundos
       setTimeout(() => {
         setStatus('idle')
       }, 3000)
     } catch (error) {
       setStatus('error')
       setErrorMessage(
-        error instanceof Error ? error.message : 'Erro ao enviar mensagem',
+        error instanceof Error
+          ? error.message
+          : 'Erro ao enviar mensagem',
       )
 
-      // Reset status após 5 segundos
       setTimeout(() => {
         setStatus('idle')
         setErrorMessage('')
@@ -191,11 +191,13 @@ export function ContactForm() {
         className="mt-auto w-full"
         disabled={isDisabled}
       >
-        {status === 'loading' ? (
-          <Loader2 className="mr-2 animate-spin" />
-        ) : (
-          'Enviar mensagem'
-        )}
+        {status === 'loading'
+          ? (
+            <Loader2 className="mr-2 animate-spin" />
+            )
+          : (
+              'Enviar mensagem'
+            )}
       </Button>
     </form>
   )

@@ -1,4 +1,4 @@
-import { motion } from 'framer-motion'
+import { motion, spring } from 'framer-motion'
 import { Github, Linkedin, Mail, MapPin, Phone } from 'lucide-react'
 import Link from 'next/link'
 
@@ -13,7 +13,11 @@ const leftVariants = {
     x: 0,
     rotate: 0,
     scale: 1,
-    transition: { type: 'spring', stiffness: 80, delay: 0.1 },
+    transition: {
+      type: spring,
+      stiffness: 80,
+      delay: 0.1,
+    },
   },
 }
 
@@ -24,7 +28,11 @@ const rightVariants = {
     x: 0,
     rotate: 0,
     scale: 1,
-    transition: { type: 'spring', stiffness: 80, delay: 0.2 },
+    transition: {
+      type: spring,
+      stiffness: 80,
+      delay: 0.2,
+    },
   },
 }
 
@@ -67,7 +75,7 @@ export function Contact() {
               <Link
                 href="https://linkedin.com/in/nathannfs"
                 target="_blank"
-                className="hover:underline"
+                className="hover:underline" rel="noreferrer"
               >
                 linkedin.com/in/nathannfs
               </Link>
@@ -77,7 +85,7 @@ export function Contact() {
               <Link
                 href="https://github.com/nathannfs"
                 target="_blank"
-                className="hover:underline"
+                className="hover:underline" rel="noreferrer"
               >
                 github.com/nathannfs
               </Link>

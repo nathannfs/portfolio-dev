@@ -19,9 +19,8 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ error: 'Email inválido' }, { status: 400 })
     }
 
-    // Enviar email usando Resend
     const { error } = await resend.emails.send({
-      from: 'Portfolio <onboarding@resend.dev>', // Você pode mudar isso depois
+      from: 'Portfolio <onboarding@resend.dev>',
       to: ['nathann.santoss2@gmail.com'],
       subject: `Nova mensagem de ${name} - Portfolio`,
       html: `

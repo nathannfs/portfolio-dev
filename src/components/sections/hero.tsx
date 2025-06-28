@@ -167,7 +167,7 @@ export function Hero() {
               >
                 <Link
                   href="https://instagram.com/nathannfs.dev"
-                  target="_blank"
+                  target="_blank" rel="noreferrer"
                 >
                   <Button variant="icon" size="icon">
                     <Instagram className="size-5" />
@@ -179,7 +179,7 @@ export function Hero() {
                 whileHover={{ scale: 1.2, rotate: 10 }}
                 whileTap={{ scale: 0.97 }}
               >
-                <Link href="https://linkedin.com/in/nathannfs" target="_blank">
+                <Link href="https://linkedin.com/in/nathannfs" target="_blank" rel="noreferrer">
                   <Button variant="icon" size="icon">
                     <Linkedin className="size-5" />
                   </Button>
@@ -190,7 +190,7 @@ export function Hero() {
                 whileHover={{ scale: 1.2, rotate: 10 }}
                 whileTap={{ scale: 0.97 }}
               >
-                <Link href="https://github.com/nathannfs" target="_blank">
+                <Link href="https://github.com/nathannfs" target="_blank" rel="noreferrer">
                   <Button variant="icon" size="icon">
                     <Github className="size-5" />
                   </Button>

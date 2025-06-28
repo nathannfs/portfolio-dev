@@ -3,6 +3,7 @@ import './globals.css'
 import type { Metadata } from 'next'
 import { Roboto } from 'next/font/google'
 import Head from 'next/head'
+import type { ReactNode } from 'react'
 import { twMerge } from 'tailwind-merge'
 
 import { Header } from '@/components/header'
@@ -87,7 +88,7 @@ export const metadata: Metadata = {
 export default function RootLayout({
   children,
 }: Readonly<{
-  children: React.ReactNode
+  children: ReactNode
 }>) {
   return (
     <html lang="pt-BR" suppressHydrationWarning>

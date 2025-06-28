@@ -1,4 +1,4 @@
-import { motion } from 'framer-motion'
+import { easeInOut, motion, spring } from 'framer-motion'
 
 import { specialties } from '@/utils/specialities'
 
@@ -12,7 +12,7 @@ const sectionVariants = {
     scale: 1,
     transition: {
       duration: 0.5,
-      ease: 'easeInOut',
+      ease: easeInOut,
       when: 'beforeChildren',
       staggerChildren: 0.2,
     },
@@ -25,7 +25,7 @@ const itemVariants = {
     opacity: 1,
     y: 0,
     scale: 1,
-    transition: { type: 'spring', stiffness: 100 },
+    transition: { type: spring, stiffness: 100 },
   },
 }
 

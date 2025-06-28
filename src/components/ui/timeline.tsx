@@ -5,13 +5,11 @@ import * as React from 'react'
 
 import { cn } from '@/lib/utils'
 
-// Types
 type TimelineContextValue = {
   activeStep: number
   setActiveStep: (step: number) => void
 }
 
-// Context
 const TimelineContext = React.createContext<TimelineContextValue | undefined>(
   undefined,
 )
@@ -24,7 +22,6 @@ const useTimeline = () => {
   return context
 }
 
-// Components
 interface TimelineProps extends React.HTMLAttributes<HTMLDivElement> {
   defaultValue?: number
   value?: number
@@ -71,7 +68,6 @@ function Timeline({
   )
 }
 
-// TimelineContent
 function TimelineContent({
   className,
   ...props
@@ -85,7 +81,6 @@ function TimelineContent({
   )
 }
 
-// TimelineDate
 interface TimelineDateProps extends React.HTMLAttributes<HTMLTimeElement> {
   asChild?: boolean
 }
@@ -95,7 +90,9 @@ function TimelineDate({
   className,
   ...props
 }: TimelineDateProps) {
-  const Comp = asChild ? SlotPrimitive.Slot : 'time'
+  const Comp = asChild
+    ? SlotPrimitive.Slot
+    : 'time'
 
   return (
     <Comp
@@ -109,7 +106,6 @@ function TimelineDate({
   )
 }
 
-// TimelineHeader
 function TimelineHeader({
   className,
   ...props
@@ -119,7 +115,6 @@ function TimelineHeader({
   )
 }
 
-// TimelineIndicator
 interface TimelineIndicatorProps extends React.HTMLAttributes<HTMLDivElement> {
   asChild?: boolean
 }
@@ -144,7 +139,6 @@ function TimelineIndicator({
   )
 }
 
-// TimelineItem
 interface TimelineItemProps extends React.HTMLAttributes<HTMLDivElement> {
   step: number
 }
@@ -165,7 +159,6 @@ function TimelineItem({ step, className, ...props }: TimelineItemProps) {
   )
 }
 
-// TimelineSeparator
 function TimelineSeparator({
   className,
   ...props
@@ -183,7 +176,6 @@ function TimelineSeparator({
   )
 }
 
-// TimelineTitle
 function TimelineTitle({
   className,
   ...props

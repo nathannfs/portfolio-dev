@@ -13,13 +13,13 @@ export function Footer() {
         </div>
 
         <div className="flex items-center gap-4">
-          <Link href="https://instagram.com/nathannfs.dev" target="_blank">
+          <Link href="https://instagram.com/nathannfs.dev" target="_blank" rel="noreferrer">
             <Instagram className="size-5 text-muted-foreground transition-colors hover:text-foreground" />
           </Link>
-          <Link href="https://linkedin.com/in/nathannfs" target="_blank">
+          <Link href="https://linkedin.com/in/nathannfs" target="_blank" rel="noreferrer">
             <Linkedin className="size-5 text-muted-foreground transition-colors hover:text-foreground" />
           </Link>
-          <Link href="https://github.com/nathannfs" target="_blank">
+          <Link href="https://github.com/nathannfs" target="_blank" rel="noreferrer">
             <Github className="size-5 text-muted-foreground transition-colors hover:text-foreground" />
           </Link>
         </div>

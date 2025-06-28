@@ -1,11 +1,11 @@
 'use client'
 
-import { motion } from 'framer-motion'
+import { easeInOut, motion } from 'framer-motion'
 import { ArrowRight } from 'lucide-react'
 import Link from 'next/link'
+import { twMerge } from 'tailwind-merge'
 
-import { certifications } from '@/utils/certifications'
-import { degrees } from '@/utils/degrees'
+import { useCertifications, useDegrees } from '@/hooks/use-query-data'
 import { statusColor, statusLabel } from '@/utils/status'
 
 import { Button } from '../button'
@@ -21,12 +21,15 @@ const sectionVariants = {
     scale: 1,
     transition: {
       duration: 0.5,
-      ease: 'easeInOut',
+      ease: easeInOut,
     },
   },
 }
 
 export function About() {
+  const { data: certificates } = useCertifications()
+  const { data: degrees } = useDegrees()
+
   return (
     <Section.Root id="about" className="scroll-mt-20 md:scroll-mt-0">
       <motion.div
@@ -106,7 +109,7 @@ export function About() {
                 >
                   <Section.Block>
                     <div className="flex flex-col gap-4">
-                      {degrees.map((degree) => (
+                      {degrees && degrees.map((degree) => (
                         <div
                           key={degree.title}
                           className="flex flex-col gap-2 rounded-lg border border-border bg-muted/40 p-4 shadow-sm"
@@ -116,9 +119,10 @@ export function About() {
                               {degree.title}
                             </span>
                             <span
-                              className={`ml-2 whitespace-nowrap rounded-full px-2 py-0.5 text-xs font-medium ${statusColor(
-                                degree.status,
-                              )}`}
+                              className={twMerge([
+                                'ml-2 whitespace-nowrap rounded-full px-2 py-0.5 text-xs font-medium',
+                                statusColor(degree.status),
+                              ])}
                             >
                               {statusLabel(degree.status)}
                             </span>
@@ -154,7 +158,7 @@ export function About() {
                 >
                   <Section.Block>
                     <div className="flex flex-col gap-4">
-                      {certifications.splice(0, 3).map((certificate) => (
+                      {certificates && certificates.splice(0, 2).map((certificate) => (
                         <div
                           key={certificate.title}
                           className="flex max-w-lg flex-col gap-2 rounded-lg border border-border bg-muted/40 p-4 shadow-sm"
@@ -164,9 +168,10 @@ export function About() {
                               {certificate.title}
                             </span>
                             <span
-                              className={`ml-2 whitespace-nowrap rounded-full px-2 py-0.5 text-xs font-medium ${statusColor(
-                                certificate.status,
-                              )}`}
+                              className={twMerge([
+                                'ml-2 whitespace-nowrap rounded-full px-2 py-0.5 text-xs font-medium',
+                                statusColor(certificate.status),
+                              ])}
                             >
                               {statusLabel(certificate.status)}
                             </span>

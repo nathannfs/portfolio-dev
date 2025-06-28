@@ -41,7 +41,7 @@ export default function ProjectsPage() {
                   Ver detalhes <ArrowRight className="size-4" />
                 </Button>
               </Link>
-              <Link href={project.href} target="_blank">
+              <Link href={project.href} target="_blank" rel="noreferrer">
                 <Button variant="link">
                   Live <ExternalLink className="size-4" />
                 </Button>

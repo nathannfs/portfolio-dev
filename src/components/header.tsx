@@ -1,14 +1,29 @@
 'use client'
 
 import { motion } from 'framer-motion'
-import { Code, List } from 'lucide-react'
+import { ChevronDown, Code, List, LogOut } from 'lucide-react'
 import { usePathname } from 'next/navigation'
+import { useSession } from 'next-auth/react'
+import { signOut } from 'next-auth/react'
 import { useEffect, useState } from 'react'
 import { twMerge } from 'tailwind-merge'
 
 import { Button } from './button'
 import { Separator } from './separator'
 import { ThemeToggle } from './theme/theme-toggle'
+import {
+  Avatar,
+  AvatarFallback,
+  AvatarImage,
+} from './ui/avatar'
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from './ui/dropdown-menu'
 import {
   Sheet,
   SheetContent,
@@ -18,8 +33,11 @@ import {
 } from './ui/sheet'
 
 export function Header() {
+  const { data: session } = useSession()
+
   const pathname = usePathname()
   const isHomePage = pathname === '/'
+
   const [activeSection, setActiveSection] = useState<string>('home')
   const [isSheetOpen, setIsSheetOpen] = useState(false)
 
@@ -72,13 +90,11 @@ export function Header() {
     if (element) {
       setActiveSection(id)
 
-      // Fecha o menu mobile se estiver aberto
       setIsSheetOpen(false)
 
       const isMobile = window.innerWidth < 768
 
       if (isMobile) {
-        // Estratégia para mobile: scroll direto
         const headerHeight = 80
         const elementPosition = element.offsetTop - headerHeight
 
@@ -87,7 +103,6 @@ export function Header() {
           behavior: 'smooth',
         })
       } else {
-        // Estratégia para desktop: scrollIntoView + ajuste
         element.scrollIntoView({
           behavior: 'smooth',
           block: 'start',
@@ -113,7 +128,6 @@ export function Header() {
             const isMobile = window.innerWidth < 768
 
             if (isMobile) {
-              // Estratégia para mobile: scroll direto
               const headerHeight = 80
               const elementPosition = element.offsetTop - headerHeight
 
@@ -122,7 +136,6 @@ export function Header() {
                 behavior: 'smooth',
               })
             } else {
-              // Estratégia para desktop: scrollIntoView + ajuste
               element.scrollIntoView({
                 behavior: 'smooth',
                 block: 'start',
@@ -268,6 +281,47 @@ export function Header() {
         <Separator orientation="vertical" />
 
         <ThemeToggle />
+
+        {session?.user && (
+          <>
+            <Separator orientation="vertical" />
+
+            <DropdownMenu>
+              <DropdownMenuTrigger asChild>
+                <Button variant="ghost" className="h-auto p-0 hover:bg-transparent">
+                  <Avatar>
+                    <AvatarImage src={session.user.image ?? undefined} alt={session.user.name ?? 'Avatar'} />
+                    <AvatarFallback>
+                      {session.user.name
+                        ? session.user.name.split(' ').map((n) => n[0]).join('').toUpperCase().slice(0, 2)
+                        : 'U'}
+                    </AvatarFallback>
+                  </Avatar>
+
+                  <ChevronDown size={16} className="opacity-60" aria-hidden="true" />
+                </Button>
+              </DropdownMenuTrigger>
+
+              <DropdownMenuContent align="end" className="max-w-64">
+                <DropdownMenuLabel className="flex min-w-0 flex-col">
+                  <span className="text-foreground truncate text-sm font-medium">
+                    {session.user.name}
+                  </span>
+                  <span className="text-muted-foreground truncate text-xs font-normal">
+                    {session.user.email}
+                  </span>
+                </DropdownMenuLabel>
+
+                <DropdownMenuSeparator />
+
+                <DropdownMenuItem onClick={() => signOut({ callbackUrl: '/' })}>
+                  <LogOut size={16} className="opacity-60" aria-hidden="true" />
+                  <span>Sair</span>
+                </DropdownMenuItem>
+              </DropdownMenuContent>
+            </DropdownMenu>
+          </>
+        )}
       </nav>
 
       <nav className="md:hidden">
@@ -391,6 +445,45 @@ export function Header() {
             <Separator />
 
             <ThemeToggle />
+
+            {session?.user && (
+              <div className="mt-auto">
+                <DropdownMenu>
+                  <DropdownMenuTrigger asChild>
+                    <Button variant="ghost" className="h-auto p-0 hover:bg-transparent">
+                      <Avatar>
+                        <AvatarImage src={session.user.image ?? undefined} alt={session.user.name ?? 'Avatar'} />
+                        <AvatarFallback>
+                          {session.user.name
+                            ? session.user.name.split(' ').map((n) => n[0]).join('').toUpperCase().slice(0, 2)
+                            : 'U'}
+                        </AvatarFallback>
+                      </Avatar>
+
+                      <ChevronDown size={16} className="opacity-60" aria-hidden="true" />
+                    </Button>
+                  </DropdownMenuTrigger>
+
+                  <DropdownMenuContent align="end" className="max-w-64">
+                    <DropdownMenuLabel className="flex min-w-0 flex-col">
+                      <span className="text-foreground truncate text-sm font-medium">
+                        {session.user.name}
+                      </span>
+                      <span className="text-muted-foreground truncate text-xs font-normal">
+                        {session.user.email}
+                      </span>
+                    </DropdownMenuLabel>
+
+                    <DropdownMenuSeparator />
+
+                    <DropdownMenuItem onClick={() => signOut({ callbackUrl: '/' })}>
+                      <LogOut size={16} className="opacity-60" aria-hidden="true" />
+                      <span>Sair</span>
+                    </DropdownMenuItem>
+                  </DropdownMenuContent>
+                </DropdownMenu>
+              </div>
+            )}
           </SheetContent>
         </Sheet>
       </nav>
