@@ -32,7 +32,7 @@ export function HobbyModal({ open, onOpenChange, initialData }: HobbyModalProps)
         : 'Adicionar Hobby'}
       description={initialData
         ? 'Edite o hobby abaixo.'
-        : 'Adicione um novo hobby preenchendo o campo abaixo.'}
+        : 'Adicione um novo hobby preenchendo os campos abaixo.'}
     >
       <form onSubmit={handleSubmit} className="space-y-4">
         <div className="flex flex-col gap-1">

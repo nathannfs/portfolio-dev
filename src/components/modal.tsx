@@ -31,6 +31,7 @@ export function Modal({
         <Dialog.Content
           className={twMerge([
             'fixed space-y-4 left-1/2 top-1/2 z-50 w-full max-w-lg -translate-x-1/2 -translate-y-1/2 rounded-lg bg-white p-6 shadow-lg dark:bg-zinc-900',
+            'max-h-[90vh] overflow-y-auto',
             className,
           ])}
         >
@@ -52,7 +53,7 @@ export function Modal({
             )}
           </div>
 
-          <div>{children}</div>
+          <div className="overflow-y-auto max-h-[65vh] w-full">{children}</div>
         </Dialog.Content>
       </Dialog.Portal>
     </Dialog.Root>

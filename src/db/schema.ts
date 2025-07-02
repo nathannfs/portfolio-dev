@@ -127,3 +127,18 @@ export const experiences = pgTable('experiences', {
   responsibilities: text('responsibilities').array().notNull(),
   createdAt: timestamp('created_at').defaultNow(),
 })
+
+export const projects = pgTable('projects', {
+  id: uuid('id').primaryKey().defaultRandom(),
+  name: text('name').notNull(),
+  description: text('description').notNull(),
+  image: text('image').notNull(),
+  href: text('href'),
+  techs: text('techs').array().notNull(),
+  year: text('year'),
+  completed: boolean('completed').default(false),
+  features: text('features').array().notNull(),
+  challenges: text('challenges').array().notNull(),
+  learnings: text('learnings').array().notNull(),
+  createdAt: timestamp('created_at').defaultNow(),
+})

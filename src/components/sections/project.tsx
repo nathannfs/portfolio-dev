@@ -2,7 +2,7 @@ import { easeInOut, motion } from 'framer-motion'
 import { ArrowRight, CheckIcon } from 'lucide-react'
 import Link from 'next/link'
 
-import { projects } from '@/utils/projects'
+import { useProjects } from '@/hooks/use-query-data'
 
 import { Button } from '../button'
 import { Section } from '../section'
@@ -54,6 +54,8 @@ const itemVariants = {
 }
 
 export function Project() {
+  const { data: projects } = useProjects()
+
   return (
     <Section.Root id="project" className="scroll-mt-20 md:scroll-mt-0">
       <motion.div
@@ -81,16 +83,18 @@ export function Project() {
               <Timeline
                 value={
                   projects
-                    .slice(0, 4)
-                    .map((p, i) => (p.completed
-                      ? i + 1
-                      : 0))
-                    .filter(Boolean)
-                    .pop() || 1
+                    ? projects
+                        .slice(0, 4)
+                        .map((p, i) => (p.completed
+                          ? i + 1
+                          : 0))
+                        .filter(Boolean)
+                        .pop()
+                    : 1
                 }
                 className="flex w-full max-w-3xl flex-col md:items-center"
               >
-                {projects.slice(0, 4).map((project, idx) => (
+                {projects && projects.slice(0, 4).map((project, idx) => (
                   <motion.div
                     key={project.name}
                     variants={itemVariants}

@@ -5,7 +5,7 @@ import { notFound } from 'next/navigation'
 
 import { Button } from '@/components/button'
 import { Badge } from '@/components/ui/badge'
-import { projects } from '@/utils/projects'
+import { getProjects } from '@/http/projects/get-projects'
 
 export default async function ProjectDetailPage({
   params,
@@ -13,12 +13,15 @@ export default async function ProjectDetailPage({
   params: Promise<{ id: string }>
 }) {
   const { id } = await params
+
+  const projects = await getProjects()
+
   const project = projects.find((p) => p.id === id)
 
   if (!project) return notFound()
 
   return (
-    <main className="container mx-auto max-w-2xl space-y-2 px-4 py-4">
+    <main className="container mx-auto max-w-2xl space-y-4 px-4 py-4">
       <Link href="/projects" className="flex items-center">
         <Button
           variant="ghost"
@@ -106,25 +109,6 @@ export default async function ProjectDetailPage({
               </ul>
             </div>
           </section>
-          {project.screenshots.length > 1 && (
-            <section className="space-y-3">
-              <h2 className="border-l-4 border-sky-600 pl-3 text-xl font-bold text-sky-900/90 dark:border-sky-400 dark:text-sky-200">
-                Screenshots
-              </h2>
-              <div className="flex flex-wrap gap-4">
-                {project.screenshots.map((src: string, i: number) => (
-                  <Image
-                    key={src + i}
-                    src={src}
-                    alt={`Screenshot ${i + 1}`}
-                    width={300}
-                    height={180}
-                    className="rounded-lg border border-sky-100 object-cover shadow-md dark:border-sky-800"
-                  />
-                ))}
-              </div>
-            </section>
-          )}
         </div>
       </div>
     </main>

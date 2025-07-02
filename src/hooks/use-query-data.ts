@@ -5,6 +5,7 @@ import { getCertifications } from '@/http/certifications/get-certifications'
 import { getDegrees } from '@/http/degrees/get-degrees'
 import { getExperiences } from '@/http/experiences/get-experiences'
 import { getHobbies } from '@/http/hobbies/get-hobbies'
+import { getProjects } from '@/http/projects/get-projects'
 
 export const useCertifications = () => {
   return useQuery({
@@ -58,6 +59,18 @@ export const useExperiences = () => {
   return useQuery({
     queryKey: ['experiences'],
     queryFn: getExperiences,
+    staleTime: 1000 * 60,
+    placeholderData: keepPreviousData,
+    refetchOnWindowFocus: true,
+    refetchInterval: 1000 * 20,
+    refetchIntervalInBackground: false,
+  })
+}
+
+export const useProjects = () => {
+  return useQuery({
+    queryKey: ['projects'],
+    queryFn: getProjects,
     staleTime: 1000 * 60,
     placeholderData: keepPreviousData,
     refetchOnWindowFocus: true,
