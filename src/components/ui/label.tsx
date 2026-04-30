@@ -14,10 +14,7 @@ const Label = ({
   className,
   ...props
 }: ComponentProps<typeof Root> & VariantProps<typeof labelVariants>) => (
-  <Root
-    className={cn(labelVariants(), className)}
-    {...props}
-  />
+  <Root className={cn(labelVariants(), className)} {...props} />
 )
 Label.displayName = Root.displayName
 

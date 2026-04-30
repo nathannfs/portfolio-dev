@@ -1,4 +1,4 @@
-import { ArrowLeft, ExternalLink } from "lucide-react"
+import { ArrowLeft } from "lucide-react"
 import Link from "next/link"
 import { notFound } from "next/navigation"
 
@@ -34,8 +34,7 @@ export default async function ProjectDetailPage({
       </Link>
 
       <div className="flex flex-col space-y-8 overflow-hidden rounded-xl border border-sky-100 bg-gradient-to-br from-sky-50 via-white to-sky-50 p-0 shadow-sm dark:border-sky-800 dark:from-sky-950 dark:via-zinc-950 dark:to-sky-900">
-
-        <div className="flex flex-col space-y-4 px-6">
+        <div className="flex flex-col space-y-4 px-6 pt-8">
           <h1 className="font-extrabold text-3xl text-slate-800 tracking-tight drop-shadow-sm dark:text-slate-100">
             {project.name}
           </h1>
@@ -47,16 +46,6 @@ export default async function ProjectDetailPage({
               </Badge>
             ))}
           </div>
-
-          <a href={project.href} rel="noopener noreferrer" target="_blank">
-            <Button
-              className="w-fit border-sky-600 bg-sky-600 text-white transition-all hover:scale-105 hover:bg-sky-700 dark:border-sky-500 dark:bg-sky-600 dark:hover:bg-sky-700"
-              size="md"
-              variant="secondary"
-            >
-              View project online <ExternalLink className="size-4" />
-            </Button>
-          </a>
         </div>
 
         <div className="space-y-8 px-6 pb-6">

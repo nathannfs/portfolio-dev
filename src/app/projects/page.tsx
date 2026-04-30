@@ -1,6 +1,6 @@
 "use client"
 
-import { ArrowRight, Edit, ExternalLink, Plus, Trash } from "lucide-react"
+import { ArrowRight, Edit, Plus, Trash } from "lucide-react"
 import Link from "next/link"
 import { useSession } from "next-auth/react"
 import { useState } from "react"
@@ -66,7 +66,6 @@ export default function ProjectsPage() {
             className="flex flex-col gap-4 rounded-lg border bg-card p-4 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-lg"
             key={project.id}
           >
-
             <div className="flex flex-col items-start gap-2">
               <h2 className="font-bold text-primary text-xl">{project.name}</h2>
               <p className="text-muted-foreground">{project.description}</p>
@@ -85,16 +84,6 @@ export default function ProjectsPage() {
                 <Link href={`/projects/${project.id}`}>
                   <Button variant="primary">
                     View Details <ArrowRight className="size-4" />
-                  </Button>
-                </Link>
-
-                <Link
-                  href={project.href || ""}
-                  rel="noreferrer"
-                  target="_blank"
-                >
-                  <Button variant="link">
-                    Live <ExternalLink className="size-4" />
                   </Button>
                 </Link>
               </div>
@@ -130,7 +119,6 @@ export default function ProjectsPage() {
               className="flex flex-col gap-4 rounded-lg border bg-card p-4 shadow-sm"
               key={`skeleton-${index}`}
             >
-
               <Skeleton className="h-6" />
               <Skeleton className="h-10" />
 

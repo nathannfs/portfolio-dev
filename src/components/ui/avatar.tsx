@@ -17,10 +17,7 @@ const Avatar = ({ className, ...props }: ComponentProps<typeof Root>) => (
 Avatar.displayName = Root.displayName
 
 const AvatarImage = ({ className, ...props }: ComponentProps<typeof Image>) => (
-  <Image
-    className={cn("aspect-square h-full w-full", className)}
-    {...props}
-  />
+  <Image className={cn("aspect-square h-full w-full", className)} {...props} />
 )
 AvatarImage.displayName = Image.displayName
 

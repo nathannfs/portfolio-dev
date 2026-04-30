@@ -147,10 +147,7 @@ const SelectSeparator = ({
   className,
   ...props
 }: ComponentProps<typeof Separator>) => (
-  <Separator
-    className={cn("-mx-1 my-1 h-px bg-muted", className)}
-    {...props}
-  />
+  <Separator className={cn("-mx-1 my-1 h-px bg-muted", className)} {...props} />
 )
 SelectSeparator.displayName = Separator.displayName
 

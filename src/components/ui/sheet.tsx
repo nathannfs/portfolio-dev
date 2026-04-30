@@ -24,7 +24,10 @@ const SheetClose = Close
 
 const SheetPortal = Portal
 
-const SheetOverlay = ({ className, ...props }: ComponentProps<typeof Overlay>) => (
+const SheetOverlay = ({
+  className,
+  ...props
+}: ComponentProps<typeof Overlay>) => (
   <Overlay
     className={cn(
       "data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 fixed inset-0 z-50 bg-black/80 data-[state=closed]:animate-out data-[state=open]:animate-in",
@@ -66,10 +69,7 @@ const SheetContent = ({
 }: SheetContentProps) => (
   <SheetPortal>
     <SheetOverlay />
-    <Content
-      className={cn(sheetVariants({ side }), className)}
-      {...props}
-    >
+    <Content className={cn(sheetVariants({ side }), className)} {...props}>
       <Close className="absolute top-4 right-4 rounded-sm opacity-70 ring-offset-background transition-opacity hover:opacity-100 focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:pointer-events-none data-[state=open]:bg-secondary">
         <X className="h-4 w-4" />
         <span className="sr-only">Close</span>

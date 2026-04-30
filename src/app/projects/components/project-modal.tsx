@@ -145,9 +145,9 @@ export function ProjectModal({
       }
 
       if (initialData) {
-        return updateProjectAction(initialData.id, data)
+        return await updateProjectAction(initialData.id, data)
       }
-      return createProjectAction(data)
+      return await createProjectAction(data)
     },
     () => onOpenChange(false)
   )
@@ -300,11 +300,7 @@ export function ProjectModal({
             Cancel
           </Button>
           <Button disabled={isPending} type="submit">
-            {isPending ? (
-              <Loader2 className="animate-spin" />
-            ) : (
-              buttonLabel
-            )}
+            {isPending ? <Loader2 className="animate-spin" /> : buttonLabel}
           </Button>
         </div>
       </form>
