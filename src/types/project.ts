@@ -6,7 +6,6 @@ export interface Project {
   features: string[]
   href?: string
   id: string
-  image: string
   learnings: string[]
   name: string
   techs: string[]

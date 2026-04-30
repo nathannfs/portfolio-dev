@@ -1,7 +1,6 @@
 "use client"
 
 import { ArrowRight, Edit, ExternalLink, Plus, Trash } from "lucide-react"
-import Image from "next/image"
 import Link from "next/link"
 import { useSession } from "next-auth/react"
 import { useState } from "react"
@@ -67,13 +66,6 @@ export default function ProjectsPage() {
             className="flex flex-col gap-4 rounded-lg border bg-card p-4 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-lg"
             key={project.id}
           >
-            <Image
-              alt={project.name}
-              className="h-48 w-full rounded-md object-cover"
-              height={340}
-              src={project.image}
-              width={600}
-            />
 
             <div className="flex flex-col items-start gap-2">
               <h2 className="font-bold text-primary text-xl">{project.name}</h2>
@@ -138,7 +130,6 @@ export default function ProjectsPage() {
               className="flex flex-col gap-4 rounded-lg border bg-card p-4 shadow-sm"
               key={`skeleton-${index}`}
             >
-              <Skeleton className="h-48 w-full rounded-md object-cover" />
 
               <Skeleton className="h-6" />
               <Skeleton className="h-10" />

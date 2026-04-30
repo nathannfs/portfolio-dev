@@ -1,6 +1,5 @@
 import { Loader2, Plus, X } from "lucide-react"
-import Image from "next/image"
-import { useEffect, useRef, useState } from "react"
+import { useEffect, useState } from "react"
 
 import { createProjectAction, updateProjectAction } from "@/actions/projects"
 import { Button } from "@/components/button"
@@ -96,14 +95,6 @@ export function ProjectModal({
   onOpenChange,
   initialData,
 }: ProjectModalProps) {
-  const [imagePath, setImagePath] = useState(initialData?.image || "")
-  const [uploading, setUploading] = useState(false)
-  const fileInputRef = useRef<HTMLInputElement>(null)
-  const [previewUrl, setPreviewUrl] = useState<string | null>(
-    initialData?.image || null
-  )
-  const [selectedFileName, setSelectedFileName] = useState<string | null>(null)
-
   const [techs, setTechs] = useState<string[]>(initialData?.techs || [])
   const [newTech, setNewTech] = useState("")
 
@@ -129,39 +120,17 @@ export function ProjectModal({
         setFeatures(initialData.features || [])
         setChallenges(initialData.challenges || [])
         setLearnings(initialData.learnings || [])
-        setImagePath(initialData.image || "")
-        setPreviewUrl(initialData.image || null)
-        setSelectedFileName(null)
       } else {
         setTechs([])
         setFeatures([])
         setChallenges([])
         setLearnings([])
-        setImagePath("")
-        setPreviewUrl(null)
-        setSelectedFileName(null)
       }
     }, 0)
   }, [initialData])
 
   const [{ errors }, handleSubmit, isPending] = useFormState(
     async (data: FormData) => {
-      if (!imagePath && fileInputRef.current?.files?.[0]) {
-        setUploading(true)
-        const formData = new FormData()
-        formData.append("file", fileInputRef.current.files[0])
-        const res = await fetch("/api/upload", {
-          method: "POST",
-          body: formData,
-        })
-        const { path } = await res.json()
-        setImagePath(path)
-        data.set("image", path)
-        setUploading(false)
-      } else {
-        data.set("image", imagePath)
-      }
-
       for (const item of techs) {
         data.append("techs", item)
       }
@@ -321,71 +290,17 @@ export function ProjectModal({
           value={newLearning}
         />
 
-        <div className="flex flex-col gap-1">
-          <Label>Imagem principal</Label>
-
-          <input
-            accept="image/*"
-            onChange={(e) => {
-              if (e.target.files?.[0]) {
-                setImagePath("")
-                const file = e.target.files[0]
-                setSelectedFileName(file.name)
-                const reader = new FileReader()
-                reader.onload = (ev) => {
-                  setPreviewUrl(ev.target?.result as string)
-                }
-                reader.readAsDataURL(file)
-              } else {
-                setSelectedFileName(null)
-                setPreviewUrl(initialData?.image || null)
-              }
-            }}
-            ref={fileInputRef}
-            style={{ display: "none" }}
-            type="file"
-          />
-
-          <Button
-            onClick={() => fileInputRef.current?.click()}
-            size="sm"
-            type="button"
-          >
-            Selecionar imagem
-          </Button>
-
-          {selectedFileName && (
-            <span className="truncate text-sm text-zinc-700 dark:text-zinc-200">
-              {selectedFileName}
-            </span>
-          )}
-
-          {previewUrl && (
-            <Image
-              alt="Preview"
-              className="mt-2 rounded border object-cover"
-              height={200}
-              src={previewUrl}
-              width={400}
-            />
-          )}
-
-          {errors?.image && (
-            <span className="text-red-500 text-sm">{errors.image[0]}</span>
-          )}
-        </div>
-
         <div className="flex justify-end gap-2">
           <Button
-            disabled={uploading || isPending}
+            disabled={isPending}
             onClick={() => onOpenChange(false)}
             type="button"
             variant="destructive"
           >
             Cancel
           </Button>
-          <Button disabled={uploading || isPending} type="submit">
-            {uploading || isPending ? (
+          <Button disabled={isPending} type="submit">
+            {isPending ? (
               <Loader2 className="animate-spin" />
             ) : (
               buttonLabel

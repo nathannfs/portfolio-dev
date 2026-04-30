@@ -1,5 +1,4 @@
 import { ArrowLeft, ExternalLink } from "lucide-react"
-import Image from "next/image"
 import Link from "next/link"
 import { notFound } from "next/navigation"
 
@@ -35,16 +34,6 @@ export default async function ProjectDetailPage({
       </Link>
 
       <div className="flex flex-col space-y-8 overflow-hidden rounded-xl border border-sky-100 bg-gradient-to-br from-sky-50 via-white to-sky-50 p-0 shadow-sm dark:border-sky-800 dark:from-sky-950 dark:via-zinc-950 dark:to-sky-900">
-        <div className="group relative h-56 w-full overflow-hidden md:h-72">
-          <Image
-            alt={project.name}
-            className="h-full w-full border-sky-50 border-b object-cover transition-transform duration-500 group-hover:scale-105 dark:border-sky-800"
-            height={500}
-            src={project.image}
-            width={1200}
-          />
-          <div className="pointer-events-none absolute inset-0 ring-1 ring-sky-100 ring-inset dark:ring-sky-800" />
-        </div>
 
         <div className="flex flex-col space-y-4 px-6">
           <h1 className="font-extrabold text-3xl text-slate-800 tracking-tight drop-shadow-sm dark:text-slate-100">

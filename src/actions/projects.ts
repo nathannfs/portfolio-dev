@@ -9,7 +9,6 @@ import { updateProject } from "@/http/projects/update-project"
 const projectSchema = z.object({
   name: z.string().min(1, "Título é obrigatório"),
   description: z.string().min(1, "Descrição é obrigatória"),
-  image: z.string().min(1, "Imagem é obrigatória"),
   href: z.string().min(1, "Link é obrigatório"),
   techs: z.array(z.string()).min(1, "Tecnologias são obrigatórias"),
   year: z.string().min(1, "Ano é obrigatório"),
