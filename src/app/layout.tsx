@@ -18,12 +18,12 @@ export const metadata: Metadata = {
   title: "Nathan Santos | Mid-Level Product Engineer",
   description:
     "Product Engineer specializing in TypeScript, Next.js, and scalable SaaS architecture. Building products that ship fast and scale to millions.",
-  metadataBase: new URL("https://nathannfs.com"),
+  metadataBase: new URL("https://www.nathannfs.com"),
   openGraph: {
     title: "Nathan Santos | Mid-Level Product Engineer",
     description:
       "Product Engineer specializing in TypeScript, Next.js, and scalable SaaS architecture. Building products that ship fast and scale to millions.",
-    url: "https://nathannfs.com",
+    url: "https://www.nathannfs.com",
     siteName: "Nathan Santos — Product Engineer",
     images: [
       {
@@ -85,7 +85,7 @@ export const metadata: Metadata = {
     "React 19",
     "Tailwind CSS",
   ],
-  authors: [{ name: "Nathan Santos", url: "https://nathannfs.com" }],
+  authors: [{ name: "Nathan Santos", url: "https://www.nathannfs.com" }],
   creator: "Nathan Santos",
   publisher: "Nathan Santos",
   category: "technology",
@@ -101,7 +101,7 @@ export default function RootLayout({
       <head>
         <meta content="width=device-width, initial-scale=1" name="viewport" />
         <meta content="#0ea5e9" name="theme-color" />
-        <link href="https://nathannfs.com/" rel="canonical" />
+        <link href="https://www.nathannfs.com/" rel="canonical" />
         <meta content="Nathan Santos" name="author" />
         <link href="/manifest.json" rel="manifest" />
         <meta content="yes" name="apple-mobile-web-app-capable" />
