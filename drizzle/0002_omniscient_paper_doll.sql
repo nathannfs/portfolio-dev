@@ -1,0 +1,1 @@
+ALTER TABLE "hobbies" DROP COLUMN "description";
