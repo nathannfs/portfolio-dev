@@ -1,12 +1,12 @@
-import { eq } from 'drizzle-orm'
-import { NextRequest, NextResponse } from 'next/server'
+import { eq } from "drizzle-orm"
+import { type NextRequest, NextResponse } from "next/server"
 
-import { experiences } from '@/db/schema'
-import { db } from '@/lib/db'
+import { experiences } from "@/db/schema"
+import { db } from "@/lib/db"
 
 export async function PATCH(
   request: NextRequest,
-  { params }: { params: Promise<{ id: string }> },
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
     const { id } = await params
@@ -19,22 +19,25 @@ export async function PATCH(
       .returning()
 
     if (!updated) {
-      return NextResponse.json({ error: 'Experience not found' }, { status: 404 })
+      return NextResponse.json(
+        { error: "Experience not found" },
+        { status: 404 }
+      )
     }
 
     return NextResponse.json({ status: 204 })
   } catch (error) {
-    console.error('Erro ao atualizar experiência:', error)
+    console.error("Erro ao atualizar experiência:", error)
     return NextResponse.json(
-      { error: 'Erro interno do servidor' },
-      { status: 500 },
+      { error: "Erro interno do servidor" },
+      { status: 500 }
     )
   }
 }
 
 export async function DELETE(
-  request: NextRequest,
-  { params }: { params: Promise<{ id: string }> },
+  _request: NextRequest,
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
     const { id } = await params
@@ -45,15 +48,18 @@ export async function DELETE(
       .returning()
 
     if (!deleted) {
-      return NextResponse.json({ error: 'Experience not found' }, { status: 404 })
+      return NextResponse.json(
+        { error: "Experience not found" },
+        { status: 404 }
+      )
     }
 
     return NextResponse.json({ status: 204 })
   } catch (error) {
-    console.error('Erro ao deletar experiência:', error)
+    console.error("Erro ao deletar experiência:", error)
     return NextResponse.json(
-      { error: 'Erro interno do servidor' },
-      { status: 500 },
+      { error: "Erro interno do servidor" },
+      { status: 500 }
     )
   }
 }

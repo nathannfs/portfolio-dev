@@ -1,14 +1,14 @@
-export type Project = {
-  id: string
-  name: string
+export interface Project {
+  challenges: string[]
+  completed?: boolean
+  createdAt?: string
   description: string
-  image: string
+  features: string[]
   href?: string
+  id: string
+  image: string
+  learnings: string[]
+  name: string
   techs: string[]
   year?: string
-  completed?: boolean
-  features: string[]
-  challenges: string[]
-  learnings: string[]
-  createdAt?: string
 }

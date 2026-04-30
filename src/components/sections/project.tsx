@@ -1,13 +1,13 @@
-import { easeInOut, motion } from 'framer-motion'
-import { ArrowRight, CheckIcon } from 'lucide-react'
-import Link from 'next/link'
+import { easeInOut, motion } from "framer-motion"
+import { ArrowRight, CheckIcon } from "lucide-react"
+import Link from "next/link"
 
-import { useProjects } from '@/hooks/use-query-data'
+import { useProjects } from "@/hooks/use-query-data"
 
-import { Button } from '../button'
-import { Section } from '../section'
-import { Badge } from '../ui/badge'
-import { ScrollArea } from '../ui/scroll-area'
+import { Button } from "../button"
+import { Section } from "../section"
+import { Badge } from "../ui/badge"
+import { ScrollArea } from "../ui/scroll-area"
 import {
   Timeline,
   TimelineContent,
@@ -17,7 +17,7 @@ import {
   TimelineItem,
   TimelineSeparator,
   TimelineTitle,
-} from '../ui/timeline'
+} from "../ui/timeline"
 
 const sectionVariants = {
   hidden: { opacity: 0, y: 50, scale: 0.95 },
@@ -57,14 +57,14 @@ export function Project() {
   const { data: projects } = useProjects()
 
   return (
-    <Section.Root id="project" className="scroll-mt-20 md:scroll-mt-0">
+    <Section.Root className="scroll-mt-20 md:scroll-mt-0" id="project">
       <motion.div
-        variants={sectionVariants}
-        initial="hidden"
-        whileInView="visible"
-        exit="hidden"
-        viewport={{ once: false, amount: 0.2 }}
         className="flex w-full flex-col items-center justify-center gap-6"
+        exit="hidden"
+        initial="hidden"
+        variants={sectionVariants}
+        viewport={{ once: false, amount: 0.2 }}
+        whileInView="visible"
       >
         <Section.Header>
           <Section.Title>Featured Work</Section.Title>
@@ -77,38 +77,36 @@ export function Project() {
         <Section.Content className="items-center space-y-6 md:space-y-0">
           <ScrollArea className="h-fit w-full max-w-4xl md:h-[60vh]">
             <motion.div
-              variants={containerVariants}
               className="flex w-full items-center justify-center pr-4"
+              variants={containerVariants}
             >
               <Timeline
+                className="flex w-full max-w-3xl flex-col md:items-center"
                 value={
                   projects
                     ? projects
                         .slice(0, 4)
-                        .map((p, i) => (p.completed
-                          ? i + 1
-                          : 0))
+                        .map((p, i) => (p.completed ? i + 1 : 0))
                         .filter(Boolean)
                         .pop()
                     : 1
                 }
-                className="flex w-full max-w-3xl flex-col md:items-center"
               >
-                {projects && projects.slice(0, 4).map((project, idx) => (
+                {projects?.slice(0, 4).map((project, idx) => (
                   <motion.div
+                    className="w-full"
                     key={project.name}
                     variants={itemVariants}
-                    className="w-full"
                   >
                     <TimelineItem
-                      step={idx + 1}
                       className="py-4 transition-all duration-300 group-data-[orientation=vertical]/timeline:ms-10"
+                      step={idx + 1}
                     >
                       <TimelineHeader>
                         <TimelineSeparator className="group-data-[orientation=vertical]/timeline:-left-7 group-data-[orientation=vertical]/timeline:h-full" />
-                        <TimelineDate>{project.year ?? '2024'}</TimelineDate>
+                        <TimelineDate>{project.year ?? "2024"}</TimelineDate>
                         <TimelineTitle>{project.name}</TimelineTitle>
-                        <TimelineIndicator className="group-data-completed/timeline-item:border-none group-data-completed/timeline-item:bg-primary group-data-completed/timeline-item:text-primary-foreground flex size-6 items-center justify-center group-data-[orientation=vertical]/timeline:-left-7">
+                        <TimelineIndicator className="flex size-6 items-center justify-center group-data-[orientation=vertical]/timeline:-left-7 group-data-completed/timeline-item:border-none group-data-completed/timeline-item:bg-primary group-data-completed/timeline-item:text-primary-foreground">
                           <CheckIcon
                             className="group-not-data-completed/timeline-item:hidden"
                             size={16}
@@ -121,7 +119,7 @@ export function Project() {
                         </div>
                         <div className="flex gap-2">
                           {project.techs.map((tech) => (
-                            <Badge variant="blue" key={tech}>
+                            <Badge key={tech} variant="blue">
                               {tech}
                             </Badge>
                           ))}
@@ -135,16 +133,16 @@ export function Project() {
           </ScrollArea>
 
           <motion.div
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
             animate={{
               translateY: [0, -4, 0],
             }}
             transition={{
               duration: 1.5,
-              repeat: Infinity,
-              repeatType: 'loop',
+              repeat: Number.POSITIVE_INFINITY,
+              repeatType: "loop",
             }}
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
           >
             <Link href="/projects">
               <Button>

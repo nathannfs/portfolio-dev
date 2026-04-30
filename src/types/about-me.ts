@@ -1,4 +1,4 @@
-export type AboutMe = {
-  id: string
+export interface AboutMe {
   content: string
+  id: string
 }

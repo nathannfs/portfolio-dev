@@ -1,31 +1,39 @@
-import { Loader2, Plus, X } from 'lucide-react'
-import React, { useEffect, useState } from 'react'
+import { Loader2, Plus, X } from "lucide-react"
+import type React from "react"
+import { useEffect, useState } from "react"
 
-import { createExperienceAction, updateExperienceAction } from '@/actions/experiences'
-import { Button } from '@/components/button'
-import { Input } from '@/components/input'
-import { Modal } from '@/components/modal'
-import { Textarea } from '@/components/textarea'
-import { Label } from '@/components/ui/label'
-import { useFormState } from '@/hooks/use-form-state'
-import type { Experience } from '@/types/experiences'
+import {
+  createExperienceAction,
+  updateExperienceAction,
+} from "@/actions/experiences"
+import { Button } from "@/components/button"
+import { Input } from "@/components/input"
+import { Modal } from "@/components/modal"
+import { Textarea } from "@/components/textarea"
+import { Label } from "@/components/ui/label"
+import { useFormState } from "@/hooks/use-form-state"
+import type { Experience } from "@/types/experiences"
 
-type ExperienceModalProps = {
-  open: boolean
-  onOpenChange: (open: boolean) => void
+interface ExperienceModalProps {
   initialData?: Experience | null
+  onOpenChange: (open: boolean) => void
+  open: boolean
 }
 
-export function ExperienceModal({ open, onOpenChange, initialData }: ExperienceModalProps) {
+export function ExperienceModal({
+  open,
+  onOpenChange,
+  initialData,
+}: ExperienceModalProps) {
   const [responsibilities, setResponsibilities] = useState<string[]>([])
-  const [newResponsibility, setNewResponsibility] = useState('')
+  const [newResponsibility, setNewResponsibility] = useState("")
 
   useEffect(() => {
-    if (initialData?.responsibilities && initialData.responsibilities.length > 0) {
-      setResponsibilities(initialData.responsibilities)
-    } else {
-      setResponsibilities([])
-    }
+    const data =
+      initialData?.responsibilities && initialData.responsibilities.length > 0
+        ? initialData.responsibilities
+        : []
+    setTimeout(() => setResponsibilities(data), 0)
   }, [initialData])
 
   const action = initialData
@@ -34,13 +42,15 @@ export function ExperienceModal({ open, onOpenChange, initialData }: ExperienceM
 
   const [{ errors, message }, handleSubmit, isPending] = useFormState(
     action,
-    () => onOpenChange(false),
+    () => onOpenChange(false)
   )
+
+  const buttonLabel = initialData ? "Save" : "Add"
 
   const addResponsibility = () => {
     if (newResponsibility.trim()) {
       setResponsibilities([...responsibilities, newResponsibility.trim()])
-      setNewResponsibility('')
+      setNewResponsibility("")
     }
   }
 
@@ -71,129 +81,148 @@ export function ExperienceModal({ open, onOpenChange, initialData }: ExperienceM
 
   return (
     <Modal
-      open={open}
+      description={
+        initialData
+          ? "Edit the details of the professional experience below."
+          : "Add a new professional experience by filling out the fields below."
+      }
       onOpenChange={onOpenChange}
-      title={initialData
-        ? 'Edit Experience'
-        : 'Add Experience'}
-      description={initialData
-        ? 'Edit the details of the professional experience below.'
-        : 'Add a new professional experience by filling out the fields below.'}
+      open={open}
+      title={initialData ? "Edit Experience" : "Add Experience"}
     >
-      <form onSubmit={handleFormSubmit} className="space-y-4">
+      <form className="space-y-4" onSubmit={handleFormSubmit}>
         <div className="flex flex-col gap-1">
           <Input.Root>
             <Input.Control
+              defaultValue={initialData?.company}
               name="company"
               placeholder="Company name"
-              defaultValue={initialData?.company}
             />
           </Input.Root>
 
-          {errors?.company && <span className="text-red-500 text-sm">{errors.company[0]}</span>}
+          {errors?.company && (
+            <span className="text-red-500 text-sm">{errors.company[0]}</span>
+          )}
         </div>
 
         <div className="flex flex-col gap-1">
           <Input.Root>
             <Input.Control
+              defaultValue={initialData?.position}
               name="position"
               placeholder="Position"
-              defaultValue={initialData?.position}
             />
           </Input.Root>
 
-          {errors?.position && <span className="text-red-500 text-sm">{errors.position[0]}</span>}
+          {errors?.position && (
+            <span className="text-red-500 text-sm">{errors.position[0]}</span>
+          )}
         </div>
 
         <div className="flex flex-col gap-1">
           <Input.Root>
             <Input.Control
+              defaultValue={initialData?.period}
               name="period"
               placeholder="Period (e.g. Jan 2023 - Dec 2023)"
-              defaultValue={initialData?.period}
             />
           </Input.Root>
-          {errors?.period && <span className="text-red-500 text-sm">{errors.period[0]}</span>}
+          {errors?.period && (
+            <span className="text-red-500 text-sm">{errors.period[0]}</span>
+          )}
         </div>
 
         <div className="flex flex-col gap-1">
           <Textarea.Root>
             <Textarea.Control
+              defaultValue={initialData?.description}
               name="description"
               placeholder="Experience description"
-              defaultValue={initialData?.description}
               rows={3}
             />
           </Textarea.Root>
-          {errors?.description && <span className="text-red-500 text-sm">{errors.description[0]}</span>}
+          {errors?.description && (
+            <span className="text-red-500 text-sm">
+              {errors.description[0]}
+            </span>
+          )}
         </div>
 
         <div className="flex flex-col gap-2">
-          <Label className="text-sm font-medium">Responsibilities</Label>
+          <Label className="font-medium text-sm">Responsibilities</Label>
 
           <ul className="flex flex-col gap-2">
-            {responsibilities.length > 0 && responsibilities.map((responsibility, index) => (
-              <li key={index} className="flex items-center gap-2">
-                <span className="flex-1 text-sm">{responsibility}</span>
-
-                <Button
-                  type="button"
-                  variant="destructive"
-                  size="sm"
-                  onClick={() => removeResponsibility(index)}
-                  className="shrink-0"
-                  aria-label="Remove responsibility"
+            {responsibilities.length > 0 &&
+              responsibilities.map((responsibility, index) => (
+                <li
+                  className="flex items-center gap-2"
+                  key={`${responsibility}-${index}`}
                 >
-                  <X className="size-4" />
-                </Button>
-              </li>
-            ))}
+                  <span className="flex-1 text-sm">{responsibility}</span>
+
+                  <Button
+                    aria-label="Remove responsibility"
+                    className="shrink-0"
+                    onClick={() => removeResponsibility(index)}
+                    size="sm"
+                    type="button"
+                    variant="destructive"
+                  >
+                    <X className="size-4" />
+                  </Button>
+                </li>
+              ))}
           </ul>
 
-          <div className="flex gap-2 items-center">
+          <div className="flex items-center gap-2">
             <Input.Root className="flex-1">
               <Input.Control
-                placeholder="Add new responsibility"
-                value={newResponsibility}
                 onChange={(e) => setNewResponsibility(e.target.value)}
                 onKeyDown={(e) => {
-                  if (e.key === 'Enter') {
+                  if (e.key === "Enter") {
                     e.preventDefault()
                     addResponsibility()
                   }
                 }}
+                placeholder="Add new responsibility"
+                value={newResponsibility}
               />
             </Input.Root>
 
             <Button
+              aria-label="Add responsibility"
+              className="w-fit shrink-0"
+              disabled={!newResponsibility.trim()}
+              onClick={addResponsibility}
+              size="sm"
               type="button"
               variant="ghost"
-              size="sm"
-              onClick={addResponsibility}
-              className="w-fit shrink-0"
-              aria-label="Add responsibility"
-              disabled={!newResponsibility.trim()}
             >
               <Plus className="size-4" />
             </Button>
           </div>
 
-          {errors?.responsibilities && <span className="text-red-500 text-sm">{errors.responsibilities[0]}</span>}
+          {errors?.responsibilities && (
+            <span className="text-red-500 text-sm">
+              {errors.responsibilities[0]}
+            </span>
+          )}
         </div>
 
         {message && <div className="text-red-500">{message}</div>}
 
         <div className="flex justify-end gap-2">
-          <Button type="button" variant="destructive" onClick={() => onOpenChange(false)} disabled={isPending}>
+          <Button
+            disabled={isPending}
+            onClick={() => onOpenChange(false)}
+            type="button"
+            variant="destructive"
+          >
             Cancel
           </Button>
 
-          <Button type="submit" disabled={isPending}>
-            {isPending
-              ? <Loader2 className="animate-spin" />
-              : initialData
-                ? 'Save'
-                : 'Add'}
+          <Button disabled={isPending} type="submit">
+            {isPending ? <Loader2 className="animate-spin" /> : buttonLabel}
           </Button>
         </div>
       </form>

@@ -1,12 +1,12 @@
-import { eq } from 'drizzle-orm'
-import { NextRequest, NextResponse } from 'next/server'
+import { eq } from "drizzle-orm"
+import { type NextRequest, NextResponse } from "next/server"
 
-import { db } from '@/db'
-import { certifications } from '@/db/schema'
+import { db } from "@/db"
+import { certifications } from "@/db/schema"
 
 export async function DELETE(
-  request: NextRequest,
-  { params }: { params: Promise<{ id: string }> },
+  _request: NextRequest,
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
     const { id } = await params
@@ -18,24 +18,24 @@ export async function DELETE(
 
     if (!deleted) {
       return NextResponse.json(
-        { error: 'Certification not found' },
-        { status: 404 },
+        { error: "Certification not found" },
+        { status: 404 }
       )
     }
 
     return NextResponse.json({ status: 204 })
   } catch (error) {
-    console.error('Erro ao deletar certificação: ', error)
+    console.error("Erro ao deletar certificação: ", error)
     return NextResponse.json(
-      { error: 'Erro interno do servidor' },
-      { status: 500 },
+      { error: "Erro interno do servidor" },
+      { status: 500 }
     )
   }
 }
 
 export async function PATCH(
   request: NextRequest,
-  { params }: { params: Promise<{ id: string }> },
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
     const { id } = await params
@@ -49,17 +49,17 @@ export async function PATCH(
 
     if (!updated) {
       return NextResponse.json(
-        { error: 'Certification not found' },
-        { status: 404 },
+        { error: "Certification not found" },
+        { status: 404 }
       )
     }
 
     return NextResponse.json({ status: 204 })
   } catch (error) {
-    console.error('Erro ao atualizar certificação: ', error)
+    console.error("Erro ao atualizar certificação: ", error)
     return NextResponse.json(
-      { error: 'Erro interno do servidor' },
-      { status: 500 },
+      { error: "Erro interno do servidor" },
+      { status: 500 }
     )
   }
 }

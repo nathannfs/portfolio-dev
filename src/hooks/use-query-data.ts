@@ -1,15 +1,15 @@
-import { keepPreviousData, useQuery } from '@tanstack/react-query'
+import { keepPreviousData, useQuery } from "@tanstack/react-query"
 
-import { getAboutMe } from '@/http/about-me/get-about-me'
-import { getCertifications } from '@/http/certifications/get-certifications'
-import { getDegrees } from '@/http/degrees/get-degrees'
-import { getExperiences } from '@/http/experiences/get-experiences'
-import { getHobbies } from '@/http/hobbies/get-hobbies'
-import { getProjects } from '@/http/projects/get-projects'
+import { getAboutMe } from "@/http/about-me/get-about-me"
+import { getCertifications } from "@/http/certifications/get-certifications"
+import { getDegrees } from "@/http/degrees/get-degrees"
+import { getExperiences } from "@/http/experiences/get-experiences"
+import { getHobbies } from "@/http/hobbies/get-hobbies"
+import { getProjects } from "@/http/projects/get-projects"
 
 export const useCertifications = () => {
   return useQuery({
-    queryKey: ['certifications'],
+    queryKey: ["certifications"],
     queryFn: getCertifications,
     staleTime: 1000 * 60, // 60 seconds
     placeholderData: keepPreviousData,
@@ -21,7 +21,7 @@ export const useCertifications = () => {
 
 export const useDegrees = () => {
   return useQuery({
-    queryKey: ['degrees'],
+    queryKey: ["degrees"],
     queryFn: getDegrees,
     staleTime: 1000 * 60, // 60 seconds
     placeholderData: keepPreviousData,
@@ -33,7 +33,7 @@ export const useDegrees = () => {
 
 export const useHobbies = () => {
   return useQuery({
-    queryKey: ['hobbies'],
+    queryKey: ["hobbies"],
     queryFn: getHobbies,
     staleTime: 1000 * 60, // 60 seconds
     placeholderData: keepPreviousData,
@@ -45,7 +45,7 @@ export const useHobbies = () => {
 
 export const useAboutMe = () => {
   return useQuery({
-    queryKey: ['about-me'],
+    queryKey: ["about-me"],
     queryFn: getAboutMe,
     staleTime: 1000 * 60, // 60 seconds
     placeholderData: keepPreviousData,
@@ -55,9 +55,9 @@ export const useAboutMe = () => {
   })
 }
 
-export const useExperiences = () => {
-  return useQuery({
-    queryKey: ['experiences'],
+export const useExperiences = () =>
+  useQuery({
+    queryKey: ["experiences"],
     queryFn: getExperiences,
     staleTime: 1000 * 60,
     placeholderData: keepPreviousData,
@@ -65,11 +65,10 @@ export const useExperiences = () => {
     refetchInterval: 1000 * 20,
     refetchIntervalInBackground: false,
   })
-}
 
-export const useProjects = () => {
-  return useQuery({
-    queryKey: ['projects'],
+export const useProjects = () =>
+  useQuery({
+    queryKey: ["projects"],
     queryFn: getProjects,
     staleTime: 1000 * 60,
     placeholderData: keepPreviousData,
@@ -77,4 +76,3 @@ export const useProjects = () => {
     refetchInterval: 1000 * 20,
     refetchIntervalInBackground: false,
   })
-}

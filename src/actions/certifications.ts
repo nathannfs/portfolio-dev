@@ -1,19 +1,19 @@
-'use server'
+"use server"
 
-import { HTTPError } from 'ky'
-import { z } from 'zod'
+import { HTTPError } from "ky"
+import { z } from "zod"
 
-import { createCertification } from '@/http/certifications/create-certification'
-import { updateCertification } from '@/http/certifications/update-certification'
+import { createCertification } from "@/http/certifications/create-certification"
+import { updateCertification } from "@/http/certifications/update-certification"
 
 const certificationSchema = z.object({
-  title: z.string().min(1, { message: 'O título é obrigatório!' }),
-  institution: z.string().min(1, { message: 'A instituição é obrigatória!' }),
+  title: z.string().min(1, { message: "O título é obrigatório!" }),
+  institution: z.string().min(1, { message: "A instituição é obrigatória!" }),
   hours: z.coerce
     .number()
-    .min(1, { message: 'A carga horária é obrigatória!' }),
-  status: z.enum(['completed', 'in_progress', 'planned'], {
-    errorMap: () => ({ message: 'O status é obrigatório!' }),
+    .min(1, { message: "A carga horária é obrigatória!" }),
+  status: z.enum(["completed", "in_progress", "planned"], {
+    errorMap: () => ({ message: "O status é obrigatório!" }),
   }),
   description: z.string().optional(),
 })
@@ -39,13 +39,13 @@ export async function createCertificationAction(data: FormData) {
         const errorData = await err.response.json()
         return {
           success: false,
-          message: errorData.error || 'Erro ao criar certificação',
+          message: errorData.error || "Erro ao criar certificação",
           errors: null,
         }
       } catch {
         return {
           success: false,
-          message: 'Erro ao processar resposta do servidor',
+          message: "Erro ao processar resposta do servidor",
           errors: null,
         }
       }
@@ -53,7 +53,7 @@ export async function createCertificationAction(data: FormData) {
 
     return {
       success: false,
-      message: 'Erro inesperado ao criar certificação.',
+      message: "Erro inesperado ao criar certificação.",
       errors: null,
     }
   }
@@ -82,13 +82,13 @@ export async function updateCertificationAction(id: string, data: FormData) {
         const errorData = await err.response.json()
         return {
           success: false,
-          message: errorData.error || 'Erro ao atualizar certificação',
+          message: errorData.error || "Erro ao atualizar certificação",
           errors: null,
         }
       } catch {
         return {
           success: false,
-          message: 'Erro ao processar resposta do servidor',
+          message: "Erro ao processar resposta do servidor",
           errors: null,
         }
       }
@@ -96,7 +96,7 @@ export async function updateCertificationAction(id: string, data: FormData) {
 
     return {
       success: false,
-      message: 'Unexpected error editing certification.',
+      message: "Unexpected error editing certification.",
       errors: null,
     }
   }

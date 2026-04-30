@@ -1,36 +1,38 @@
-'use client'
+"use client"
 
-import React, { useState } from 'react'
+import type React from "react"
+import { useState } from "react"
 
-type ConfirmModalConfig = {
-  title: string
-  description: string
-  confirmText?: string
+interface ConfirmModalConfig {
   cancelText?: string
-  variant?: 'default' | 'delete'
+  confirmText?: string
+  description: string
   icon?: React.ReactNode
+  title: string
+  variant?: "default" | "delete"
 }
 
-type UseConfirmModalReturn = {
-  isOpen: boolean
+interface UseConfirmModalReturn {
+  close: () => void
   config: ConfirmModalConfig | null
   confirm: (config: ConfirmModalConfig) => Promise<boolean>
-  close: () => void
   handleConfirm: () => void
+  isOpen: boolean
 }
 
 export function useConfirmModal(): UseConfirmModalReturn {
   const [isOpen, setIsOpen] = useState(false)
   const [config, setConfig] = useState<ConfirmModalConfig | null>(null)
-  const [resolve, setResolve] = useState<((value: boolean) => void) | null>(null)
+  const [resolve, setResolve] = useState<((value: boolean) => void) | null>(
+    null
+  )
 
-  const confirm = (config: ConfirmModalConfig): Promise<boolean> => {
-    return new Promise((resolve) => {
+  const confirm = (config: ConfirmModalConfig): Promise<boolean> =>
+    new Promise((resolve) => {
       setConfig(config)
       setResolve(() => resolve)
       setIsOpen(true)
     })
-  }
 
   const close = () => {
     setIsOpen(false)

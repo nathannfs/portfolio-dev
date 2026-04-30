@@ -1,10 +1,10 @@
-import type { Certificate } from '@/types/certificate'
+import type { Certificate } from "@/types/certificate"
 
-import { api } from '../api-client'
+import { api } from "../api-client"
 
 export async function updateCertification(
   id: string,
-  cert: Partial<Certificate>,
+  cert: Partial<Certificate>
 ) {
-  await api.patch(`certifications/${id}`, { json: (cert) }).json<void>()
+  await api.patch(`certifications/${id}`, { json: cert }).json<void>()
 }

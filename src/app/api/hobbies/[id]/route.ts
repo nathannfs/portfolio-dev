@@ -1,20 +1,20 @@
-import { eq } from 'drizzle-orm'
-import { NextRequest, NextResponse } from 'next/server'
+import { eq } from "drizzle-orm"
+import { type NextRequest, NextResponse } from "next/server"
 
-import { hobbies } from '@/db/schema'
-import { db } from '@/lib/db'
+import { hobbies } from "@/db/schema"
+import { db } from "@/lib/db"
 
 export async function DELETE(
-  request: NextRequest,
-  { params }: { params: Promise<{ id: string }> },
+  _request: NextRequest,
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
     const { id } = await params
 
     if (!id) {
       return NextResponse.json(
-        { error: 'Hobby ID is required' },
-        { status: 400 },
+        { error: "Hobby ID is required" },
+        { status: 400 }
       )
     }
 
@@ -24,25 +24,22 @@ export async function DELETE(
       .returning()
 
     if (!deleted) {
-      return NextResponse.json(
-        { error: 'Hobby not found' },
-        { status: 404 },
-      )
+      return NextResponse.json({ error: "Hobby not found" }, { status: 404 })
     }
 
     return NextResponse.json({ status: 204 })
   } catch (error) {
-    console.error('Erro ao deletar hobbies: ', error)
+    console.error("Erro ao deletar hobbies: ", error)
     return NextResponse.json(
-      { error: 'Erro interno do servidor' },
-      { status: 500 },
+      { error: "Erro interno do servidor" },
+      { status: 500 }
     )
   }
 }
 
 export async function PATCH(
   request: NextRequest,
-  { params }: { params: Promise<{ id: string }> },
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
     const { id } = await params
@@ -51,15 +48,15 @@ export async function PATCH(
 
     if (!id) {
       return NextResponse.json(
-        { error: 'Hobby ID is required' },
-        { status: 400 },
+        { error: "Hobby ID is required" },
+        { status: 400 }
       )
     }
 
     if (!title) {
       return NextResponse.json(
-        { error: 'Missing required fields' },
-        { status: 400 },
+        { error: "Missing required fields" },
+        { status: 400 }
       )
     }
 
@@ -72,18 +69,15 @@ export async function PATCH(
       .returning()
 
     if (!updated) {
-      return NextResponse.json(
-        { error: 'Hobby not found' },
-        { status: 404 },
-      )
+      return NextResponse.json({ error: "Hobby not found" }, { status: 404 })
     }
 
     return NextResponse.json({ status: 204 })
   } catch (error) {
-    console.error('Erro ao atualizar hobbies: ', error)
+    console.error("Erro ao atualizar hobbies: ", error)
     return NextResponse.json(
-      { error: 'Erro interno do servidor' },
-      { status: 500 },
+      { error: "Erro interno do servidor" },
+      { status: 500 }
     )
   }
 }

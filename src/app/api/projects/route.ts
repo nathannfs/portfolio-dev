@@ -1,7 +1,7 @@
-import { NextRequest, NextResponse } from 'next/server'
+import { type NextRequest, NextResponse } from "next/server"
 
-import { projects } from '@/db/schema'
-import { db } from '@/lib/db'
+import { projects } from "@/db/schema"
+import { db } from "@/lib/db"
 
 export async function GET() {
   const result = await db.select().from(projects)

@@ -1,27 +1,28 @@
-import { NextRequest, NextResponse } from 'next/server'
-import { Resend } from 'resend'
+import { type NextRequest, NextResponse } from "next/server"
+import { Resend } from "resend"
 
 const resend = new Resend(process.env.RESEND_API_KEY)
+
+const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
 
 export async function POST(request: NextRequest) {
   try {
     const { name, email, message } = await request.json()
 
-    if (!name || !email || !message) {
+    if (!(name && email && message)) {
       return NextResponse.json(
-        { error: 'Todos os campos são obrigatórios' },
-        { status: 400 },
+        { error: "Todos os campos são obrigatórios" },
+        { status: 400 }
       )
     }
 
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
-    if (!emailRegex.test(email)) {
-      return NextResponse.json({ error: 'Email inválido' }, { status: 400 })
+    if (!EMAIL_REGEX.test(email)) {
+      return NextResponse.json({ error: "Email inválido" }, { status: 400 })
     }
 
     const { error } = await resend.emails.send({
-      from: 'Portfolio <onboarding@resend.dev>',
-      to: ['nathann.santoss2@gmail.com'],
+      from: "Portfolio <onboarding@resend.dev>",
+      to: ["nathann.santoss2@gmail.com"],
       subject: `New message from ${name} - Portfolio`,
       html: `
         <div style="font-family: sans-serif; padding: 20px;">
@@ -40,22 +41,22 @@ export async function POST(request: NextRequest) {
     })
 
     if (error) {
-      console.error('Error sending email:', error)
+      console.error("Error sending email:", error)
       return NextResponse.json(
-        { error: 'Error sending email' },
-        { status: 500 },
+        { error: "Error sending email" },
+        { status: 500 }
       )
     }
 
     return NextResponse.json(
-      { message: 'Message sent successfully!' },
-      { status: 200 },
+      { message: "Message sent successfully!" },
+      { status: 200 }
     )
   } catch (error) {
-    console.error('Error sending email:', error)
+    console.error("Error sending email:", error)
     return NextResponse.json(
-      { error: 'Erro interno do servidor' },
-      { status: 500 },
+      { error: "Erro interno do servidor" },
+      { status: 500 }
     )
   }
 }

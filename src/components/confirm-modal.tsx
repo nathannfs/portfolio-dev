@@ -1,23 +1,31 @@
-'use client'
+"use client"
 
-import * as Dialog from '@radix-ui/react-dialog'
-import { AlertTriangle, Trash2, X } from 'lucide-react'
-import { ReactNode } from 'react'
+import {
+  Close,
+  Content,
+  Description,
+  Overlay,
+  Portal,
+  Root,
+  Title,
+} from "@radix-ui/react-dialog"
+import { AlertTriangle, Trash2, X } from "lucide-react"
+import type { ReactNode } from "react"
 
-import { Button } from './button'
+import { Button } from "./button"
 
-type ConfirmModalProps = {
-  open: boolean
-  onOpenChange: (open: boolean) => void
-  title: string
-  description: string
-  confirmText?: string
+interface ConfirmModalProps {
   cancelText?: string
-  variant?: 'default' | 'delete'
-  onConfirm: () => void
-  onCancel?: () => void
+  confirmText?: string
+  description: string
   icon?: ReactNode
   loading?: boolean
+  onCancel?: () => void
+  onConfirm: () => void
+  onOpenChange: (open: boolean) => void
+  open: boolean
+  title: string
+  variant?: "default" | "delete"
 }
 
 export function ConfirmModal({
@@ -25,9 +33,9 @@ export function ConfirmModal({
   onOpenChange,
   title,
   description,
-  confirmText = 'Confirm',
-  cancelText = 'Cancel',
-  variant = 'default',
+  confirmText = "Confirm",
+  cancelText = "Cancel",
+  variant = "default",
   onConfirm,
   onCancel,
   icon,
@@ -43,69 +51,63 @@ export function ConfirmModal({
     onOpenChange(false)
   }
 
-  const defaultIcon = variant === 'delete'
-    ? (
+  const defaultIcon =
+    variant === "delete" ? (
       <Trash2 className="size-6 text-red-500" />
-      )
-    : (
+    ) : (
       <AlertTriangle className="size-6 text-sky-500" />
-      )
+    )
 
   return (
-    <Dialog.Root open={open} onOpenChange={onOpenChange}>
-      <Dialog.Portal>
-        <Dialog.Overlay className="fixed inset-0 z-50 bg-black/40 backdrop-blur-sm" />
+    <Root onOpenChange={onOpenChange} open={open}>
+      <Portal>
+        <Overlay className="fixed inset-0 z-50 bg-black/40 backdrop-blur-sm" />
 
-        <Dialog.Content className="fixed left-1/2 top-1/2 z-50 w-full max-w-md -translate-x-1/2 -translate-y-1/2 rounded-lg bg-white p-6 shadow-lg dark:bg-zinc-900">
+        <Content className="fixed top-1/2 left-1/2 z-50 w-full max-w-md -translate-x-1/2 -translate-y-1/2 rounded-lg bg-white p-6 shadow-lg dark:bg-zinc-900">
           <div className="flex items-start gap-4">
-            <div className="flex-shrink-0">
-              {icon || defaultIcon}
-            </div>
+            <div className="flex-shrink-0">{icon || defaultIcon}</div>
 
             <div className="flex-1">
-              <Dialog.Title className="text-lg font-semibold text-zinc-900 dark:text-zinc-100">
+              <Title className="font-semibold text-lg text-zinc-900 dark:text-zinc-100">
                 {title}
-              </Dialog.Title>
+              </Title>
 
-              <Dialog.Description className="mt-2 text-sm text-zinc-600 dark:text-zinc-400">
+              <Description className="mt-2 text-sm text-zinc-600 dark:text-zinc-400">
                 {description}
-              </Dialog.Description>
+              </Description>
             </div>
 
-            <Dialog.Close asChild>
-              <button className="rounded p-1 hover:bg-zinc-100 dark:hover:bg-zinc-800">
+            <Close asChild>
+              <button
+                className="rounded p-1 hover:bg-zinc-100 dark:hover:bg-zinc-800"
+                type="button"
+              >
                 <X className="size-5" />
               </button>
-            </Dialog.Close>
+            </Close>
           </div>
 
           <div className="mt-6 flex gap-3">
             <Button
-              variant={variant === 'default'
-                ? 'destructive'
-                : 'primary'}
-              onClick={handleCancel}
-              disabled={loading}
               className="flex-1"
+              disabled={loading}
+              onClick={handleCancel}
+              variant={variant === "default" ? "destructive" : "primary"}
             >
               {cancelText}
             </Button>
 
             <Button
-              variant={variant === 'delete'
-                ? 'destructive'
-                : 'primary'}
-              onClick={handleConfirm}
-              disabled={loading}
               className="flex-1"
+              disabled={loading}
+              onClick={handleConfirm}
+              variant={variant === "delete" ? "destructive" : "primary"}
             >
-              {loading
-                ? 'Confirming...'
-                : confirmText}
+              {loading ? "Confirming..." : confirmText}
             </Button>
           </div>
-        </Dialog.Content>
-      </Dialog.Portal>
-    </Dialog.Root>
+        </Content>
+      </Portal>
+    </Root>
   )
 }

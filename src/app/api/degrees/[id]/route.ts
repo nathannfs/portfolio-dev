@@ -1,20 +1,20 @@
-import { eq } from 'drizzle-orm'
-import { NextRequest, NextResponse } from 'next/server'
+import { eq } from "drizzle-orm"
+import { type NextRequest, NextResponse } from "next/server"
 
-import { degrees } from '@/db/schema'
-import { db } from '@/lib/db'
+import { degrees } from "@/db/schema"
+import { db } from "@/lib/db"
 
 export async function DELETE(
-  request: NextRequest,
-  { params }: { params: Promise<{ id: string }> },
+  _request: NextRequest,
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
     const { id } = await params
 
     if (!id) {
       return NextResponse.json(
-        { error: 'Degree ID is required' },
-        { status: 400 },
+        { error: "Degree ID is required" },
+        { status: 400 }
       )
     }
 
@@ -25,24 +25,24 @@ export async function DELETE(
 
     if (!deleted) {
       return NextResponse.json(
-        { error: 'Degree não encontrado' },
-        { status: 404 },
+        { error: "Degree não encontrado" },
+        { status: 404 }
       )
     }
 
     return NextResponse.json({ status: 204 })
   } catch (error) {
-    console.error('Erro ao deletar degrees: ', error)
+    console.error("Erro ao deletar degrees: ", error)
     return NextResponse.json(
-      { error: 'Erro interno do servidor' },
-      { status: 500 },
+      { error: "Erro interno do servidor" },
+      { status: 500 }
     )
   }
 }
 
 export async function PATCH(
   request: NextRequest,
-  { params }: { params: Promise<{ id: string }> },
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
     const { id } = await params
@@ -51,15 +51,15 @@ export async function PATCH(
 
     if (!id) {
       return NextResponse.json(
-        { error: 'Degree ID is required' },
-        { status: 400 },
+        { error: "Degree ID is required" },
+        { status: 400 }
       )
     }
 
-    if (!title || !institution || !period || !status) {
+    if (!(title && institution && period && status)) {
       return NextResponse.json(
-        { error: 'Missing required fields' },
-        { status: 400 },
+        { error: "Missing required fields" },
+        { status: 400 }
       )
     }
 
@@ -77,17 +77,17 @@ export async function PATCH(
 
     if (!updated) {
       return NextResponse.json(
-        { error: 'Degree não encontrado' },
-        { status: 404 },
+        { error: "Degree não encontrado" },
+        { status: 404 }
       )
     }
 
     return NextResponse.json({ status: 204 })
   } catch (error) {
-    console.error('Erro ao atualizar degrees: ', error)
+    console.error("Erro ao atualizar degrees: ", error)
     return NextResponse.json(
-      { error: 'Erro interno do servidor' },
-      { status: 500 },
+      { error: "Erro interno do servidor" },
+      { status: 500 }
     )
   }
 }

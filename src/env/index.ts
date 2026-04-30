@@ -1,6 +1,6 @@
-import 'dotenv/config'
+import "dotenv/config"
 
-import { z } from 'zod'
+import { z } from "zod"
 
 const envSchema = z.object({
   DATABASE_URL: z.string(),
@@ -11,8 +11,8 @@ const envSchema = z.object({
 const _env = envSchema.safeParse(process.env)
 
 if (_env.success === false) {
-  console.error('Variáveis de ambiente inválidas.', _env.error.format())
-  throw new Error('Variáveis de ambiente inválidas.')
+  console.error("Variáveis de ambiente inválidas.", _env.error.format())
+  throw new Error("Variáveis de ambiente inválidas.")
 }
 
 export const env = _env.data

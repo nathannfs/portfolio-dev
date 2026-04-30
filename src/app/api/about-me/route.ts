@@ -1,7 +1,7 @@
-import { NextRequest, NextResponse } from 'next/server'
+import { type NextRequest, NextResponse } from "next/server"
 
-import { aboutMe } from '@/db/schema'
-import { db } from '@/lib/db'
+import { aboutMe } from "@/db/schema"
+import { db } from "@/lib/db"
 
 export async function GET() {
   const result = await db.select().from(aboutMe).orderBy(aboutMe.updatedAt)
@@ -16,8 +16,8 @@ export async function POST(request: NextRequest) {
 
     if (!content) {
       return NextResponse.json(
-        { error: 'Missing required fields' },
-        { status: 400 },
+        { error: "Missing required fields" },
+        { status: 400 }
       )
     }
 
@@ -27,6 +27,9 @@ export async function POST(request: NextRequest) {
 
     return NextResponse.json(result, { status: 201 })
   } catch {
-    return NextResponse.json({ error: 'Internal Server Error' }, { status: 500 })
+    return NextResponse.json(
+      { error: "Internal Server Error" },
+      { status: 500 }
+    )
   }
 }

@@ -1,22 +1,22 @@
-'use client'
+"use client"
 
-import { ArrowRight, Edit, ExternalLink, Plus, Trash } from 'lucide-react'
-import Image from 'next/image'
-import Link from 'next/link'
-import { useSession } from 'next-auth/react'
-import { useState } from 'react'
+import { ArrowRight, Edit, ExternalLink, Plus, Trash } from "lucide-react"
+import Image from "next/image"
+import Link from "next/link"
+import { useSession } from "next-auth/react"
+import { useState } from "react"
 
-import { Button } from '@/components/button'
-import { ConfirmModal } from '@/components/confirm-modal'
-import { Badge } from '@/components/ui/badge'
-import { Skeleton } from '@/components/ui/skeleton'
-import { useConfirmModal } from '@/hooks/use-confirm-modal'
-import { useProjects } from '@/hooks/use-query-data'
-import { deleteProject } from '@/http/projects/delete-project'
-import { queryClient } from '@/lib/react-query'
-import type { Project } from '@/types/project'
+import { Button } from "@/components/button"
+import { ConfirmModal } from "@/components/confirm-modal"
+import { Badge } from "@/components/ui/badge"
+import { Skeleton } from "@/components/ui/skeleton"
+import { useConfirmModal } from "@/hooks/use-confirm-modal"
+import { useProjects } from "@/hooks/use-query-data"
+import { deleteProject } from "@/http/projects/delete-project"
+import { queryClient } from "@/lib/react-query"
+import type { Project } from "@/types/project"
 
-import { ProjectModal } from './components/project-modal'
+import { ProjectModal } from "./components/project-modal"
 
 export default function ProjectsPage() {
   const { data: session } = useSession()
@@ -29,23 +29,24 @@ export default function ProjectsPage() {
 
   async function handleDeleteProject(id: string) {
     const confirmed = await confirm({
-      title: 'Confirm deletion',
-      description: 'Are you sure you want to delete this project? This action cannot be undone.',
-      confirmText: 'Delete',
-      cancelText: 'Cancel',
-      variant: 'delete',
+      title: "Confirm deletion",
+      description:
+        "Are you sure you want to delete this project? This action cannot be undone.",
+      confirmText: "Delete",
+      cancelText: "Cancel",
+      variant: "delete",
     })
 
     if (confirmed) {
       await deleteProject(id)
-      queryClient.invalidateQueries({ queryKey: ['projects'] })
+      queryClient.invalidateQueries({ queryKey: ["projects"] })
     }
   }
 
   return (
     <main className="container mx-auto space-y-8 px-4 py-12">
       <div className="flex items-center justify-between">
-        <h1 className="text-3xl font-bold">Projects</h1>
+        <h1 className="font-bold text-3xl">Projects</h1>
 
         {session?.user && (
           <Button
@@ -61,27 +62,27 @@ export default function ProjectsPage() {
       </div>
 
       <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
-        {projects && projects.map((project) => (
+        {projects?.map((project) => (
           <div
-            key={project.id}
             className="flex flex-col gap-4 rounded-lg border bg-card p-4 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-lg"
+            key={project.id}
           >
             <Image
-              src={project.image}
               alt={project.name}
-              width={600}
-              height={340}
               className="h-48 w-full rounded-md object-cover"
+              height={340}
+              src={project.image}
+              width={600}
             />
 
             <div className="flex flex-col items-start gap-2">
-              <h2 className="text-xl font-bold text-primary">{project.name}</h2>
+              <h2 className="font-bold text-primary text-xl">{project.name}</h2>
               <p className="text-muted-foreground">{project.description}</p>
             </div>
 
             <div className="flex flex-wrap gap-2">
               {project.techs?.map((tech) => (
-                <Badge variant="blue" key={tech}>
+                <Badge key={tech} variant="blue">
                   {tech}
                 </Badge>
               ))}
@@ -95,7 +96,11 @@ export default function ProjectsPage() {
                   </Button>
                 </Link>
 
-                <Link href={project.href || ''} target="_blank" rel="noreferrer">
+                <Link
+                  href={project.href || ""}
+                  rel="noreferrer"
+                  target="_blank"
+                >
                   <Button variant="link">
                     Live <ExternalLink className="size-4" />
                   </Button>
@@ -115,9 +120,9 @@ export default function ProjectsPage() {
                   </Button>
 
                   <Button
-                    variant="destructive"
                     className="text-sm"
                     onClick={() => handleDeleteProject(project.id)}
+                    variant="destructive"
                   >
                     <Trash className="size-4" />
                   </Button>
@@ -127,11 +132,11 @@ export default function ProjectsPage() {
           </div>
         ))}
 
-        {isLoadingProjects && (
+        {isLoadingProjects &&
           Array.from({ length: 3 }).map((_, index) => (
             <div
-              key={index}
               className="flex flex-col gap-4 rounded-lg border bg-card p-4 shadow-sm"
+              key={`skeleton-${index}`}
             >
               <Skeleton className="h-48 w-full rounded-md object-cover" />
 
@@ -142,27 +147,26 @@ export default function ProjectsPage() {
 
               <Skeleton className="h-8" />
             </div>
-          ))
-        )}
+          ))}
       </div>
 
       <ProjectModal
-        open={modalOpen}
-        onOpenChange={setModalOpen}
         initialData={editData}
+        onOpenChange={setModalOpen}
+        open={modalOpen}
       />
 
       {config && (
         <ConfirmModal
-          open={isOpen}
-          onOpenChange={close}
-          title={config.title}
-          description={config.description}
-          confirmText={config.confirmText}
           cancelText={config.cancelText}
-          variant={config.variant}
+          confirmText={config.confirmText}
+          description={config.description}
           icon={config.icon}
           onConfirm={handleConfirm}
+          onOpenChange={close}
+          open={isOpen}
+          title={config.title}
+          variant={config.variant}
         />
       )}
     </main>

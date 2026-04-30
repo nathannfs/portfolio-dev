@@ -1,52 +1,58 @@
-'use client'
+"use client"
 
-import { Slot as SlotPrimitive } from 'radix-ui'
-import * as React from 'react'
+import { Slot as SlotPrimitive } from "radix-ui"
+import {
+  createContext,
+  type HTMLAttributes,
+  useCallback,
+  useContext,
+  useState,
+} from "react"
 
-import { cn } from '@/lib/utils'
+import { cn } from "@/lib/utils"
 
-type TimelineContextValue = {
+interface TimelineContextValue {
   activeStep: number
   setActiveStep: (step: number) => void
 }
 
-const TimelineContext = React.createContext<TimelineContextValue | undefined>(
-  undefined,
+const TimelineContext = createContext<TimelineContextValue | undefined>(
+  undefined
 )
 
 const useTimeline = () => {
-  const context = React.useContext(TimelineContext)
+  const context = useContext(TimelineContext)
   if (!context) {
-    throw new Error('useTimeline must be used within a Timeline')
+    throw new Error("useTimeline must be used within a Timeline")
   }
   return context
 }
 
-interface TimelineProps extends React.HTMLAttributes<HTMLDivElement> {
+interface TimelineProps extends HTMLAttributes<HTMLDivElement> {
   defaultValue?: number
-  value?: number
   onValueChange?: (value: number) => void
-  orientation?: 'horizontal' | 'vertical'
+  orientation?: "horizontal" | "vertical"
+  value?: number
 }
 
 function Timeline({
   defaultValue = 1,
   value,
   onValueChange,
-  orientation = 'vertical',
+  orientation = "vertical",
   className,
   ...props
 }: TimelineProps) {
-  const [activeStep, setInternalStep] = React.useState(defaultValue)
+  const [activeStep, setInternalStep] = useState(defaultValue)
 
-  const setActiveStep = React.useCallback(
+  const setActiveStep = useCallback(
     (step: number) => {
       if (value === undefined) {
         setInternalStep(step)
       }
       onValueChange?.(step)
     },
-    [value, onValueChange],
+    [value, onValueChange]
   )
 
   const currentStep = value ?? activeStep
@@ -56,12 +62,12 @@ function Timeline({
       value={{ activeStep: currentStep, setActiveStep }}
     >
       <div
-        data-slot="timeline"
         className={cn(
-          'group/timeline flex data-[orientation=horizontal]:w-full data-[orientation=horizontal]:flex-row data-[orientation=vertical]:flex-col',
-          className,
+          "group/timeline flex data-[orientation=horizontal]:w-full data-[orientation=horizontal]:flex-row data-[orientation=vertical]:flex-col",
+          className
         )}
         data-orientation={orientation}
+        data-slot="timeline"
         {...props}
       />
     </TimelineContext.Provider>
@@ -71,17 +77,17 @@ function Timeline({
 function TimelineContent({
   className,
   ...props
-}: React.HTMLAttributes<HTMLDivElement>) {
+}: HTMLAttributes<HTMLDivElement>) {
   return (
     <div
+      className={cn("text-muted-foreground text-sm", className)}
       data-slot="timeline-content"
-      className={cn('text-sm text-muted-foreground', className)}
       {...props}
     />
   )
 }
 
-interface TimelineDateProps extends React.HTMLAttributes<HTMLTimeElement> {
+interface TimelineDateProps extends HTMLAttributes<HTMLTimeElement> {
   asChild?: boolean
 }
 
@@ -90,17 +96,15 @@ function TimelineDate({
   className,
   ...props
 }: TimelineDateProps) {
-  const Comp = asChild
-    ? SlotPrimitive.Slot
-    : 'time'
+  const Comp = asChild ? SlotPrimitive.Slot : "time"
 
   return (
     <Comp
-      data-slot="timeline-date"
       className={cn(
-        'mb-1 block text-xs font-medium text-muted-foreground group-data-[orientation=vertical]/timeline:max-sm:h-4',
-        className,
+        "mb-1 block font-medium text-muted-foreground text-xs group-data-[orientation=vertical]/timeline:max-sm:h-4",
+        className
       )}
+      data-slot="timeline-date"
       {...props}
     />
   )
@@ -109,13 +113,13 @@ function TimelineDate({
 function TimelineHeader({
   className,
   ...props
-}: React.HTMLAttributes<HTMLDivElement>) {
+}: HTMLAttributes<HTMLDivElement>) {
   return (
-    <div data-slot="timeline-header" className={cn(className)} {...props} />
+    <div className={cn(className)} data-slot="timeline-header" {...props} />
   )
 }
 
-interface TimelineIndicatorProps extends React.HTMLAttributes<HTMLDivElement> {
+interface TimelineIndicatorProps extends HTMLAttributes<HTMLDivElement> {
   asChild?: boolean
 }
 
@@ -126,12 +130,12 @@ function TimelineIndicator({
 }: TimelineIndicatorProps) {
   return (
     <div
-      data-slot="timeline-indicator"
-      className={cn(
-        'group-data-completed/timeline-item:border-primary absolute size-4 rounded-full border-2 border-primary/20 group-data-[orientation=horizontal]/timeline:-top-6 group-data-[orientation=horizontal]/timeline:left-0 group-data-[orientation=vertical]/timeline:-left-6 group-data-[orientation=vertical]/timeline:top-0 group-data-[orientation=horizontal]/timeline:-translate-y-1/2 group-data-[orientation=vertical]/timeline:-translate-x-1/2',
-        className,
-      )}
       aria-hidden="true"
+      className={cn(
+        "absolute size-4 rounded-full border-2 border-primary/20 group-data-[orientation=horizontal]/timeline:-top-6 group-data-[orientation=vertical]/timeline:top-0 group-data-[orientation=horizontal]/timeline:left-0 group-data-[orientation=vertical]/timeline:-left-6 group-data-[orientation=vertical]/timeline:-translate-x-1/2 group-data-[orientation=horizontal]/timeline:-translate-y-1/2 group-data-completed/timeline-item:border-primary",
+        className
+      )}
+      data-slot="timeline-indicator"
       {...props}
     >
       {children}
@@ -139,7 +143,7 @@ function TimelineIndicator({
   )
 }
 
-interface TimelineItemProps extends React.HTMLAttributes<HTMLDivElement> {
+interface TimelineItemProps extends HTMLAttributes<HTMLDivElement> {
   step: number
 }
 
@@ -148,12 +152,12 @@ function TimelineItem({ step, className, ...props }: TimelineItemProps) {
 
   return (
     <div
-      data-slot="timeline-item"
       className={cn(
-        'group/timeline-item group-data-[orientation=horizontal]/timeline:not-last:pe-8 group-data-[orientation=vertical]/timeline:not-last:pb-12 relative flex flex-1 flex-col gap-0.5 group-data-[orientation=horizontal]/timeline:mt-8 group-data-[orientation=vertical]/timeline:ms-8 has-[+[data-completed]]:[&_[data-slot=timeline-separator]]:bg-primary',
-        className,
+        "group/timeline-item relative flex flex-1 flex-col gap-0.5 group-data-[orientation=vertical]/timeline:ms-8 group-data-[orientation=horizontal]/timeline:mt-8 group-data-[orientation=horizontal]/timeline:not-last:pe-8 group-data-[orientation=vertical]/timeline:not-last:pb-12 has-[+[data-completed]]:[&_[data-slot=timeline-separator]]:bg-primary",
+        className
       )}
       data-completed={step <= activeStep || undefined}
+      data-slot="timeline-item"
       {...props}
     />
   )
@@ -162,15 +166,15 @@ function TimelineItem({ step, className, ...props }: TimelineItemProps) {
 function TimelineSeparator({
   className,
   ...props
-}: React.HTMLAttributes<HTMLDivElement>) {
+}: HTMLAttributes<HTMLDivElement>) {
   return (
     <div
-      data-slot="timeline-separator"
-      className={cn(
-        'group-data-[orientation=horizontal]/timeline:translate-x-4.5 group-data-[orientation=vertical]/timeline:translate-y-4.5 absolute self-start bg-primary/10 group-last/timeline-item:hidden group-data-[orientation=horizontal]/timeline:-top-6 group-data-[orientation=vertical]/timeline:-left-6 group-data-[orientation=horizontal]/timeline:h-0.5 group-data-[orientation=vertical]/timeline:h-[calc(100%-1rem-0.25rem)] group-data-[orientation=horizontal]/timeline:w-[calc(100%-1rem-0.25rem)] group-data-[orientation=vertical]/timeline:w-0.5 group-data-[orientation=horizontal]/timeline:-translate-y-1/2 group-data-[orientation=vertical]/timeline:-translate-x-1/2',
-        className,
-      )}
       aria-hidden="true"
+      className={cn(
+        "absolute self-start bg-primary/10 group-last/timeline-item:hidden group-data-[orientation=horizontal]/timeline:-top-6 group-data-[orientation=vertical]/timeline:-left-6 group-data-[orientation=horizontal]/timeline:h-0.5 group-data-[orientation=vertical]/timeline:h-[calc(100%-1rem-0.25rem)] group-data-[orientation=horizontal]/timeline:w-[calc(100%-1rem-0.25rem)] group-data-[orientation=vertical]/timeline:w-0.5 group-data-[orientation=horizontal]/timeline:translate-x-4.5 group-data-[orientation=vertical]/timeline:-translate-x-1/2 group-data-[orientation=horizontal]/timeline:-translate-y-1/2 group-data-[orientation=vertical]/timeline:translate-y-4.5",
+        className
+      )}
+      data-slot="timeline-separator"
       {...props}
     />
   )
@@ -179,11 +183,11 @@ function TimelineSeparator({
 function TimelineTitle({
   className,
   ...props
-}: React.HTMLAttributes<HTMLHeadingElement>) {
+}: HTMLAttributes<HTMLHeadingElement>) {
   return (
     <h3
+      className={cn("font-medium text-sm", className)}
       data-slot="timeline-title"
-      className={cn('text-sm font-medium', className)}
       {...props}
     />
   )

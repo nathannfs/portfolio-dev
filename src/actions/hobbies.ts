@@ -1,13 +1,13 @@
-'use server'
+"use server"
 
-import { HTTPError } from 'ky'
-import { z } from 'zod'
+import { HTTPError } from "ky"
+import { z } from "zod"
 
-import { createHobby } from '@/http/hobbies/create-hobby'
-import { updateHobby } from '@/http/hobbies/update-hobby'
+import { createHobby } from "@/http/hobbies/create-hobby"
+import { updateHobby } from "@/http/hobbies/update-hobby"
 
 const hobbySchema = z.object({
-  title: z.string().min(1, 'Título é obrigatório'),
+  title: z.string().min(1, "Título é obrigatório"),
   description: z.string().optional(),
 })
 
@@ -32,13 +32,13 @@ export async function createHobbyAction(data: FormData) {
         const errorData = await err.response.json()
         return {
           success: false,
-          message: errorData.error || 'Erro ao criar hobby',
+          message: errorData.error || "Erro ao criar hobby",
           errors: null,
         }
       } catch {
         return {
           success: false,
-          message: 'Erro ao processar resposta do servidor',
+          message: "Erro ao processar resposta do servidor",
           errors: null,
         }
       }
@@ -46,7 +46,7 @@ export async function createHobbyAction(data: FormData) {
 
     return {
       success: false,
-      message: 'Erro inesperado ao criar hobby.',
+      message: "Erro inesperado ao criar hobby.",
       errors: null,
     }
   }
@@ -75,13 +75,13 @@ export async function updateHobbyAction(id: string, data: FormData) {
         const errorData = await err.response.json()
         return {
           success: false,
-          message: errorData.error || 'Erro ao atualizar hobby',
+          message: errorData.error || "Erro ao atualizar hobby",
           errors: null,
         }
       } catch {
         return {
           success: false,
-          message: 'Erro ao processar resposta do servidor',
+          message: "Erro ao processar resposta do servidor",
           errors: null,
         }
       }
@@ -89,7 +89,7 @@ export async function updateHobbyAction(id: string, data: FormData) {
 
     return {
       success: false,
-      message: 'Unexpected error editing hobby.',
+      message: "Unexpected error editing hobby.",
       errors: null,
     }
   }

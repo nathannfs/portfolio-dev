@@ -1,9 +1,9 @@
-export type Experience = {
-  id: string
+export interface Experience {
   company: string
-  position: string
-  period: string
-  description: string
-  responsibilities: string[]
   createdAt?: string
+  description: string
+  id: string
+  period: string
+  position: string
+  responsibilities: string[]
 }

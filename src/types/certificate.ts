@@ -1,10 +1,10 @@
-import type { Status } from './status'
+import type { Status } from "./status"
 
-export type Certificate = {
-  id: string
-  title: string
+export interface Certificate {
   description?: string
-  institution: string
   hours?: number
+  id: string
+  institution: string
   status?: Status
+  title: string
 }

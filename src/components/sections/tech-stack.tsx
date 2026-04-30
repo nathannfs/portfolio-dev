@@ -1,8 +1,8 @@
-import { easeInOut, motion, spring } from 'framer-motion'
+import { easeInOut, motion, spring } from "framer-motion"
 
-import { techs } from '@/utils/techs'
+import { techs } from "@/utils/techs"
 
-import { Section } from '../section'
+import { Section } from "../section"
 
 const sectionVariants = {
   hidden: { opacity: 0, y: 50, scale: 0.95 },
@@ -41,14 +41,14 @@ const itemVariants = {
 
 export function TechStack() {
   return (
-    <Section.Root id="techs" className="scroll-mt-20 md:scroll-mt-0">
+    <Section.Root className="scroll-mt-20 md:scroll-mt-0" id="techs">
       <motion.div
-        variants={sectionVariants}
-        initial="hidden"
-        whileInView="visible"
-        exit="hidden"
-        viewport={{ once: false, amount: 0.2 }}
         className="flex w-full flex-col items-center justify-center gap-6"
+        exit="hidden"
+        initial="hidden"
+        variants={sectionVariants}
+        viewport={{ once: false, amount: 0.2 }}
+        whileInView="visible"
       >
         <Section.Header>
           <Section.Title>Tech Stack</Section.Title>
@@ -65,8 +65,8 @@ export function TechStack() {
           >
             {techs.map((tech) => (
               <motion.div
-                key={tech.name}
                 className="group flex flex-col items-center justify-center gap-1.5 rounded-lg border bg-background p-3 shadow-sm transition-all duration-300 hover:bg-muted/40 hover:shadow-lg"
+                key={tech.name}
                 variants={itemVariants}
                 whileHover={{ scale: 1.1 }}
                 whileTap={{ scale: 0.95 }}
@@ -74,7 +74,7 @@ export function TechStack() {
                 <div className="text-3xl text-muted-foreground transition-colors group-hover:text-foreground">
                   {tech.icon}
                 </div>
-                <span className="text-center text-xs font-medium text-muted-foreground transition-colors group-hover:text-foreground">
+                <span className="text-center font-medium text-muted-foreground text-xs transition-colors group-hover:text-foreground">
                   {tech.name}
                 </span>
               </motion.div>

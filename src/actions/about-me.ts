@@ -1,13 +1,13 @@
-'use server'
+"use server"
 
-import { HTTPError } from 'ky'
-import { z } from 'zod'
+import { HTTPError } from "ky"
+import { z } from "zod"
 
-import { createAboutMe } from '@/http/about-me/create-about-me'
-import { updateAboutMe } from '@/http/about-me/update-about-me'
+import { createAboutMe } from "@/http/about-me/create-about-me"
+import { updateAboutMe } from "@/http/about-me/update-about-me"
 
 const aboutMeSchema = z.object({
-  content: z.string().min(1, 'Conteúdo é obrigatório'),
+  content: z.string().min(1, "Conteúdo é obrigatório"),
 })
 
 export async function createAboutMeAction(data: FormData) {
@@ -31,13 +31,13 @@ export async function createAboutMeAction(data: FormData) {
         const errorData = await err.response.json()
         return {
           success: false,
-          message: errorData.error || 'Erro ao criar about-me',
+          message: errorData.error || "Erro ao criar about-me",
           errors: null,
         }
       } catch {
         return {
           success: false,
-          message: 'Erro ao processar resposta do servidor',
+          message: "Erro ao processar resposta do servidor",
           errors: null,
         }
       }
@@ -45,7 +45,7 @@ export async function createAboutMeAction(data: FormData) {
 
     return {
       success: false,
-      message: 'Erro inesperado ao criar about-me.',
+      message: "Erro inesperado ao criar about-me.",
       errors: null,
     }
   }
@@ -74,13 +74,13 @@ export async function updateAboutMeAction(id: string, data: FormData) {
         const errorData = await err.response.json()
         return {
           success: false,
-          message: errorData.error || 'Erro ao atualizar about-me',
+          message: errorData.error || "Erro ao atualizar about-me",
           errors: null,
         }
       } catch {
         return {
           success: false,
-          message: 'Erro ao processar resposta do servidor',
+          message: "Erro ao processar resposta do servidor",
           errors: null,
         }
       }
@@ -88,7 +88,7 @@ export async function updateAboutMeAction(id: string, data: FormData) {
 
     return {
       success: false,
-      message: 'Unexpected error editing about me.',
+      message: "Unexpected error editing about me.",
       errors: null,
     }
   }

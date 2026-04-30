@@ -1,9 +1,9 @@
-import { type FormEvent, useState } from 'react'
+import { type FormEvent, useState } from "react"
 
 export interface FormState {
-  success: boolean
-  message: string | null
   errors: Record<string, string[]> | null
+  message: string | null
+  success: boolean
 }
 
 function resetForm(form: HTMLFormElement) {
@@ -13,11 +13,11 @@ function resetForm(form: HTMLFormElement) {
 export function useFormState(
   action: (data: FormData) => Promise<FormState | undefined>,
   onSuccess?: () => Promise<void> | void,
-  initialState?: FormState,
+  initialState?: FormState
 ) {
   const [isPending, setIsPending] = useState(false)
   const [formState, setFormState] = useState<FormState>(
-    initialState ?? { success: false, message: null, errors: null },
+    initialState ?? { success: false, message: null, errors: null }
   )
 
   async function handleSubmit(event: FormEvent<HTMLFormElement>) {
@@ -40,7 +40,7 @@ export function useFormState(
         setFormState(state)
       }
     } catch (error) {
-      console.error('Error submitting form:', error)
+      console.error("Error submitting form:", error)
     } finally {
       setIsPending(false)
     }

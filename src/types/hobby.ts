@@ -1,5 +1,5 @@
-export type Hobby = {
+export interface Hobby {
+  description?: string
   id: string
   title: string
-  description?: string
 }
