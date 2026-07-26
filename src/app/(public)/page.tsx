@@ -14,7 +14,7 @@ export default function Home() {
   const containerRef = useRef(null)
 
   return (
-    <main
+    <div
       className="min-h-full overflow-y-auto transition-all ease-in-out md:h-[calc(100vh-80px)] md:snap-y md:snap-mandatory md:overflow-y-scroll"
       ref={containerRef}
     >
@@ -39,6 +39,6 @@ export default function Home() {
       <Separator />
 
       <Contact />
-    </main>
+    </div>
   )
 }

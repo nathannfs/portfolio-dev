@@ -13,6 +13,7 @@ export function Footer() {
 
         <div className="flex items-center gap-4">
           <Link
+            aria-label="Instagram de Nathan Santos"
             href="https://instagram.com/nathannfss"
             rel="noreferrer"
             target="_blank"
@@ -20,6 +21,7 @@ export function Footer() {
             <Instagram className="size-5 text-muted-foreground transition-colors hover:text-foreground" />
           </Link>
           <Link
+            aria-label="LinkedIn de Nathan Santos"
             href="https://linkedin.com/in/nathannfs"
             rel="noreferrer"
             target="_blank"
@@ -27,6 +29,7 @@ export function Footer() {
             <Linkedin className="size-5 text-muted-foreground transition-colors hover:text-foreground" />
           </Link>
           <Link
+            aria-label="GitHub de Nathan Santos"
             href="https://github.com/nathannfs"
             rel="noreferrer"
             target="_blank"

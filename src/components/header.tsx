@@ -288,7 +288,7 @@ export function Header() {
       <nav className="md:hidden">
         <Sheet onOpenChange={setIsSheetOpen} open={isSheetOpen}>
           <SheetTrigger asChild>
-            <Button variant="ghost">
+            <Button aria-label="Abrir menu de navegação" variant="ghost">
               <List className="size-5" />
             </Button>
           </SheetTrigger>

@@ -183,13 +183,13 @@ export function Hero() {
                 whileTap={{ scale: 0.97 }}
               >
                 <Link
+                  aria-label="Instagram de Nathan Santos"
                   href="https://instagram.com/nathannfss"
                   rel="noreferrer"
                   target="_blank"
                 >
                   <Button size="icon" variant="icon">
                     <Instagram className="size-5" />
-                    <span className="sr-only">Instagram</span>
                   </Button>
                 </Link>
               </motion.div>
@@ -199,13 +199,13 @@ export function Hero() {
                 whileTap={{ scale: 0.97 }}
               >
                 <Link
+                  aria-label="LinkedIn de Nathan Santos"
                   href="https://linkedin.com/in/nathannfs"
                   rel="noreferrer"
                   target="_blank"
                 >
                   <Button size="icon" variant="icon">
                     <Linkedin className="size-5" />
-                    <span className="sr-only">LinkedIn</span>
                   </Button>
                 </Link>
               </motion.div>
@@ -215,13 +215,13 @@ export function Hero() {
                 whileTap={{ scale: 0.97 }}
               >
                 <Link
+                  aria-label="GitHub de Nathan Santos"
                   href="https://github.com/nathannfs"
                   rel="noreferrer"
                   target="_blank"
                 >
                   <Button size="icon" variant="icon">
                     <Github className="size-5" />
-                    <span className="sr-only">GitHub</span>
                   </Button>
                 </Link>
               </motion.div>

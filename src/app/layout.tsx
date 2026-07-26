@@ -129,9 +129,17 @@ export default function RootLayout({
           dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
           type="application/ld+json"
         />
+        <a
+          className="sr-only focus:absolute focus:top-4 focus:left-4 focus:z-[100] focus:rounded focus:bg-background focus:px-4 focus:py-2 focus:font-medium focus:text-foreground focus:shadow-md focus:ring-2 focus:ring-sky-500 focus:not-sr-only"
+          href="#main-content"
+        >
+          Ir ao conteúdo principal
+        </a>
         <Providers>
           <Header />
-          <main className="pt-[80px]">{children}</main>
+          <main className="pt-[80px]" id="main-content">
+            {children}
+          </main>
         </Providers>
       </body>
     </html>

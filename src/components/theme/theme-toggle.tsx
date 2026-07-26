@@ -16,12 +16,12 @@ export function ThemeToggle() {
       whileTap={{ scale: 0.97 }}
     >
       <Button
+        aria-label="Alternar tema claro/escuro"
         onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
         variant="ghost"
       >
         <Sun className="block dark:hidden" />
         <Moon className="hidden dark:block" />
-        <span className="sr-only">Mudar tema</span>
       </Button>
     </motion.div>
   )
