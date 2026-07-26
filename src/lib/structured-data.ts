@@ -12,13 +12,13 @@ const featuredProjects = [
   {
     name: "OMD Farm ERP",
     description:
-      "Enterprise-grade ERP platform spanning inventory, financial controls, production tracking, and supply chain — NestJS + Prisma backend with an Angular frontend, using MQTT and Redis for real-time sensor data.",
+      "Enterprise-grade ERP platform spanning inventory, financial controls, production tracking, and supply chain. NestJS + Prisma backend with an Angular frontend, using MQTT and Redis for real-time sensor data.",
     keywords: ["Angular", "NestJS", "PostgreSQL", "Prisma", "Docker", "MQTT", "Redis"],
   },
   {
     name: "Precifica Agora",
     description:
-      "Marketplace-intelligence SaaS with an automated pricing engine integrated with the Mercado Livre API — real-time tax/tariff calculation, margin analysis, and inventory cost optimization. Built with Next.js, Supabase, and TanStack Query.",
+      "Marketplace-intelligence SaaS with an automated pricing engine integrated with the Mercado Livre API. It handles real-time tax and tariff calculation, margin analysis, and inventory cost optimization. Built with Next.js, Supabase, and TanStack Query.",
     keywords: ["Next.js", "Supabase", "React", "TanStack Query", "Tailwind CSS"],
   },
   {
@@ -30,7 +30,7 @@ const featuredProjects = [
   {
     name: "Checkout Hub",
     description:
-      "Centralized webhook-routing infrastructure for automatic user provisioning across multiple Supabase instances after Stripe payments — connecting payment events to multi-database onboarding.",
+      "Centralized webhook-routing infrastructure for automatic user provisioning across multiple Supabase instances after Stripe payments, connecting payment events to multi-database onboarding.",
     keywords: ["Node.js", "Stripe", "Supabase", "Hono", "TypeScript"],
   },
 ]
@@ -43,7 +43,7 @@ const person = {
   image: `${SITE_URL}/nathan.jpeg`,
   jobTitle: "Product Engineer",
   description:
-    "Product Engineer building full-stack products end-to-end — from NestJS APIs to Next.js interfaces.",
+    "Product Engineer building full-stack products with NestJS, Next.js, and PostgreSQL.",
   knowsAbout: [
     "TypeScript",
     "Next.js",
@@ -71,7 +71,7 @@ const website = {
   "@type": "WebSite",
   "@id": WEBSITE_ID,
   url: `${SITE_URL}/`,
-  name: "Nathan Santos — Product Engineer",
+  name: "Nathan Santos · Product Engineer",
   publisher: { "@id": PERSON_ID },
   inLanguage: "en-US",
 }

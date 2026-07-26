@@ -36,7 +36,7 @@ export const messages: Record<Locale, Record<string, unknown>> = {
       role: "Product Engineer",
       tagline: "Product Engineer · TypeScript · Next.js · Supabase",
       description:
-        "I build full-stack products end-to-end — from NestJS APIs to Next.js interfaces. Currently shipping at OMD do Brasil and building SaaS products on the side.",
+        "I build full-stack products, from the NestJS API up to the Next.js interface. Right now I'm shipping at OMD do Brasil and building my own SaaS on the side.",
       scrollToWork: "Scroll to selected work",
       socialLinks: "Social links",
     },
@@ -45,18 +45,18 @@ export const messages: Record<Locale, Record<string, unknown>> = {
       headingLine1: "Selected",
       headingLine2: "Work",
       intro:
-        "Products I've architected and shipped — from SaaS platforms to infrastructure tooling. Scroll to explore.",
+        "Products I've built and shipped, from SaaS platforms to internal infrastructure.",
       shipped: "Shipped",
       projectsCount: "{count} Projects",
     },
     about: {
       label: "About",
       heading:
-        "Product Engineer architecting full-stack SaaS platforms that solve real business problems.",
+        "I build full-stack SaaS platforms that solve real business problems.",
       paragraph1:
-        "I specialize in the TypeScript ecosystem (Next.js, React, Node.js, Supabase), building products from zero to production with a focus on performance, clean architecture, and developer experience.",
+        "I work mostly in the TypeScript ecosystem (Next.js, React, Node.js, Supabase), taking products from zero to production and caring about performance, clean architecture, and the developer experience along the way.",
       paragraph2:
-        "I stay close to the frontier of the stack — shipping production code with Next.js, React 19, Tailwind, and Biome, and adopting new tools early when they earn their place. Currently open to full-stack roles where I can own features from API to UI.",
+        "I keep up with the newer parts of the stack and ship production code with Next.js, React 19, Tailwind, and Biome. I'll pick up a new tool early when it actually earns its place. Right now I'm open to full-stack roles where I own a feature from the API to the UI.",
       education: "Education & Certifications",
       moreAboutMe: "More about me",
       hoursSuffix: "hours",
@@ -64,12 +64,12 @@ export const messages: Record<Locale, Record<string, unknown>> = {
     expertise: {
       label: "Expertise",
       statement:
-        "End-to-end product engineering — from system design to shipped pixels.",
+        "End-to-end product engineering, from system design to the finished UI.",
       items: [
         {
           title: "Full-Stack Product Engineering",
           description:
-            "I architect and ship complete SaaS products from database schema to polished UI, leveraging Next.js App Router, Server Actions, and edge-first deployment strategies.",
+            "I build and ship complete SaaS products, from the database schema to the polished UI, using the Next.js App Router, Server Actions, and edge-first deploys.",
         },
         {
           title: "API Design & Backend Architecture",
@@ -101,8 +101,8 @@ export const messages: Record<Locale, Record<string, unknown>> = {
       headingLine1: "Let's build",
       headingLine2: "something",
       intro:
-        "Interested in working together, have a project idea, or just want to talk about engineering? Reach out through any channel below or send a message.",
-      location: "Sertãozinho, SP — Brazil",
+        "Working on something, have an idea, or just want to talk about engineering? Reach out through any channel below, or send a message here.",
+      location: "Sertãozinho, SP, Brazil",
       form: {
         nameLabel: "Name",
         namePlaceholder: "Your name",
@@ -117,9 +117,9 @@ export const messages: Record<Locale, Record<string, unknown>> = {
     },
     projects: {
       label: "Selected Work",
-      heading: "Products I've architected & shipped.",
+      heading: "Products I've built and shipped.",
       intro:
-        "A collection of products I've designed, built, and shipped — from SaaS platforms to infrastructure tooling. Explore the details behind each one.",
+        "Products I've designed, built, and shipped, from SaaS platforms to internal tooling. Open any one to see how it came together.",
       projectsCount: "{count} Projects",
       shipped: "Shipped",
       viewDetails: "View details",
@@ -183,7 +183,7 @@ export const messages: Record<Locale, Record<string, unknown>> = {
       role: "Product Engineer",
       tagline: "Product Engineer · TypeScript · Next.js · Supabase",
       description:
-        "Construo produtos full-stack de ponta a ponta — de APIs em NestJS a interfaces em Next.js. Atualmente entregando na OMD do Brasil e desenvolvendo produtos SaaS paralelamente.",
+        "Construo produtos full-stack, da API em NestJS até a interface em Next.js. No momento estou entregando na OMD do Brasil e tocando meus próprios SaaS nas horas vagas.",
       scrollToWork: "Rolar para os trabalhos selecionados",
       socialLinks: "Redes sociais",
     },
@@ -192,18 +192,18 @@ export const messages: Record<Locale, Record<string, unknown>> = {
       headingLine1: "Trabalhos",
       headingLine2: "Selecionados",
       intro:
-        "Produtos que arquitetei e coloquei em produção — de plataformas SaaS a ferramentas de infraestrutura. Role para explorar.",
+        "Produtos que construí e coloquei em produção, de plataformas SaaS a ferramentas internas de infraestrutura.",
       shipped: "Em produção",
       projectsCount: "{count} Projetos",
     },
     about: {
       label: "Sobre",
       heading:
-        "Product Engineer arquitetando plataformas SaaS full-stack que resolvem problemas reais de negócio.",
+        "Construo plataformas SaaS full-stack que resolvem problemas reais de negócio.",
       paragraph1:
-        "Sou especializado no ecossistema TypeScript (Next.js, React, Node.js, Supabase), construindo produtos do zero à produção com foco em performance, arquitetura limpa e experiência do desenvolvedor.",
+        "Trabalho principalmente no ecossistema TypeScript (Next.js, React, Node.js, Supabase), levando produtos do zero à produção e cuidando de performance, arquitetura limpa e experiência do desenvolvedor no caminho.",
       paragraph2:
-        "Mantenho-me na fronteira da stack — entregando código em produção com Next.js, React 19, Tailwind e Biome, e adotando novas ferramentas cedo quando elas conquistam seu espaço. Atualmente aberto a vagas full-stack onde eu possa cuidar das features da API à UI.",
+        "Acompanho de perto as partes mais novas da stack e coloco código em produção com Next.js, React 19, Tailwind e Biome. Adoto uma ferramenta nova cedo quando ela realmente prova seu valor. No momento estou aberto a vagas full-stack em que eu cuide da feature da API até a UI.",
       education: "Formação e Certificações",
       moreAboutMe: "Mais sobre mim",
       hoursSuffix: "horas",
@@ -211,12 +211,12 @@ export const messages: Record<Locale, Record<string, unknown>> = {
     expertise: {
       label: "Especialidades",
       statement:
-        "Engenharia de produto de ponta a ponta — do design de sistema aos pixels em produção.",
+        "Engenharia de produto de ponta a ponta, do design do sistema à interface final.",
       items: [
         {
           title: "Engenharia de Produto Full-Stack",
           description:
-            "Arquiteto e entrego produtos SaaS completos, do schema do banco de dados à UI refinada, aproveitando o App Router do Next.js, Server Actions e estratégias de deploy edge-first.",
+            "Construo e entrego produtos SaaS completos, do schema do banco de dados à UI refinada, usando o App Router do Next.js, Server Actions e deploys edge-first.",
         },
         {
           title: "Design de APIs e Arquitetura de Backend",
@@ -248,8 +248,8 @@ export const messages: Record<Locale, Record<string, unknown>> = {
       headingLine1: "Vamos construir",
       headingLine2: "algo juntos",
       intro:
-        "Tem interesse em trabalhar comigo, uma ideia de projeto ou só quer conversar sobre engenharia? Fale comigo por qualquer canal abaixo ou envie uma mensagem.",
-      location: "Sertãozinho, SP — Brasil",
+        "Está tocando algum projeto, tem uma ideia ou só quer trocar uma ideia sobre engenharia? Fale comigo por qualquer canal abaixo, ou mande uma mensagem por aqui.",
+      location: "Sertãozinho, SP, Brasil",
       form: {
         nameLabel: "Nome",
         namePlaceholder: "Seu nome",
@@ -264,9 +264,9 @@ export const messages: Record<Locale, Record<string, unknown>> = {
     },
     projects: {
       label: "Trabalhos Selecionados",
-      heading: "Produtos que arquitetei e coloquei em produção.",
+      heading: "Produtos que construí e coloquei em produção.",
       intro:
-        "Uma coleção de produtos que projetei, construí e coloquei em produção — de plataformas SaaS a ferramentas de infraestrutura. Explore os detalhes por trás de cada um.",
+        "Produtos que projetei, construí e coloquei em produção, de plataformas SaaS a ferramentas internas. Abra qualquer um para ver como foi feito.",
       projectsCount: "{count} Projetos",
       shipped: "Em produção",
       viewDetails: "Ver detalhes",

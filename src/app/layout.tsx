@@ -27,7 +27,7 @@ const geistMono = Geist_Mono({
 })
 
 const SITE_DESCRIPTION =
-  "Product Engineer building full-stack products end-to-end — NestJS APIs, Next.js interfaces, and PostgreSQL-backed SaaS. Currently shipping at OMD do Brasil."
+  "Product Engineer building full-stack products with NestJS, Next.js, and PostgreSQL. Currently shipping at OMD do Brasil and building SaaS on the side."
 
 export const metadata: Metadata = {
   title: "Nathan Santos | Product Engineer",
@@ -42,13 +42,13 @@ export const metadata: Metadata = {
     title: "Nathan Santos | Product Engineer",
     description: SITE_DESCRIPTION,
     url: "https://www.nathannfs.com/",
-    siteName: "Nathan Santos — Product Engineer",
+    siteName: "Nathan Santos · Product Engineer",
     images: [
       {
         url: "/nathan.jpeg",
         width: 800,
         height: 800,
-        alt: "Nathan Santos — Product Engineer",
+        alt: "Nathan Santos · Product Engineer",
       },
     ],
     locale: "en_US",
@@ -83,7 +83,7 @@ export const metadata: Metadata = {
       "max-snippet": -1,
     },
   },
-  applicationName: "Nathan Santos — Product Engineer",
+  applicationName: "Nathan Santos · Product Engineer",
   generator: "Next.js",
   keywords: [
     "Nathan Santos",
