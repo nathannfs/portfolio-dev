@@ -4,10 +4,13 @@ import { motion } from "framer-motion"
 import { Moon, Sun } from "lucide-react"
 import { useTheme } from "next-themes"
 
+import { useI18n } from "@/i18n/provider"
+
 import { Button } from "../button"
 
 export function ThemeToggle() {
   const { setTheme, theme } = useTheme()
+  const { t } = useI18n()
 
   return (
     <motion.div
@@ -16,7 +19,7 @@ export function ThemeToggle() {
       whileTap={{ scale: 0.97 }}
     >
       <Button
-        aria-label="Alternar tema claro/escuro"
+        aria-label={t("common.toggleTheme")}
         onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
         variant="ghost"
       >

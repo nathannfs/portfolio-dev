@@ -4,6 +4,7 @@ import { Github, Linkedin, MapPin, Phone } from "lucide-react"
 import Link from "next/link"
 
 import { Magnetic, Reveal } from "@/components/motion"
+import { useI18n } from "@/i18n/provider"
 
 import { Footer } from "../footer"
 import { ContactForm } from "../form/contact-form"
@@ -29,6 +30,8 @@ const channels = [
 ]
 
 export function Contact() {
+  const { t } = useI18n()
+
   return (
     <section
       className="relative flex scroll-mt-20 flex-col justify-between md:scroll-mt-0"
@@ -38,15 +41,17 @@ export function Contact() {
         <Reveal>
           <div className="mb-12 flex items-center gap-4">
             <span className="font-mono text-muted-foreground text-xs uppercase tracking-[0.3em]">
-              Contact
+              {t("contact.label")}
             </span>
             <div className="h-px flex-1 bg-border" />
           </div>
 
           <h2 className="font-bold text-[clamp(2.5rem,9vw,8rem)] leading-[0.9] tracking-tighter">
-            Let&apos;s build
+            {t("contact.headingLine1")}
             <br />
-            <span className="text-muted-foreground">something</span>
+            <span className="text-muted-foreground">
+              {t("contact.headingLine2")}
+            </span>
           </h2>
         </Reveal>
 
@@ -55,9 +60,7 @@ export function Contact() {
           <div className="lg:col-span-6">
             <Reveal>
               <p className="max-w-md text-base text-muted-foreground leading-relaxed md:text-lg">
-                Interested in working together, have a project idea, or just
-                want to talk about engineering? Reach out through any channel
-                below or send a message.
+                {t("contact.intro")}
               </p>
             </Reveal>
 
@@ -109,7 +112,7 @@ export function Contact() {
                 })}
                 <li className="flex items-center gap-3 border-border border-b py-4 text-muted-foreground">
                   <MapPin className="size-5 text-aurora-cyan" />
-                  Sertãozinho, SP — Brazil
+                  {t("contact.location")}
                 </li>
               </ul>
             </Reveal>

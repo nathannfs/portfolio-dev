@@ -1,8 +1,13 @@
+"use client"
+
 import Link from "next/link"
 
 import { AuroraCanvas, Magnetic, Reveal } from "@/components/motion"
+import { useI18n } from "@/i18n/provider"
 
 export default function NotFound() {
+  const { t } = useI18n()
+
   return (
     <main className="relative flex min-h-[calc(100vh-80px)] flex-col items-center justify-center overflow-hidden px-6 text-center">
       <AuroraCanvas className="pointer-events-none absolute inset-0 -z-10" />
@@ -10,12 +15,11 @@ export default function NotFound() {
       <Reveal>
         <div className="flex flex-col items-center gap-6">
           <h1 className="font-bold text-7xl text-aurora-cyan tracking-tight md:text-9xl">
-            404
+            {t("notFound.title")}
           </h1>
 
           <p className="max-w-md text-lg text-muted-foreground">
-            Esta página se perdeu na aurora. O caminho que você procura não
-            existe por aqui.
+            {t("notFound.copy")}
           </p>
 
           <Magnetic strength={0.25}>
@@ -24,7 +28,7 @@ export default function NotFound() {
               data-cursor="hover"
               href="/"
             >
-              Voltar para o início
+              {t("notFound.returnHome")}
             </Link>
           </Magnetic>
         </div>

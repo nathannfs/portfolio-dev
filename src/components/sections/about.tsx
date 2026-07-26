@@ -8,11 +8,13 @@ import { twMerge } from "tailwind-merge"
 
 import { Magnetic, Reveal } from "@/components/motion"
 import { useCertifications, useDegrees } from "@/hooks/use-query-data"
-import { statusColor, statusLabel } from "@/utils/status"
+import { useI18n } from "@/i18n/provider"
+import { statusColor } from "@/utils/status"
 
 export function About() {
   const { data: certificates } = useCertifications()
   const { data: degrees } = useDegrees()
+  const { t } = useI18n()
 
   const credentials = [
     ...(degrees?.map((d) => ({
@@ -24,7 +26,7 @@ export function About() {
     ...(certificates?.slice(0, 2).map((c) => ({
       title: c.title,
       meta: c.institution,
-      period: `${c.hours} hours`,
+      period: `${c.hours} ${t("about.hoursSuffix")}`,
       status: c.status,
     })) ?? []),
   ]
@@ -38,7 +40,7 @@ export function About() {
       <Reveal>
         <div className="mb-12 flex items-center gap-4">
           <span className="font-mono text-muted-foreground text-xs uppercase tracking-[0.3em]">
-            About
+            {t("about.label")}
           </span>
           <div className="h-px flex-1 bg-border" />
         </div>
@@ -49,21 +51,15 @@ export function About() {
         <div className="lg:col-span-7">
           <Reveal>
             <h2 className="font-bold text-[clamp(1.75rem,3.5vw,3rem)] leading-[1.1] tracking-tight">
-              Product Engineer architecting full-stack SaaS platforms that solve
-              real business problems.
+              {t("about.heading")}
             </h2>
           </Reveal>
           <Reveal delay={0.1}>
             <p className="mt-8 max-w-xl text-base text-muted-foreground leading-relaxed md:text-lg">
-              I specialize in the TypeScript ecosystem (Next.js, React, Node.js,
-              Supabase), building products from zero to production with a focus
-              on performance, clean architecture, and developer experience.
+              {t("about.paragraph1")}
             </p>
             <p className="mt-4 max-w-xl font-medium text-base text-foreground leading-relaxed md:text-lg">
-              I stay close to the frontier of the stack — shipping production
-              code with Next.js, React 19, Tailwind, and Biome, and adopting new
-              tools early when they earn their place. Currently open to
-              full-stack roles where I can own features from API to UI.
+              {t("about.paragraph2")}
             </p>
           </Reveal>
 
@@ -73,7 +69,7 @@ export function About() {
                 className="inline-flex items-center gap-2 border-foreground border-b pb-1 font-semibold text-foreground transition-colors hover:border-aurora-cyan hover:text-aurora-cyan"
                 href="/about"
               >
-                More about me
+                {t("about.moreAboutMe")}
                 <ArrowUpRight className="size-4" />
               </Link>
             </Magnetic>
@@ -98,7 +94,7 @@ export function About() {
               width={512}
             />
             <span className="mt-3 block text-right font-mono text-muted-foreground text-xs">
-              Sertãozinho, SP — Brazil
+              {t("contact.location")}
             </span>
           </motion.div>
         </div>
@@ -109,7 +105,7 @@ export function About() {
         <Reveal delay={0.1}>
           <div className="mt-20 border-border border-t pt-10">
             <span className="font-mono text-muted-foreground text-xs uppercase tracking-[0.3em]">
-              Education &amp; Certifications
+              {t("about.education")}
             </span>
             <ul className="mt-6 flex flex-col">
               {credentials.map((c) => (
@@ -131,7 +127,7 @@ export function About() {
                       statusColor(c.status),
                     ])}
                   >
-                    {statusLabel(c.status)}
+                    {c.status ? t(`common.status.${c.status}`) : ""}
                   </span>
                 </li>
               ))}

@@ -9,6 +9,7 @@ import { Header } from "@/components/header"
 import { BackToTop } from "@/components/motion/back-to-top"
 import { CustomCursor } from "@/components/motion/custom-cursor"
 import { SmoothScroll } from "@/components/motion/smooth-scroll"
+import { SkipLink } from "@/components/skip-link"
 import { structuredData } from "@/lib/structured-data"
 
 import Providers from "./providers"
@@ -136,13 +137,8 @@ export default function RootLayout({
           dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
           type="application/ld+json"
         />
-        <a
-          className="sr-only focus:absolute focus:top-4 focus:left-4 focus:z-[100] focus:rounded focus:bg-background focus:px-4 focus:py-2 focus:font-medium focus:text-foreground focus:shadow-md focus:ring-2 focus:ring-sky-500 focus:not-sr-only"
-          href="#main-content"
-        >
-          Ir ao conteúdo principal
-        </a>
         <Providers>
+          <SkipLink />
           <SmoothScroll>
             <CustomCursor />
             <Header />

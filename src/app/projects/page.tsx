@@ -12,6 +12,7 @@ import { Badge } from "@/components/ui/badge"
 import { Skeleton } from "@/components/ui/skeleton"
 import { useConfirmModal } from "@/hooks/use-confirm-modal"
 import { useProjects } from "@/hooks/use-query-data"
+import { useI18n } from "@/i18n/provider"
 import { deleteProject } from "@/http/projects/delete-project"
 import { queryClient } from "@/lib/react-query"
 import type { Project } from "@/types/project"
@@ -21,6 +22,7 @@ import { ProjectModal } from "./components/project-modal"
 export default function ProjectsPage() {
   const { data: session } = useSession()
   const { data: projects, isLoading: isLoadingProjects } = useProjects()
+  const { t } = useI18n()
 
   const { isOpen, config, confirm, close, handleConfirm } = useConfirmModal()
 
@@ -53,19 +55,21 @@ export default function ProjectsPage() {
       <Reveal>
         <div className="mb-6 flex items-center gap-4">
           <span className="font-mono text-muted-foreground text-xs uppercase tracking-[0.3em]">
-            Selected Work
+            {t("projects.label")}
           </span>
           <div className="h-px flex-1 bg-border" />
           {total > 0 && (
             <span className="font-mono text-muted-foreground text-xs uppercase tracking-[0.3em]">
-              {String(total).padStart(2, "0")} Projects
+              {t("projects.projectsCount", {
+                count: String(total).padStart(2, "0"),
+              })}
             </span>
           )}
         </div>
 
         <div className="flex items-end justify-between gap-6">
           <h1 className="max-w-4xl font-bold text-[clamp(2.25rem,6vw,5rem)] leading-[0.95] tracking-tighter">
-            Products I&apos;ve architected &amp; shipped.
+            {t("projects.heading")}
           </h1>
 
           {session?.user && (
@@ -84,9 +88,7 @@ export default function ProjectsPage() {
         </div>
 
         <p className="mt-8 max-w-xl text-base text-muted-foreground leading-relaxed md:text-lg">
-          A collection of products I&apos;ve designed, built, and shipped — from
-          SaaS platforms to infrastructure tooling. Explore the details behind
-          each one.
+          {t("projects.intro")}
         </p>
       </Reveal>
 
@@ -101,12 +103,14 @@ export default function ProjectsPage() {
                 <span className="flex items-center gap-3">
                   {project.year ?? "2024"}
                   {project.completed && (
-                    <span className="text-aurora-cyan md:hidden">Shipped</span>
+                    <span className="text-aurora-cyan md:hidden">
+                      {t("projects.shipped")}
+                    </span>
                   )}
                 </span>
                 {project.completed && (
                   <span className="hidden text-aurora-cyan md:inline">
-                    Shipped
+                    {t("projects.shipped")}
                   </span>
                 )}
               </div>
@@ -123,7 +127,7 @@ export default function ProjectsPage() {
                     data-cursor="hover"
                     href={`/projects/${project.id}`}
                   >
-                    View details
+                    {t("projects.viewDetails")}
                     <ArrowUpRight className="size-4" />
                   </Link>
                 </Magnetic>

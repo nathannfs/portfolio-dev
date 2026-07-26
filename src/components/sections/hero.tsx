@@ -6,6 +6,7 @@ import Link from "next/link"
 import { useEffect, useRef, useState } from "react"
 
 import { AuroraCanvas, useLenis } from "@/components/motion"
+import { useI18n } from "@/i18n/provider"
 
 const socials = [
   { label: "GitHub", short: "GH", href: "https://github.com/nathannfs" },
@@ -16,15 +17,17 @@ const socials = [
 export function Hero() {
   const ref = useRef<HTMLDivElement>(null)
   const lenis = useLenis()
+  const { t } = useI18n()
 
   const { scrollY } = useScroll()
   const nameY = useTransform(scrollY, [0, 700], [0, 120])
   const annotationY = useTransform(scrollY, [0, 700], [0, 40])
 
   const [displayText, setDisplayText] = useState("")
-  const fullText = "Product Engineer · TypeScript · Next.js · Supabase"
+  const fullText = t("hero.tagline")
 
   useEffect(() => {
+    setDisplayText("")
     let index = 0
     const interval = setInterval(() => {
       setDisplayText(fullText.slice(0, index + 1))
@@ -34,7 +37,7 @@ export function Hero() {
       }
     }, 45)
     return () => clearInterval(interval)
-  }, [])
+  }, [fullText])
 
   function scrollToWork() {
     const element = document.getElementById("project")
@@ -68,7 +71,7 @@ export function Hero() {
             <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-green-400 opacity-75" />
             <span className="relative inline-flex h-2 w-2 rounded-full bg-green-500" />
           </span>
-          Open to Full-Stack Engineer Roles
+          {t("common.availability")}
         </div>
       </motion.div>
 
@@ -107,7 +110,7 @@ export function Hero() {
           transition={{ duration: 0.6, delay: 0.35 }}
         >
           <p className="font-semibold text-foreground text-sm uppercase tracking-[0.2em]">
-            Product Engineer
+            {t("hero.role")}
           </p>
           <p className="mt-2 min-h-[24px] font-mono text-muted-foreground text-sm md:text-base">
             {displayText}
@@ -118,14 +121,14 @@ export function Hero() {
         {/* Corner social text-links */}
         <motion.nav
           animate={{ opacity: 1 }}
-          aria-label="Social links"
+          aria-label={t("hero.socialLinks")}
           className="flex items-center gap-5 font-mono text-sm"
           initial={{ opacity: 0 }}
           transition={{ duration: 0.6, delay: 0.5 }}
         >
           {socials.map((s) => (
             <Link
-              aria-label={`${s.label} de Nathan Santos`}
+              aria-label={`${s.label} — Nathan Santos`}
               className="text-muted-foreground underline-offset-4 transition-colors hover:text-aurora-cyan hover:underline"
               href={s.href}
               key={s.short}
@@ -141,7 +144,7 @@ export function Hero() {
       {/* Bottom scroll cue */}
       <motion.button
         animate={{ opacity: 1 }}
-        aria-label="Scroll to selected work"
+        aria-label={t("hero.scrollToWork")}
         className="mt-14 inline-flex w-fit items-center gap-2 font-mono text-muted-foreground text-xs uppercase tracking-[0.2em] transition-colors hover:text-foreground"
         initial={{ opacity: 0 }}
         onClick={scrollToWork}
@@ -158,7 +161,7 @@ export function Hero() {
         >
           <ArrowDown className="size-4" />
         </motion.span>
-        Scroll to explore
+        {t("common.scrollCue")}
       </motion.button>
     </section>
   )

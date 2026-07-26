@@ -3,9 +3,12 @@
 import { twMerge } from "tailwind-merge"
 
 import { Reveal } from "@/components/motion"
+import { useI18n } from "@/i18n/provider"
 import { techGroups } from "@/utils/techs"
 
 export function TechStack() {
+  const { t } = useI18n()
+
   return (
     <section
       className="relative mx-auto w-full max-w-7xl scroll-mt-20 px-6 py-24 md:scroll-mt-0 md:px-10 md:py-32 lg:px-16"
@@ -14,15 +17,15 @@ export function TechStack() {
       <Reveal>
         <div className="mb-12 flex items-center gap-4">
           <span className="font-mono text-muted-foreground text-xs uppercase tracking-[0.3em]">
-            Tech Stack
+            {t("stack.label")}
           </span>
           <div className="h-px flex-1 bg-border" />
         </div>
         <h2 className="max-w-3xl font-bold text-[clamp(1.75rem,3.5vw,3rem)] leading-[1.1] tracking-tight">
-          The tools I reach for to design, build, and ship production products.
+          {t("stack.heading")}
         </h2>
         <p className="mt-4 max-w-xl text-muted-foreground md:text-lg">
-          Highlighted items are the ones I use every day.
+          {t("stack.highlightNote")}
         </p>
       </Reveal>
 
@@ -31,7 +34,7 @@ export function TechStack() {
           <Reveal key={group.category}>
             <div className="grid grid-cols-1 gap-6 border-border border-t py-10 md:grid-cols-12 md:gap-8">
               <h3 className="font-bold text-2xl tracking-tight md:col-span-4 md:text-3xl">
-                {group.category}
+                {t(`stack.categories.${group.category}`)}
               </h3>
               <ul className="flex flex-wrap items-center gap-x-6 gap-y-4 md:col-span-8">
                 {group.items.map((tech) => (

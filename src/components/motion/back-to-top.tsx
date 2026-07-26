@@ -4,10 +4,13 @@ import { AnimatePresence, motion } from "framer-motion"
 import { ArrowUp } from "lucide-react"
 import { useEffect, useState } from "react"
 
+import { useI18n } from "@/i18n/provider"
+
 import { useLenis } from "./smooth-scroll"
 
 export function BackToTop() {
   const lenis = useLenis()
+  const { t } = useI18n()
   const [show, setShow] = useState(false)
 
   useEffect(() => {
@@ -32,7 +35,7 @@ export function BackToTop() {
       {show && (
         <motion.button
           animate={{ opacity: 1, scale: 1 }}
-          aria-label="Voltar ao topo"
+          aria-label={t("common.backToTop")}
           className="fixed right-6 bottom-6 z-[90] flex size-11 items-center justify-center rounded-full border border-aurora-cyan/40 bg-surface-2/80 text-foreground shadow-lg backdrop-blur transition-colors hover:border-aurora-cyan hover:text-aurora-cyan"
           exit={{ opacity: 0, scale: 0.8 }}
           initial={{ opacity: 0, scale: 0.8 }}

@@ -11,6 +11,7 @@ import {
 import { type ChangeEvent, type FormEvent, useState } from "react"
 
 import { Button } from "@/components/button"
+import { useI18n } from "@/i18n/provider"
 
 import { Input } from "../input"
 import { Separator } from "../separator"
@@ -26,6 +27,7 @@ interface FormData {
 type FormStatus = "idle" | "loading" | "success" | "error"
 
 export function ContactForm() {
+  const { t } = useI18n()
   const [formData, setFormData] = useState<FormData>({
     name: "",
     email: "",
@@ -61,7 +63,7 @@ export function ContactForm() {
       const data = await response.json()
 
       if (!response.ok) {
-        throw new Error(data.error || "Failed to send message")
+        throw new Error(data.error || t("contact.form.error"))
       }
 
       setStatus("success")
@@ -73,7 +75,7 @@ export function ContactForm() {
     } catch (error) {
       setStatus("error")
       setErrorMessage(
-        error instanceof Error ? error.message : "Failed to send message"
+        error instanceof Error ? error.message : t("contact.form.error")
       )
 
       setTimeout(() => {
@@ -95,7 +97,7 @@ export function ContactForm() {
         <div className="flex items-center gap-2 rounded-lg bg-green-50 p-3 text-green-800 dark:bg-green-900/20 dark:text-green-200">
           <CheckCircle className="size-5" />
           <span className="font-medium text-sm">
-            Message sent successfully!
+            {t("contact.form.success")}
           </span>
         </div>
       )}
@@ -112,7 +114,7 @@ export function ContactForm() {
           className="font-medium text-muted-foreground text-sm"
           htmlFor="name"
         >
-          Name
+          {t("contact.form.nameLabel")}
         </Label>
 
         <Input.Root>
@@ -124,7 +126,7 @@ export function ContactForm() {
             id="name"
             name="name"
             onChange={handleInputChange}
-            placeholder="Your name"
+            placeholder={t("contact.form.namePlaceholder")}
             required
             value={formData.name}
           />
@@ -136,7 +138,7 @@ export function ContactForm() {
           className="font-medium text-muted-foreground text-sm"
           htmlFor="email"
         >
-          Email
+          {t("contact.form.emailLabel")}
         </Label>
 
         <Input.Root>
@@ -148,7 +150,7 @@ export function ContactForm() {
             id="email"
             name="email"
             onChange={handleInputChange}
-            placeholder="your@email.com"
+            placeholder={t("contact.form.emailPlaceholder")}
             required
             type="email"
             value={formData.email}
@@ -161,7 +163,7 @@ export function ContactForm() {
           className="font-medium text-muted-foreground text-sm"
           htmlFor="message"
         >
-          Message
+          {t("contact.form.messageLabel")}
         </Label>
 
         <Textarea.Root>
@@ -173,7 +175,7 @@ export function ContactForm() {
             id="message"
             name="message"
             onChange={handleInputChange}
-            placeholder="Tell me about your project or idea..."
+            placeholder={t("contact.form.messagePlaceholder")}
             required
             rows={4}
             value={formData.message}
@@ -192,7 +194,7 @@ export function ContactForm() {
         {status === "loading" ? (
           <Loader2 className="mr-2 animate-spin" />
         ) : (
-          "Send message"
+          t("contact.form.submit")
         )}
       </Button>
     </form>

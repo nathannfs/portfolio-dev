@@ -8,8 +8,10 @@ import { useEffect, useState } from "react"
 import { twMerge } from "tailwind-merge"
 
 import { useLenis } from "@/components/motion"
+import { useI18n } from "@/i18n/provider"
 
 import { Button } from "./button"
+import { LocaleSwitcher } from "./locale-switcher"
 import { Separator } from "./separator"
 import { ThemeToggle } from "./theme/theme-toggle"
 import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar"
@@ -32,6 +34,7 @@ import {
 export function Header() {
   const { data: session } = useSession()
   const lenis = useLenis()
+  const { t } = useI18n()
 
   const pathname = usePathname()
   const isHomePage = pathname === "/"
@@ -140,12 +143,12 @@ export function Header() {
   }, [])
 
   const navItems = [
-    { id: "home", label: "Home" },
-    { id: "about", label: "About" },
-    { id: "specialties", label: "Expertise" },
-    { id: "project", label: "Projects" },
-    { id: "techs", label: "Stack" },
-    { id: "contact", label: "Contact" },
+    { id: "home", label: t("common.nav.home") },
+    { id: "about", label: t("common.nav.about") },
+    { id: "specialties", label: t("common.nav.expertise") },
+    { id: "project", label: t("common.nav.projects") },
+    { id: "techs", label: t("common.nav.stack") },
+    { id: "contact", label: t("common.nav.contact") },
   ]
 
   return (
@@ -204,7 +207,8 @@ export function Header() {
         </nav>
 
         {/* Right cluster (desktop) */}
-        <div className="hidden items-center gap-1 md:flex">
+        <div className="hidden items-center gap-2 md:flex">
+          <LocaleSwitcher />
           <ThemeToggle />
 
           {session?.user && (
@@ -253,7 +257,7 @@ export function Header() {
 
                 <DropdownMenuItem onClick={() => signOut({ callbackUrl: "/" })}>
                   <LogOut aria-hidden="true" className="opacity-60" size={16} />
-                  <span>Sign Out</span>
+                  <span>{t("common.signOut")}</span>
                 </DropdownMenuItem>
               </DropdownMenuContent>
             </DropdownMenu>
@@ -264,7 +268,7 @@ export function Header() {
       <nav className="md:hidden">
         <Sheet onOpenChange={setIsSheetOpen} open={isSheetOpen}>
           <SheetTrigger asChild>
-            <Button aria-label="Abrir menu de navegação" variant="ghost">
+            <Button aria-label={t("common.openMenu")} variant="ghost">
               <List className="size-5" />
             </Button>
           </SheetTrigger>
@@ -296,7 +300,10 @@ export function Header() {
 
             <Separator />
 
-            <ThemeToggle />
+            <div className="flex items-center gap-3">
+              <LocaleSwitcher />
+              <ThemeToggle />
+            </div>
 
             {session?.user && (
               <div className="mt-auto">
@@ -351,7 +358,7 @@ export function Header() {
                         className="opacity-60"
                         size={16}
                       />
-                      <span>Sign Out</span>
+                      <span>{t("common.signOut")}</span>
                     </DropdownMenuItem>
                   </DropdownMenuContent>
                 </DropdownMenu>

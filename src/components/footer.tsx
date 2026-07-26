@@ -1,13 +1,19 @@
+"use client"
+
 import { Github, Instagram, Linkedin } from "lucide-react"
 import Link from "next/link"
 
+import { useI18n } from "@/i18n/provider"
+
 export function Footer() {
+  const { t } = useI18n()
+
   return (
     <footer className="flex w-full flex-col items-center justify-center py-8">
       <div className="flex w-full max-w-7xl flex-col items-center justify-between gap-4 px-4 sm:flex-row sm:gap-0">
         <div className="flex items-center gap-2">
           <span className="text-center font-medium text-muted-foreground text-sm md:text-start">
-            © {new Date().getFullYear()} Nathan Santos. All rights reserved.
+            {t("footer.rights", { year: new Date().getFullYear() })}
           </span>
         </div>
 

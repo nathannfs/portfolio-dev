@@ -9,8 +9,10 @@ import { Button } from "@/components/button"
 import { Input } from "@/components/input"
 import { AuroraCanvas } from "@/components/motion"
 import { Label } from "@/components/ui/label"
+import { useI18n } from "@/i18n/provider"
 
 export function SignInForm() {
+  const { t } = useI18n()
   const [form, setForm] = useState({ email: "", password: "" })
   const [error, setError] = useState("")
   const [loading, setLoading] = useState(false)
@@ -33,7 +35,7 @@ export function SignInForm() {
     setLoading(false)
 
     if (res?.error) {
-      setError("Invalid email or password")
+      setError(t("signin.invalidCredentials"))
     } else if (res?.ok) {
       router.push(res.url || "/")
     }
@@ -48,12 +50,12 @@ export function SignInForm() {
         onSubmit={handleSubmit}
       >
         <h1 className="mb-4 text-center font-bold text-2xl tracking-tight">
-          Entrar
+          {t("signin.heading")}
         </h1>
 
         <div className="flex flex-col gap-2">
           <Label className="font-medium text-sm" htmlFor="email">
-            Email
+            {t("signin.emailLabel")}
           </Label>
 
           <Input.Root className="bg-surface-2 focus-within:border-aurora-cyan focus-within:ring-4 focus-within:ring-aurora-cyan/20">
@@ -65,7 +67,7 @@ export function SignInForm() {
               onChange={(e) =>
                 setForm((f) => ({ ...f, email: e.target.value }))
               }
-              placeholder="seu@email.com"
+              placeholder={t("signin.emailPlaceholder")}
               required
               type="email"
               value={form.email}
@@ -75,7 +77,7 @@ export function SignInForm() {
 
         <div className="flex flex-col gap-2">
           <Label className="font-medium text-sm" htmlFor="password">
-            Senha
+            {t("signin.passwordLabel")}
           </Label>
 
           <Input.Root className="bg-surface-2 focus-within:border-aurora-cyan focus-within:ring-4 focus-within:ring-aurora-cyan/20">
@@ -87,7 +89,7 @@ export function SignInForm() {
               onChange={(e) =>
                 setForm((f) => ({ ...f, password: e.target.value }))
               }
-              placeholder="Your password"
+              placeholder={t("signin.passwordPlaceholder")}
               required
               type="password"
               value={form.password}
@@ -106,7 +108,11 @@ export function SignInForm() {
           disabled={loading}
           type="submit"
         >
-          {loading ? <Loader2 className="size-4 animate-spin" /> : "Entrar"}
+          {loading ? (
+            <Loader2 className="size-4 animate-spin" />
+          ) : (
+            t("signin.submit")
+          )}
         </Button>
       </form>
     </div>

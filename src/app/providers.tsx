@@ -6,6 +6,7 @@ import { SessionProvider } from "next-auth/react"
 import { type ReactNode, useEffect, useState } from "react"
 
 import { PageLoader } from "@/components/page-loader"
+import { LocaleProvider } from "@/i18n/provider"
 import { queryClient } from "@/lib/react-query"
 
 import { ThemeProvider } from "../components/theme/theme-provider"
@@ -30,7 +31,7 @@ export default function Providers({ children }: { children: ReactNode }) {
           disableTransitionOnChange
           enableSystem
         >
-          {children}
+          <LocaleProvider>{children}</LocaleProvider>
         </ThemeProvider>
       </QueryClientProvider>
     </SessionProvider>
