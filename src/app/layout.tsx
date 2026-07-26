@@ -6,6 +6,7 @@ import type { ReactNode } from "react"
 import { twMerge } from "tailwind-merge"
 
 import { Header } from "@/components/header"
+import { BackToTop } from "@/components/motion/back-to-top"
 import { CustomCursor } from "@/components/motion/custom-cursor"
 import { SmoothScroll } from "@/components/motion/smooth-scroll"
 import { structuredData } from "@/lib/structured-data"
@@ -148,6 +149,7 @@ export default function RootLayout({
             <main className="pt-[80px]" id="main-content">
               {children}
             </main>
+            <BackToTop />
           </SmoothScroll>
         </Providers>
       </body>
