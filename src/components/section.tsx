@@ -8,7 +8,7 @@ function Root({ className, ...props }: RootProps) {
     <div
       {...props}
       className={twMerge([
-        "mx-auto flex w-full flex-col items-center justify-center gap-10 px-4 py-10 md:h-[calc(100vh-80px)] md:snap-start md:py-4 lg:max-w-7xl",
+        "mx-auto flex w-full scroll-mt-24 flex-col items-center justify-center gap-10 px-4 py-20 md:py-28 lg:max-w-7xl",
         className,
       ])}
     />
