@@ -1,68 +1,43 @@
-import Autoplay from "embla-carousel-autoplay"
-import {
-  motion,
-  useAnimation,
-  useInView,
-  useScroll,
-  useTransform,
-  type Variants,
-} from "framer-motion"
-import { ArrowUpRight, Github, Instagram, Linkedin } from "lucide-react"
-import Image from "next/image"
+"use client"
+
+import { motion, useScroll, useTransform } from "framer-motion"
+import { ArrowDown } from "lucide-react"
 import Link from "next/link"
 import { useEffect, useRef, useState } from "react"
 
-import { AuroraCanvas, Magnetic, Reveal, useLenis } from "@/components/motion"
-import { techs } from "@/utils/techs"
+import { AuroraCanvas, useLenis } from "@/components/motion"
 
-import { Button } from "../button"
-import { Section } from "../section"
-import { Carousel, CarouselContent, CarouselItem } from "../ui/carousel"
-
-const containerVariants: Variants = {
-  hidden: { opacity: 0, y: 40 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    transition: { staggerChildren: 0.12, delayChildren: 0.2 },
-  },
-}
-
-const itemVariants: Variants = {
-  hidden: { opacity: 0, y: 30 },
-  visible: { opacity: 1, y: 0, transition: { type: "spring", stiffness: 60 } },
-}
-
-const imageVariants: Variants = {
-  hidden: { opacity: 0, scale: 0.8 },
-  visible: {
-    opacity: 1,
-    scale: 1,
-    transition: { type: "spring", stiffness: 80, delay: 0.3 },
-  },
-}
+const socials = [
+  { label: "GitHub", short: "GH", href: "https://github.com/nathannfs" },
+  { label: "LinkedIn", short: "LI", href: "https://linkedin.com/in/nathannfs" },
+  { label: "Instagram", short: "IG", href: "https://instagram.com/nathannfss" },
+]
 
 export function Hero() {
   const ref = useRef<HTMLDivElement>(null)
-  const inView = useInView(ref, { amount: 0.3, once: false })
-  const controls = useAnimation()
   const lenis = useLenis()
 
   const { scrollY } = useScroll()
-  const auroraY = useTransform(scrollY, [0, 700], [0, 140])
-  const contentY = useTransform(scrollY, [0, 700], [0, 60])
-  const contentOpacity = useTransform(scrollY, [0, 600], [1, 0])
+  const nameY = useTransform(scrollY, [0, 700], [0, 120])
+  const annotationY = useTransform(scrollY, [0, 700], [0, 40])
+
+  const [displayText, setDisplayText] = useState("")
+  const fullText = "Product Engineer · TypeScript · Next.js · Supabase"
 
   useEffect(() => {
-    if (inView) {
-      controls.start("visible")
-    } else {
-      controls.start("hidden")
-    }
-  }, [inView, controls])
+    let index = 0
+    const interval = setInterval(() => {
+      setDisplayText(fullText.slice(0, index + 1))
+      index++
+      if (index > fullText.length) {
+        clearInterval(interval)
+      }
+    }, 45)
+    return () => clearInterval(interval)
+  }, [])
 
-  function handleNavigation(id: string) {
-    const element = document.getElementById(id)
+  function scrollToWork() {
+    const element = document.getElementById("project")
     if (!element) {
       return
     }
@@ -73,250 +48,118 @@ export function Hero() {
     }
   }
 
-  const [displayText, setDisplayText] = useState("")
-  const fullText = "Product Engineer · TypeScript · Next.js · Supabase"
-
-  useEffect(() => {
-    let index = 0
-    const interval = setInterval(() => {
-      setDisplayText(fullText.slice(0, index + 1))
-      index++
-
-      if (index > fullText.length) {
-        clearInterval(interval)
-      }
-    }, 45)
-
-    return () => clearInterval(interval)
-  }, [])
-
   return (
-    <Section.Root
-      className="relative min-h-[calc(100vh-80px)] justify-center overflow-hidden"
+    <section
+      className="relative flex min-h-[calc(100vh-80px)] flex-col justify-center overflow-hidden px-6 pt-28 pb-16 md:px-10 lg:px-16"
       id="home"
+      ref={ref}
     >
+      <AuroraCanvas className="pointer-events-none absolute inset-0 -z-10" />
+
+      {/* Availability pill */}
       <motion.div
-        className="pointer-events-none absolute inset-0 -z-10"
-        style={{ y: auroraY }}
+        animate={{ opacity: 1, y: 0 }}
+        className="mb-8"
+        initial={{ opacity: 0, y: 12 }}
+        transition={{ duration: 0.5 }}
       >
-        <AuroraCanvas className="absolute inset-0" />
+        <div className="inline-flex items-center gap-2 rounded-full border border-green-500/30 bg-green-500/10 px-3 py-1 font-medium text-green-600 text-xs dark:text-green-400">
+          <span className="relative flex h-2 w-2">
+            <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-green-400 opacity-75" />
+            <span className="relative inline-flex h-2 w-2 rounded-full bg-green-500" />
+          </span>
+          Open to Full-Stack Engineer Roles
+        </div>
       </motion.div>
+
+      {/* Massive typographic statement */}
+      <motion.h1
+        className="font-bold text-[clamp(4rem,16vw,18rem)] leading-[0.85] tracking-tighter"
+        style={{ y: nameY }}
+      >
+        <motion.span
+          animate={{ opacity: 1, y: 0 }}
+          className="block"
+          initial={{ opacity: 0, y: 40 }}
+          transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
+        >
+          Nathan
+        </motion.span>
+        <motion.span
+          animate={{ opacity: 1, y: 0 }}
+          className="block text-muted-foreground"
+          initial={{ opacity: 0, y: 40 }}
+          transition={{ duration: 0.7, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
+        >
+          Santos
+        </motion.span>
+      </motion.h1>
+
+      {/* Offset annotation + socials */}
       <motion.div
-        className="flex w-full justify-center"
-        style={{ y: contentY, opacity: contentOpacity }}
+        className="mt-10 flex flex-col gap-8 md:flex-row md:items-end md:justify-between"
+        style={{ y: annotationY }}
       >
         <motion.div
-          animate={controls}
-          className="mx-auto flex w-full max-w-[100vw] flex-col-reverse items-center justify-center gap-8 px-4 sm:px-6 md:px-8 lg:max-w-6xl lg:flex-row xl:max-w-7xl"
-          initial="hidden"
-          ref={ref}
-          variants={containerVariants}
+          animate={{ opacity: 1, y: 0 }}
+          className="max-w-md md:ml-[8vw]"
+          initial={{ opacity: 0, y: 20 }}
+          transition={{ duration: 0.6, delay: 0.35 }}
         >
-        <motion.div
-          className="flex w-full max-w-xl flex-col gap-4 text-center lg:text-start"
-          variants={itemVariants}
-        >
-          {/* Availability Badge */}
-          <motion.div
-            className="flex justify-center lg:justify-start"
-            variants={itemVariants}
-          >
-            <div className="inline-flex items-center gap-2 rounded-full border border-green-500/30 bg-green-500/10 px-3 py-1 font-medium text-green-600 text-xs dark:text-green-400">
-              <span className="relative flex h-2 w-2">
-                <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-green-400 opacity-75" />
-                <span className="relative inline-flex h-2 w-2 rounded-full bg-green-500" />
-              </span>
-              Open to Full-Stack Engineer Roles
-            </div>
-          </motion.div>
-
-          <motion.div className="flex flex-col gap-1" variants={itemVariants}>
-            <span className="text-lg text-muted-foreground">Hey, I&apos;m</span>
-            <motion.h1
-              className="font-bold text-[clamp(3rem,8vw,5.5rem)] leading-[1.05] tracking-tight"
-              variants={itemVariants}
-            >
-              Nathan Santos
-            </motion.h1>
-            <motion.p
-              animate={{ opacity: 1 }}
-              className="min-h-[28px] font-mono font-medium text-base text-muted-foreground"
-              initial={{ opacity: 0 }}
-              transition={{ delay: 0.5 }}
-            >
-              {displayText}
-              <span className="animate-pulse">|</span>
-            </motion.p>
-          </motion.div>
-
-          <motion.div variants={itemVariants}>
-            <Reveal>
-              <Section.Description className="lg:text-start">
-                I build full-stack products end-to-end — from NestJS APIs to
-                Next.js interfaces. Currently shipping at OMD do Brasil and
-                building SaaS products on the side.
-              </Section.Description>
-            </Reveal>
-          </motion.div>
-
-          <motion.div
-            className="flex flex-col items-center justify-center gap-4 lg:flex-row lg:justify-start"
-            variants={itemVariants}
-          >
-            <div className="flex items-center gap-2">
-              <motion.div
-                animate={{
-                  translateY: [0, -4, 0],
-                }}
-                transition={{
-                  duration: 1.5,
-                  repeat: Number.POSITIVE_INFINITY,
-                  repeatType: "loop",
-                }}
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.97 }}
-              >
-                <Magnetic>
-                  <Button
-                    onClick={() => handleNavigation("contact")}
-                    variant="primary"
-                  >
-                    Let&apos;s Talk
-                    <ArrowUpRight className="size-4" />
-                  </Button>
-                </Magnetic>
-              </motion.div>
-
-              <motion.div
-                animate={{
-                  translateY: [0, -4, 0],
-                }}
-                transition={{
-                  duration: 1.5,
-                  repeat: Number.POSITIVE_INFINITY,
-                  repeatType: "loop",
-                  delay: 0.2,
-                }}
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.97 }}
-              >
-                <Button
-                  onClick={() => handleNavigation("project")}
-                  variant="primary"
-                >
-                  View Projects
-                  <ArrowUpRight className="size-4" />
-                </Button>
-              </motion.div>
-            </div>
-
-            <div className="flex items-center gap-2">
-              <motion.div
-                whileHover={{ scale: 1.2, rotate: 10 }}
-                whileTap={{ scale: 0.97 }}
-              >
-                <Link
-                  aria-label="Instagram de Nathan Santos"
-                  href="https://instagram.com/nathannfss"
-                  rel="noreferrer"
-                  target="_blank"
-                >
-                  <Button size="icon" variant="icon">
-                    <Instagram className="size-5" />
-                  </Button>
-                </Link>
-              </motion.div>
-
-              <motion.div
-                whileHover={{ scale: 1.2, rotate: 10 }}
-                whileTap={{ scale: 0.97 }}
-              >
-                <Link
-                  aria-label="LinkedIn de Nathan Santos"
-                  href="https://linkedin.com/in/nathannfs"
-                  rel="noreferrer"
-                  target="_blank"
-                >
-                  <Button size="icon" variant="icon">
-                    <Linkedin className="size-5" />
-                  </Button>
-                </Link>
-              </motion.div>
-
-              <motion.div
-                whileHover={{ scale: 1.2, rotate: 10 }}
-                whileTap={{ scale: 0.97 }}
-              >
-                <Link
-                  aria-label="GitHub de Nathan Santos"
-                  href="https://github.com/nathannfs"
-                  rel="noreferrer"
-                  target="_blank"
-                >
-                  <Button size="icon" variant="icon">
-                    <Github className="size-5" />
-                  </Button>
-                </Link>
-              </motion.div>
-            </div>
-          </motion.div>
-
-          <motion.div variants={itemVariants}>
-            <Carousel
-              className="w-full"
-              opts={{
-                loop: true,
-              }}
-              plugins={[
-                Autoplay({
-                  delay: 2000,
-                }),
-              ]}
-            >
-              <CarouselContent className="-ml-1">
-                {techs.map((tech) => (
-                  <CarouselItem className="basis-1/5 pl-1" key={tech.name}>
-                    <motion.div
-                      className="p-1"
-                      whileHover={{ scale: 1.12 }}
-                      whileTap={{ scale: 0.97 }}
-                    >
-                      <div className="flex aspect-square items-center justify-center p-2">
-                        <span className="font-semibold text-2xl">
-                          {tech.icon}
-                        </span>
-                      </div>
-                    </motion.div>
-                  </CarouselItem>
-                ))}
-              </CarouselContent>
-            </Carousel>
-          </motion.div>
+          <p className="font-semibold text-foreground text-sm uppercase tracking-[0.2em]">
+            Product Engineer
+          </p>
+          <p className="mt-2 min-h-[24px] font-mono text-muted-foreground text-sm md:text-base">
+            {displayText}
+            <span className="animate-pulse">|</span>
+          </p>
         </motion.div>
 
-        <motion.div
-          className="flex w-full items-center justify-center md:w-auto"
-          variants={imageVariants}
+        {/* Corner social text-links */}
+        <motion.nav
+          animate={{ opacity: 1 }}
+          aria-label="Social links"
+          className="flex items-center gap-5 font-mono text-sm"
+          initial={{ opacity: 0 }}
+          transition={{ duration: 0.6, delay: 0.5 }}
         >
-          <motion.div
-            animate={{ opacity: 1, scale: 1 }}
-            initial={{ opacity: 0, scale: 0.8 }}
-            transition={{ type: "spring", stiffness: 80, delay: 0.0 }}
-            whileHover={{ scale: 1.02 }}
-          >
-            <Image
-              alt="Nathan Santos — Product Engineer"
-              className="h-44 max-h-[70vw] w-44 max-w-full rounded-xl object-cover shadow-lg sm:h-64 sm:w-64 md:h-80 md:w-80 lg:h-[22rem] lg:w-[22rem] xl:h-[26rem] xl:w-[26rem]"
-              fetchPriority="high"
-              height={400}
-              priority
-              src="/nathan.jpeg"
-              width={400}
-            />
-          </motion.div>
-        </motion.div>
-        </motion.div>
+          {socials.map((s) => (
+            <Link
+              aria-label={`${s.label} de Nathan Santos`}
+              className="text-muted-foreground underline-offset-4 transition-colors hover:text-aurora-cyan hover:underline"
+              href={s.href}
+              key={s.short}
+              rel="noreferrer"
+              target="_blank"
+            >
+              {s.short}
+            </Link>
+          ))}
+        </motion.nav>
       </motion.div>
-    </Section.Root>
+
+      {/* Bottom scroll cue */}
+      <motion.button
+        animate={{ opacity: 1 }}
+        aria-label="Scroll to selected work"
+        className="mt-14 inline-flex w-fit items-center gap-2 font-mono text-muted-foreground text-xs uppercase tracking-[0.2em] transition-colors hover:text-foreground"
+        initial={{ opacity: 0 }}
+        onClick={scrollToWork}
+        transition={{ duration: 0.6, delay: 0.7 }}
+        type="button"
+      >
+        <motion.span
+          animate={{ y: [0, 4, 0] }}
+          transition={{
+            duration: 1.6,
+            repeat: Number.POSITIVE_INFINITY,
+            repeatType: "loop",
+          }}
+        >
+          <ArrowDown className="size-4" />
+        </motion.span>
+        Scroll to explore
+      </motion.button>
+    </section>
   )
 }

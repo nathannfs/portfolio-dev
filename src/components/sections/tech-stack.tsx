@@ -1,127 +1,68 @@
-import { easeInOut, motion, spring } from "framer-motion"
+"use client"
+
 import { twMerge } from "tailwind-merge"
 
-import { Magnetic, Reveal } from "@/components/motion"
+import { Reveal } from "@/components/motion"
 import { techGroups } from "@/utils/techs"
-
-import { Section } from "../section"
-
-const sectionVariants = {
-  hidden: { opacity: 0, y: 50, scale: 0.95 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    scale: 1,
-    transition: {
-      duration: 0.5,
-      ease: easeInOut,
-    },
-  },
-}
-
-const containerVariants = {
-  hidden: { opacity: 0 },
-  visible: {
-    opacity: 1,
-    transition: {
-      staggerChildren: 0.08,
-    },
-  },
-}
-
-const itemVariants = {
-  hidden: { opacity: 0, y: 20 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    transition: {
-      type: spring,
-      stiffness: 100,
-    },
-  },
-}
 
 export function TechStack() {
   return (
-    <Section.Root className="scroll-mt-20 md:scroll-mt-0" id="techs">
-      <motion.div
-        className="flex w-full flex-col items-center justify-center gap-6"
-        exit="hidden"
-        initial="hidden"
-        variants={sectionVariants}
-        viewport={{ once: false, amount: 0.2 }}
-        whileInView="visible"
-      >
-        <Reveal>
-          <Section.Header>
-            <Section.Title>Tech Stack</Section.Title>
-            <Section.Description>
-              The core technologies I reach for to design, build, and ship
-              production products. Highlighted tools are the ones I use every
-              day.
-            </Section.Description>
-          </Section.Header>
-        </Reveal>
+    <section
+      className="relative mx-auto w-full max-w-7xl scroll-mt-20 px-6 py-24 md:scroll-mt-0 md:px-10 md:py-32 lg:px-16"
+      id="techs"
+    >
+      <Reveal>
+        <div className="mb-12 flex items-center gap-4">
+          <span className="font-mono text-muted-foreground text-xs uppercase tracking-[0.3em]">
+            Tech Stack
+          </span>
+          <div className="h-px flex-1 bg-border" />
+        </div>
+        <h2 className="max-w-3xl font-bold text-[clamp(1.75rem,3.5vw,3rem)] leading-[1.1] tracking-tight">
+          The tools I reach for to design, build, and ship production products.
+        </h2>
+        <p className="mt-4 max-w-xl text-muted-foreground md:text-lg">
+          Highlighted items are the ones I use every day.
+        </p>
+      </Reveal>
 
-        <Section.Content className="max-w-4xl items-stretch gap-8">
-          <motion.div
-            className="flex w-full flex-col gap-8"
-            variants={containerVariants}
-          >
-            {techGroups.map((group) => (
-              <motion.div
-                className="flex w-full flex-col gap-4"
-                key={group.category}
-                variants={itemVariants}
-              >
-                <div className="flex items-center gap-3">
-                  <h3 className="font-semibold text-base">{group.category}</h3>
-                  <div className="h-px flex-1 bg-border" />
-                </div>
-
-                <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 md:grid-cols-5">
-                  {group.items.map((tech) => {
-                    const tile = (
-                      <motion.div
-                        className={twMerge(
-                          "group flex items-center gap-2.5 rounded-lg border bg-background p-3 shadow-sm transition-all duration-300 hover:shadow-md",
-                          tech.featured &&
-                            "border-sky-500/40 bg-sky-500/[0.06] ring-1 ring-sky-500/20 dark:bg-sky-400/[0.06]"
-                        )}
-                        data-cursor="hover"
-                        whileHover={{ y: -3 }}
-                        whileTap={{ scale: 0.97 }}
-                      >
-                        <span
-                          className={twMerge(
-                            "shrink-0 text-2xl transition-colors",
-                            tech.featured
-                              ? "text-sky-600 dark:text-sky-400"
-                              : "text-muted-foreground group-hover:text-foreground"
-                          )}
-                        >
-                          {tech.icon}
-                        </span>
-                        <span className="font-medium text-sm leading-tight">
-                          {tech.name}
-                        </span>
-                      </motion.div>
-                    )
-
-                    return tech.featured ? (
-                      <Magnetic key={tech.name} strength={0.2}>
-                        {tile}
-                      </Magnetic>
-                    ) : (
-                      <div key={tech.name}>{tile}</div>
-                    )
-                  })}
-                </div>
-              </motion.div>
-            ))}
-          </motion.div>
-        </Section.Content>
-      </motion.div>
-    </Section.Root>
+      <div className="mt-16 flex flex-col">
+        {techGroups.map((group) => (
+          <Reveal key={group.category}>
+            <div className="grid grid-cols-1 gap-6 border-border border-t py-10 md:grid-cols-12 md:gap-8">
+              <h3 className="font-bold text-2xl tracking-tight md:col-span-4 md:text-3xl">
+                {group.category}
+              </h3>
+              <ul className="flex flex-wrap items-center gap-x-6 gap-y-4 md:col-span-8">
+                {group.items.map((tech) => (
+                  <li
+                    className={twMerge(
+                      "group inline-flex items-center gap-2.5 font-semibold text-xl transition-colors md:text-2xl",
+                      tech.featured
+                        ? "text-aurora-cyan"
+                        : "text-muted-foreground hover:text-foreground"
+                    )}
+                    key={tech.name}
+                  >
+                    <span
+                      className={twMerge(
+                        "shrink-0 text-2xl",
+                        tech.featured
+                          ? "opacity-100"
+                          : "opacity-60 transition-opacity group-hover:opacity-100"
+                      )}
+                    >
+                      {tech.icon}
+                    </span>
+                    {tech.name}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </Reveal>
+        ))}
+        <div aria-hidden="true" className="border-border border-t" />
+      </div>
+    </section>
   )
 }
