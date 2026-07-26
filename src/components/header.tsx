@@ -149,59 +149,65 @@ export function Header() {
   ]
 
   return (
-    <motion.header
-      className={twMerge(
-        "fixed top-0 left-0 z-50 flex w-full items-center justify-between px-6 py-4 transition-all duration-300",
-        scrolled
-          ? "border-muted/20 border-b bg-background/80 shadow-md backdrop-blur-sm"
-          : "bg-transparent"
-      )}
-    >
-      <Button
-        className="flex items-center gap-3 p-0"
-        onClick={() => handleNavigation("home")}
-        variant="none"
+    <motion.header className="fixed inset-x-0 top-0 z-50 flex justify-center px-4 pt-3 md:pt-4">
+      <div
+        className={twMerge(
+          "relative flex w-full max-w-6xl items-center justify-between gap-4 rounded-2xl border px-3 py-2 transition-all duration-300 md:px-4",
+          scrolled
+            ? "border-border/60 bg-surface-1/70 shadow-black/5 shadow-lg backdrop-blur-xl"
+            : "border-transparent bg-transparent"
+        )}
       >
-        <Code />
-
-        <div className="flex items-center gap-2">
-          <span className="font-bold text-lg">Nathan Santos</span>
-          <div className="h-4 w-px bg-muted-foreground/30" />
-          <span className="text-muted-foreground text-sm">
-            Product Engineer
+        {/* Logo */}
+        <button
+          className="group flex items-center gap-2.5"
+          onClick={() => handleNavigation("home")}
+          type="button"
+        >
+          <span className="flex size-8 items-center justify-center rounded-lg bg-aurora-cyan/10 text-aurora-cyan ring-1 ring-aurora-cyan/20 transition-transform group-hover:scale-105">
+            <Code className="size-4" />
           </span>
-        </div>
-      </Button>
+          <span className="font-semibold tracking-tight">Nathan Santos</span>
+        </button>
 
-      {/* Desktop Navigation */}
-      <nav className="hidden items-center justify-center gap-2 md:flex">
-        {navItems.map((item, index) => (
-          <div className="flex items-center gap-2" key={item.id}>
-            <div className="relative">
-              <Button onClick={() => handleNavigation(item.id)} variant="ghost">
-                {item.label}
-              </Button>
-              {isHomePage && activeSection === item.id && (
-                <motion.div
-                  className="absolute right-0 bottom-[-4px] left-0 h-0.5 bg-sky-500"
-                  layoutId="active-pill"
-                />
-              )}
-            </div>
-            {index < navItems.length - 1 && (
-              <Separator orientation="vertical" />
-            )}
-          </div>
-        ))}
+        {/* Desktop Navigation — centered floating pill */}
+        <nav className="-translate-x-1/2 absolute left-1/2 hidden items-center gap-1 md:flex">
+          {navItems.map((item) => {
+            const active = isHomePage && activeSection === item.id
+            return (
+              <button
+                className="relative rounded-full px-3.5 py-1.5 font-medium text-sm transition-colors"
+                key={item.id}
+                onClick={() => handleNavigation(item.id)}
+                type="button"
+              >
+                {active && (
+                  <motion.span
+                    className="absolute inset-0 rounded-full bg-aurora-cyan/[0.12]"
+                    layoutId="nav-active"
+                    transition={{ type: "spring", stiffness: 380, damping: 30 }}
+                  />
+                )}
+                <span
+                  className={twMerge(
+                    "relative z-10 transition-colors",
+                    active
+                      ? "text-aurora-cyan"
+                      : "text-muted-foreground hover:text-foreground"
+                  )}
+                >
+                  {item.label}
+                </span>
+              </button>
+            )
+          })}
+        </nav>
 
-        <Separator orientation="vertical" />
+        {/* Right cluster (desktop) */}
+        <div className="hidden items-center gap-1 md:flex">
+          <ThemeToggle />
 
-        <ThemeToggle />
-
-        {session?.user && (
-          <>
-            <Separator orientation="vertical" />
-
+          {session?.user && (
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
                 <Button
@@ -251,9 +257,8 @@ export function Header() {
                 </DropdownMenuItem>
               </DropdownMenuContent>
             </DropdownMenu>
-          </>
-        )}
-      </nav>
+          )}
+        </div>
 
       {/* Mobile Navigation */}
       <nav className="md:hidden">
@@ -355,6 +360,7 @@ export function Header() {
           </SheetContent>
         </Sheet>
       </nav>
+      </div>
     </motion.header>
   )
 }
