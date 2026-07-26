@@ -17,6 +17,6 @@ export const specialties = [
     icon: <Rocket className="size-8 text-primary" />,
     title: "Performance & DX Optimization",
     description:
-      "Spearheaded performance-first frontends using React Server Components, Turbopack, and code-splitting patterns. Reduced build times and TTI through cutting-edge tooling.",
+      "Built performance-first frontends with React Server Components, Turbopack, and code-splitting. Cut build times and improved time-to-interactive through profiling and disciplined tooling.",
   },
 ]

@@ -86,11 +86,11 @@ export function About() {
                       <br />
                       <br />
                       <b>
-                        I&apos;m an early adopter of cutting-edge technologies —
-                        shipping production code with Next.js 16, React 19,
-                        Tailwind v4, and Biome before they reach mainstream
-                        adoption. Currently seeking challenges that push the
-                        boundaries of what&apos;s possible.
+                        I stay close to the frontier of the stack — shipping
+                        production code with Next.js, React 19, Tailwind, and
+                        Biome, and adopting new tools early when they earn their
+                        place. Currently open to full-stack roles where I can
+                        own features from API to UI.
                       </b>
                     </Section.Description>
                   </Section.Block>

@@ -1,6 +1,7 @@
 import { easeInOut, motion, spring } from "framer-motion"
+import { twMerge } from "tailwind-merge"
 
-import { techs } from "@/utils/techs"
+import { techGroups } from "@/utils/techs"
 
 import { Section } from "../section"
 
@@ -22,16 +23,16 @@ const containerVariants = {
   visible: {
     opacity: 1,
     transition: {
-      staggerChildren: 0.05,
+      staggerChildren: 0.08,
     },
   },
 }
 
 const itemVariants = {
-  hidden: { opacity: 0, scale: 0.5 },
+  hidden: { opacity: 0, y: 20 },
   visible: {
     opacity: 1,
-    scale: 1,
+    y: 0,
     transition: {
       type: spring,
       stiffness: 100,
@@ -53,30 +54,55 @@ export function TechStack() {
         <Section.Header>
           <Section.Title>Tech Stack</Section.Title>
           <Section.Description>
-            The technologies and tools I use daily to architect and ship
-            production-grade products.
+            The core technologies I reach for to design, build, and ship
+            production products. Highlighted tools are the ones I use every day.
           </Section.Description>
         </Section.Header>
 
-        <Section.Content className="max-w-5xl">
+        <Section.Content className="max-w-4xl items-stretch gap-8">
           <motion.div
-            className="grid grid-cols-3 gap-3 sm:grid-cols-4 md:grid-cols-6 lg:grid-cols-8"
+            className="flex w-full flex-col gap-8"
             variants={containerVariants}
           >
-            {techs.map((tech) => (
+            {techGroups.map((group) => (
               <motion.div
-                className="group flex flex-col items-center justify-center gap-1.5 rounded-lg border bg-background p-3 shadow-sm transition-all duration-300 hover:bg-muted/40 hover:shadow-lg"
-                key={tech.name}
+                className="flex w-full flex-col gap-4"
+                key={group.category}
                 variants={itemVariants}
-                whileHover={{ scale: 1.1 }}
-                whileTap={{ scale: 0.95 }}
               >
-                <div className="text-3xl text-muted-foreground transition-colors group-hover:text-foreground">
-                  {tech.icon}
+                <div className="flex items-center gap-3">
+                  <h3 className="font-semibold text-base">{group.category}</h3>
+                  <div className="h-px flex-1 bg-border" />
                 </div>
-                <span className="text-center font-medium text-muted-foreground text-xs transition-colors group-hover:text-foreground">
-                  {tech.name}
-                </span>
+
+                <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 md:grid-cols-5">
+                  {group.items.map((tech) => (
+                    <motion.div
+                      className={twMerge(
+                        "group flex items-center gap-2.5 rounded-lg border bg-background p-3 shadow-sm transition-all duration-300 hover:shadow-md",
+                        tech.featured &&
+                          "border-sky-500/40 bg-sky-500/[0.06] ring-1 ring-sky-500/20 dark:bg-sky-400/[0.06]"
+                      )}
+                      key={tech.name}
+                      whileHover={{ y: -3 }}
+                      whileTap={{ scale: 0.97 }}
+                    >
+                      <span
+                        className={twMerge(
+                          "shrink-0 text-2xl transition-colors",
+                          tech.featured
+                            ? "text-sky-600 dark:text-sky-400"
+                            : "text-muted-foreground group-hover:text-foreground"
+                        )}
+                      >
+                        {tech.icon}
+                      </span>
+                      <span className="truncate font-medium text-sm">
+                        {tech.name}
+                      </span>
+                    </motion.div>
+                  ))}
+                </div>
               </motion.div>
             ))}
           </motion.div>

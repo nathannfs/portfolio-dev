@@ -122,9 +122,9 @@ export function Hero() {
 
           <motion.div variants={itemVariants}>
             <Section.Description className="lg:text-start">
-              I architect products that ship fast and scale — from zero to
-              millions of users. Specializing in the TypeScript ecosystem with
-              deep Next.js and Supabase integration.
+              I build full-stack products end-to-end — from NestJS APIs to
+              Next.js interfaces. Currently shipping at OMD do Brasil and
+              building SaaS products on the side.
             </Section.Description>
           </motion.div>
 
