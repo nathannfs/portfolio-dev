@@ -61,25 +61,25 @@ export function ConfirmModal({
   return (
     <Root onOpenChange={onOpenChange} open={open}>
       <Portal>
-        <Overlay className="fixed inset-0 z-50 bg-black/40 backdrop-blur-sm" />
+        <Overlay className="fixed inset-0 z-50 bg-black/60" />
 
-        <Content className="fixed top-1/2 left-1/2 z-50 w-full max-w-md -translate-x-1/2 -translate-y-1/2 rounded-lg bg-white p-6 shadow-lg dark:bg-zinc-900">
+        <Content className="fixed top-1/2 left-1/2 z-50 w-full max-w-md -translate-x-1/2 -translate-y-1/2 rounded-2xl border border-border bg-surface-1 p-6 text-foreground shadow-xl">
           <div className="flex items-start gap-4">
             <div className="flex-shrink-0">{icon || defaultIcon}</div>
 
             <div className="flex-1">
-              <Title className="font-semibold text-lg text-zinc-900 dark:text-zinc-100">
+              <Title className="font-semibold text-foreground text-lg">
                 {title}
               </Title>
 
-              <Description className="mt-2 text-sm text-zinc-600 dark:text-zinc-400">
+              <Description className="mt-2 text-muted-foreground text-sm">
                 {description}
               </Description>
             </div>
 
             <Close asChild>
               <button
-                className="rounded p-1 hover:bg-zinc-100 dark:hover:bg-zinc-800"
+                className="rounded-md p-1 text-muted-foreground transition-colors hover:bg-surface-2 hover:text-foreground"
                 type="button"
               >
                 <X className="size-5" />

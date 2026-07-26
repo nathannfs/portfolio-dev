@@ -40,8 +40,8 @@ export function HobbyModal({
       open={open}
       title={initialData ? "Edit Hobby" : "Add Hobby"}
     >
-      <form className="space-y-4" onSubmit={handleSubmit}>
-        <div className="flex flex-col gap-1">
+      <form className="space-y-5" onSubmit={handleSubmit}>
+        <div className="flex flex-col gap-1.5">
           <Input.Root>
             <Input.Control
               defaultValue={initialData?.title}
@@ -55,7 +55,7 @@ export function HobbyModal({
           )}
         </div>
         {message && <div className="mt-2 text-red-500">{message}</div>}
-        <div className="flex justify-end gap-2">
+        <div className="flex justify-end gap-2 border-border border-t pt-4">
           <Button
             disabled={isPending}
             onClick={() => onOpenChange(false)}
@@ -64,7 +64,11 @@ export function HobbyModal({
           >
             Cancel
           </Button>
-          <Button disabled={isPending} type="submit">
+          <Button
+            className="focus-visible:ring-2 focus-visible:ring-aurora-cyan focus-visible:ring-offset-2 focus-visible:ring-offset-surface-1"
+            disabled={isPending}
+            type="submit"
+          >
             {isPending ? (
               <Loader2 className="size-4 animate-spin" />
             ) : (

@@ -34,11 +34,11 @@ export function Modal({
   return (
     <Root onOpenChange={onOpenChange} open={open}>
       <Portal>
-        <Overlay className="fixed inset-0 z-50 bg-black/40" />
+        <Overlay className="fixed inset-0 z-50 bg-black/60" />
 
         <Content
           className={twMerge([
-            "fixed top-1/2 left-1/2 z-50 w-full max-w-lg -translate-x-1/2 -translate-y-1/2 space-y-4 rounded-lg bg-white p-6 shadow-lg dark:bg-zinc-900",
+            "fixed top-1/2 left-1/2 z-50 w-full max-w-lg -translate-x-1/2 -translate-y-1/2 space-y-4 rounded-2xl border border-border bg-surface-1 p-6 text-foreground shadow-xl",
             "max-h-[90vh] overflow-y-auto",
             className,
           ])}
@@ -49,7 +49,7 @@ export function Modal({
 
               <Close asChild>
                 <button
-                  className="rounded p-1 hover:bg-zinc-100 dark:hover:bg-zinc-800"
+                  className="rounded-md p-1 text-muted-foreground transition-colors hover:bg-surface-2 hover:text-foreground"
                   type="button"
                 >
                   <X className="size-5" />
