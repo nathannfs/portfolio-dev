@@ -7,6 +7,8 @@ import { signOut, useSession } from "next-auth/react"
 import { useEffect, useState } from "react"
 import { twMerge } from "tailwind-merge"
 
+import { useLenis } from "@/components/motion"
+
 import { Button } from "./button"
 import { Separator } from "./separator"
 import { ThemeToggle } from "./theme/theme-toggle"
@@ -29,6 +31,7 @@ import {
 
 export function Header() {
   const { data: session } = useSession()
+  const lenis = useLenis()
 
   const pathname = usePathname()
   const isHomePage = pathname === "/"
@@ -82,40 +85,24 @@ export function Header() {
 
   function handleNavigation(id: string) {
     if (!isHomePage) {
-      window.location.href = "/"
       sessionStorage.setItem("scrollToSection", id)
+      window.location.href = "/"
       return
     }
 
     const element = document.getElementById(id)
-    if (element) {
-      setActiveSection(id)
+    if (!element) {
+      return
+    }
 
-      setIsSheetOpen(false)
+    setActiveSection(id)
+    setIsSheetOpen(false)
 
-      const isMobile = window.innerWidth < 768
-
-      if (isMobile) {
-        const headerHeight = 80
-        const elementPosition = element.offsetTop - headerHeight
-
-        window.scrollTo({
-          top: elementPosition,
-          behavior: "smooth",
-        })
-      } else {
-        element.scrollIntoView({
-          behavior: "smooth",
-          block: "start",
-        })
-
-        setTimeout(() => {
-          window.scrollBy({
-            top: -80,
-            behavior: "smooth",
-          })
-        }, 100)
-      }
+    if (lenis) {
+      lenis.scrollTo(element, { offset: -80 })
+    } else {
+      const top = element.getBoundingClientRect().top + window.scrollY - 80
+      window.scrollTo({ top, behavior: "smooth" })
     }
   }
 
@@ -126,28 +113,12 @@ export function Header() {
         const element = document.getElementById(sectionToScroll)
         if (element) {
           setTimeout(() => {
-            const isMobile = window.innerWidth < 768
-
-            if (isMobile) {
-              const headerHeight = 80
-              const elementPosition = element.offsetTop - headerHeight
-
-              window.scrollTo({
-                top: elementPosition,
-                behavior: "smooth",
-              })
+            if (lenis) {
+              lenis.scrollTo(element, { offset: -80 })
             } else {
-              element.scrollIntoView({
-                behavior: "smooth",
-                block: "start",
-              })
-
-              setTimeout(() => {
-                window.scrollBy({
-                  top: -80,
-                  behavior: "smooth",
-                })
-              }, 100)
+              const top =
+                element.getBoundingClientRect().top + window.scrollY - 80
+              window.scrollTo({ top, behavior: "smooth" })
             }
 
             setActiveSection(sectionToScroll)
