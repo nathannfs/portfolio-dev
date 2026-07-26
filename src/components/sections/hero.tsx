@@ -5,6 +5,7 @@ import Image from "next/image"
 import Link from "next/link"
 import { useEffect, useRef, useState } from "react"
 
+import { AuroraCanvas, Magnetic, Reveal } from "@/components/motion"
 import { techs } from "@/utils/techs"
 
 import { Button } from "../button"
@@ -75,7 +76,8 @@ export function Hero() {
   }, [])
 
   return (
-    <Section.Root id="home">
+    <Section.Root className="relative overflow-hidden" id="home">
+      <AuroraCanvas className="pointer-events-none absolute inset-0 -z-10" />
       <motion.div
         animate={controls}
         className="mx-auto flex w-full max-w-[100vw] flex-col-reverse items-center justify-center gap-8 px-4 sm:px-6 md:px-8 lg:max-w-6xl lg:flex-row xl:max-w-7xl"
@@ -121,11 +123,13 @@ export function Hero() {
           </motion.div>
 
           <motion.div variants={itemVariants}>
-            <Section.Description className="lg:text-start">
-              I build full-stack products end-to-end — from NestJS APIs to
-              Next.js interfaces. Currently shipping at OMD do Brasil and
-              building SaaS products on the side.
-            </Section.Description>
+            <Reveal>
+              <Section.Description className="lg:text-start">
+                I build full-stack products end-to-end — from NestJS APIs to
+                Next.js interfaces. Currently shipping at OMD do Brasil and
+                building SaaS products on the side.
+              </Section.Description>
+            </Reveal>
           </motion.div>
 
           <motion.div
@@ -145,13 +149,15 @@ export function Hero() {
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.97 }}
               >
-                <Button
-                  onClick={() => handleNavigation("contact")}
-                  variant="primary"
-                >
-                  Let&apos;s Talk
-                  <ArrowUpRight className="size-4" />
-                </Button>
+                <Magnetic>
+                  <Button
+                    onClick={() => handleNavigation("contact")}
+                    variant="primary"
+                  >
+                    Let&apos;s Talk
+                    <ArrowUpRight className="size-4" />
+                  </Button>
+                </Magnetic>
               </motion.div>
 
               <motion.div
