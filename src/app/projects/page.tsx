@@ -1,7 +1,6 @@
 "use client"
 
-import { motion } from "framer-motion"
-import { ArrowRight, Edit, Plus, Trash } from "lucide-react"
+import { ArrowUpRight, Edit, Plus, Trash } from "lucide-react"
 import Link from "next/link"
 import { useSession } from "next-auth/react"
 import { useState } from "react"
@@ -44,74 +43,90 @@ export default function ProjectsPage() {
     }
   }
 
+  const total = projects?.length ?? 0
+
   return (
-    <main className="container mx-auto space-y-10 px-4 py-12">
-      <div className="relative overflow-hidden rounded-2xl border bg-surface-1 px-6 py-10 md:px-10 md:py-14">
-        <AuroraCanvas className="pointer-events-none absolute inset-0 -z-10 opacity-70" />
+    <main className="relative mx-auto w-full max-w-7xl px-6 py-24 md:px-10 md:py-32 lg:px-16">
+      <AuroraCanvas className="pointer-events-none absolute inset-x-0 top-0 -z-10 h-[60vh] opacity-40" />
 
-        <Reveal>
-          <div className="flex items-center justify-between gap-4">
-            <div className="flex flex-col gap-3">
-              <h1 className="font-bold text-3xl tracking-tight md:text-4xl">
-                Projects
-              </h1>
-              <p className="max-w-xl text-muted-foreground">
-                A collection of products I&apos;ve designed, built, and
-                shipped — explore the details behind each one.
-              </p>
-            </div>
+      {/* Editorial header */}
+      <Reveal>
+        <div className="mb-6 flex items-center gap-4">
+          <span className="font-mono text-muted-foreground text-xs uppercase tracking-[0.3em]">
+            Selected Work
+          </span>
+          <div className="h-px flex-1 bg-border" />
+          {total > 0 && (
+            <span className="font-mono text-muted-foreground text-xs uppercase tracking-[0.3em]">
+              {String(total).padStart(2, "0")} Projects
+            </span>
+          )}
+        </div>
 
-            {session?.user && (
-              <Magnetic strength={0.25}>
-                <Button
-                  onClick={() => {
-                    setEditData(null)
-                    setModalOpen(true)
-                  }}
-                >
-                  <span className="sr-only md:not-sr-only">Add</span>
-                  <Plus className="size-4" />
-                </Button>
-              </Magnetic>
-            )}
-          </div>
-        </Reveal>
-      </div>
+        <div className="flex items-end justify-between gap-6">
+          <h1 className="max-w-4xl font-bold text-[clamp(2.25rem,6vw,5rem)] leading-[0.95] tracking-tighter">
+            Products I&apos;ve architected &amp; shipped.
+          </h1>
 
-      <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
+          {session?.user && (
+            <Magnetic strength={0.25}>
+              <Button
+                onClick={() => {
+                  setEditData(null)
+                  setModalOpen(true)
+                }}
+              >
+                <span className="sr-only md:not-sr-only">Add</span>
+                <Plus className="size-4" />
+              </Button>
+            </Magnetic>
+          )}
+        </div>
+
+        <p className="mt-8 max-w-xl text-base text-muted-foreground leading-relaxed md:text-lg">
+          A collection of products I&apos;ve designed, built, and shipped — from
+          SaaS platforms to infrastructure tooling. Explore the details behind
+          each one.
+        </p>
+      </Reveal>
+
+      {/* Editorial project index — large full-width rows */}
+      <ul className="mt-20 flex flex-col">
         {projects?.map((project, index) => (
-          <Reveal delay={index * 0.08} key={project.id}>
-            <motion.div
-              className="group flex h-full flex-col gap-4 rounded-xl border bg-surface-1 p-6 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-lg hover:ring-1 hover:ring-aurora-cyan/30"
-              data-cursor="hover"
-              whileHover={{ rotateX: 2, rotateY: -2, scale: 1.01 }}
-              whileTap={{ scale: 0.99 }}
-            >
-              <div className="flex flex-col items-start gap-2">
-                <h2 className="font-bold text-primary text-xl transition-colors group-hover:text-aurora-cyan">
+          <Reveal key={project.id}>
+            <li className="group grid grid-cols-1 gap-6 border-border border-t py-10 transition-colors hover:bg-muted/20 md:grid-cols-12 md:items-start md:gap-8 md:py-14">
+              {/* Index + year */}
+              <div className="flex items-center justify-between font-mono text-muted-foreground text-xs uppercase tracking-[0.2em] md:col-span-2 md:flex-col md:items-start md:gap-3">
+                <span>{String(index + 1).padStart(2, "0")}</span>
+                <span className="flex items-center gap-3">
+                  {project.year ?? "2024"}
+                  {project.completed && (
+                    <span className="text-aurora-cyan md:hidden">Shipped</span>
+                  )}
+                </span>
+                {project.completed && (
+                  <span className="hidden text-aurora-cyan md:inline">
+                    Shipped
+                  </span>
+                )}
+              </div>
+
+              {/* Name + view link */}
+              <div className="flex flex-col gap-5 md:col-span-6">
+                <h2 className="font-bold text-[clamp(1.5rem,3vw,2.5rem)] leading-[1.02] tracking-tight transition-colors group-hover:text-aurora-cyan">
                   {project.name}
                 </h2>
-                <p className="text-muted-foreground">{project.description}</p>
-              </div>
 
-              <div className="flex flex-wrap gap-2">
-                {project.techs?.map((tech) => (
-                  <Badge key={tech} variant="blue">
-                    {tech}
-                  </Badge>
-                ))}
-              </div>
-
-              <div className="mt-auto flex items-center justify-between">
-                <div className="flex gap-2">
-                  <Magnetic strength={0.25}>
-                    <Link href={`/projects/${project.id}`}>
-                      <Button variant="primary">
-                        View Details <ArrowRight className="size-4" />
-                      </Button>
-                    </Link>
-                  </Magnetic>
-                </div>
+                <Magnetic className="w-fit">
+                  <Link
+                    className="inline-flex items-center gap-2 border-foreground border-b pb-1 font-semibold text-foreground transition-colors hover:border-aurora-cyan hover:text-aurora-cyan"
+                    data-cursor="hover"
+                    href={`/projects/${project.id}`}
+                  >
+                    View details
+                    <ArrowUpRight className="size-4" />
+                  </Link>
+                </Magnetic>
 
                 {session?.user && (
                   <div className="flex gap-2">
@@ -135,25 +150,49 @@ export default function ProjectsPage() {
                   </div>
                 )}
               </div>
-            </motion.div>
+
+              {/* Description + techs */}
+              <div className="flex flex-col gap-4 md:col-span-4 md:opacity-70 md:transition-opacity md:group-hover:opacity-100">
+                <p className="text-muted-foreground leading-relaxed">
+                  {project.description}
+                </p>
+                <div className="flex flex-wrap gap-2">
+                  {project.techs?.map((tech) => (
+                    <Badge key={tech} variant="blue">
+                      {tech}
+                    </Badge>
+                  ))}
+                </div>
+              </div>
+            </li>
           </Reveal>
         ))}
 
         {isLoadingProjects &&
           Array.from({ length: 3 }).map((_, index) => (
-            <div
-              className="flex flex-col gap-4 rounded-xl border bg-surface-1 p-6 shadow-sm"
+            <li
+              className="grid grid-cols-1 gap-6 border-border border-t py-10 md:grid-cols-12 md:gap-8 md:py-14"
               key={`skeleton-${index}`}
             >
-              <Skeleton className="h-6" />
-              <Skeleton className="h-10" />
-
-              <Skeleton className="h-4" />
-
-              <Skeleton className="h-8" />
-            </div>
+              <div className="md:col-span-2">
+                <Skeleton className="h-4 w-16" />
+              </div>
+              <div className="flex flex-col gap-4 md:col-span-6">
+                <Skeleton className="h-10 w-3/4" />
+                <Skeleton className="h-5 w-32" />
+              </div>
+              <div className="flex flex-col gap-3 md:col-span-4">
+                <Skeleton className="h-4" />
+                <Skeleton className="h-4 w-2/3" />
+                <Skeleton className="h-8 w-40" />
+              </div>
+            </li>
           ))}
-      </div>
+
+        {!isLoadingProjects && total > 0 && (
+          <li aria-hidden="true" className="border-border border-t" />
+        )}
+      </ul>
 
       <ProjectModal
         initialData={editData}
