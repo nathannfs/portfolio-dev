@@ -1,11 +1,18 @@
 import Autoplay from "embla-carousel-autoplay"
-import { motion, useAnimation, useInView, type Variants } from "framer-motion"
+import {
+  motion,
+  useAnimation,
+  useInView,
+  useScroll,
+  useTransform,
+  type Variants,
+} from "framer-motion"
 import { ArrowUpRight, Github, Instagram, Linkedin } from "lucide-react"
 import Image from "next/image"
 import Link from "next/link"
 import { useEffect, useRef, useState } from "react"
 
-import { AuroraCanvas, Magnetic, Reveal } from "@/components/motion"
+import { AuroraCanvas, Magnetic, Reveal, useLenis } from "@/components/motion"
 import { techs } from "@/utils/techs"
 
 import { Button } from "../button"
@@ -39,6 +46,12 @@ export function Hero() {
   const ref = useRef<HTMLDivElement>(null)
   const inView = useInView(ref, { amount: 0.3, once: false })
   const controls = useAnimation()
+  const lenis = useLenis()
+
+  const { scrollY } = useScroll()
+  const auroraY = useTransform(scrollY, [0, 700], [0, 140])
+  const contentY = useTransform(scrollY, [0, 700], [0, 60])
+  const contentOpacity = useTransform(scrollY, [0, 600], [1, 0])
 
   useEffect(() => {
     if (inView) {
@@ -50,11 +63,13 @@ export function Hero() {
 
   function handleNavigation(id: string) {
     const element = document.getElementById(id)
-    if (element) {
-      element.scrollIntoView({
-        behavior: "smooth",
-        block: "start",
-      })
+    if (!element) {
+      return
+    }
+    if (lenis) {
+      lenis.scrollTo(element, { offset: -80 })
+    } else {
+      element.scrollIntoView({ behavior: "smooth", block: "start" })
     }
   }
 
@@ -76,15 +91,27 @@ export function Hero() {
   }, [])
 
   return (
-    <Section.Root className="relative overflow-hidden" id="home">
-      <AuroraCanvas className="pointer-events-none absolute inset-0 -z-10" />
+    <Section.Root
+      className="relative min-h-[calc(100vh-80px)] justify-center overflow-hidden"
+      id="home"
+    >
       <motion.div
-        animate={controls}
-        className="mx-auto flex w-full max-w-[100vw] flex-col-reverse items-center justify-center gap-8 px-4 sm:px-6 md:px-8 lg:max-w-6xl lg:flex-row xl:max-w-7xl"
-        initial="hidden"
-        ref={ref}
-        variants={containerVariants}
+        className="pointer-events-none absolute inset-0 -z-10"
+        style={{ y: auroraY }}
       >
+        <AuroraCanvas className="absolute inset-0" />
+      </motion.div>
+      <motion.div
+        className="flex w-full justify-center"
+        style={{ y: contentY, opacity: contentOpacity }}
+      >
+        <motion.div
+          animate={controls}
+          className="mx-auto flex w-full max-w-[100vw] flex-col-reverse items-center justify-center gap-8 px-4 sm:px-6 md:px-8 lg:max-w-6xl lg:flex-row xl:max-w-7xl"
+          initial="hidden"
+          ref={ref}
+          variants={containerVariants}
+        >
         <motion.div
           className="flex w-full max-w-xl flex-col gap-4 text-center lg:text-start"
           variants={itemVariants}
@@ -106,7 +133,7 @@ export function Hero() {
           <motion.div className="flex flex-col gap-1" variants={itemVariants}>
             <span className="text-lg text-muted-foreground">Hey, I&apos;m</span>
             <motion.h1
-              className="font-bold text-5xl leading-[1.12] tracking-tight"
+              className="font-bold text-[clamp(3rem,8vw,5.5rem)] leading-[1.05] tracking-tight"
               variants={itemVariants}
             >
               Nathan Santos
@@ -287,6 +314,7 @@ export function Hero() {
               width={400}
             />
           </motion.div>
+        </motion.div>
         </motion.div>
       </motion.div>
     </Section.Root>
