@@ -1,7 +1,7 @@
 import "./globals.css"
 
 import type { Metadata } from "next"
-import { Inter } from "next/font/google"
+import { Geist, Geist_Mono } from "next/font/google"
 import type { ReactNode } from "react"
 import { twMerge } from "tailwind-merge"
 
@@ -9,9 +9,16 @@ import { Header } from "@/components/header"
 
 import Providers from "./providers"
 
-const inter = Inter({
+const geistSans = Geist({
   subsets: ["latin"],
-  weight: ["400", "500", "600", "700", "900"],
+  variable: "--font-geist-sans",
+  display: "swap",
+})
+
+const geistMono = Geist_Mono({
+  subsets: ["latin"],
+  variable: "--font-geist-mono",
+  display: "swap",
 })
 
 export const metadata: Metadata = {
@@ -111,8 +118,9 @@ export default function RootLayout({
       </head>
       <body
         className={twMerge([
-          inter.className,
-          "bg-zinc-50 text-zinc-950 antialiased dark:bg-zinc-950 dark:text-zinc-50",
+          geistSans.variable,
+          geistMono.variable,
+          "bg-zinc-50 font-sans text-zinc-950 antialiased dark:bg-zinc-950 dark:text-zinc-50",
         ])}
       >
         <Providers>

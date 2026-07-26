@@ -51,7 +51,9 @@ export function Contact() {
           viewport={{ once: false, amount: 0.2 }}
           whileInView="visible"
         >
-          <h2 className="font-bold text-4xl">Let&apos;s Build Something</h2>
+          <h2 className="text-balance font-bold text-4xl tracking-tight">
+            Let&apos;s Build Something
+          </h2>
           <p className="text-lg text-muted-foreground">
             Interested in working together, have a project idea, or just want to
             talk about engineering? Feel free to reach out through any of the

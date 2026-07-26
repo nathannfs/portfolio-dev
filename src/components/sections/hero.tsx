@@ -111,7 +111,7 @@ export function Hero() {
             </motion.h1>
             <motion.p
               animate={{ opacity: 1 }}
-              className="min-h-[28px] font-medium text-lg text-muted-foreground"
+              className="min-h-[28px] font-mono font-medium text-base text-muted-foreground"
               initial={{ opacity: 0 }}
               transition={{ delay: 0.5 }}
             >
