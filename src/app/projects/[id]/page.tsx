@@ -1,8 +1,9 @@
-import { ArrowLeft } from "lucide-react"
+import { ArrowLeft, ArrowUpRight } from "lucide-react"
 import Link from "next/link"
 import { notFound } from "next/navigation"
 
 import { Button } from "@/components/button"
+import { AuroraCanvas, Magnetic, Reveal } from "@/components/motion"
 import { Badge } from "@/components/ui/badge"
 import { getProjects } from "@/http/projects/get-projects"
 
@@ -22,73 +23,137 @@ export default async function ProjectDetailPage({
   }
 
   return (
-    <main className="container mx-auto max-w-2xl space-y-4 px-4 py-4">
-      <Link className="flex items-center" href="/projects">
-        <Button
-          className="gap-2 text-sky-700 hover:bg-sky-100 hover:text-sky-900 dark:text-sky-300 dark:hover:bg-sky-900/20 dark:hover:text-sky-200"
-          variant="ghost"
-        >
-          <ArrowLeft className="size-4" />
-          Back to projects
-        </Button>
-      </Link>
+    <main className="flex flex-col">
+      {/* ─── Aurora hero band ─── */}
+      <section className="relative overflow-hidden">
+        <AuroraCanvas className="pointer-events-none absolute inset-0 -z-10" />
+        <div className="container mx-auto max-w-4xl px-4 py-16 sm:py-24">
+          <Magnetic className="inline-block">
+            <Link className="inline-flex" href="/projects">
+              <Button
+                className="gap-2 text-aurora-cyan hover:bg-aurora-cyan/10 hover:text-aurora-cyan"
+                variant="ghost"
+              >
+                <ArrowLeft className="size-4" />
+                Back to projects
+              </Button>
+            </Link>
+          </Magnetic>
 
-      <div className="flex flex-col space-y-8 overflow-hidden rounded-xl border border-sky-100 bg-gradient-to-br from-sky-50 via-white to-sky-50 p-0 shadow-sm dark:border-sky-800 dark:from-sky-950 dark:via-zinc-950 dark:to-sky-900">
-        <div className="flex flex-col space-y-4 px-6 pt-8">
-          <h1 className="font-extrabold text-3xl text-slate-800 tracking-tight drop-shadow-sm dark:text-slate-100">
-            {project.name}
-          </h1>
+          <div className="mt-8 flex flex-col gap-6">
+            {project.year ? (
+              <span className="font-mono text-aurora-cyan text-sm tracking-widest">
+                {project.year}
+              </span>
+            ) : null}
 
-          <div className="flex flex-wrap gap-3">
-            {project.techs?.map((tech: string) => (
-              <Badge key={tech} variant="blue">
-                {tech}
-              </Badge>
-            ))}
+            <h1 className="font-bold text-[clamp(2.5rem,7vw,4.5rem)] leading-[1.05] tracking-tight">
+              {project.name}
+            </h1>
+
+            {project.techs?.length ? (
+              <div className="flex flex-wrap gap-2">
+                {project.techs.map((tech: string) => (
+                  <Badge key={tech} variant="blue">
+                    {tech}
+                  </Badge>
+                ))}
+              </div>
+            ) : null}
+
+            {project.href ? (
+              <div>
+                <Magnetic className="inline-block">
+                  <Link
+                    className="inline-flex"
+                    href={project.href}
+                    rel="noreferrer"
+                    target="_blank"
+                  >
+                    <Button variant="primary">
+                      Visit project
+                      <ArrowUpRight className="size-4" />
+                    </Button>
+                  </Link>
+                </Magnetic>
+              </div>
+            ) : null}
           </div>
         </div>
+      </section>
 
-        <div className="space-y-8 px-6 pb-6">
-          <section className="space-y-3">
-            <h2 className="border-sky-600 border-l-4 pl-3 font-bold text-sky-900/90 text-xl dark:border-sky-400 dark:text-sky-200">
-              Descrição
-            </h2>
-            <p className="text-lg text-slate-700 leading-relaxed dark:text-slate-300">
+      {/* ─── Case-study body ─── */}
+      <div className="container mx-auto max-w-4xl space-y-8 px-4 pb-24">
+        <Reveal>
+          <section className="rounded-xl border bg-surface-1 p-6 sm:p-8">
+            <h2 className="font-bold text-xl tracking-tight">Descrição</h2>
+            <p className="mt-4 text-lg text-muted-foreground leading-relaxed">
               {project.description}
             </p>
           </section>
-          <section className="space-y-3">
-            <h2 className="border-sky-600 border-l-4 pl-3 font-bold text-sky-900/90 text-xl dark:border-sky-400 dark:text-sky-200">
-              Funcionalidades
-            </h2>
-            <ul className="list-disc space-y-2 pl-8 text-base text-slate-700 dark:text-slate-300">
-              {project.features.map((item: string) => (
-                <li key={item}>{item}</li>
-              ))}
-            </ul>
-          </section>
-          <section className="grid grid-cols-1 gap-8 md:grid-cols-2">
-            <div className="space-y-2">
-              <h3 className="font-semibold text-lg text-sky-700 dark:text-sky-300">
-                Desafios
-              </h3>
-              <ul className="list-disc space-y-2 pl-6 text-base text-slate-700 dark:text-slate-300">
-                {project.challenges.map((item: string) => (
-                  <li key={item}>{item}</li>
+        </Reveal>
+
+        {project.features?.length ? (
+          <Reveal>
+            <section className="rounded-xl border bg-surface-1 p-6 sm:p-8">
+              <h2 className="font-bold text-xl tracking-tight">
+                Funcionalidades
+              </h2>
+              <ul className="mt-4 space-y-3">
+                {project.features.map((item: string) => (
+                  <li className="flex gap-3 text-muted-foreground" key={item}>
+                    <span
+                      aria-hidden="true"
+                      className="mt-2 size-1.5 shrink-0 rounded-full bg-aurora-cyan"
+                    />
+                    <span className="leading-relaxed">{item}</span>
+                  </li>
                 ))}
               </ul>
-            </div>
-            <div className="space-y-2">
-              <h3 className="font-semibold text-lg text-sky-700 dark:text-sky-300">
-                Aprendizados
-              </h3>
-              <ul className="list-disc space-y-2 pl-6 text-base text-slate-700 dark:text-slate-300">
-                {project.learnings.map((item: string) => (
-                  <li key={item}>{item}</li>
-                ))}
-              </ul>
-            </div>
-          </section>
+            </section>
+          </Reveal>
+        ) : null}
+
+        <div className="grid grid-cols-1 gap-8 md:grid-cols-2">
+          {project.challenges?.length ? (
+            <Reveal>
+              <section className="h-full rounded-xl border bg-surface-1 p-6 sm:p-8">
+                <h2 className="font-bold text-xl tracking-tight">Desafios</h2>
+                <ul className="mt-4 space-y-3">
+                  {project.challenges.map((item: string) => (
+                    <li className="flex gap-3 text-muted-foreground" key={item}>
+                      <span
+                        aria-hidden="true"
+                        className="mt-2 size-1.5 shrink-0 rounded-full bg-aurora-cyan"
+                      />
+                      <span className="leading-relaxed">{item}</span>
+                    </li>
+                  ))}
+                </ul>
+              </section>
+            </Reveal>
+          ) : null}
+
+          {project.learnings?.length ? (
+            <Reveal delay={0.1}>
+              <section className="h-full rounded-xl border bg-surface-1 p-6 sm:p-8">
+                <h2 className="font-bold text-xl tracking-tight">
+                  Aprendizados
+                </h2>
+                <ul className="mt-4 space-y-3">
+                  {project.learnings.map((item: string) => (
+                    <li className="flex gap-3 text-muted-foreground" key={item}>
+                      <span
+                        aria-hidden="true"
+                        className="mt-2 size-1.5 shrink-0 rounded-full bg-aurora-cyan"
+                      />
+                      <span className="leading-relaxed">{item}</span>
+                    </li>
+                  ))}
+                </ul>
+              </section>
+            </Reveal>
+          ) : null}
         </div>
       </div>
     </main>

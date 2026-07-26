@@ -8,6 +8,7 @@ import { twMerge } from "tailwind-merge"
 
 import { Button } from "@/components/button"
 import { ConfirmModal } from "@/components/confirm-modal"
+import { AuroraCanvas, Reveal } from "@/components/motion"
 import { Section } from "@/components/section"
 import { Skeleton } from "@/components/ui/skeleton"
 import { useConfirmModal } from "@/hooks/use-confirm-modal"
@@ -150,31 +151,36 @@ export function About() {
   return (
     <>
       <div className="mx-auto flex w-full flex-col items-center justify-center gap-10 px-4 py-10 lg:max-w-7xl">
-        <Section.Header className="space-y-4">
-          <Image
-            alt="Nathan Santos profile photo"
-            className="rounded-full border-4 border-sky-100 dark:border-sky-800"
-            height={120}
-            src="/avatar.jpeg"
-            width={120}
-          />
-          <Section.Title as="h1" className="text-sky-900 dark:text-sky-100">
-            About Me
-          </Section.Title>
+        <div className="relative isolate w-full overflow-hidden rounded-3xl border bg-surface-1 px-4 py-14 md:py-20">
+          <AuroraCanvas className="pointer-events-none absolute inset-0 -z-10" />
+          <Section.Header className="space-y-4">
+            <Image
+              alt="Nathan Santos profile photo"
+              className="rounded-full ring-2 ring-aurora-cyan/40 ring-offset-2 ring-offset-surface-1"
+              height={120}
+              src="/avatar.jpeg"
+              width={120}
+            />
+            <Section.Title as="h1">About Me</Section.Title>
 
-          <Section.Description className="text-sky-900/90 dark:text-sky-200/90">
-            Product Engineer with a track record of architecting full-stack SaaS
-            platforms that solve real business problems. I specialize in the
-            TypeScript ecosystem (Next.js, React, Node.js, Supabase), building
-            products from zero to production with a focus on performance, clean
-            architecture, and developer experience.
-          </Section.Description>
-        </Section.Header>
+            <Section.Description>
+              Product Engineer with a track record of architecting full-stack
+              SaaS platforms that solve real business problems. I specialize in
+              the TypeScript ecosystem (Next.js, React, Node.js, Supabase),
+              building products from zero to production with a focus on
+              performance, clean architecture, and developer experience.
+            </Section.Description>
+          </Section.Header>
+        </div>
 
-        <Section.Content className="space-y-4">
-          <div className="w-full space-y-4">
-            <div className="flex justify-between">
-              <h2 className="border-sky-100 border-l-4 pl-2 font-bold text-sky-800 text-xl dark:border-sky-700 dark:text-sky-200">
+        <Section.Content className="space-y-10">
+          <Reveal className="w-full space-y-4">
+            <div className="flex items-center justify-between">
+              <h2 className="flex items-center gap-2.5 font-bold text-foreground text-xl">
+                <span
+                  aria-hidden="true"
+                  className="size-2 rounded-full bg-aurora-cyan"
+                />
                 Education
               </h2>
 
@@ -191,20 +197,21 @@ export function About() {
               )}
             </div>
 
-            <ul className="space-y-3">
+            <ul className="space-y-4">
               {degrees?.map((degree) => (
                 <li
-                  className="flex items-center justify-between gap-6 border-sky-100 border-l-4 pl-4 dark:border-sky-700"
+                  className="flex items-center justify-between gap-6 rounded-xl border bg-surface-1 p-6 transition-all hover:ring-1 hover:ring-aurora-cyan/20"
+                  data-cursor="hover"
                   key={degree.title}
                 >
                   <div className="flex flex-col items-start gap-2">
-                    <div className="flex flex-col gap-2 font-semibold text-sky-900 md:flex-row dark:text-sky-100">
+                    <div className="flex flex-col gap-2 font-semibold text-foreground md:flex-row md:items-center">
                       {degree.title}
 
                       {degree.status && (
                         <span
                           className={twMerge([
-                            "w-fit rounded bg-sky-100 px-2 py-0.5 font-medium text-sky-800 text-xs dark:bg-sky-700 dark:text-sky-200",
+                            "w-fit rounded bg-secondary px-2 py-0.5 font-medium text-secondary-foreground text-xs",
                             statusColor(degree.status),
                           ])}
                         >
@@ -214,16 +221,16 @@ export function About() {
                     </div>
 
                     {degree.description && (
-                      <span className="text-sky-800/80 dark:text-sky-200/80">
+                      <span className="text-muted-foreground">
                         {degree.description}
                       </span>
                     )}
 
-                    <div className="text-sky-800/80 text-sm dark:text-sky-200/80">
+                    <div className="text-muted-foreground text-sm">
                       {degree.institution}
                     </div>
 
-                    <div className="text-sky-700/60 text-xs dark:text-sky-300/60">
+                    <div className="text-aurora-cyan text-xs">
                       {degree.period}
                     </div>
                   </div>
@@ -255,7 +262,7 @@ export function About() {
               {isLoadingDegrees &&
                 Array.from({ length: 2 }).map((_, index) => (
                   <li
-                    className="space-y-1.5 border-sky-100 border-l-4 pl-4 dark:border-sky-700"
+                    className="space-y-1.5 rounded-xl border bg-surface-1 p-6"
                     key={`skeleton-degree-${index}`}
                   >
                     <Skeleton className="h-4 w-1/2" />
@@ -264,11 +271,15 @@ export function About() {
                   </li>
                 ))}
             </ul>
-          </div>
+          </Reveal>
 
-          <div className="w-full space-y-4">
-            <div className="flex justify-between">
-              <h2 className="border-sky-100 border-l-4 pl-2 font-bold text-sky-800 text-xl dark:border-sky-700 dark:text-sky-200">
+          <Reveal className="w-full space-y-4">
+            <div className="flex items-center justify-between">
+              <h2 className="flex items-center gap-2.5 font-bold text-foreground text-xl">
+                <span
+                  aria-hidden="true"
+                  className="size-2 rounded-full bg-aurora-cyan"
+                />
                 Courses & Certifications
               </h2>
 
@@ -288,11 +299,12 @@ export function About() {
             <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
               {certifications?.map((cert) => (
                 <div
-                  className="space-y-2 rounded-lg border border-sky-100 bg-white p-4 shadow-sm transition-all hover:shadow-md dark:border-sky-800 dark:bg-zinc-900"
+                  className="space-y-2 rounded-xl border bg-surface-1 p-6 transition-all hover:ring-1 hover:ring-aurora-cyan/20"
+                  data-cursor="hover"
                   key={cert.title}
                 >
                   <div className="flex items-center justify-between">
-                    <h3 className="font-semibold text-sky-900 dark:text-sky-100">
+                    <h3 className="font-semibold text-foreground">
                       {cert.title}
                     </h3>
 
@@ -319,11 +331,11 @@ export function About() {
                     )}
                   </div>
 
-                  <div className="text-sky-800/80 text-sm dark:text-sky-200/80">
+                  <div className="text-muted-foreground text-sm">
                     {cert.institution}
                   </div>
                   <div className="flex items-center gap-2">
-                    <span className="text-sky-700/80 text-xs dark:text-sky-300/80">
+                    <span className="text-aurora-cyan text-xs">
                       {cert.hours} hours
                     </span>
                     <span
@@ -342,7 +354,7 @@ export function About() {
               {isLoadingCertifications &&
                 Array.from({ length: 4 }).map((_, index) => (
                   <div
-                    className="space-y-2 rounded-lg border border-sky-100 bg-white p-4 shadow-sm transition-all hover:shadow-md dark:border-sky-800 dark:bg-zinc-900"
+                    className="space-y-2 rounded-xl border bg-surface-1 p-6"
                     key={`skeleton-cert-${index}`}
                   >
                     <Skeleton className="h-6" />
@@ -351,11 +363,15 @@ export function About() {
                   </div>
                 ))}
             </div>
-          </div>
+          </Reveal>
 
-          <div className="w-full space-y-4">
-            <div className="flex justify-between">
-              <h2 className="border-sky-100 border-l-4 pl-2 font-bold text-sky-800 text-xl dark:border-sky-700 dark:text-sky-200">
+          <Reveal className="w-full space-y-4">
+            <div className="flex items-center justify-between">
+              <h2 className="flex items-center gap-2.5 font-bold text-foreground text-xl">
+                <span
+                  aria-hidden="true"
+                  className="size-2 rounded-full bg-aurora-cyan"
+                />
                 Professional Experience
               </h2>
 
@@ -375,21 +391,22 @@ export function About() {
             <div className="space-y-6">
               {experiences?.map((experience) => (
                 <div
-                  className="space-y-4 rounded-lg border border-sky-100 bg-white p-6 shadow-sm transition-all hover:shadow-md dark:border-sky-800 dark:bg-zinc-900"
+                  className="space-y-4 rounded-xl border bg-surface-1 p-6 transition-all hover:ring-1 hover:ring-aurora-cyan/20"
+                  data-cursor="hover"
                   key={experience.id}
                 >
                   <div className="flex flex-col space-y-2 md:flex-row md:items-center md:justify-between md:space-y-0">
                     <div>
-                      <h3 className="font-semibold text-lg text-sky-900 dark:text-sky-100">
+                      <h3 className="font-semibold text-foreground text-lg">
                         {experience.position}
                       </h3>
-                      <p className="font-medium text-base text-sky-800 dark:text-sky-200">
+                      <p className="font-medium text-base text-muted-foreground">
                         {experience.company}
                       </p>
                     </div>
 
                     <div className="flex items-center gap-2">
-                      <span className="font-medium text-sky-700 text-sm dark:text-sky-300">
+                      <span className="font-medium text-aurora-cyan text-sm">
                         {experience.period}
                       </span>
 
@@ -419,18 +436,22 @@ export function About() {
                     </div>
                   </div>
 
-                  <p className="text-sky-800/80 text-sm dark:text-sky-300/80">
+                  <p className="text-muted-foreground text-sm">
                     {experience.description}
                   </p>
 
-                  <ul className="space-y-1">
+                  <ul className="space-y-1.5">
                     {experience.responsibilities.map(
                       (responsibility, index) => (
                         <li
-                          className="text-sky-800/80 text-sm dark:text-sky-300/80"
+                          className="flex gap-2 text-muted-foreground text-sm"
                           key={`${responsibility}-${index}`}
                         >
-                          • {responsibility}
+                          <span
+                            aria-hidden="true"
+                            className="mt-2 size-1 shrink-0 rounded-full bg-aurora-cyan"
+                          />
+                          <span>{responsibility}</span>
                         </li>
                       )
                     )}
@@ -441,7 +462,7 @@ export function About() {
               {isLoadingExperiences &&
                 Array.from({ length: 4 }).map((_, index) => (
                   <div
-                    className="space-y-4 rounded-lg border border-sky-100 bg-white p-6 shadow-sm transition-all hover:shadow-md dark:border-sky-800 dark:bg-zinc-900"
+                    className="space-y-4 rounded-xl border bg-surface-1 p-6"
                     key={`skeleton-exp-${index}`}
                   >
                     <Skeleton className="h-6" />
@@ -451,11 +472,15 @@ export function About() {
                   </div>
                 ))}
             </div>
-          </div>
+          </Reveal>
 
-          <div className="w-full space-y-4">
-            <div className="flex justify-between">
-              <h2 className="border-sky-100 border-l-4 pl-2 font-bold text-sky-800 text-xl dark:border-sky-700 dark:text-sky-200">
+          <Reveal className="w-full space-y-4">
+            <div className="flex items-center justify-between">
+              <h2 className="flex items-center gap-2.5 font-bold text-foreground text-xl">
+                <span
+                  aria-hidden="true"
+                  className="size-2 rounded-full bg-aurora-cyan"
+                />
                 Hobbies & Interests
               </h2>
 
@@ -472,13 +497,20 @@ export function About() {
               )}
             </div>
 
-            <ul className="list-disc space-y-2 pl-6 text-base text-sky-900/80 dark:text-sky-200/80">
+            <ul className="space-y-2 text-base text-muted-foreground">
               {hobbies?.map((hobby) => (
                 <div
-                  className="flex items-center justify-between"
+                  className="flex items-center justify-between gap-4 rounded-xl border bg-surface-1 px-5 py-3 transition-all hover:ring-1 hover:ring-aurora-cyan/20"
+                  data-cursor="hover"
                   key={hobby.id}
                 >
-                  <li>{hobby.title}</li>
+                  <li className="flex items-center gap-2.5">
+                    <span
+                      aria-hidden="true"
+                      className="size-1.5 shrink-0 rounded-full bg-aurora-cyan"
+                    />
+                    {hobby.title}
+                  </li>
 
                   {session?.user && (
                     <div className="flex gap-2">
@@ -506,16 +538,23 @@ export function About() {
 
               {isLoadingHobbies &&
                 Array.from({ length: 4 }).map((_, index) => (
-                  <li key={`skeleton-hobby-${index}`}>
+                  <li
+                    className="rounded-xl border bg-surface-1 px-5 py-3"
+                    key={`skeleton-hobby-${index}`}
+                  >
                     <Skeleton className="h-6" />
                   </li>
                 ))}
             </ul>
-          </div>
+          </Reveal>
 
-          <div className="w-full space-y-4">
-            <div className="flex justify-between">
-              <h2 className="border-sky-100 border-l-4 pl-2 font-bold text-sky-800 text-xl dark:border-sky-700 dark:text-sky-200">
+          <Reveal className="w-full space-y-4">
+            <div className="flex items-center justify-between">
+              <h2 className="flex items-center gap-2.5 font-bold text-foreground text-xl">
+                <span
+                  aria-hidden="true"
+                  className="size-2 rounded-full bg-aurora-cyan"
+                />
                 More About Me
               </h2>
 
@@ -532,7 +571,7 @@ export function About() {
               )}
             </div>
 
-            <div className="space-y-4 rounded-lg border border-sky-100 bg-white p-6 shadow-sm dark:border-sky-800 dark:bg-zinc-900">
+            <div className="space-y-4 rounded-xl border bg-surface-1 p-6">
               {aboutMe?.map((about) => {
                 const paragraphs = about?.content?.split("\n\n") || []
 
@@ -540,7 +579,7 @@ export function About() {
                   <div className="group relative" key={about.id}>
                     {paragraphs.map((paragraph) => (
                       <div className="space-y-1.5" key={paragraph}>
-                        <p className="text-sky-800/80 text-sm dark:text-sky-200/80">
+                        <p className="text-muted-foreground text-sm">
                           {paragraph}
                         </p>
 
@@ -578,7 +617,7 @@ export function About() {
                   <Skeleton className="h-6" key={`skeleton-about-${index}`} />
                 ))}
             </div>
-          </div>
+          </Reveal>
         </Section.Content>
       </div>
 
