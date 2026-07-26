@@ -2,6 +2,7 @@ import { easeInOut, motion } from "framer-motion"
 import { ArrowRight, CheckIcon } from "lucide-react"
 import Link from "next/link"
 
+import { Magnetic, Reveal } from "@/components/motion"
 import { useProjects } from "@/hooks/use-query-data"
 
 import { Button } from "../button"
@@ -66,13 +67,15 @@ export function Project() {
         viewport={{ once: false, amount: 0.2 }}
         whileInView="visible"
       >
-        <Section.Header>
-          <Section.Title>Featured Work</Section.Title>
-          <Section.Description>
-            Products I&apos;ve architected and shipped — from SaaS platforms to
-            infrastructure tooling.
-          </Section.Description>
-        </Section.Header>
+        <Reveal>
+          <Section.Header>
+            <Section.Title>Featured Work</Section.Title>
+            <Section.Description>
+              Products I&apos;ve architected and shipped — from SaaS platforms to
+              infrastructure tooling.
+            </Section.Description>
+          </Section.Header>
+        </Reveal>
 
         <Section.Content className="items-center space-y-6 md:space-y-0">
           <ScrollArea className="h-fit w-full max-w-4xl md:h-[60vh]">
@@ -144,12 +147,14 @@ export function Project() {
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
           >
-            <Link href="/projects">
-              <Button>
-                View all projects
-                <ArrowRight className="size-4" />
-              </Button>
-            </Link>
+            <Magnetic>
+              <Link href="/projects">
+                <Button>
+                  View all projects
+                  <ArrowRight className="size-4" />
+                </Button>
+              </Link>
+            </Magnetic>
           </motion.div>
         </Section.Content>
       </motion.div>

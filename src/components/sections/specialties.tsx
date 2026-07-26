@@ -1,5 +1,6 @@
 import { easeInOut, motion, spring } from "framer-motion"
 
+import { Reveal } from "@/components/motion"
 import { specialties } from "@/utils/specialities"
 
 import { Section } from "../section"
@@ -40,19 +41,22 @@ export function Specialties() {
         viewport={{ once: false, amount: 0.2 }}
         whileInView="visible"
       >
-        <Section.Header>
-          <Section.Title>Core Expertise</Section.Title>
-          <Section.Description>
-            End-to-end product engineering — from system design to shipped
-            pixels.
-          </Section.Description>
-        </Section.Header>
+        <Reveal>
+          <Section.Header>
+            <Section.Title>Core Expertise</Section.Title>
+            <Section.Description>
+              End-to-end product engineering — from system design to shipped
+              pixels.
+            </Section.Description>
+          </Section.Header>
+        </Reveal>
 
         <Section.Content className="max-w-6xl">
           <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
             {specialties.map((item) => (
               <motion.div
                 className="flex flex-col gap-4 rounded-lg border bg-muted/20 p-6 shadow-sm transition-all duration-300 hover:bg-muted/40 hover:shadow-lg"
+                data-cursor="hover"
                 key={item.title}
                 variants={itemVariants}
                 whileHover={{ y: -5, scale: 1.03 }}

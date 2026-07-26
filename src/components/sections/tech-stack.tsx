@@ -1,6 +1,7 @@
 import { easeInOut, motion, spring } from "framer-motion"
 import { twMerge } from "tailwind-merge"
 
+import { Magnetic, Reveal } from "@/components/motion"
 import { techGroups } from "@/utils/techs"
 
 import { Section } from "../section"
@@ -51,13 +52,16 @@ export function TechStack() {
         viewport={{ once: false, amount: 0.2 }}
         whileInView="visible"
       >
-        <Section.Header>
-          <Section.Title>Tech Stack</Section.Title>
-          <Section.Description>
-            The core technologies I reach for to design, build, and ship
-            production products. Highlighted tools are the ones I use every day.
-          </Section.Description>
-        </Section.Header>
+        <Reveal>
+          <Section.Header>
+            <Section.Title>Tech Stack</Section.Title>
+            <Section.Description>
+              The core technologies I reach for to design, build, and ship
+              production products. Highlighted tools are the ones I use every
+              day.
+            </Section.Description>
+          </Section.Header>
+        </Reveal>
 
         <Section.Content className="max-w-4xl items-stretch gap-8">
           <motion.div
@@ -76,32 +80,42 @@ export function TechStack() {
                 </div>
 
                 <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 md:grid-cols-5">
-                  {group.items.map((tech) => (
-                    <motion.div
-                      className={twMerge(
-                        "group flex items-center gap-2.5 rounded-lg border bg-background p-3 shadow-sm transition-all duration-300 hover:shadow-md",
-                        tech.featured &&
-                          "border-sky-500/40 bg-sky-500/[0.06] ring-1 ring-sky-500/20 dark:bg-sky-400/[0.06]"
-                      )}
-                      key={tech.name}
-                      whileHover={{ y: -3 }}
-                      whileTap={{ scale: 0.97 }}
-                    >
-                      <span
+                  {group.items.map((tech) => {
+                    const tile = (
+                      <motion.div
                         className={twMerge(
-                          "shrink-0 text-2xl transition-colors",
-                          tech.featured
-                            ? "text-sky-600 dark:text-sky-400"
-                            : "text-muted-foreground group-hover:text-foreground"
+                          "group flex items-center gap-2.5 rounded-lg border bg-background p-3 shadow-sm transition-all duration-300 hover:shadow-md",
+                          tech.featured &&
+                            "border-sky-500/40 bg-sky-500/[0.06] ring-1 ring-sky-500/20 dark:bg-sky-400/[0.06]"
                         )}
+                        data-cursor="hover"
+                        whileHover={{ y: -3 }}
+                        whileTap={{ scale: 0.97 }}
                       >
-                        {tech.icon}
-                      </span>
-                      <span className="font-medium text-sm leading-tight">
-                        {tech.name}
-                      </span>
-                    </motion.div>
-                  ))}
+                        <span
+                          className={twMerge(
+                            "shrink-0 text-2xl transition-colors",
+                            tech.featured
+                              ? "text-sky-600 dark:text-sky-400"
+                              : "text-muted-foreground group-hover:text-foreground"
+                          )}
+                        >
+                          {tech.icon}
+                        </span>
+                        <span className="font-medium text-sm leading-tight">
+                          {tech.name}
+                        </span>
+                      </motion.div>
+                    )
+
+                    return tech.featured ? (
+                      <Magnetic key={tech.name} strength={0.2}>
+                        {tile}
+                      </Magnetic>
+                    ) : (
+                      <div key={tech.name}>{tile}</div>
+                    )
+                  })}
                 </div>
               </motion.div>
             ))}

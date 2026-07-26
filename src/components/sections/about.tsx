@@ -5,6 +5,7 @@ import { ArrowRight } from "lucide-react"
 import Link from "next/link"
 import { twMerge } from "tailwind-merge"
 
+import { Reveal } from "@/components/motion"
 import { useCertifications, useDegrees } from "@/hooks/use-query-data"
 import { statusColor, statusLabel } from "@/utils/status"
 
@@ -75,25 +76,27 @@ export function About() {
                   key="about-content"
                   transition={{ duration: 0.3 }}
                 >
-                  <Section.Block>
-                    <Section.Description>
-                      Product Engineer with a track record of architecting
-                      full-stack SaaS platforms that solve real business
-                      problems. I specialize in the TypeScript ecosystem
-                      (Next.js, React, Node.js, Supabase), building products
-                      from zero to production with a focus on performance, clean
-                      architecture, and developer experience.
-                      <br />
-                      <br />
-                      <b>
-                        I stay close to the frontier of the stack — shipping
-                        production code with Next.js, React 19, Tailwind, and
-                        Biome, and adopting new tools early when they earn their
-                        place. Currently open to full-stack roles where I can
-                        own features from API to UI.
-                      </b>
-                    </Section.Description>
-                  </Section.Block>
+                  <Reveal>
+                    <Section.Block>
+                      <Section.Description>
+                        Product Engineer with a track record of architecting
+                        full-stack SaaS platforms that solve real business
+                        problems. I specialize in the TypeScript ecosystem
+                        (Next.js, React, Node.js, Supabase), building products
+                        from zero to production with a focus on performance,
+                        clean architecture, and developer experience.
+                        <br />
+                        <br />
+                        <b>
+                          I stay close to the frontier of the stack — shipping
+                          production code with Next.js, React 19, Tailwind, and
+                          Biome, and adopting new tools early when they earn
+                          their place. Currently open to full-stack roles where
+                          I can own features from API to UI.
+                        </b>
+                      </Section.Description>
+                    </Section.Block>
+                  </Reveal>
                 </motion.div>
               </TabsContent>
 

@@ -2,6 +2,8 @@ import { motion, spring } from "framer-motion"
 import { Github, Linkedin, Mail, MapPin, Phone } from "lucide-react"
 import Link from "next/link"
 
+import { Reveal } from "@/components/motion"
+
 import { Footer } from "../footer"
 import { ContactForm } from "../form/contact-form"
 import { Section } from "../section"
@@ -51,14 +53,16 @@ export function Contact() {
           viewport={{ once: false, amount: 0.2 }}
           whileInView="visible"
         >
-          <h2 className="text-balance font-bold text-4xl tracking-tight">
-            Let&apos;s Build Something
-          </h2>
-          <p className="text-lg text-muted-foreground">
-            Interested in working together, have a project idea, or just want to
-            talk about engineering? Feel free to reach out through any of the
-            channels below or send a message through the form.
-          </p>
+          <Reveal className="flex flex-col gap-6">
+            <h2 className="text-balance font-bold text-4xl tracking-tight">
+              Let&apos;s Build Something
+            </h2>
+            <p className="text-lg text-muted-foreground">
+              Interested in working together, have a project idea, or just want
+              to talk about engineering? Feel free to reach out through any of
+              the channels below or send a message through the form.
+            </p>
+          </Reveal>
           <ul className="flex flex-col gap-4 text-base">
             <li className="flex items-center gap-3 text-muted-foreground">
               <Mail className="size-5 text-sky-600" />
