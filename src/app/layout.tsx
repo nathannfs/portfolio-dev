@@ -6,6 +6,7 @@ import type { ReactNode } from "react"
 import { twMerge } from "tailwind-merge"
 
 import { Header } from "@/components/header"
+import { SmoothScroll } from "@/components/motion/smooth-scroll"
 import { structuredData } from "@/lib/structured-data"
 
 import Providers from "./providers"
@@ -140,10 +141,12 @@ export default function RootLayout({
           Ir ao conteúdo principal
         </a>
         <Providers>
-          <Header />
-          <main className="pt-[80px]" id="main-content">
-            {children}
-          </main>
+          <SmoothScroll>
+            <Header />
+            <main className="pt-[80px]" id="main-content">
+              {children}
+            </main>
+          </SmoothScroll>
         </Providers>
       </body>
     </html>
