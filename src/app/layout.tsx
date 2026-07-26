@@ -6,6 +6,7 @@ import type { ReactNode } from "react"
 import { twMerge } from "tailwind-merge"
 
 import { Header } from "@/components/header"
+import { structuredData } from "@/lib/structured-data"
 
 import Providers from "./providers"
 
@@ -123,6 +124,11 @@ export default function RootLayout({
           "bg-zinc-50 font-sans text-zinc-950 antialiased dark:bg-zinc-950 dark:text-zinc-50",
         ])}
       >
+        <script
+          // biome-ignore lint/security/noDangerouslySetInnerHtml: JSON-LD structured data
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
+          type="application/ld+json"
+        />
         <Providers>
           <Header />
           <main className="pt-[80px]">{children}</main>
