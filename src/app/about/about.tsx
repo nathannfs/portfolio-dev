@@ -158,7 +158,7 @@ export function About() {
             src="/avatar.jpeg"
             width={120}
           />
-          <Section.Title className="text-sky-900 dark:text-sky-100">
+          <Section.Title as="h1" className="text-sky-900 dark:text-sky-100">
             About Me
           </Section.Title>
 

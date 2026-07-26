@@ -103,9 +103,12 @@ export function Hero() {
 
           <motion.div className="flex flex-col gap-1" variants={itemVariants}>
             <span className="text-lg text-muted-foreground">Hey, I&apos;m</span>
-            <motion.h2 className="font-bold text-5xl" variants={itemVariants}>
+            <motion.h1
+              className="font-bold text-5xl leading-[1.12] tracking-tight"
+              variants={itemVariants}
+            >
               Nathan Santos
-            </motion.h2>
+            </motion.h1>
             <motion.p
               animate={{ opacity: 1 }}
               className="min-h-[28px] font-medium text-lg text-muted-foreground"

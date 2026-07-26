@@ -194,7 +194,7 @@ export function Header() {
         <Code />
 
         <div className="flex items-center gap-2">
-          <h1 className="font-bold text-lg">Nathan Santos</h1>
+          <span className="font-bold text-lg">Nathan Santos</span>
           <div className="h-4 w-px bg-muted-foreground/30" />
           <span className="text-muted-foreground text-sm">
             Product Engineer
