@@ -37,7 +37,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Nathan Santos | Product Engineer",
     description: SITE_DESCRIPTION,
-    url: "/",
+    url: "https://www.nathannfs.com/",
     siteName: "Nathan Santos — Product Engineer",
     images: [
       {

@@ -97,7 +97,7 @@ export function TechStack() {
                       >
                         {tech.icon}
                       </span>
-                      <span className="truncate font-medium text-sm">
+                      <span className="font-medium text-sm leading-tight">
                         {tech.name}
                       </span>
                     </motion.div>

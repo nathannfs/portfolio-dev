@@ -272,8 +272,9 @@ export function Hero() {
             whileHover={{ scale: 1.02 }}
           >
             <Image
-              alt="Nathan Santos — Mid-Level Product Engineer"
+              alt="Nathan Santos — Product Engineer"
               className="h-44 max-h-[70vw] w-44 max-w-full rounded-xl object-cover shadow-lg sm:h-64 sm:w-64 md:h-80 md:w-80 lg:h-[22rem] lg:w-[22rem] xl:h-[26rem] xl:w-[26rem]"
+              fetchPriority="high"
               height={400}
               priority
               src="/nathan.jpeg"
