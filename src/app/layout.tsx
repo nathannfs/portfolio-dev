@@ -1,6 +1,6 @@
 import "./globals.css"
 
-import type { Metadata } from "next"
+import type { Metadata, Viewport } from "next"
 import { Geist, Geist_Mono } from "next/font/google"
 import type { ReactNode } from "react"
 import { twMerge } from "tailwind-merge"
@@ -22,23 +22,29 @@ const geistMono = Geist_Mono({
   display: "swap",
 })
 
+const SITE_DESCRIPTION =
+  "Product Engineer building full-stack products end-to-end — NestJS APIs, Next.js interfaces, and PostgreSQL-backed SaaS. Currently shipping at OMD do Brasil."
+
 export const metadata: Metadata = {
-  title: "Nathan Santos | Mid-Level Product Engineer",
-  description:
-    "Product Engineer specializing in TypeScript, Next.js, and scalable SaaS architecture. Building products that ship fast and scale to millions.",
+  title: "Nathan Santos | Product Engineer",
+  description: SITE_DESCRIPTION,
   metadataBase: new URL("https://www.nathannfs.com"),
+  alternates: {
+    canonical: "/",
+  },
+  manifest: "/manifest.json",
+  referrer: "strict-origin-when-cross-origin",
   openGraph: {
-    title: "Nathan Santos | Mid-Level Product Engineer",
-    description:
-      "Product Engineer specializing in TypeScript, Next.js, and scalable SaaS architecture. Building products that ship fast and scale to millions.",
-    url: "https://www.nathannfs.com",
+    title: "Nathan Santos | Product Engineer",
+    description: SITE_DESCRIPTION,
+    url: "/",
     siteName: "Nathan Santos — Product Engineer",
     images: [
       {
         url: "/nathan.jpeg",
         width: 800,
         height: 800,
-        alt: "Nathan Santos — Mid-Level Product Engineer",
+        alt: "Nathan Santos — Product Engineer",
       },
     ],
     locale: "en_US",
@@ -46,9 +52,8 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Nathan Santos | Mid-Level Product Engineer",
-    description:
-      "Product Engineer specializing in TypeScript, Next.js, and scalable SaaS architecture.",
+    title: "Nathan Santos | Product Engineer",
+    description: SITE_DESCRIPTION,
     site: "@nathannfs",
     creator: "@nathannfs",
     images: ["/nathan.jpeg"],
@@ -97,6 +102,16 @@ export const metadata: Metadata = {
   creator: "Nathan Santos",
   publisher: "Nathan Santos",
   category: "technology",
+  other: {
+    "mobile-web-app-capable": "yes",
+    copyright: "© 2025 Nathan Santos",
+  },
+}
+
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  themeColor: "#0ea5e9",
 }
 
 export default function RootLayout({
@@ -106,17 +121,6 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <head>
-        <meta content="width=device-width, initial-scale=1" name="viewport" />
-        <meta content="#0ea5e9" name="theme-color" />
-        <link href="https://www.nathannfs.com/" rel="canonical" />
-        <meta content="Nathan Santos" name="author" />
-        <link href="/manifest.json" rel="manifest" />
-        <meta content="yes" name="apple-mobile-web-app-capable" />
-        <meta content="default" name="apple-mobile-web-app-status-bar-style" />
-        <meta content="strict-origin-when-cross-origin" name="referrer" />
-        <meta content="© 2025 Nathan Santos" name="copyright" />
-      </head>
       <body
         className={twMerge([
           geistSans.variable,
