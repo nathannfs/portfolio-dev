@@ -68,7 +68,8 @@ export function Project() {
   const { data: projects } = useProjects()
   const { t } = useI18n()
 
-  const items = projects ?? []
+  // Home shows a curated 2; the "View all" link goes to /projects (full list).
+  const items = (projects ?? []).slice(0, 2)
 
   return (
     <section
