@@ -68,10 +68,7 @@ export function Project() {
   const { data: projects } = useProjects()
   const { t } = useI18n()
 
-  // Featured work: only OMD Farm ERP for now.
-  const items = (projects ?? [])
-    .filter((p) => /omd\s*farm/i.test(p.name))
-    .slice(0, 1)
+  const items = projects ?? []
 
   return (
     <section
