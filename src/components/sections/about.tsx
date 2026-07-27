@@ -9,7 +9,7 @@ import { twMerge } from "tailwind-merge"
 import { Magnetic, Reveal } from "@/components/motion"
 import { useCertifications, useDegrees } from "@/hooks/use-query-data"
 import { useI18n } from "@/i18n/provider"
-import { statusColor } from "@/utils/status"
+import { normalizeStatus, statusColor } from "@/utils/status"
 
 export function About() {
   const { data: certificates } = useCertifications()
@@ -127,7 +127,7 @@ export function About() {
                       statusColor(c.status),
                     ])}
                   >
-                    {c.status ? t(`common.status.${c.status}`) : ""}
+                    {c.status ? t(`common.status.${normalizeStatus(c.status)}`) : ""}
                   </span>
                 </li>
               ))}
