@@ -5,6 +5,7 @@ import Link from "next/link"
 
 import { Magnetic, Reveal } from "@/components/motion"
 import { useProjects } from "@/hooks/use-query-data"
+import { localize } from "@/i18n/localize"
 import { useI18n } from "@/i18n/provider"
 import type { Project as ProjectType } from "@/types/project"
 
@@ -17,7 +18,7 @@ function ProjectRow({
   project: ProjectType
   index: number
 }) {
-  const { t } = useI18n()
+  const { t, locale } = useI18n()
 
   return (
     <Reveal>
@@ -49,7 +50,12 @@ function ProjectRow({
 
         <div className="md:col-span-5">
           <p className="text-base text-muted-foreground leading-relaxed md:text-lg">
-            {project.description}
+            {localize(
+              project.description,
+              project.translations,
+              "description",
+              locale
+            )}
           </p>
           <div className="mt-5 flex flex-wrap gap-2">
             {project.techs.map((tech) => (

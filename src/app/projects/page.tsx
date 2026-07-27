@@ -12,6 +12,7 @@ import { Badge } from "@/components/ui/badge"
 import { Skeleton } from "@/components/ui/skeleton"
 import { useConfirmModal } from "@/hooks/use-confirm-modal"
 import { useProjects } from "@/hooks/use-query-data"
+import { localize } from "@/i18n/localize"
 import { useI18n } from "@/i18n/provider"
 import { deleteProject } from "@/http/projects/delete-project"
 import { queryClient } from "@/lib/react-query"
@@ -22,7 +23,7 @@ import { ProjectModal } from "./components/project-modal"
 export default function ProjectsPage() {
   const { data: session } = useSession()
   const { data: projects, isLoading: isLoadingProjects } = useProjects()
-  const { t } = useI18n()
+  const { t, locale } = useI18n()
 
   const { isOpen, config, confirm, close, handleConfirm } = useConfirmModal()
 
@@ -158,7 +159,12 @@ export default function ProjectsPage() {
               {/* Description + techs */}
               <div className="flex flex-col gap-4 md:col-span-4 md:opacity-70 md:transition-opacity md:group-hover:opacity-100">
                 <p className="text-muted-foreground leading-relaxed">
-                  {project.description}
+                  {localize(
+                    project.description,
+                    project.translations,
+                    "description",
+                    locale
+                  )}
                 </p>
                 <div className="flex flex-wrap gap-2">
                   {project.techs?.map((tech) => (

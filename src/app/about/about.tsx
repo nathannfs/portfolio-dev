@@ -23,6 +23,8 @@ import { deleteCertification } from "@/http/certifications/delete-certification"
 import { deleteDegree } from "@/http/degrees/delete-degree"
 import { deleteExperience } from "@/http/experiences/delete-experience"
 import { deleteHobby } from "@/http/hobbies/delete-hobby"
+import { localize } from "@/i18n/localize"
+import { useI18n } from "@/i18n/provider"
 import { queryClient } from "@/lib/react-query"
 import type { AboutMe } from "@/types/about-me"
 import type { Certificate } from "@/types/certificate"
@@ -57,6 +59,7 @@ function SectionLabel({
 
 export function About() {
   const { data: session } = useSession()
+  const { locale } = useI18n()
 
   const { isOpen, config, confirm, close, handleConfirm } = useConfirmModal()
 
@@ -235,7 +238,12 @@ export function About() {
               >
                 <div className="flex flex-col items-start gap-2">
                   <div className="flex flex-col gap-2 font-bold text-[clamp(1.25rem,2.2vw,1.75rem)] text-foreground leading-tight tracking-tight md:flex-row md:items-center">
-                    {degree.title}
+                    {localize(
+                      degree.title,
+                      degree.translations,
+                      "title",
+                      locale
+                    )}
 
                     {degree.status && (
                       <span
@@ -251,7 +259,12 @@ export function About() {
 
                   {degree.description && (
                     <span className="text-muted-foreground leading-relaxed">
-                      {degree.description}
+                      {localize(
+                        degree.description,
+                        degree.translations,
+                        "description",
+                        locale
+                      )}
                     </span>
                   )}
 
@@ -453,24 +466,32 @@ export function About() {
 
                 <div className="flex flex-col gap-4 md:col-span-7">
                   <p className="text-muted-foreground leading-relaxed">
-                    {experience.description}
+                    {localize(
+                      experience.description,
+                      experience.translations,
+                      "description",
+                      locale
+                    )}
                   </p>
 
                   <ul className="space-y-2">
-                    {experience.responsibilities.map(
-                      (responsibility, index) => (
-                        <li
-                          className="flex gap-3 text-muted-foreground leading-relaxed"
-                          key={`${responsibility}-${index}`}
-                        >
-                          <span
-                            aria-hidden="true"
-                            className="mt-2.5 size-1 shrink-0 rounded-full bg-aurora-cyan"
-                          />
-                          <span>{responsibility}</span>
-                        </li>
-                      )
-                    )}
+                    {localize(
+                      experience.responsibilities,
+                      experience.translations,
+                      "responsibilities",
+                      locale
+                    ).map((responsibility, index) => (
+                      <li
+                        className="flex gap-3 text-muted-foreground leading-relaxed"
+                        key={`${responsibility}-${index}`}
+                      >
+                        <span
+                          aria-hidden="true"
+                          className="mt-2.5 size-1 shrink-0 rounded-full bg-aurora-cyan"
+                        />
+                        <span>{responsibility}</span>
+                      </li>
+                    ))}
                   </ul>
                 </div>
               </li>
@@ -597,7 +618,13 @@ export function About() {
 
           <div className="flex flex-col gap-8">
             {aboutMe?.map((about) => {
-              const paragraphs = about?.content?.split("\n\n") || []
+              const content = localize(
+                about.content,
+                about.translations,
+                "content",
+                locale
+              )
+              const paragraphs = content?.split("\n\n") || []
 
               return (
                 <div className="group relative flex flex-col gap-4" key={about.id}>

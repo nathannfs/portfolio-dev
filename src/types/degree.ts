@@ -7,4 +7,5 @@ export interface Degree {
   period: string
   status?: Status
   title: string
+  translations?: Record<string, unknown> | null
 }

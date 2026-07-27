@@ -6,11 +6,37 @@ import Link from "next/link"
 import { Button } from "@/components/button"
 import { AuroraCanvas, Magnetic, Reveal } from "@/components/motion"
 import { Badge } from "@/components/ui/badge"
+import { localize } from "@/i18n/localize"
 import { useI18n } from "@/i18n/provider"
 import type { Project } from "@/types/project"
 
 export function ProjectDetailView({ project }: { project: Project }) {
-  const { t } = useI18n()
+  const { t, locale } = useI18n()
+
+  const description = localize(
+    project.description,
+    project.translations,
+    "description",
+    locale
+  )
+  const features = localize(
+    project.features,
+    project.translations,
+    "features",
+    locale
+  )
+  const challenges = localize(
+    project.challenges,
+    project.translations,
+    "challenges",
+    locale
+  )
+  const learnings = localize(
+    project.learnings,
+    project.translations,
+    "learnings",
+    locale
+  )
 
   return (
     <main className="flex flex-col">
@@ -63,19 +89,19 @@ export function ProjectDetailView({ project }: { project: Project }) {
               {t("projectDetail.description")}
             </h2>
             <p className="mt-4 text-lg text-muted-foreground leading-relaxed">
-              {project.description}
+              {description}
             </p>
           </section>
         </Reveal>
 
-        {project.features?.length ? (
+        {features?.length ? (
           <Reveal>
             <section className="rounded-xl border bg-surface-1 p-6 sm:p-8">
               <h2 className="font-bold text-xl tracking-tight">
                 {t("projectDetail.features")}
               </h2>
               <ul className="mt-4 space-y-3">
-                {project.features.map((item: string) => (
+                {features.map((item: string) => (
                   <li className="flex gap-3 text-muted-foreground" key={item}>
                     <span
                       aria-hidden="true"
@@ -90,14 +116,14 @@ export function ProjectDetailView({ project }: { project: Project }) {
         ) : null}
 
         <div className="grid grid-cols-1 gap-8 md:grid-cols-2">
-          {project.challenges?.length ? (
+          {challenges?.length ? (
             <Reveal>
               <section className="h-full rounded-xl border bg-surface-1 p-6 sm:p-8">
                 <h2 className="font-bold text-xl tracking-tight">
                   {t("projectDetail.challenges")}
                 </h2>
                 <ul className="mt-4 space-y-3">
-                  {project.challenges.map((item: string) => (
+                  {challenges.map((item: string) => (
                     <li className="flex gap-3 text-muted-foreground" key={item}>
                       <span
                         aria-hidden="true"
@@ -111,14 +137,14 @@ export function ProjectDetailView({ project }: { project: Project }) {
             </Reveal>
           ) : null}
 
-          {project.learnings?.length ? (
+          {learnings?.length ? (
             <Reveal delay={0.1}>
               <section className="h-full rounded-xl border bg-surface-1 p-6 sm:p-8">
                 <h2 className="font-bold text-xl tracking-tight">
                   {t("projectDetail.learnings")}
                 </h2>
                 <ul className="mt-4 space-y-3">
-                  {project.learnings.map((item: string) => (
+                  {learnings.map((item: string) => (
                     <li className="flex gap-3 text-muted-foreground" key={item}>
                       <span
                         aria-hidden="true"
