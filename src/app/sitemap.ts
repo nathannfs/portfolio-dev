@@ -1,6 +1,6 @@
 import type { MetadataRoute } from "next"
 
-import { getProjects } from "@/http/projects/get-projects"
+import { getProjects } from "@/server/content"
 
 const BASE_URL = "https://www.nathannfs.com"
 
@@ -23,7 +23,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     }))
     return [...staticRoutes, ...projectRoutes]
   } catch {
-    // API unreachable at build time — ship the static routes only.
+    // Database unreachable at build time, ship the static routes only.
     return staticRoutes
   }
 }

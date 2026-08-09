@@ -9,11 +9,19 @@ import { twMerge } from "tailwind-merge"
 import { Magnetic, Reveal } from "@/components/motion"
 import { useCertifications, useDegrees } from "@/hooks/use-query-data"
 import { useI18n } from "@/i18n/provider"
+import type { Certificate } from "@/types/certificate"
+import type { Degree } from "@/types/degree"
 import { normalizeStatus, statusColor } from "@/utils/status"
 
-export function About() {
-  const { data: certificates } = useCertifications()
-  const { data: degrees } = useDegrees()
+export function About({
+  initialCertificates,
+  initialDegrees,
+}: {
+  initialCertificates?: Certificate[]
+  initialDegrees?: Degree[]
+}) {
+  const { data: certificates } = useCertifications(initialCertificates)
+  const { data: degrees } = useDegrees(initialDegrees)
   const { t } = useI18n()
 
   const credentials = [

@@ -70,8 +70,12 @@ function ProjectRow({
   )
 }
 
-export function Project() {
-  const { data: projects } = useProjects()
+export function Project({
+  initialProjects,
+}: {
+  initialProjects?: ProjectType[]
+}) {
+  const { data: projects } = useProjects(initialProjects)
   const { t } = useI18n()
 
   // Home shows a curated 2; the "View all" link goes to /projects (full list).

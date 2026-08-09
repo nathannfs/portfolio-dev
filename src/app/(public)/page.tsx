@@ -1,5 +1,3 @@
-"use client"
-
 import { Reveal } from "@/components/motion"
 import { About } from "@/components/sections/about"
 import { Contact } from "@/components/sections/contact"
@@ -7,16 +5,23 @@ import { Hero } from "@/components/sections/hero"
 import { Project } from "@/components/sections/project"
 import { Specialties } from "@/components/sections/specialties"
 import { TechStack } from "@/components/sections/tech-stack"
+import { getCertifications, getDegrees, getProjects } from "@/server/content"
 
-export default function Home() {
+export default async function Home() {
+  const [projects, certificates, degrees] = await Promise.all([
+    getProjects(),
+    getCertifications(),
+    getDegrees(),
+  ])
+
   return (
     <div className="flex flex-col">
       <Hero />
 
-      <Project />
+      <Project initialProjects={projects} />
 
       <Reveal>
-        <About />
+        <About initialCertificates={certificates} initialDegrees={degrees} />
       </Reveal>
 
       <Reveal>

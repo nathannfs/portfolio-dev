@@ -57,7 +57,15 @@ function SectionLabel({
   )
 }
 
-export function About() {
+type AboutInitialData = {
+  aboutMe: AboutMe[]
+  certifications: Certificate[]
+  degrees: Degree[]
+  experiences: Experience[]
+  hobbies: Hobby[]
+}
+
+export function About({ initial }: { initial: AboutInitialData }) {
   const { data: session } = useSession()
   const { locale } = useI18n()
 
@@ -80,13 +88,20 @@ export function About() {
   const [modalAboutMeOpen, setModalAboutMeOpen] = useState(false)
   const [editDataAboutMe, setEditDataAboutMe] = useState<AboutMe | null>(null)
 
-  const { data: experiences, isLoading: isLoadingExperiences } =
-    useExperiences()
+  const { data: experiences, isLoading: isLoadingExperiences } = useExperiences(
+    initial.experiences
+  )
   const { data: certifications, isLoading: isLoadingCertifications } =
-    useCertifications()
-  const { data: degrees, isLoading: isLoadingDegrees } = useDegrees()
-  const { data: hobbies, isLoading: isLoadingHobbies } = useHobbies()
-  const { data: aboutMe, isLoading: isLoadingAboutMe } = useAboutMe()
+    useCertifications(initial.certifications)
+  const { data: degrees, isLoading: isLoadingDegrees } = useDegrees(
+    initial.degrees
+  )
+  const { data: hobbies, isLoading: isLoadingHobbies } = useHobbies(
+    initial.hobbies
+  )
+  const { data: aboutMe, isLoading: isLoadingAboutMe } = useAboutMe(
+    initial.aboutMe
+  )
 
   async function handleDeleteExperience(id: string) {
     const confirmed = await confirm({
