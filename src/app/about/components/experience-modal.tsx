@@ -90,8 +90,8 @@ export function ExperienceModal({
       open={open}
       title={initialData ? "Edit Experience" : "Add Experience"}
     >
-      <form className="space-y-4" onSubmit={handleFormSubmit}>
-        <div className="flex flex-col gap-1">
+      <form className="space-y-5" onSubmit={handleFormSubmit}>
+        <div className="flex flex-col gap-1.5">
           <Input.Root>
             <Input.Control
               defaultValue={initialData?.company}
@@ -105,7 +105,7 @@ export function ExperienceModal({
           )}
         </div>
 
-        <div className="flex flex-col gap-1">
+        <div className="flex flex-col gap-1.5">
           <Input.Root>
             <Input.Control
               defaultValue={initialData?.position}
@@ -119,7 +119,7 @@ export function ExperienceModal({
           )}
         </div>
 
-        <div className="flex flex-col gap-1">
+        <div className="flex flex-col gap-1.5">
           <Input.Root>
             <Input.Control
               defaultValue={initialData?.period}
@@ -132,7 +132,7 @@ export function ExperienceModal({
           )}
         </div>
 
-        <div className="flex flex-col gap-1">
+        <div className="flex flex-col gap-1.5">
           <Textarea.Root>
             <Textarea.Control
               defaultValue={initialData?.description}
@@ -149,13 +149,13 @@ export function ExperienceModal({
         </div>
 
         <div className="flex flex-col gap-2">
-          <Label className="font-medium text-sm">Responsibilities</Label>
+          <Label className="text-muted-foreground">Responsibilities</Label>
 
           <ul className="flex flex-col gap-2">
             {responsibilities.length > 0 &&
               responsibilities.map((responsibility, index) => (
                 <li
-                  className="flex items-center gap-2"
+                  className="flex items-center gap-2 rounded-md border border-border bg-surface-2 px-3 py-2"
                   key={`${responsibility}-${index}`}
                 >
                   <span className="flex-1 text-sm">{responsibility}</span>
@@ -211,7 +211,7 @@ export function ExperienceModal({
 
         {message && <div className="text-red-500">{message}</div>}
 
-        <div className="flex justify-end gap-2">
+        <div className="flex justify-end gap-2 border-border border-t pt-4">
           <Button
             disabled={isPending}
             onClick={() => onOpenChange(false)}
@@ -221,7 +221,11 @@ export function ExperienceModal({
             Cancel
           </Button>
 
-          <Button disabled={isPending} type="submit">
+          <Button
+            className="focus-visible:ring-2 focus-visible:ring-aurora-cyan focus-visible:ring-offset-2 focus-visible:ring-offset-surface-1"
+            disabled={isPending}
+            type="submit"
+          >
             {isPending ? <Loader2 className="animate-spin" /> : buttonLabel}
           </Button>
         </div>

@@ -7,9 +7,12 @@ import { type FormEvent, useState } from "react"
 
 import { Button } from "@/components/button"
 import { Input } from "@/components/input"
+import { AuroraCanvas } from "@/components/motion"
 import { Label } from "@/components/ui/label"
+import { useI18n } from "@/i18n/provider"
 
 export function SignInForm() {
+  const { t } = useI18n()
   const [form, setForm] = useState({ email: "", password: "" })
   const [error, setError] = useState("")
   const [loading, setLoading] = useState(false)
@@ -32,26 +35,30 @@ export function SignInForm() {
     setLoading(false)
 
     if (res?.error) {
-      setError("Invalid email or password")
+      setError(t("signin.invalidCredentials"))
     } else if (res?.ok) {
       router.push(res.url || "/")
     }
   }
 
   return (
-    <div className="flex h-[calc(100vh-80px)] items-center justify-center bg-zinc-50 dark:bg-zinc-950">
+    <div className="relative flex h-[calc(100vh-80px)] items-center justify-center overflow-hidden px-6">
+      <AuroraCanvas className="pointer-events-none absolute inset-0 -z-10 opacity-70" />
+
       <form
-        className="w-full max-w-sm space-y-6 rounded-lg border border-zinc-200 bg-white p-8 shadow-lg dark:border-zinc-800 dark:bg-zinc-900"
+        className="w-full max-w-sm space-y-6 rounded-xl border bg-surface-1 p-8 shadow-xl"
         onSubmit={handleSubmit}
       >
-        <h1 className="mb-4 text-center font-bold text-2xl">Entrar</h1>
+        <h1 className="mb-4 text-center font-bold text-2xl tracking-tight">
+          {t("signin.heading")}
+        </h1>
 
         <div className="flex flex-col gap-2">
           <Label className="font-medium text-sm" htmlFor="email">
-            Email
+            {t("signin.emailLabel")}
           </Label>
 
-          <Input.Root>
+          <Input.Root className="bg-surface-2 focus-within:border-aurora-cyan focus-within:ring-4 focus-within:ring-aurora-cyan/20">
             <Input.Control
               autoComplete="email"
               disabled={loading}
@@ -60,7 +67,7 @@ export function SignInForm() {
               onChange={(e) =>
                 setForm((f) => ({ ...f, email: e.target.value }))
               }
-              placeholder="seu@email.com"
+              placeholder={t("signin.emailPlaceholder")}
               required
               type="email"
               value={form.email}
@@ -70,10 +77,10 @@ export function SignInForm() {
 
         <div className="flex flex-col gap-2">
           <Label className="font-medium text-sm" htmlFor="password">
-            Senha
+            {t("signin.passwordLabel")}
           </Label>
 
-          <Input.Root>
+          <Input.Root className="bg-surface-2 focus-within:border-aurora-cyan focus-within:ring-4 focus-within:ring-aurora-cyan/20">
             <Input.Control
               autoComplete="current-password"
               disabled={loading}
@@ -82,7 +89,7 @@ export function SignInForm() {
               onChange={(e) =>
                 setForm((f) => ({ ...f, password: e.target.value }))
               }
-              placeholder="Your password"
+              placeholder={t("signin.passwordPlaceholder")}
               required
               type="password"
               value={form.password}
@@ -96,8 +103,16 @@ export function SignInForm() {
           </div>
         )}
 
-        <Button className="w-full" disabled={loading} type="submit">
-          {loading ? <Loader2 className="size-4 animate-spin" /> : "Entrar"}
+        <Button
+          className="w-full focus-visible:ring-4 focus-visible:ring-aurora-cyan/30"
+          disabled={loading}
+          type="submit"
+        >
+          {loading ? (
+            <Loader2 className="size-4 animate-spin" />
+          ) : (
+            t("signin.submit")
+          )}
         </Button>
       </form>
     </div>

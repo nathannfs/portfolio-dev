@@ -186,7 +186,7 @@ function TimelineTitle({
 }: HTMLAttributes<HTMLHeadingElement>) {
   return (
     <h3
-      className={cn("font-medium text-sm", className)}
+      className={cn("font-semibold text-base", className)}
       data-slot="timeline-title"
       {...props}
     />

@@ -1,87 +1,71 @@
-import { easeInOut, motion, spring } from "framer-motion"
+"use client"
 
-import { techs } from "@/utils/techs"
+import { twMerge } from "tailwind-merge"
 
-import { Section } from "../section"
-
-const sectionVariants = {
-  hidden: { opacity: 0, y: 50, scale: 0.95 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    scale: 1,
-    transition: {
-      duration: 0.5,
-      ease: easeInOut,
-    },
-  },
-}
-
-const containerVariants = {
-  hidden: { opacity: 0 },
-  visible: {
-    opacity: 1,
-    transition: {
-      staggerChildren: 0.05,
-    },
-  },
-}
-
-const itemVariants = {
-  hidden: { opacity: 0, scale: 0.5 },
-  visible: {
-    opacity: 1,
-    scale: 1,
-    transition: {
-      type: spring,
-      stiffness: 100,
-    },
-  },
-}
+import { Reveal } from "@/components/motion"
+import { useI18n } from "@/i18n/provider"
+import { techGroups } from "@/utils/techs"
 
 export function TechStack() {
-  return (
-    <Section.Root className="scroll-mt-20 md:scroll-mt-0" id="techs">
-      <motion.div
-        className="flex w-full flex-col items-center justify-center gap-6"
-        exit="hidden"
-        initial="hidden"
-        variants={sectionVariants}
-        viewport={{ once: false, amount: 0.2 }}
-        whileInView="visible"
-      >
-        <Section.Header>
-          <Section.Title>Tech Stack</Section.Title>
-          <Section.Description>
-            The technologies and tools I use daily to architect and ship
-            production-grade products.
-          </Section.Description>
-        </Section.Header>
+  const { t } = useI18n()
 
-        <Section.Content className="max-w-5xl">
-          <motion.div
-            className="grid grid-cols-3 gap-3 sm:grid-cols-4 md:grid-cols-6 lg:grid-cols-8"
-            variants={containerVariants}
-          >
-            {techs.map((tech) => (
-              <motion.div
-                className="group flex flex-col items-center justify-center gap-1.5 rounded-lg border bg-background p-3 shadow-sm transition-all duration-300 hover:bg-muted/40 hover:shadow-lg"
-                key={tech.name}
-                variants={itemVariants}
-                whileHover={{ scale: 1.1 }}
-                whileTap={{ scale: 0.95 }}
-              >
-                <div className="text-3xl text-muted-foreground transition-colors group-hover:text-foreground">
-                  {tech.icon}
-                </div>
-                <span className="text-center font-medium text-muted-foreground text-xs transition-colors group-hover:text-foreground">
-                  {tech.name}
-                </span>
-              </motion.div>
-            ))}
-          </motion.div>
-        </Section.Content>
-      </motion.div>
-    </Section.Root>
+  return (
+    <section
+      className="relative mx-auto w-full max-w-7xl scroll-mt-20 px-6 py-24 md:scroll-mt-0 md:px-10 md:py-32 lg:px-16"
+      id="techs"
+    >
+      <Reveal>
+        <div className="mb-12 flex items-center gap-4">
+          <span className="font-mono text-muted-foreground text-xs uppercase tracking-[0.3em]">
+            {t("stack.label")}
+          </span>
+          <div className="h-px flex-1 bg-border" />
+        </div>
+        <h2 className="max-w-3xl font-bold text-[clamp(1.75rem,3.5vw,3rem)] leading-[1.1] tracking-tight">
+          {t("stack.heading")}
+        </h2>
+        <p className="mt-4 max-w-xl text-muted-foreground md:text-lg">
+          {t("stack.highlightNote")}
+        </p>
+      </Reveal>
+
+      <div className="mt-16 flex flex-col">
+        {techGroups.map((group) => (
+          <Reveal key={group.category}>
+            <div className="grid grid-cols-1 gap-6 border-border border-t py-10 md:grid-cols-12 md:gap-8">
+              <h3 className="font-bold text-2xl tracking-tight md:col-span-4 md:text-3xl">
+                {t(`stack.categories.${group.category}`)}
+              </h3>
+              <ul className="flex flex-wrap items-center gap-x-6 gap-y-4 md:col-span-8">
+                {group.items.map((tech) => (
+                  <li
+                    className={twMerge(
+                      "group inline-flex items-center gap-2.5 font-semibold text-xl transition-colors md:text-2xl",
+                      tech.featured
+                        ? "text-aurora-cyan"
+                        : "text-muted-foreground hover:text-foreground"
+                    )}
+                    key={tech.name}
+                  >
+                    <span
+                      className={twMerge(
+                        "shrink-0 text-2xl",
+                        tech.featured
+                          ? "opacity-100"
+                          : "opacity-60 transition-opacity group-hover:opacity-100"
+                      )}
+                    >
+                      {tech.icon}
+                    </span>
+                    {tech.name}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </Reveal>
+        ))}
+        <div aria-hidden="true" className="border-border border-t" />
+      </div>
+    </section>
   )
 }

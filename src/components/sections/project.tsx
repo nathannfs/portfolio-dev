@@ -1,158 +1,125 @@
-import { easeInOut, motion } from "framer-motion"
-import { ArrowRight, CheckIcon } from "lucide-react"
+"use client"
+
+import { ArrowUpRight } from "lucide-react"
 import Link from "next/link"
 
+import { Magnetic, Reveal } from "@/components/motion"
 import { useProjects } from "@/hooks/use-query-data"
+import { localize } from "@/i18n/localize"
+import { useI18n } from "@/i18n/provider"
+import type { Project as ProjectType } from "@/types/project"
 
-import { Button } from "../button"
-import { Section } from "../section"
 import { Badge } from "../ui/badge"
-import { ScrollArea } from "../ui/scroll-area"
-import {
-  Timeline,
-  TimelineContent,
-  TimelineDate,
-  TimelineHeader,
-  TimelineIndicator,
-  TimelineItem,
-  TimelineSeparator,
-  TimelineTitle,
-} from "../ui/timeline"
 
-const sectionVariants = {
-  hidden: { opacity: 0, y: 50, scale: 0.95 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    scale: 1,
-    transition: {
-      duration: 0.5,
-      ease: easeInOut,
-    },
-  },
-}
-
-const containerVariants = {
-  hidden: { opacity: 0 },
-  visible: {
-    opacity: 1,
-    transition: {
-      staggerChildren: 0.2,
-    },
-  },
-}
-
-const itemVariants = {
-  hidden: { opacity: 0, x: -50 },
-  visible: {
-    opacity: 1,
-    x: 0,
-    transition: {
-      duration: 0.5,
-    },
-  },
-}
-
-export function Project() {
-  const { data: projects } = useProjects()
+function ProjectRow({
+  project,
+  index,
+}: {
+  project: ProjectType
+  index: number
+}) {
+  const { t, locale } = useI18n()
 
   return (
-    <Section.Root className="scroll-mt-20 md:scroll-mt-0" id="project">
-      <motion.div
-        className="flex w-full flex-col items-center justify-center gap-6"
-        exit="hidden"
-        initial="hidden"
-        variants={sectionVariants}
-        viewport={{ once: false, amount: 0.2 }}
-        whileInView="visible"
-      >
-        <Section.Header>
-          <Section.Title>Featured Work</Section.Title>
-          <Section.Description>
-            Products I&apos;ve architected and shipped — from SaaS platforms to
-            infrastructure tooling.
-          </Section.Description>
-        </Section.Header>
+    <Reveal>
+      <article className="grid grid-cols-1 gap-6 border-border border-t py-10 md:grid-cols-12 md:gap-8 md:py-14">
+        <span className="font-mono text-muted-foreground text-sm md:col-span-1">
+          {String(index + 1).padStart(2, "0")}
+        </span>
 
-        <Section.Content className="items-center space-y-6 md:space-y-0">
-          <ScrollArea className="h-fit w-full max-w-4xl md:h-[60vh]">
-            <motion.div
-              className="flex w-full items-center justify-center pr-4"
-              variants={containerVariants}
+        <div className="md:col-span-6">
+          <div className="mb-3 flex items-center gap-3 font-mono text-muted-foreground text-xs uppercase tracking-[0.2em]">
+            <span>{project.year ?? "2024"}</span>
+            {project.completed && (
+              <span className="text-aurora-cyan">{t("work.shipped")}</span>
+            )}
+          </div>
+          <h3 className="font-bold text-[clamp(2rem,4.5vw,3.75rem)] leading-[0.95] tracking-tighter">
+            {project.name}
+          </h3>
+          <Magnetic className="mt-6 w-fit">
+            <Link
+              className="inline-flex items-center gap-2 border-foreground border-b pb-1 font-semibold text-foreground transition-colors hover:border-aurora-cyan hover:text-aurora-cyan"
+              href="/projects"
             >
-              <Timeline
-                className="flex w-full max-w-3xl flex-col md:items-center"
-                value={
-                  projects
-                    ? projects
-                        .slice(0, 4)
-                        .map((p, i) => (p.completed ? i + 1 : 0))
-                        .filter(Boolean)
-                        .pop()
-                    : 1
-                }
-              >
-                {projects?.slice(0, 4).map((project, idx) => (
-                  <motion.div
-                    className="w-full"
-                    key={project.name}
-                    variants={itemVariants}
-                  >
-                    <TimelineItem
-                      className="py-4 transition-all duration-300 group-data-[orientation=vertical]/timeline:ms-10"
-                      step={idx + 1}
-                    >
-                      <TimelineHeader>
-                        <TimelineSeparator className="group-data-[orientation=vertical]/timeline:-left-7 group-data-[orientation=vertical]/timeline:h-full" />
-                        <TimelineDate>{project.year ?? "2024"}</TimelineDate>
-                        <TimelineTitle>{project.name}</TimelineTitle>
-                        <TimelineIndicator className="flex size-6 items-center justify-center group-data-[orientation=vertical]/timeline:-left-7 group-data-completed/timeline-item:border-none group-data-completed/timeline-item:bg-primary group-data-completed/timeline-item:text-primary-foreground">
-                          <CheckIcon
-                            className="group-not-data-completed/timeline-item:hidden"
-                            size={16}
-                          />
-                        </TimelineIndicator>
-                      </TimelineHeader>
-                      <TimelineContent className="flex w-full flex-col gap-2 md:w-[500px]">
-                        <div className="w-full text-muted-foreground">
-                          {project.description}
-                        </div>
-                        <div className="flex gap-2">
-                          {project.techs.map((tech) => (
-                            <Badge key={tech} variant="blue">
-                              {tech}
-                            </Badge>
-                          ))}
-                        </div>
-                      </TimelineContent>
-                    </TimelineItem>
-                  </motion.div>
-                ))}
-              </Timeline>
-            </motion.div>
-          </ScrollArea>
-
-          <motion.div
-            animate={{
-              translateY: [0, -4, 0],
-            }}
-            transition={{
-              duration: 1.5,
-              repeat: Number.POSITIVE_INFINITY,
-              repeatType: "loop",
-            }}
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-          >
-            <Link href="/projects">
-              <Button>
-                View all projects
-                <ArrowRight className="size-4" />
-              </Button>
+              {t("common.viewProject")}
+              <ArrowUpRight className="size-4" />
             </Link>
-          </motion.div>
-        </Section.Content>
-      </motion.div>
-    </Section.Root>
+          </Magnetic>
+        </div>
+
+        <div className="md:col-span-5">
+          <p className="text-base text-muted-foreground leading-relaxed md:text-lg">
+            {localize(
+              project.description,
+              project.translations,
+              "description",
+              locale
+            )}
+          </p>
+          <div className="mt-5 flex flex-wrap gap-2">
+            {project.techs.map((tech) => (
+              <Badge key={tech} variant="blue">
+                {tech}
+              </Badge>
+            ))}
+          </div>
+        </div>
+      </article>
+    </Reveal>
+  )
+}
+
+export function Project({
+  initialProjects,
+}: {
+  initialProjects?: ProjectType[]
+}) {
+  const { data: projects } = useProjects(initialProjects)
+  const { t } = useI18n()
+
+  // Home shows a curated 2; the "View all" link goes to /projects (full list).
+  const items = (projects ?? []).slice(0, 2)
+
+  return (
+    <section
+      className="relative mx-auto w-full max-w-7xl scroll-mt-20 px-6 py-24 md:scroll-mt-0 md:px-10 md:py-32 lg:px-16"
+      id="project"
+    >
+      <Reveal>
+        <div className="mb-12 flex items-center gap-4">
+          <span className="font-mono text-muted-foreground text-xs uppercase tracking-[0.3em]">
+            {t("work.label")}
+          </span>
+          <div className="h-px flex-1 bg-border" />
+        </div>
+        <h2 className="max-w-3xl font-bold text-[clamp(2rem,5vw,4rem)] leading-[0.95] tracking-tighter">
+          {t("work.headingLine1")}{" "}
+          <span className="text-muted-foreground">
+            {t("work.headingLine2")}
+          </span>
+        </h2>
+        <p className="mt-6 max-w-xl text-base text-muted-foreground leading-relaxed md:text-lg">
+          {t("work.intro")}
+        </p>
+      </Reveal>
+
+      <div className="mt-14 flex flex-col">
+        {items.map((project, idx) => (
+          <ProjectRow index={idx} key={project.id ?? project.name} project={project} />
+        ))}
+        <div aria-hidden="true" className="border-border border-t" />
+      </div>
+
+      <Magnetic className="mt-10 w-fit">
+        <Link
+          className="inline-flex items-center gap-2 font-mono text-muted-foreground text-sm uppercase tracking-[0.15em] transition-colors hover:text-foreground"
+          href="/projects"
+        >
+          {t("common.viewAll")}
+          <ArrowUpRight className="size-4" />
+        </Link>
+      </Magnetic>
+    </section>
   )
 }

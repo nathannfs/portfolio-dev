@@ -6,73 +6,72 @@ import { getDegrees } from "@/http/degrees/get-degrees"
 import { getExperiences } from "@/http/experiences/get-experiences"
 import { getHobbies } from "@/http/hobbies/get-hobbies"
 import { getProjects } from "@/http/projects/get-projects"
+import type { AboutMe } from "@/types/about-me"
+import type { Certificate } from "@/types/certificate"
+import type { Degree } from "@/types/degree"
+import type { Experience } from "@/types/experiences"
+import type { Hobby } from "@/types/hobby"
+import type { Project } from "@/types/project"
 
-export const useCertifications = () => {
-  return useQuery({
+/**
+ * Every hook accepts `initialData` so a Server Component can hand over rows it
+ * already read from the database. Without it the first paint is empty and the
+ * content only exists after the browser fetches, which leaves crawlers with a
+ * blank page.
+ */
+
+const shared = {
+  staleTime: 1000 * 60,
+  placeholderData: keepPreviousData,
+  refetchOnWindowFocus: true,
+  refetchInterval: 1000 * 20,
+  refetchIntervalInBackground: false,
+} as const
+
+export const useCertifications = (initialData?: Certificate[]) =>
+  useQuery({
     queryKey: ["certifications"],
     queryFn: getCertifications,
-    staleTime: 1000 * 60, // 60 seconds
-    placeholderData: keepPreviousData,
-    refetchOnWindowFocus: true,
-    refetchInterval: 1000 * 20, // 20 seconds
-    refetchIntervalInBackground: false,
+    initialData,
+    ...shared,
   })
-}
 
-export const useDegrees = () => {
-  return useQuery({
+export const useDegrees = (initialData?: Degree[]) =>
+  useQuery({
     queryKey: ["degrees"],
     queryFn: getDegrees,
-    staleTime: 1000 * 60, // 60 seconds
-    placeholderData: keepPreviousData,
-    refetchOnWindowFocus: true,
-    refetchInterval: 1000 * 20, // 20 seconds
-    refetchIntervalInBackground: false,
+    initialData,
+    ...shared,
   })
-}
 
-export const useHobbies = () => {
-  return useQuery({
+export const useHobbies = (initialData?: Hobby[]) =>
+  useQuery({
     queryKey: ["hobbies"],
     queryFn: getHobbies,
-    staleTime: 1000 * 60, // 60 seconds
-    placeholderData: keepPreviousData,
-    refetchOnWindowFocus: true,
-    refetchInterval: 1000 * 20, // 20 seconds
-    refetchIntervalInBackground: false,
+    initialData,
+    ...shared,
   })
-}
 
-export const useAboutMe = () => {
-  return useQuery({
+export const useAboutMe = (initialData?: AboutMe[]) =>
+  useQuery({
     queryKey: ["about-me"],
     queryFn: getAboutMe,
-    staleTime: 1000 * 60, // 60 seconds
-    placeholderData: keepPreviousData,
-    refetchOnWindowFocus: true,
-    refetchInterval: 1000 * 20, // 20 seconds
-    refetchIntervalInBackground: false,
+    initialData,
+    ...shared,
   })
-}
 
-export const useExperiences = () =>
+export const useExperiences = (initialData?: Experience[]) =>
   useQuery({
     queryKey: ["experiences"],
     queryFn: getExperiences,
-    staleTime: 1000 * 60,
-    placeholderData: keepPreviousData,
-    refetchOnWindowFocus: true,
-    refetchInterval: 1000 * 20,
-    refetchIntervalInBackground: false,
+    initialData,
+    ...shared,
   })
 
-export const useProjects = () =>
+export const useProjects = (initialData?: Project[]) =>
   useQuery({
     queryKey: ["projects"],
     queryFn: getProjects,
-    staleTime: 1000 * 60,
-    placeholderData: keepPreviousData,
-    refetchOnWindowFocus: true,
-    refetchInterval: 1000 * 20,
-    refetchIntervalInBackground: false,
+    initialData,
+    ...shared,
   })

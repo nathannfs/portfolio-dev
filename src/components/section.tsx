@@ -8,7 +8,7 @@ function Root({ className, ...props }: RootProps) {
     <div
       {...props}
       className={twMerge([
-        "mx-auto flex w-full flex-col items-center justify-center gap-10 px-4 py-10 md:h-[calc(100vh-80px)] md:snap-start md:py-4 lg:max-w-7xl",
+        "mx-auto flex w-full scroll-mt-24 flex-col items-center justify-center gap-10 px-4 py-20 md:py-28 lg:max-w-7xl",
         className,
       ])}
     />
@@ -29,14 +29,16 @@ function Header({ className, ...props }: HeaderProps) {
   )
 }
 
-type TitleProps = ComponentProps<"h1">
+type TitleProps = ComponentProps<"h2"> & {
+  as?: "h1" | "h2"
+}
 
-function Title({ className, ...props }: TitleProps) {
+function Title({ as: Comp = "h2", className, ...props }: TitleProps) {
   return (
-    <h1
+    <Comp
       {...props}
       className={twMerge([
-        "text-center font-bold text-3xl md:text-4xl lg:text-5xl",
+        "text-balance text-center font-bold text-3xl tracking-tight md:text-4xl lg:text-5xl",
         className,
       ])}
     />

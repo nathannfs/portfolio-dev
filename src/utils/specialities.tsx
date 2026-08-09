@@ -5,18 +5,18 @@ export const specialties = [
     icon: <Layers className="size-8 text-primary" />,
     title: "Full-Stack Product Engineering",
     description:
-      "I architect and ship complete SaaS products from database schema to polished UI, leveraging Next.js App Router, Server Actions, and edge-first deployment strategies.",
+      "I build and ship complete SaaS products, from the database schema to the UI, using the Next.js App Router, Server Actions, and containerized deploys.",
   },
   {
     icon: <Server className="size-8 text-primary" />,
     title: "API Design & Backend Architecture",
     description:
-      "Engineered scalable REST and GraphQL APIs with Node.js, NestJS, and Hono. Deep experience with Supabase real-time, Row-Level Security, and multi-tenant data isolation.",
+      "Built REST APIs with Node.js, NestJS, and Hono. I isolate tenants with Row Level Security in Postgres, applied per request, instead of trusting every query to remember the filter.",
   },
   {
     icon: <Rocket className="size-8 text-primary" />,
     title: "Performance & DX Optimization",
     description:
-      "Spearheaded performance-first frontends using React Server Components, Turbopack, and code-splitting patterns. Reduced build times and TTI through cutting-edge tooling.",
+      "Built performance-first frontends with React Server Components, Turbopack, and code-splitting. I profile before optimizing, so the work goes where the time is actually spent.",
   },
 ]

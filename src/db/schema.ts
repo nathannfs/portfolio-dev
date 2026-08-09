@@ -1,6 +1,7 @@
 import {
   boolean,
   integer,
+  jsonb,
   pgTable,
   primaryKey,
   text,
@@ -100,6 +101,7 @@ export const certifications = pgTable("certifications", {
   hours: integer("hours").notNull(),
   status: text("status").notNull(),
   description: text("description"),
+  translations: jsonb("translations").$type<Record<string, unknown>>(),
   createdAt: timestamp("created_at").defaultNow(),
 })
 
@@ -110,6 +112,7 @@ export const degrees = pgTable("degrees", {
   period: text("period").notNull(),
   status: text("status").notNull(),
   description: text("description"),
+  translations: jsonb("translations").$type<Record<string, unknown>>(),
   createdAt: timestamp("created_at").defaultNow(),
 })
 
@@ -122,6 +125,7 @@ export const hobbies = pgTable("hobbies", {
 export const aboutMe = pgTable("about_me", {
   id: uuid("id").primaryKey().defaultRandom(),
   content: text("content").notNull(),
+  translations: jsonb("translations").$type<Record<string, unknown>>(),
   createdAt: timestamp("created_at").defaultNow(),
   updatedAt: timestamp("updated_at").defaultNow(),
 })
@@ -133,6 +137,7 @@ export const experiences = pgTable("experiences", {
   period: text("period").notNull(),
   description: text("description").notNull(),
   responsibilities: text("responsibilities").array().notNull(),
+  translations: jsonb("translations").$type<Record<string, unknown>>(),
   createdAt: timestamp("created_at").defaultNow(),
 })
 
@@ -147,5 +152,6 @@ export const projects = pgTable("projects", {
   features: text("features").array().notNull(),
   challenges: text("challenges").array().notNull(),
   learnings: text("learnings").array().notNull(),
+  translations: jsonb("translations").$type<Record<string, unknown>>(),
   createdAt: timestamp("created_at").defaultNow(),
 })

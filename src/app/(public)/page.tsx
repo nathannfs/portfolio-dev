@@ -1,44 +1,40 @@
-"use client"
-
-import { useRef } from "react"
-
+import { Reveal } from "@/components/motion"
 import { About } from "@/components/sections/about"
 import { Contact } from "@/components/sections/contact"
 import { Hero } from "@/components/sections/hero"
 import { Project } from "@/components/sections/project"
 import { Specialties } from "@/components/sections/specialties"
 import { TechStack } from "@/components/sections/tech-stack"
-import { Separator } from "@/components/separator"
+import { getCertifications, getDegrees, getProjects } from "@/server/content"
 
-export default function Home() {
-  const containerRef = useRef(null)
+export default async function Home() {
+  const [projects, certificates, degrees] = await Promise.all([
+    getProjects(),
+    getCertifications(),
+    getDegrees(),
+  ])
 
   return (
-    <main
-      className="min-h-full overflow-y-auto transition-all ease-in-out md:h-[calc(100vh-80px)] md:snap-y md:snap-mandatory md:overflow-y-scroll"
-      ref={containerRef}
-    >
+    <div className="flex flex-col">
       <Hero />
 
-      <Separator />
+      <Project initialProjects={projects} />
 
-      <About />
+      <Reveal>
+        <About initialCertificates={certificates} initialDegrees={degrees} />
+      </Reveal>
 
-      <Separator />
+      <Reveal>
+        <Specialties />
+      </Reveal>
 
-      <Specialties />
+      <Reveal>
+        <TechStack />
+      </Reveal>
 
-      <Separator />
-
-      <Project />
-
-      <Separator />
-
-      <TechStack />
-
-      <Separator />
-
-      <Contact />
-    </main>
+      <Reveal>
+        <Contact />
+      </Reveal>
+    </div>
   )
 }

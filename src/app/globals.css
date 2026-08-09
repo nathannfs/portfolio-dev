@@ -28,6 +28,12 @@
     --chart-4: 43 74% 66%;
     --chart-5: 27 87% 67%;
     --radius: 0.5rem;
+    --aurora-1: #22d3ee;
+    --aurora-2: #3b82f6;
+    --aurora-3: #8b5cf6;
+    --surface-1: #0e0e13;
+    --surface-2: #14141b;
+    --glow: 34 211 238;
   }
   .dark {
     --background: 240 10% 3.9%;
@@ -54,6 +60,21 @@
     --chart-3: 30 80% 55%;
     --chart-4: 280 65% 60%;
     --chart-5: 340 75% 55%;
+    --aurora-1: #22d3ee;
+    --aurora-2: #3b82f6;
+    --aurora-3: #8b5cf6;
+    --surface-1: #0e0e13;
+    --surface-2: #14141b;
+    --glow: 34 211 238;
+  }
+  /* Light variant: softened "soft aurora" (toggle stays functional) */
+  :root:not(.dark) {
+    --aurora-1: #67e8f9;
+    --aurora-2: #93c5fd;
+    --aurora-3: #c4b5fd;
+    --surface-1: #ffffff;
+    --surface-2: #f4f4f6;
+    --glow: 103 232 249;
   }
 }
 @layer base {
@@ -63,6 +84,54 @@
   body {
     @apply bg-background text-foreground;
   }
+}
+
+/* ─── Lenis smooth scroll ─── */
+html.lenis,
+html.lenis body {
+  height: auto;
+}
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+.lenis.lenis-stopped {
+  overflow: hidden;
+}
+
+/* ─── Reduced motion: kill decorative motion ─── */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* ─── Custom cursor: hide native cursor on precise pointers ─── */
+@media (pointer: fine) and (prefers-reduced-motion: no-preference) {
+  body,
+  body a,
+  body button {
+    cursor: none;
+  }
+}
+
+/* ─── Aurora radial helper ─── */
+.bg-aurora-radial {
+  background:
+    radial-gradient(
+      60% 50% at 20% 20%,
+      color-mix(in oklab, var(--aurora-1) 45%, transparent),
+      transparent 70%
+    ),
+    radial-gradient(
+      55% 45% at 80% 30%,
+      color-mix(in oklab, var(--aurora-3) 40%, transparent),
+      transparent 70%
+    );
 }
 
 /* ─── Custom Animation Keyframes ─── */
@@ -102,16 +171,6 @@
   }
   50% {
     box-shadow: 0 0 20px rgba(14, 165, 233, 0.6);
-  }
-}
-
-@keyframes gradient-text {
-  0%,
-  100% {
-    background-position: 0% 50%;
-  }
-  50% {
-    background-position: 100% 50%;
   }
 }
 
@@ -156,31 +215,10 @@
   animation: pulse-glow 2s ease-in-out infinite;
 }
 
-.animate-gradient-text {
-  -webkit-text-fill-color: transparent;
-  -webkit-background-clip: text;
-  background-clip: text;
-  background-size: 200% auto;
-  animation: gradient-text 4s linear infinite;
-}
-
 .animate-slide-in-right {
   animation: slide-in-right 0.5s ease-out forwards;
 }
 
 .animate-fade-in-up {
   animation: fade-in-up 0.5s ease-out forwards;
-}
-
-/* ─── Glassmorphism Utility ─── */
-.glass {
-  background: rgba(255, 255, 255, 0.05);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  -webkit-backdrop-filter: blur(12px);
-  backdrop-filter: blur(12px);
-}
-
-.dark .glass {
-  background: rgba(255, 255, 255, 0.03);
-  border: 1px solid rgba(255, 255, 255, 0.06);
 }

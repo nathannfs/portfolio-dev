@@ -6,4 +6,5 @@ export interface Experience {
   period: string
   position: string
   responsibilities: string[]
+  translations?: Record<string, unknown> | null
 }

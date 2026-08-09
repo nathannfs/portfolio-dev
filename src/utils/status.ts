@@ -1,7 +1,19 @@
 import type { Status } from "@/types/status"
 
-export function statusLabel(status: Status | undefined) {
-  switch (status) {
+/**
+ * Normalizes a status value to the canonical key ("completed", "in_progress",
+ * "planned") regardless of the casing/spacing stored in the database
+ * (e.g. "Completed" or "In Progress").
+ */
+export function normalizeStatus(status: string | undefined): string {
+  return String(status ?? "")
+    .trim()
+    .toLowerCase()
+    .replace(/[\s-]+/g, "_")
+}
+
+export function statusLabel(status: Status | string | undefined) {
+  switch (normalizeStatus(status)) {
     case "completed":
       return "Completed"
     case "in_progress":
@@ -13,8 +25,8 @@ export function statusLabel(status: Status | undefined) {
   }
 }
 
-export function statusColor(status: Status | undefined) {
-  switch (status) {
+export function statusColor(status: Status | string | undefined) {
+  switch (normalizeStatus(status)) {
     case "completed":
       return "bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200"
     case "in_progress":

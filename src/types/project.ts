@@ -9,5 +9,6 @@ export interface Project {
   learnings: string[]
   name: string
   techs: string[]
+  translations?: Record<string, unknown> | null
   year?: string
 }

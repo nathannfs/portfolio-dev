@@ -1,36 +1,73 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# portfolio-dev
 
-## Getting Started
+Meu portfólio pessoal, no ar em **[nathannfs.com](https://nathannfs.com)**.
 
-First, run the development server:
+Não é uma página estática. Os projetos vivem no Postgres e são editados por uma área administrativa protegida, o conteúdo é servido em português e inglês a partir do banco, e o SEO técnico é gerado no build.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+## Stack
+
+| | |
+|---|---|
+| Framework | Next.js 15 (App Router), React 19, TypeScript |
+| Estilo | Tailwind CSS, next-themes para claro e escuro |
+| Dados | PostgreSQL com Drizzle ORM |
+| Autenticação | NextAuth v5 |
+| Animação | GSAP, Framer Motion, Lenis para scroll suave |
+| Deploy | Vercel |
+
+## Decisões que valem explicar
+
+**Conteúdo no banco, não em arquivo.** Os projetos ficam em Postgres e são editados pela área autenticada em `/auth/sign-in`. Trocar uma descrição ou publicar um projeto novo não exige commit nem redeploy.
+
+**Tradução aditiva, em coluna separada.** Em vez de duplicar cada registro por idioma, cada projeto guarda suas traduções numa coluna própria. Adicionar um idioma novo não altera o schema nem migra dado existente.
+
+**Idioma por conteúdo, nunca por redirecionamento de IP.** Redirecionar visitante por geolocalização cega o rastreador do Google, que chega sempre do mesmo lugar e acaba indexando uma versão só. Aqui a rota decide o idioma e o Googlebot enxerga as duas.
+
+**SEO gerado, não escrito à mão.** `sitemap.ts` e `robots.ts` são gerados a partir do banco, cada projeto tem metadata própria, e o site expõe um `llms.txt` para os rastreadores de busca por IA.
+
+**Scroll com Lenis em contexto compartilhado.** A navegação por âncora e o botão de voltar ao topo usam a mesma instância do Lenis via contexto, em vez de cada componente criar a sua e disputar o scroll.
+
+## Estrutura
+
+```
+src/
+├── app/
+│   ├── (public)/          # home e autenticação
+│   ├── about/
+│   ├── projects/          # listagem e detalhe por id
+│   ├── api/
+│   ├── sitemap.ts         # gerado a partir do banco
+│   └── robots.ts
+├── components/            # botão, modal, formulário, motion
+├── db/                    # schema e cliente Drizzle
+├── i18n/                  # config, provider e localização
+└── http/                  # cliente de API
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Rodando local
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+Requer Node 20+, pnpm e um PostgreSQL acessível.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```bash
+pnpm install
+```
 
-## Learn More
+Crie um `.env` na raiz:
 
-To learn more about Next.js, take a look at the following resources:
+```env
+DATABASE_URL=postgresql://usuario:senha@localhost:5432/portfolio
+AUTH_SECRET=  # gere com: openssl rand -base64 32
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Depois:
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+```bash
+pnpm drizzle-kit push     # cria o schema
+pnpm dev
+```
 
-## Deploy on Vercel
+A aplicação sobe em `http://localhost:3000`.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Licença
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Código aberto para leitura e referência. O conteúdo, os textos e as imagens são meus.

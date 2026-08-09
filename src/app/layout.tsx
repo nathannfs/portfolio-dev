@@ -1,36 +1,54 @@
 import "./globals.css"
 
-import type { Metadata } from "next"
-import { Inter } from "next/font/google"
+import type { Metadata, Viewport } from "next"
+import { Geist, Geist_Mono } from "next/font/google"
 import type { ReactNode } from "react"
 import { twMerge } from "tailwind-merge"
 
 import { Header } from "@/components/header"
+import { BackToTop } from "@/components/motion/back-to-top"
+import { CustomCursor } from "@/components/motion/custom-cursor"
+import { SmoothScroll } from "@/components/motion/smooth-scroll"
+import { SkipLink } from "@/components/skip-link"
+import { structuredData } from "@/lib/structured-data"
 
 import Providers from "./providers"
 
-const inter = Inter({
+const geistSans = Geist({
   subsets: ["latin"],
-  weight: ["400", "500", "600", "700", "900"],
+  variable: "--font-geist-sans",
+  display: "swap",
 })
 
+const geistMono = Geist_Mono({
+  subsets: ["latin"],
+  variable: "--font-geist-mono",
+  display: "swap",
+})
+
+const SITE_DESCRIPTION =
+  "Full-stack engineer working with TypeScript end to end: NestJS and Node on the API, Next.js and React on the interface, PostgreSQL underneath. I build multi-tenant SaaS at OMD do Brasil and on my own."
+
 export const metadata: Metadata = {
-  title: "Nathan Santos | Mid-Level Product Engineer",
-  description:
-    "Product Engineer specializing in TypeScript, Next.js, and scalable SaaS architecture. Building products that ship fast and scale to millions.",
+  title: "Nathan Ferreira Santos | Full-Stack Software Engineer",
+  description: SITE_DESCRIPTION,
   metadataBase: new URL("https://www.nathannfs.com"),
+  alternates: {
+    canonical: "/",
+  },
+  manifest: "/manifest.json",
+  referrer: "strict-origin-when-cross-origin",
   openGraph: {
-    title: "Nathan Santos | Mid-Level Product Engineer",
-    description:
-      "Product Engineer specializing in TypeScript, Next.js, and scalable SaaS architecture. Building products that ship fast and scale to millions.",
-    url: "https://www.nathannfs.com",
-    siteName: "Nathan Santos — Product Engineer",
+    title: "Nathan Ferreira Santos | Full-Stack Software Engineer",
+    description: SITE_DESCRIPTION,
+    url: "https://www.nathannfs.com/",
+    siteName: "Nathan Ferreira Santos · Full-Stack Software Engineer",
     images: [
       {
         url: "/nathan.jpeg",
         width: 800,
         height: 800,
-        alt: "Nathan Santos — Mid-Level Product Engineer",
+        alt: "Nathan Ferreira Santos · Full-Stack Software Engineer",
       },
     ],
     locale: "en_US",
@@ -38,9 +56,8 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Nathan Santos | Mid-Level Product Engineer",
-    description:
-      "Product Engineer specializing in TypeScript, Next.js, and scalable SaaS architecture.",
+    title: "Nathan Ferreira Santos | Full-Stack Software Engineer",
+    description: SITE_DESCRIPTION,
     site: "@nathannfs",
     creator: "@nathannfs",
     images: ["/nathan.jpeg"],
@@ -66,29 +83,37 @@ export const metadata: Metadata = {
       "max-snippet": -1,
     },
   },
-  applicationName: "Nathan Santos — Product Engineer",
+  applicationName: "Nathan Ferreira Santos · Full-Stack Software Engineer",
   generator: "Next.js",
   keywords: [
-    "Nathan Santos",
-    "Product Engineer",
-    "Mid-Level Developer",
+    "Nathan Ferreira Santos",
+    "Full Stack Engineer",
+    "Software Engineer",
     "TypeScript",
+    "NestJS",
     "Next.js",
     "React",
     "Node.js",
-    "Supabase",
-    "SaaS Architecture",
-    "Full Stack Engineer",
-    "Frontend",
-    "Backend",
-    "Web Developer",
-    "React 19",
-    "Tailwind CSS",
+    "PostgreSQL",
+    "Drizzle ORM",
+    "Multi-tenant SaaS",
+    "Row Level Security",
+    "Docker",
   ],
-  authors: [{ name: "Nathan Santos", url: "https://www.nathannfs.com" }],
-  creator: "Nathan Santos",
-  publisher: "Nathan Santos",
+  authors: [{ name: "Nathan Ferreira Santos", url: "https://www.nathannfs.com" }],
+  creator: "Nathan Ferreira Santos",
+  publisher: "Nathan Ferreira Santos",
   category: "technology",
+  other: {
+    "mobile-web-app-capable": "yes",
+    copyright: "© 2026 Nathan Ferreira Santos",
+  },
+}
+
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  themeColor: "#0ea5e9",
 }
 
 export default function RootLayout({
@@ -98,26 +123,28 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <head>
-        <meta content="width=device-width, initial-scale=1" name="viewport" />
-        <meta content="#0ea5e9" name="theme-color" />
-        <link href="https://www.nathannfs.com/" rel="canonical" />
-        <meta content="Nathan Santos" name="author" />
-        <link href="/manifest.json" rel="manifest" />
-        <meta content="yes" name="apple-mobile-web-app-capable" />
-        <meta content="default" name="apple-mobile-web-app-status-bar-style" />
-        <meta content="strict-origin-when-cross-origin" name="referrer" />
-        <meta content="© 2025 Nathan Santos" name="copyright" />
-      </head>
       <body
         className={twMerge([
-          inter.className,
-          "bg-zinc-50 text-zinc-950 antialiased dark:bg-zinc-950 dark:text-zinc-50",
+          geistSans.variable,
+          geistMono.variable,
+          "bg-zinc-50 font-sans text-zinc-950 antialiased dark:bg-zinc-950 dark:text-zinc-50",
         ])}
       >
+        <script
+          // biome-ignore lint/security/noDangerouslySetInnerHtml: JSON-LD structured data
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
+          type="application/ld+json"
+        />
         <Providers>
-          <Header />
-          <main className="pt-[80px]">{children}</main>
+          <SkipLink />
+          <SmoothScroll>
+            <CustomCursor />
+            <Header />
+            <main className="pt-[80px]" id="main-content">
+              {children}
+            </main>
+            <BackToTop />
+          </SmoothScroll>
         </Providers>
       </body>
     </html>
