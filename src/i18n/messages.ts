@@ -72,6 +72,33 @@ export const messages: Record<Locale, Record<string, unknown>> = {
       hobbies: "Hobbies & Interests",
       more: "More About Me",
     },
+    aiWorkflow: {
+      label: "AI-assisted development",
+      statement:
+        "I build with AI in the loop. What makes that safe to ship is not the model, it is what happens around it.",
+      items: [
+        {
+          title: "Spec before code",
+          description:
+            "Anything non-trivial starts as a written spec: the decision, the constraint, and the option I ruled out on purpose. The agent reads it, and so does whoever picks the project up next.",
+        },
+        {
+          title: "I read it as a reviewer, not as the author",
+          description:
+            "Generated code gets the same pass as a pull request from a stranger. Most of what I throw away looks correct and is quietly wrong in one line.",
+        },
+        {
+          title: "Tests decide, not the diff",
+          description:
+            "Business rules and access policies get tests before I trust a change. An agent that can run the suite and read the failure is worth more than one that writes the code faster.",
+        },
+        {
+          title: "Context has to survive the session",
+          description:
+            "Versioned migrations, decisions written down next to the code, and a project file the agent reads on the way in. That is what lets me pick up a project six weeks later without reconstructing it from memory.",
+        },
+      ],
+    },
     expertise: {
       label: "Expertise",
       statement:
@@ -90,7 +117,7 @@ export const messages: Record<Locale, Record<string, unknown>> = {
         {
           title: "Performance & DX Optimization",
           description:
-            "Built performance-first frontends with React Server Components, Turbopack, and code-splitting. Cut build times and improved time-to-interactive through profiling and disciplined tooling.",
+            "Built performance-first frontends with React Server Components, Turbopack, and code-splitting. I profile before optimizing, so the work goes where the time is actually spent.",
         },
       ],
     },
@@ -103,8 +130,8 @@ export const messages: Record<Locale, Record<string, unknown>> = {
       highlightNote: "Highlighted items are the ones I use every day.",
       categories: {
         Frontend: "Frontend",
-        "Backend & Infra": "Backend & Infra",
-        Tooling: "Tooling",
+        "Backend & Data": "Backend & Data",
+        "Infra & Tooling": "Infra & Tooling",
       },
     },
     contact: {
@@ -230,6 +257,33 @@ export const messages: Record<Locale, Record<string, unknown>> = {
       hobbies: "Hobbies e interesses",
       more: "Mais sobre mim",
     },
+    aiWorkflow: {
+      label: "Desenvolvimento assistido por IA",
+      statement:
+        "Construo com IA no meio do processo. O que torna isso seguro de colocar em produção não é o modelo, é o que acontece em volta dele.",
+      items: [
+        {
+          title: "Spec antes do código",
+          description:
+            "Toda mudança que não é trivial começa como spec escrito: a decisão, a restrição e a opção que descartei de propósito. O agente lê isso, e quem pegar o projeto depois também.",
+        },
+        {
+          title: "Leio como revisor, não como autor",
+          description:
+            "Código gerado passa pela mesma leitura de um pull request de alguém que eu não conheço. A maior parte do que eu descarto parece certa e está errada em silêncio, numa linha só.",
+        },
+        {
+          title: "Quem decide é o teste, não o diff",
+          description:
+            "Regra de negócio e política de acesso ganham teste antes de eu confiar na mudança. Um agente que roda a suíte e lê a falha vale mais que um que escreve o código mais rápido.",
+        },
+        {
+          title: "O contexto precisa sobreviver à sessão",
+          description:
+            "Migrations versionadas, decisão escrita ao lado do código e um arquivo de projeto que o agente lê ao entrar. É o que me deixa voltar a um projeto seis semanas depois sem reconstruir tudo de memória.",
+        },
+      ],
+    },
     expertise: {
       label: "Especialidades",
       statement:
@@ -248,7 +302,7 @@ export const messages: Record<Locale, Record<string, unknown>> = {
         {
           title: "Otimização de Performance e DX",
           description:
-            "Construí frontends com foco em performance usando React Server Components, Turbopack e code-splitting. Reduzi tempos de build e melhorei o time-to-interactive por meio de profiling e ferramentas disciplinadas.",
+            "Construí frontends com foco em performance usando React Server Components, Turbopack e code-splitting. Faço profiling antes de otimizar, pra o esforço ir onde o tempo realmente está.",
         },
       ],
     },
@@ -261,8 +315,8 @@ export const messages: Record<Locale, Record<string, unknown>> = {
       highlightNote: "Os itens em destaque são os que uso todos os dias.",
       categories: {
         Frontend: "Frontend",
-        "Backend & Infra": "Backend e Infra",
-        Tooling: "Ferramentas",
+        "Backend & Data": "Backend e Dados",
+        "Infra & Tooling": "Infra e Ferramentas",
       },
     },
     contact: {

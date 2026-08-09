@@ -1,5 +1,6 @@
 import { Reveal } from "@/components/motion"
 import { About } from "@/components/sections/about"
+import { AiWorkflow } from "@/components/sections/ai-workflow"
 import { Contact } from "@/components/sections/contact"
 import { Hero } from "@/components/sections/hero"
 import { Project } from "@/components/sections/project"
@@ -26,6 +27,10 @@ export default async function Home() {
 
       <Reveal>
         <Specialties />
+      </Reveal>
+
+      <Reveal>
+        <AiWorkflow />
       </Reveal>
 
       <Reveal>
