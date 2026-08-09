@@ -38,12 +38,12 @@ const featuredProjects = [
 const person = {
   "@type": "Person",
   "@id": PERSON_ID,
-  name: "Nathan Santos",
+  name: "Nathan Ferreira Santos",
   url: `${SITE_URL}/`,
   image: `${SITE_URL}/nathan.jpeg`,
-  jobTitle: "Product Engineer",
+  jobTitle: "Full-Stack Software Engineer",
   description:
-    "Product Engineer building full-stack products with NestJS, Next.js, and PostgreSQL.",
+    "Full-stack engineer building multi-tenant SaaS with TypeScript, NestJS, Next.js and PostgreSQL.",
   knowsAbout: [
     "TypeScript",
     "Next.js",
@@ -51,8 +51,10 @@ const person = {
     "Node.js",
     "NestJS",
     "PostgreSQL",
-    "Supabase",
-    "Full-Stack Development",
+    "Drizzle ORM",
+    "Docker",
+    "Multi-tenant architecture",
+    "Row Level Security",
   ],
   address: {
     "@type": "PostalAddress",
@@ -71,7 +73,7 @@ const website = {
   "@type": "WebSite",
   "@id": WEBSITE_ID,
   url: `${SITE_URL}/`,
-  name: "Nathan Santos · Product Engineer",
+  name: "Nathan Ferreira Santos · Full-Stack Software Engineer",
   publisher: { "@id": PERSON_ID },
   inLanguage: "en-US",
 }
@@ -79,7 +81,7 @@ const website = {
 const profilePage = {
   "@type": "ProfilePage",
   url: `${SITE_URL}/`,
-  name: "Nathan Santos | Product Engineer",
+  name: "Nathan Ferreira Santos | Full-Stack Software Engineer",
   isPartOf: { "@id": WEBSITE_ID },
   about: { "@id": PERSON_ID },
   mainEntity: { "@id": PERSON_ID },

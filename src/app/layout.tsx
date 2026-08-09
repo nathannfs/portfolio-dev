@@ -27,10 +27,10 @@ const geistMono = Geist_Mono({
 })
 
 const SITE_DESCRIPTION =
-  "Product Engineer building full-stack products with NestJS, Next.js, and PostgreSQL. Currently shipping at OMD do Brasil and building SaaS on the side."
+  "Full-stack engineer working with TypeScript end to end: NestJS and Node on the API, Next.js and React on the interface, PostgreSQL underneath. I build multi-tenant SaaS at OMD do Brasil and on my own."
 
 export const metadata: Metadata = {
-  title: "Nathan Santos | Product Engineer",
+  title: "Nathan Ferreira Santos | Full-Stack Software Engineer",
   description: SITE_DESCRIPTION,
   metadataBase: new URL("https://www.nathannfs.com"),
   alternates: {
@@ -39,16 +39,16 @@ export const metadata: Metadata = {
   manifest: "/manifest.json",
   referrer: "strict-origin-when-cross-origin",
   openGraph: {
-    title: "Nathan Santos | Product Engineer",
+    title: "Nathan Ferreira Santos | Full-Stack Software Engineer",
     description: SITE_DESCRIPTION,
     url: "https://www.nathannfs.com/",
-    siteName: "Nathan Santos · Product Engineer",
+    siteName: "Nathan Ferreira Santos · Full-Stack Software Engineer",
     images: [
       {
         url: "/nathan.jpeg",
         width: 800,
         height: 800,
-        alt: "Nathan Santos · Product Engineer",
+        alt: "Nathan Ferreira Santos · Full-Stack Software Engineer",
       },
     ],
     locale: "en_US",
@@ -56,7 +56,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Nathan Santos | Product Engineer",
+    title: "Nathan Ferreira Santos | Full-Stack Software Engineer",
     description: SITE_DESCRIPTION,
     site: "@nathannfs",
     creator: "@nathannfs",
@@ -83,32 +83,30 @@ export const metadata: Metadata = {
       "max-snippet": -1,
     },
   },
-  applicationName: "Nathan Santos · Product Engineer",
+  applicationName: "Nathan Ferreira Santos · Full-Stack Software Engineer",
   generator: "Next.js",
   keywords: [
-    "Nathan Santos",
-    "Product Engineer",
-    "Mid-Level Developer",
+    "Nathan Ferreira Santos",
+    "Full Stack Engineer",
+    "Software Engineer",
     "TypeScript",
+    "NestJS",
     "Next.js",
     "React",
     "Node.js",
-    "Supabase",
-    "SaaS Architecture",
-    "Full Stack Engineer",
-    "Frontend",
-    "Backend",
-    "Web Developer",
-    "React 19",
-    "Tailwind CSS",
+    "PostgreSQL",
+    "Drizzle ORM",
+    "Multi-tenant SaaS",
+    "Row Level Security",
+    "Docker",
   ],
-  authors: [{ name: "Nathan Santos", url: "https://www.nathannfs.com" }],
-  creator: "Nathan Santos",
-  publisher: "Nathan Santos",
+  authors: [{ name: "Nathan Ferreira Santos", url: "https://www.nathannfs.com" }],
+  creator: "Nathan Ferreira Santos",
+  publisher: "Nathan Ferreira Santos",
   category: "technology",
   other: {
     "mobile-web-app-capable": "yes",
-    copyright: "© 2025 Nathan Santos",
+    copyright: "© 2026 Nathan Ferreira Santos",
   },
 }
 

@@ -33,8 +33,8 @@ export const messages: Record<Locale, Record<string, unknown>> = {
       },
     },
     hero: {
-      role: "Product Engineer",
-      tagline: "Product Engineer · TypeScript · Next.js · Supabase",
+      role: "Full-Stack Software Engineer",
+      tagline: "Full-Stack · TypeScript · NestJS · Next.js · PostgreSQL",
       description:
         "I build full-stack products, from the NestJS API up to the Next.js interface. Right now I'm shipping at OMD do Brasil and building my own SaaS on the side.",
       scrollToWork: "Scroll to selected work",
@@ -54,7 +54,7 @@ export const messages: Record<Locale, Record<string, unknown>> = {
       heading:
         "I build full-stack SaaS platforms that solve real business problems.",
       paragraph1:
-        "I work mostly in the TypeScript ecosystem (Next.js, React, Node.js, Supabase), taking products from zero to production and caring about performance, clean architecture, and the developer experience along the way.",
+        "I work in the TypeScript ecosystem (Next.js, React, NestJS, Node.js, PostgreSQL), taking products from zero to production and caring about performance, clean architecture, and the developer experience along the way.",
       paragraph2:
         "I keep up with the newer parts of the stack and ship production code with Next.js, React 19, Tailwind, and Biome. I'll pick up a new tool early when it actually earns its place. Right now I'm open to full-stack roles where I own a feature from the API to the UI.",
       education: "Education & Certifications",
@@ -74,7 +74,7 @@ export const messages: Record<Locale, Record<string, unknown>> = {
         {
           title: "API Design & Backend Architecture",
           description:
-            "Engineered scalable REST and GraphQL APIs with Node.js, NestJS, and Hono. Deep experience with Supabase real-time, Row-Level Security, and multi-tenant data isolation.",
+            "Built REST APIs with Node.js, NestJS, and Hono. I isolate tenants with Row Level Security in Postgres, applied per request, instead of trusting every query to remember the filter.",
         },
         {
           title: "Performance & DX Optimization",
@@ -180,8 +180,8 @@ export const messages: Record<Locale, Record<string, unknown>> = {
       },
     },
     hero: {
-      role: "Product Engineer",
-      tagline: "Product Engineer · TypeScript · Next.js · Supabase",
+      role: "Engenheiro de Software Full-Stack",
+      tagline: "Full-Stack · TypeScript · NestJS · Next.js · PostgreSQL",
       description:
         "Construo produtos full-stack, da API em NestJS até a interface em Next.js. No momento estou entregando na OMD do Brasil e tocando meus próprios SaaS nas horas vagas.",
       scrollToWork: "Rolar para os trabalhos selecionados",
@@ -201,7 +201,7 @@ export const messages: Record<Locale, Record<string, unknown>> = {
       heading:
         "Construo plataformas SaaS full-stack que resolvem problemas reais de negócio.",
       paragraph1:
-        "Trabalho principalmente no ecossistema TypeScript (Next.js, React, Node.js, Supabase), levando produtos do zero à produção e cuidando de performance, arquitetura limpa e experiência do desenvolvedor no caminho.",
+        "Trabalho no ecossistema TypeScript (Next.js, React, NestJS, Node.js, PostgreSQL), levando produtos do zero à produção e cuidando de performance, arquitetura limpa e experiência do desenvolvedor no caminho.",
       paragraph2:
         "Acompanho de perto as partes mais novas da stack e coloco código em produção com Next.js, React 19, Tailwind e Biome. Adoto uma ferramenta nova cedo quando ela realmente prova seu valor. No momento estou aberto a vagas full-stack em que eu cuide da feature da API até a UI.",
       education: "Formação e Certificações",
@@ -221,7 +221,7 @@ export const messages: Record<Locale, Record<string, unknown>> = {
         {
           title: "Design de APIs e Arquitetura de Backend",
           description:
-            "Desenvolvi APIs REST e GraphQL escaláveis com Node.js, NestJS e Hono. Ampla experiência com Supabase real-time, Row-Level Security e isolamento de dados multi-tenant.",
+            "Construí APIs REST com Node.js, NestJS e Hono. Isolo tenants com Row Level Security no Postgres, aplicado por requisição, em vez de confiar que toda query lembrou do filtro.",
         },
         {
           title: "Otimização de Performance e DX",
