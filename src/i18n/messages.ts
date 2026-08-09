@@ -45,16 +45,16 @@ export const messages: Record<Locale, Record<string, unknown>> = {
       headingLine1: "Selected",
       headingLine2: "Work",
       intro:
-        "Products I've built and shipped, from SaaS platforms to internal infrastructure.",
+        "A few of them, and what broke along the way.",
       shipped: "Shipped",
       projectsCount: "{count} Projects",
     },
     about: {
       label: "About",
       heading:
-        "I build full-stack SaaS platforms that solve real business problems.",
+        "Most of my work is backend, and the interesting part is almost always in the database.",
       paragraph1:
-        "I work in the TypeScript ecosystem (Next.js, React, NestJS, Node.js, PostgreSQL), taking products from zero to production and caring about performance, clean architecture, and the developer experience along the way.",
+        "I work in the TypeScript ecosystem: NestJS and Node on the API, Next.js and React on the interface, PostgreSQL underneath. I care more about getting the data model right early than about the framework of the month.",
       paragraph2:
         "I keep up with the newer parts of the stack and ship production code with Next.js, React 19, Tailwind, and Biome. I'll pick up a new tool early when it actually earns its place. Right now I'm open to full-stack roles where I own a feature from the API to the UI.",
       education: "Education & Certifications",
@@ -102,7 +102,7 @@ export const messages: Record<Locale, Record<string, unknown>> = {
     expertise: {
       label: "Expertise",
       statement:
-        "End-to-end product engineering, from system design to the finished UI.",
+        "What I actually spend my time on.",
       items: [
         {
           title: "Full-Stack Product Engineering",
@@ -124,7 +124,7 @@ export const messages: Record<Locale, Record<string, unknown>> = {
     stack: {
       label: "Tech Stack",
       heading:
-        "The tools I reach for to design, build, and ship production products.",
+        "The tools I actually use, not the ones I have heard of.",
       description:
         "The core technologies I reach for to design, build, and ship production products. Highlighted tools are the ones I use every day.",
       highlightNote: "Highlighted items are the ones I use every day.",
@@ -155,9 +155,9 @@ export const messages: Record<Locale, Record<string, unknown>> = {
     },
     projects: {
       label: "Selected Work",
-      heading: "Products I've built and shipped.",
+      heading: "Things I have built.",
       intro:
-        "Products I've designed, built, and shipped, from SaaS platforms to internal tooling. Open any one to see how it came together.",
+        "Open any one to see the decisions behind it, including the ones I got wrong first.",
       projectsCount: "{count} Projects",
       shipped: "Shipped",
       viewDetails: "View details",
@@ -230,16 +230,16 @@ export const messages: Record<Locale, Record<string, unknown>> = {
       headingLine1: "Trabalhos",
       headingLine2: "Selecionados",
       intro:
-        "Produtos que construí e coloquei em produção, de plataformas SaaS a ferramentas internas de infraestrutura.",
+        "Alguns deles, e o que quebrou no caminho.",
       shipped: "Em produção",
       projectsCount: "{count} Projetos",
     },
     about: {
       label: "Sobre",
       heading:
-        "Construo plataformas SaaS full-stack que resolvem problemas reais de negócio.",
+        "A maior parte do meu trabalho é backend, e a parte interessante quase sempre está no banco.",
       paragraph1:
-        "Trabalho no ecossistema TypeScript (Next.js, React, NestJS, Node.js, PostgreSQL), levando produtos do zero à produção e cuidando de performance, arquitetura limpa e experiência do desenvolvedor no caminho.",
+        "Trabalho no ecossistema TypeScript: NestJS e Node na API, Next.js e React na interface, PostgreSQL embaixo. Me importo mais em acertar o modelo de dados cedo do que com o framework do mês.",
       paragraph2:
         "Acompanho de perto as partes mais novas da stack e coloco código em produção com Next.js, React 19, Tailwind e Biome. Adoto uma ferramenta nova cedo quando ela realmente prova seu valor. No momento estou aberto a vagas full-stack em que eu cuide da feature da API até a UI.",
       education: "Formação e Certificações",
@@ -287,7 +287,7 @@ export const messages: Record<Locale, Record<string, unknown>> = {
     expertise: {
       label: "Especialidades",
       statement:
-        "Engenharia de produto de ponta a ponta, do design do sistema à interface final.",
+        "No que eu passo o tempo de verdade.",
       items: [
         {
           title: "Engenharia de Produto Full-Stack",
@@ -309,7 +309,7 @@ export const messages: Record<Locale, Record<string, unknown>> = {
     stack: {
       label: "Tech Stack",
       heading:
-        "As ferramentas que uso para projetar, construir e entregar produtos em produção.",
+        "As ferramentas que eu uso mesmo, não as que eu já ouvi falar.",
       description:
         "As principais tecnologias que uso para projetar, construir e entregar produtos em produção. As ferramentas em destaque são as que uso todos os dias.",
       highlightNote: "Os itens em destaque são os que uso todos os dias.",
@@ -340,9 +340,9 @@ export const messages: Record<Locale, Record<string, unknown>> = {
     },
     projects: {
       label: "Trabalhos Selecionados",
-      heading: "Produtos que construí e coloquei em produção.",
+      heading: "Coisas que eu construí.",
       intro:
-        "Produtos que projetei, construí e coloquei em produção, de plataformas SaaS a ferramentas internas. Abra qualquer um para ver como foi feito.",
+        "Abra qualquer um para ver as decisões por trás dele, inclusive as que eu errei primeiro.",
       projectsCount: "{count} Projetos",
       shipped: "Em produção",
       viewDetails: "Ver detalhes",
