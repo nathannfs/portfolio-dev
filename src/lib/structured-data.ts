@@ -75,7 +75,7 @@ const website = {
   url: `${SITE_URL}/`,
   name: "Nathan Ferreira Santos · Full-Stack Software Engineer",
   publisher: { "@id": PERSON_ID },
-  inLanguage: "en-US",
+  inLanguage: ["en-US", "pt-BR"],
 }
 
 const profilePage = {

@@ -1,13 +1,17 @@
-import type { Metadata } from "next"
-
+import { localizedMetadata } from "@/lib/page-metadata"
 import { getProjects } from "@/server/content"
 
 import { ProjectsView } from "./projects-view"
 
-export const metadata: Metadata = {
-  title: "Projects",
-  description:
-    "Full-stack products I built and shipped, from multi-tenant SaaS platforms to internal tooling.",
+export function generateMetadata() {
+  return localizedMetadata({
+    title: { en: "Projects", "pt-BR": "Projetos" },
+    description: {
+      en: "Full-stack products I built and shipped, from multi-tenant SaaS platforms to internal tooling.",
+      "pt-BR":
+        "Produtos full-stack que construí e coloquei em produção, de plataformas SaaS multi-tenant a ferramentas internas.",
+    },
+  })
 }
 
 export default async function ProjectsPage() {

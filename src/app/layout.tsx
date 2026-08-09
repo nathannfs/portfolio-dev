@@ -65,7 +65,10 @@ export async function generateMetadata(): Promise<Metadata> {
 }
 
 const baseMetadata: Metadata = {
-  title: "Nathan Ferreira Santos | Full-Stack Software Engineer",
+  title: {
+    default: "Nathan Ferreira Santos | Full-Stack Software Engineer",
+    template: "%s | Nathan Ferreira Santos",
+  },
   description: SITE_DESCRIPTION,
   metadataBase: new URL("https://www.nathannfs.com"),
   manifest: "/manifest.json",
