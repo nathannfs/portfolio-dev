@@ -67,7 +67,7 @@ type AboutInitialData = {
 
 export function About({ initial }: { initial: AboutInitialData }) {
   const { data: session } = useSession()
-  const { locale } = useI18n()
+  const { locale, t } = useI18n()
 
   const { isOpen, config, confirm, close, handleConfirm } = useConfirmModal()
 
@@ -192,7 +192,7 @@ export function About({ initial }: { initial: AboutInitialData }) {
         <Reveal>
           <div className="mb-6 flex items-center gap-4">
             <span className="font-mono text-muted-foreground text-xs uppercase tracking-[0.3em]">
-              About
+              {t("aboutPage.label")}
             </span>
             <div className="h-px flex-1 bg-border" />
           </div>
@@ -200,14 +200,10 @@ export function About({ initial }: { initial: AboutInitialData }) {
           <div className="grid grid-cols-1 gap-10 lg:grid-cols-12 lg:items-end lg:gap-8">
             <div className="lg:col-span-8">
               <h1 className="max-w-4xl font-bold text-[clamp(2.25rem,6vw,5rem)] leading-[0.95] tracking-tighter">
-                About Me
+                {t("aboutPage.heading")}
               </h1>
               <p className="mt-8 max-w-2xl text-base text-muted-foreground leading-relaxed md:text-lg">
-                Product Engineer with a track record of architecting full-stack
-                SaaS platforms that solve real business problems. I specialize
-                in the TypeScript ecosystem (Next.js, React, Node.js, Supabase),
-                building products from zero to production with a focus on
-                performance, clean architecture, and developer experience.
+                {t("aboutPage.intro")}
               </p>
             </div>
 
@@ -241,7 +237,7 @@ export function About({ initial }: { initial: AboutInitialData }) {
               )
             }
           >
-            Education
+            {t("aboutPage.education")}
           </SectionLabel>
 
           <ul className="flex flex-col">
@@ -347,7 +343,7 @@ export function About({ initial }: { initial: AboutInitialData }) {
               )
             }
           >
-            Courses &amp; Certifications
+            {t("aboutPage.certifications")}
           </SectionLabel>
 
           <ul className="flex flex-col">
@@ -435,7 +431,7 @@ export function About({ initial }: { initial: AboutInitialData }) {
               )
             }
           >
-            Professional Experience
+            {t("aboutPage.experience")}
           </SectionLabel>
 
           <ul className="flex flex-col">
@@ -556,7 +552,7 @@ export function About({ initial }: { initial: AboutInitialData }) {
               )
             }
           >
-            Hobbies &amp; Interests
+            {t("aboutPage.hobbies")}
           </SectionLabel>
 
           <ul className="flex flex-col">
@@ -632,7 +628,7 @@ export function About({ initial }: { initial: AboutInitialData }) {
               )
             }
           >
-            More About Me
+            {t("aboutPage.more")}
           </SectionLabel>
 
           <div className="flex flex-col gap-8">

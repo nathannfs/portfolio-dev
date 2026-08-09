@@ -8,7 +8,6 @@ export const metadata: Metadata = {
   title: "Projects",
   description:
     "Full-stack products I built and shipped, from multi-tenant SaaS platforms to internal tooling.",
-  alternates: { canonical: "/projects" },
 }
 
 export default async function ProjectsPage() {

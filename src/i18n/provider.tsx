@@ -78,16 +78,30 @@ function interpolate(
   )
 }
 
-export function LocaleProvider({ children }: { children: ReactNode }) {
-  // Start from the SSR default to avoid hydration mismatch; switch after mount.
-  const [locale, setLocaleState] = useState<Locale>(defaultLocale)
+/**
+ * The locale comes from the URL, resolved in middleware and handed down by the
+ * server. Server and client render the same language on the first pass, so
+ * there is no flash and no hydration mismatch.
+ *
+ * The cookie is written only so a bare visit to `/` can be redirected to the
+ * language someone picked last. It is never the source of truth.
+ */
+export function LocaleProvider({
+  children,
+  locale: initialLocale,
+}: {
+  children: ReactNode
+  locale?: Locale
+}) {
+  const [locale, setLocaleState] = useState<Locale>(
+    initialLocale ?? defaultLocale
+  )
 
   useEffect(() => {
-    const persisted = readCookieLocale() ?? readStoredLocale()
-    if (persisted && persisted !== defaultLocale) {
-      setLocaleState(persisted)
+    if (initialLocale && initialLocale !== locale) {
+      setLocaleState(initialLocale)
     }
-  }, [])
+  }, [initialLocale, locale])
 
   useEffect(() => {
     if (typeof document !== "undefined") {

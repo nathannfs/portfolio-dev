@@ -14,7 +14,6 @@ export const metadata: Metadata = {
   title: "About",
   description:
     "Full-stack engineer working with TypeScript end to end. Experience, education and the tools I reach for.",
-  alternates: { canonical: "/about" },
 }
 
 export default async function AboutPage() {

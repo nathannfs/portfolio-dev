@@ -2,6 +2,7 @@ import "./globals.css"
 
 import type { Metadata, Viewport } from "next"
 import { Geist, Geist_Mono } from "next/font/google"
+import { headers } from "next/headers"
 import type { ReactNode } from "react"
 import { twMerge } from "tailwind-merge"
 
@@ -29,13 +30,44 @@ const geistMono = Geist_Mono({
 const SITE_DESCRIPTION =
   "Full-stack engineer working with TypeScript end to end: NestJS and Node on the API, Next.js and React on the interface, PostgreSQL underneath. I build multi-tenant SaaS at OMD do Brasil and on my own."
 
-export const metadata: Metadata = {
+const SITE_DESCRIPTION_PT =
+  "Engenheiro full-stack que trabalha com TypeScript nas duas pontas: NestJS e Node na API, Next.js e React na interface, PostgreSQL embaixo. Construo SaaS multi-tenant na OMD do Brasil e por conta própria."
+
+/** English lives at the root, Portuguese under /pt. See src/middleware.ts. */
+function ptPath(path: string) {
+  return path === "/" ? "/pt" : `/pt${path}`
+}
+
+export async function generateMetadata(): Promise<Metadata> {
+  const requestHeaders = await headers()
+  const locale = requestHeaders.get("x-locale") === "pt-BR" ? "pt-BR" : "en"
+  const path = requestHeaders.get("x-pathname") ?? "/"
+  const description = locale === "pt-BR" ? SITE_DESCRIPTION_PT : SITE_DESCRIPTION
+
+  return {
+    ...baseMetadata,
+    description,
+    alternates: {
+      canonical: locale === "pt-BR" ? ptPath(path) : path,
+      languages: {
+        en: path,
+        "pt-BR": ptPath(path),
+        "x-default": path,
+      },
+    },
+    openGraph: {
+      ...baseMetadata.openGraph,
+      description,
+      locale: locale === "pt-BR" ? "pt_BR" : "en_US",
+    },
+    twitter: { ...baseMetadata.twitter, description },
+  }
+}
+
+const baseMetadata: Metadata = {
   title: "Nathan Ferreira Santos | Full-Stack Software Engineer",
   description: SITE_DESCRIPTION,
   metadataBase: new URL("https://www.nathannfs.com"),
-  alternates: {
-    canonical: "/",
-  },
   manifest: "/manifest.json",
   referrer: "strict-origin-when-cross-origin",
   openGraph: {
@@ -116,13 +148,16 @@ export const viewport: Viewport = {
   themeColor: "#0ea5e9",
 }
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: ReactNode
 }>) {
+  const requestHeaders = await headers()
+  const locale = requestHeaders.get("x-locale") === "pt-BR" ? "pt-BR" : "en"
+
   return (
-    <html lang="en" suppressHydrationWarning>
+    <html lang={locale} suppressHydrationWarning>
       <body
         className={twMerge([
           geistSans.variable,
@@ -135,7 +170,7 @@ export default function RootLayout({
           dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
           type="application/ld+json"
         />
-        <Providers>
+        <Providers locale={locale}>
           <SkipLink />
           <SmoothScroll>
             <CustomCursor />

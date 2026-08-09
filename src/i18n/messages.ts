@@ -61,6 +61,17 @@ export const messages: Record<Locale, Record<string, unknown>> = {
       moreAboutMe: "More about me",
       hoursSuffix: "hours",
     },
+    aboutPage: {
+      label: "About",
+      heading: "About Me",
+      intro:
+        "I build full-stack SaaS in the TypeScript ecosystem, usually starting from the data model. Most of what I enjoy sits on the backend: access control that lives in the database, invariants the schema can enforce on its own, and migrations you can replay.",
+      education: "Education",
+      certifications: "Courses & Certifications",
+      experience: "Professional Experience",
+      hobbies: "Hobbies & Interests",
+      more: "More About Me",
+    },
     expertise: {
       label: "Expertise",
       statement:
@@ -207,6 +218,17 @@ export const messages: Record<Locale, Record<string, unknown>> = {
       education: "Formação e Certificações",
       moreAboutMe: "Mais sobre mim",
       hoursSuffix: "horas",
+    },
+    aboutPage: {
+      label: "Sobre",
+      heading: "Sobre mim",
+      intro:
+        "Construo SaaS full-stack no ecossistema TypeScript, quase sempre começando pelo modelo de dados. A parte que mais gosto fica no backend: controle de acesso que mora no banco, invariantes que o schema garante sozinho, e migrations que dá pra rodar de novo.",
+      education: "Formação",
+      certifications: "Cursos e certificações",
+      experience: "Experiência profissional",
+      hobbies: "Hobbies e interesses",
+      more: "Mais sobre mim",
     },
     expertise: {
       label: "Especialidades",
