@@ -536,7 +536,10 @@ export function About({ initial }: { initial: AboutInitialData }) {
           </ul>
         </Reveal>
 
-        {/* Hobbies & Interests */}
+        {/* Hobbies & Interests — hidden when empty, unless signed in to add one */}
+        {(session?.user ||
+          isLoadingHobbies ||
+          (hobbies?.length ?? 0) > 0) && (
         <Reveal className="mt-24 w-full">
           <SectionLabel
             action={
@@ -610,6 +613,7 @@ export function About({ initial }: { initial: AboutInitialData }) {
             )}
           </ul>
         </Reveal>
+        )}
 
         {/* More About Me */}
         <Reveal className="mt-24 w-full">

@@ -1,0 +1,682 @@
+{
+  "about_me": [
+    {
+      "id": "39d41528-c012-432a-aef4-5a12b84ff482",
+      "content": "I've been into technology since I was a kid, always curious about how things work underneath. I like solving hard problems, learning new tools, and swapping notes with other engineers. When I'm not building something, I'm usually reading, watching a series, playing video games, or spending time with family and friends.\n\nI think technology can genuinely change lives and make the world a bit better. That's what pushes me to build things that matter and that hold up at scale.",
+      "created_at": "2026-04-30T17:36:13.625Z",
+      "updated_at": "2026-04-30T17:36:13.625Z",
+      "translations": {
+        "content": "Sou apaixonado por tecnologia desde criança, sempre curioso sobre como as coisas funcionam por baixo dos panos. Gosto de resolver problemas difíceis, aprender novas ferramentas e trocar ideia com outros engenheiros. Quando não estou construindo alguma coisa, costumo estar lendo, assistindo a uma série, jogando videogame ou passando tempo com a família e os amigos.\n\nAcredito que a tecnologia pode realmente mudar vidas e tornar o mundo um pouco melhor. É isso que me move a construir coisas que importam e que aguentam escalar."
+      }
+    }
+  ],
+  "projects": [
+    {
+      "id": "05dabea3-1b8b-4872-ba6e-63b5437973f2",
+      "name": "OMD Farm ERP",
+      "description": "An ERP platform I built from scratch to cover inventory, financial controls, production tracking, and supply chain. The backend runs on NestJS and Prisma and talks to an Angular frontend. MQTT and Redis handle the real-time sensor data and messaging.",
+      "href": "",
+      "techs": [
+        "Angular",
+        "NestJS",
+        "PostgreSQL",
+        "Prisma ORM",
+        "Docker",
+        "ECharts",
+        "TypeScript",
+        "MQTT",
+        "Redis"
+      ],
+      "year": "2025",
+      "completed": true,
+      "features": [
+        "Multi-module ERP covering inventory, finance, production, and supply chain",
+        "Real-time IoT sensor data handled through MQTT and Redis pub/sub",
+        "Operational dashboards and data visualization built with ECharts",
+        "Microservices packaged in Docker containers for easier deployment"
+      ],
+      "challenges": [
+        "Keeping API performance steady while ingesting high-throughput sensor streams from the farm over MQTT",
+        "Designing a relational schema in Prisma that links production metrics to financial data",
+        "Managing state in a large Angular app used across an enterprise team"
+      ],
+      "learnings": [
+        "How to apply event-driven patterns with Redis and MQTT for IoT systems",
+        "Prisma query optimization and database indexing for analytical reports",
+        "Scaling Angular apps with strict TypeScript typing and clear module boundaries"
+      ],
+      "created_at": "2026-04-30T17:36:08.238Z",
+      "translations": {
+        "features": [
+          "ERP multimódulo cobrindo estoque, financeiro, produção e cadeia de suprimentos",
+          "Dados de sensores IoT em tempo real tratados via MQTT e pub/sub do Redis",
+          "Dashboards operacionais e visualização de dados construídos com ECharts",
+          "Microsserviços empacotados em contêineres Docker para facilitar o deploy"
+        ],
+        "learnings": [
+          "Como aplicar padrões orientados a eventos com Redis e MQTT em sistemas IoT",
+          "Otimização de queries no Prisma e indexação de banco para relatórios analíticos",
+          "Escalar aplicações Angular com tipagem estrita em TypeScript e fronteiras de módulo bem definidas"
+        ],
+        "challenges": [
+          "Manter o desempenho da API estável enquanto ingeria fluxos de sensores de alto volume vindos da fazenda via MQTT",
+          "Modelar um schema relacional no Prisma que ligasse métricas de produção aos dados financeiros",
+          "Gerenciar o estado de uma aplicação Angular grande, usada por um time inteiro da empresa"
+        ],
+        "description": "Uma plataforma de ERP que desenvolvi do zero para cobrir estoque, controles financeiros, acompanhamento de produção e cadeia de suprimentos. O backend roda em NestJS e Prisma e se comunica com um frontend em Angular. MQTT e Redis cuidam dos dados de sensores em tempo real e da troca de mensagens."
+      }
+    },
+    {
+      "id": "f2895853-304c-4a0c-91ca-a1bf5e211bf9",
+      "name": "Checkout Hub",
+      "description": "A centralized webhook router I built to provision users automatically across several Supabase instances after a Stripe payment. It connects payment events to user onboarding when more than one database is involved.",
+      "href": "",
+      "techs": [
+        "Node.js",
+        "Stripe Webhooks",
+        "Supabase",
+        "Hono",
+        "TypeScript"
+      ],
+      "year": "2025",
+      "completed": true,
+      "features": [
+        "Central Stripe webhook router that dispatches by event type",
+        "Automatic user provisioning across multiple Supabase projects",
+        "Webhook signature verification and replay protection",
+        "Audit logging for every provisioning event, with recovery on failure"
+      ],
+      "challenges": [
+        "Sending each webhook event to the right Supabase instance based on product metadata",
+        "Creating users atomically across several databases, with rollback when one fails",
+        "Handling Stripe's webhook retries without creating duplicate users"
+      ],
+      "learnings": [
+        "How to coordinate writes across multiple databases in a distributed SaaS setup",
+        "Practical ways to process Stripe webhook events at scale",
+        "Using idempotency keys so webhook-driven provisioning runs once"
+      ],
+      "created_at": "2026-04-30T17:36:08.841Z",
+      "translations": {
+        "features": [
+          "Roteador central de webhooks do Stripe que despacha por tipo de evento",
+          "Provisionamento automático de usuários em múltiplos projetos do Supabase",
+          "Verificação de assinatura dos webhooks e proteção contra replay",
+          "Log de auditoria para cada evento de provisionamento, com recuperação em caso de falha"
+        ],
+        "learnings": [
+          "Como coordenar escritas em múltiplos bancos de dados num cenário SaaS distribuído",
+          "Formas práticas de processar eventos de webhook do Stripe em escala",
+          "Usar chaves de idempotência para que o provisionamento via webhook rode apenas uma vez"
+        ],
+        "challenges": [
+          "Enviar cada evento de webhook para a instância correta do Supabase com base nos metadados do produto",
+          "Criar usuários de forma atômica em vários bancos de dados, com rollback quando um deles falha",
+          "Lidar com os retries de webhook do Stripe sem criar usuários duplicados"
+        ],
+        "description": "Um roteador centralizado de webhooks que construí para provisionar usuários automaticamente em várias instâncias do Supabase após um pagamento no Stripe. Ele conecta os eventos de pagamento ao onboarding de usuários quando há mais de um banco de dados envolvido."
+      }
+    },
+    {
+      "id": "83e756a4-526a-4efb-92cc-ae7c6fcb08d2",
+      "name": "Travel Hub",
+      "description": "A trip management platform with i18n support, shared expense tracking, and collaborative itineraries. Teams and groups use it to plan and organize travel together in real time.",
+      "href": "",
+      "techs": [
+        "Next.js",
+        "Supabase",
+        "next-intl",
+        "TanStack Query",
+        "Tailwind CSS"
+      ],
+      "year": "2024",
+      "completed": true,
+      "features": [
+        "Two languages (EN/PT) through next-intl",
+        "Shared expense tracking that splits costs automatically",
+        "Itinerary builder with drag-and-drop scheduling",
+        "Live updates over Supabase Realtime subscriptions"
+      ],
+      "challenges": [
+        "Supporting real-time collaborative editing without running into data conflicts",
+        "Writing an expense-splitting algorithm that handles equal, percentage, and custom splits",
+        "Keeping i18n consistent across both dynamic database content and static UI strings"
+      ],
+      "learnings": [
+        "How Supabase Realtime works for collaborative apps",
+        "Using next-intl for translation across server and client components",
+        "Managing state for a UI where several people edit at once"
+      ],
+      "created_at": "2026-04-30T17:36:09.046Z",
+      "translations": {
+        "features": [
+          "Dois idiomas (EN/PT) através do next-intl",
+          "Controle de despesas compartilhadas que divide os custos automaticamente",
+          "Construtor de roteiros com agendamento por drag-and-drop",
+          "Atualizações ao vivo via subscriptions do Supabase Realtime"
+        ],
+        "learnings": [
+          "Como o Supabase Realtime funciona em aplicações colaborativas",
+          "Usar o next-intl para tradução entre server e client components",
+          "Gerenciar o estado de uma interface em que várias pessoas editam ao mesmo tempo"
+        ],
+        "challenges": [
+          "Dar suporte à edição colaborativa em tempo real sem esbarrar em conflitos de dados",
+          "Escrever um algoritmo de divisão de despesas que lidasse com rateios iguais, por porcentagem e personalizados",
+          "Manter a i18n consistente tanto no conteúdo dinâmico do banco quanto nos textos estáticos da interface"
+        ],
+        "description": "Uma plataforma de gestão de viagens com suporte a i18n, controle de despesas compartilhadas e roteiros colaborativos. Times e grupos a usam para planejar e organizar viagens juntos em tempo real."
+      }
+    },
+    {
+      "id": "f84bde07-2ca7-422e-938b-cef13e18a336",
+      "name": "Finance-AI",
+      "description": "A transaction management app built on Tailwind v4 and next-intl. It categorizes transactions automatically, supports multiple currencies, and has dashboards for financial analytics.",
+      "href": "",
+      "techs": [
+        "Next.js",
+        "Tailwind v4",
+        "next-intl",
+        "Supabase",
+        "Recharts"
+      ],
+      "year": "2024",
+      "completed": true,
+      "features": [
+        "Transaction management with automatic categorization",
+        "Multiple currencies with live exchange rates",
+        "Analytics dashboards built with Recharts",
+        "Early move to Tailwind CSS v4 and its new architecture"
+      ],
+      "challenges": [
+        "Migrating to the Tailwind v4 early-adopter API while it still had breaking changes",
+        "Building charts that stay responsive with large transaction datasets",
+        "Getting multi-currency math right down to the precision"
+      ],
+      "learnings": [
+        "How to migrate to Tailwind v4 and its CSS-first configuration",
+        "Tuning performance for data-heavy financial dashboards",
+        "Wiring next-intl into the App Router"
+      ],
+      "created_at": "2026-04-30T17:36:09.186Z",
+      "translations": {
+        "features": [
+          "Gestão de transações com categorização automática",
+          "Múltiplas moedas com taxas de câmbio em tempo real",
+          "Dashboards analíticos construídos com Recharts",
+          "Adoção antecipada do Tailwind CSS v4 e sua nova arquitetura"
+        ],
+        "learnings": [
+          "Como migrar para o Tailwind v4 e sua configuração CSS-first",
+          "Ajustar o desempenho de dashboards financeiros com muitos dados",
+          "Integrar o next-intl ao App Router"
+        ],
+        "challenges": [
+          "Migrar para a API early-adopter do Tailwind v4 enquanto ela ainda tinha breaking changes",
+          "Construir gráficos que se mantivessem responsivos com grandes volumes de transações",
+          "Acertar a matemática multimoeda até o último dígito de precisão"
+        ],
+        "description": "Um app de gestão de transações construído sobre Tailwind v4 e next-intl. Ele categoriza transações automaticamente, suporta múltiplas moedas e tem dashboards para análise financeira."
+      }
+    },
+    {
+      "id": "716b57ff-0f17-4f0f-9eb7-70b4d8125f10",
+      "name": "Curriculum SaaS",
+      "description": "A PDF resume generator built with Puppeteer. It handles recurring billing through Stripe, supports i18n, and has E2E test coverage with Playwright. A full production SaaS with subscription management.",
+      "href": "",
+      "techs": [
+        "Next.js",
+        "Puppeteer",
+        "Stripe",
+        "Playwright",
+        "i18n"
+      ],
+      "year": "2024",
+      "completed": true,
+      "features": [
+        "PDF generation with Puppeteer and custom templates",
+        "Stripe recurring billing with full subscription lifecycle handling",
+        "Resume templates in two languages (EN/PT)",
+        "Playwright E2E tests covering the critical user flows"
+      ],
+      "challenges": [
+        "Getting PDF layouts to come out exactly right from dynamic HTML/CSS templates",
+        "Running Puppeteer in a serverless environment and cutting down cold starts",
+        "Writing E2E tests that cover the payment flows"
+      ],
+      "learnings": [
+        "How to run PDF generation at scale and keep Puppeteer efficient",
+        "Managing the Stripe subscription lifecycle: trials, upgrades, cancellations",
+        "Structuring Playwright E2E tests for a SaaS app"
+      ],
+      "created_at": "2026-04-30T17:36:09.454Z",
+      "translations": {
+        "features": [
+          "Geração de PDF com Puppeteer e templates personalizados",
+          "Cobrança recorrente no Stripe com gestão completa do ciclo de vida da assinatura",
+          "Modelos de currículo em dois idiomas (EN/PT)",
+          "Testes E2E com Playwright cobrindo os fluxos críticos do usuário"
+        ],
+        "learnings": [
+          "Como executar geração de PDF em escala e manter o Puppeteer eficiente",
+          "Gerenciar o ciclo de vida da assinatura no Stripe: trials, upgrades e cancelamentos",
+          "Estruturar testes E2E com Playwright para uma aplicação SaaS"
+        ],
+        "challenges": [
+          "Fazer os layouts em PDF saírem exatamente certos a partir de templates dinâmicos em HTML/CSS",
+          "Rodar o Puppeteer em ambiente serverless e reduzir os cold starts",
+          "Escrever testes E2E que cobrissem os fluxos de pagamento"
+        ],
+        "description": "Um gerador de currículos em PDF construído com Puppeteer. Ele lida com cobrança recorrente via Stripe, suporta i18n e tem cobertura de testes E2E com Playwright. Um SaaS completo em produção, com gestão de assinaturas."
+      }
+    },
+    {
+      "id": "0a5564e6-bc11-4eca-bb9c-0be87647fefd",
+      "name": "SaaS Templates",
+      "description": "An opinionated starting point for building SaaS products, with Hono, Drizzle ORM, Better-auth, and Biome. It includes three templates I've tested in practice (Routine, Board, Link-Hub) that cut the time it takes to ship.",
+      "href": "",
+      "techs": [
+        "Hono",
+        "Drizzle ORM",
+        "Better-auth",
+        "Biome",
+        "TypeScript"
+      ],
+      "year": "2025",
+      "completed": true,
+      "features": [
+        "Auth already wired up with Better-auth (email, OAuth, magic links)",
+        "Type-safe database layer using Drizzle ORM with automatic migrations",
+        "Biome for linting and formatting in place of ESLint and Prettier",
+        "Three ready-to-use templates: Routine Manager, Kanban Board, Link Hub"
+      ],
+      "challenges": [
+        "Designing a template structure flexible enough for different kinds of SaaS",
+        "Bringing in Better-auth as an Auth.js alternative while keeping full type safety",
+        "Setting up Biome to match the team's coding standards across all the templates"
+      ],
+      "learnings": [
+        "Using Hono as a lightweight, edge-first API framework",
+        "Drizzle ORM patterns for type-safe database work",
+        "How to integrate Better-auth and migrate off next-auth"
+      ],
+      "created_at": "2026-04-30T17:36:09.661Z",
+      "translations": {
+        "features": [
+          "Autenticação já pronta com Better-auth (e-mail, OAuth, magic links)",
+          "Camada de banco type-safe usando Drizzle ORM com migrações automáticas",
+          "Biome para linting e formatação no lugar de ESLint e Prettier",
+          "Três templates prontos para uso: Routine Manager, Kanban Board e Link Hub"
+        ],
+        "learnings": [
+          "Usar o Hono como framework de API leve e edge-first",
+          "Padrões do Drizzle ORM para trabalho type-safe com banco de dados",
+          "Como integrar o Better-auth e sair do next-auth"
+        ],
+        "challenges": [
+          "Desenhar uma estrutura de template flexível o bastante para diferentes tipos de SaaS",
+          "Adotar o Better-auth como alternativa ao Auth.js mantendo type safety completo",
+          "Configurar o Biome para seguir o padrão de código do time em todos os templates"
+        ],
+        "description": "Um ponto de partida opinativo para construir produtos SaaS, com Hono, Drizzle ORM, Better-auth e Biome. Inclui três templates que já testei na prática (Routine, Board, Link-Hub) e que reduzem o tempo até colocar algo no ar."
+      }
+    },
+    {
+      "id": "111f7fde-0c6e-4b3c-9bec-5ee508731a08",
+      "name": "Agendar-j",
+      "description": "A booking and appointment system with an interactive UI built on Vaul and Radix. It uses optimistic updates so actions feel instant, handles scheduling across multiple providers, and deals with time zones.",
+      "href": "",
+      "techs": [
+        "Next.js",
+        "Vaul",
+        "Radix UI",
+        "TanStack Query",
+        "Supabase"
+      ],
+      "year": "2024",
+      "completed": true,
+      "features": [
+        "Appointment scheduling across multiple providers, with conflict detection",
+        "Interactive drawer UI with Vaul for a mobile-first booking flow",
+        "Optimistic updates through TanStack Query so feedback is instant",
+        "Time-zone-aware scheduling that converts automatically"
+      ],
+      "challenges": [
+        "Writing a scheduling algorithm that avoids conflicts on overlapping time slots",
+        "Making optimistic updates handle server rejections without breaking the UI",
+        "Designing a mobile-first booking flow around drawer navigation with Vaul"
+      ],
+      "learnings": [
+        "Scheduling algorithms that resolve conflicts under constraints",
+        "How to compose interactive drawer UIs with Vaul and Radix",
+        "Using TanStack Query optimistic updates for real-time interfaces"
+      ],
+      "created_at": "2026-04-30T17:36:09.801Z",
+      "translations": {
+        "features": [
+          "Agendamento entre múltiplos prestadores, com detecção de conflitos",
+          "Interface de drawer interativa com Vaul para um fluxo de agendamento mobile-first",
+          "Optimistic updates via TanStack Query para feedback instantâneo",
+          "Agendamento consciente de fuso horário, com conversão automática"
+        ],
+        "learnings": [
+          "Algoritmos de agendamento que resolvem conflitos sob restrições",
+          "Como compor interfaces de drawer interativas com Vaul e Radix",
+          "Usar os optimistic updates do TanStack Query em interfaces de tempo real"
+        ],
+        "challenges": [
+          "Escrever um algoritmo de agendamento que evitasse conflitos em horários sobrepostos",
+          "Fazer os optimistic updates lidarem com rejeições do servidor sem quebrar a interface",
+          "Desenhar um fluxo de agendamento mobile-first em torno de navegação por drawer com Vaul"
+        ],
+        "description": "Um sistema de agendamentos com uma interface interativa construída sobre Vaul e Radix. Ele usa optimistic updates para as ações parecerem instantâneas, lida com agendamentos entre múltiplos prestadores e trata fusos horários."
+      }
+    }
+  ],
+  "experiences": [
+    {
+      "id": "157062e4-2bb0-4def-ab4b-5cd340a75642",
+      "company": "OMD do Brasil",
+      "position": "Software Engineer",
+      "period": "May 2025 — Present",
+      "description": "Built modern, responsive web interfaces in Angular, with real attention to accessibility and good practices.",
+      "responsibilities": [
+        "Built modern, responsive, accessible web interfaces in Angular",
+        "Built RESTful APIs and integrated the front end with the back end using NestJS and Prisma",
+        "Took part in code reviews and the ongoing maintenance and improvement of the apps",
+        "Made sure things worked across browsers and devices",
+        "Applied practices like Clean Code and component-driven architecture"
+      ],
+      "created_at": "2026-04-30T17:36:09.941Z",
+      "translations": {
+        "description": "Construí interfaces web modernas e responsivas em Angular, com atenção de verdade à acessibilidade e às boas práticas.",
+        "responsibilities": [
+          "Construí interfaces web modernas, responsivas e acessíveis em Angular",
+          "Construí APIs RESTful e integrei o front-end com o back-end usando NestJS e Prisma",
+          "Participei de code reviews e da manutenção e evolução contínua das aplicações",
+          "Garanti o funcionamento entre diferentes navegadores e dispositivos",
+          "Apliquei práticas como Clean Code e arquitetura orientada a componentes"
+        ]
+      }
+    },
+    {
+      "id": "6e40a454-a4e6-4cad-99b8-627ab93a0e98",
+      "company": "Drivetech Soluções Tecnológicas",
+      "position": "Innovation Analyst",
+      "period": "Aug 2024 — Apr 2025",
+      "description": "Full-stack development with an eye on scalability and usability, and a real part in the technical architecture decisions.",
+      "responsibilities": [
+        "Built full-stack web and mobile apps with attention to scalability, usability, and back-end integration",
+        "Built RESTful APIs and designed the database schemas behind them",
+        "Took part in requirements analysis and the key technical architecture decisions",
+        "Used modern tools and agile practices to keep deliveries efficient and solid"
+      ],
+      "created_at": "2026-04-30T17:36:10.081Z",
+      "translations": {
+        "description": "Desenvolvimento full-stack com atenção à escalabilidade e à usabilidade, e participação real nas decisões de arquitetura técnica.",
+        "responsibilities": [
+          "Desenvolvi aplicações web e mobile full-stack com atenção à escalabilidade, usabilidade e integração com o back-end",
+          "Construí APIs RESTful e modelei os schemas de banco de dados por trás delas",
+          "Participei da análise de requisitos e das principais decisões de arquitetura técnica",
+          "Usei ferramentas modernas e práticas ágeis para manter as entregas eficientes e sólidas"
+        ]
+      }
+    },
+    {
+      "id": "dbd0f4ed-8a6f-4a80-b18a-79028027dcbc",
+      "company": "Drivetech Soluções Tecnológicas",
+      "position": "Mid-Level Draftsman",
+      "period": "Oct 2023 — Aug 2024",
+      "description": "Created electrical diagrams and mechanical layouts, and reviewed technical specifications closely.",
+      "responsibilities": [
+        "Drafted electrical diagrams",
+        "Created mechanical layouts",
+        "Reviewed and validated technical project specifications"
+      ],
+      "created_at": "2026-04-30T17:36:10.221Z",
+      "translations": {
+        "description": "Elaborei diagramas elétricos e layouts mecânicos, e revisei especificações técnicas com atenção aos detalhes.",
+        "responsibilities": [
+          "Elaborei diagramas elétricos",
+          "Criei layouts mecânicos",
+          "Revisei e validei especificações técnicas de projeto"
+        ]
+      }
+    },
+    {
+      "id": "5a36b4b4-82ec-47cb-8ed6-0bf7e4c67ff8",
+      "company": "Drivetech Soluções Tecnológicas",
+      "position": "Project Engineering Trainee",
+      "period": "Apr 2023 — Oct 2023",
+      "description": "Picked up the basics of project engineering, mostly around technical diagrams and specifications.",
+      "responsibilities": [
+        "Drafted detailed electrical diagrams",
+        "Created mechanical layouts",
+        "Reviewed technical specifications for ongoing projects"
+      ],
+      "created_at": "2026-04-30T17:36:10.362Z",
+      "translations": {
+        "description": "Aprendi o básico de engenharia de projetos, principalmente em torno de diagramas e especificações técnicas.",
+        "responsibilities": [
+          "Elaborei diagramas elétricos detalhados",
+          "Criei layouts mecânicos",
+          "Revisei especificações técnicas de projetos em andamento"
+        ]
+      }
+    },
+    {
+      "id": "251a2230-c193-4a12-ae22-b0255bceb66b",
+      "company": "Drivetech Soluções Tecnológicas",
+      "position": "Applications Engineering Trainee",
+      "period": "Jan 2023 — Apr 2023",
+      "description": "Built spreadsheets and kept technical information organized to keep project work moving.",
+      "responsibilities": [
+        "Handled project budgeting and cost estimates",
+        "Built custom spreadsheets to track and control technical data"
+      ],
+      "created_at": "2026-04-30T17:36:10.502Z",
+      "translations": {
+        "description": "Montei planilhas e mantive as informações técnicas organizadas para manter os projetos andando.",
+        "responsibilities": [
+          "Cuidei do orçamento dos projetos e das estimativas de custo",
+          "Montei planilhas personalizadas para acompanhar e controlar dados técnicos"
+        ]
+      }
+    },
+    {
+      "id": "d1ff3a38-add7-485d-8e90-ed56cfaf8297",
+      "company": "Drivetech Soluções Tecnológicas",
+      "position": "Project Management Trainee",
+      "period": "Aug 2022 — Jan 2023",
+      "description": "Managed the project lifecycle and set up KPIs to keep track of progress.",
+      "responsibilities": [
+        "Managed projects end to end",
+        "Analyzed data and set up key performance indicators (KPIs)"
+      ],
+      "created_at": "2026-04-30T17:36:10.642Z",
+      "translations": {
+        "description": "Gerenciei o ciclo de vida dos projetos e defini KPIs para acompanhar o progresso.",
+        "responsibilities": [
+          "Gerenciei projetos de ponta a ponta",
+          "Analisei dados e defini indicadores-chave de desempenho (KPIs)"
+        ]
+      }
+    },
+    {
+      "id": "fbe8abbf-ebc3-445e-8e85-610b6b83253c",
+      "company": "Drivetech Soluções Tecnológicas",
+      "position": "Quality Assurance Intern",
+      "period": "Mar 2022 — Aug 2022",
+      "description": "Inspected electrical panels and kept the inspection paperwork in order.",
+      "responsibilities": [
+        "Inspected electrical panels thoroughly",
+        "Managed the quality assurance and inspection documents"
+      ],
+      "created_at": "2026-04-30T17:36:10.781Z",
+      "translations": {
+        "description": "Inspecionei painéis elétricos e mantive a documentação de inspeção em ordem.",
+        "responsibilities": [
+          "Inspecionei painéis elétricos minuciosamente",
+          "Gerenciei os documentos de garantia da qualidade e de inspeção"
+        ]
+      }
+    }
+  ],
+  "degrees": [
+    {
+      "id": "594cc13f-1676-4ef5-a6f1-c9fcd3ae22d9",
+      "title": "Postgraduate in Software Engineering",
+      "institution": "Descomplica EAD",
+      "period": "Oct 2024 — Apr 2025",
+      "status": "Completed",
+      "description": "Advanced study in software engineering, with a solid grounding in software architecture, logic, algorithms, and data structures. I use these day to day when building systems that need to scale.",
+      "created_at": "2026-04-30T17:36:10.991Z",
+      "translations": {
+        "title": "Pós-graduação em Engenharia de Software",
+        "description": "Estudo avançado em engenharia de software, com uma base sólida em arquitetura de software, lógica, algoritmos e estruturas de dados. Uso isso no dia a dia ao construir sistemas que precisam escalar."
+      }
+    },
+    {
+      "id": "3f6cb926-fc70-4cb8-8673-21d934a0421f",
+      "title": "Technologist in Industrial Mechatronics",
+      "institution": "FATEC",
+      "period": "Jan 2019 — Dec 2023",
+      "status": "Completed",
+      "description": "A degree covering automation logic, hardware and software integration, and problem-solving methods. It's where I picked up the engineering mindset I still bring to building reliable systems.",
+      "created_at": "2026-04-30T17:36:11.133Z",
+      "translations": {
+        "title": "Tecnólogo em Mecatrônica Industrial",
+        "description": "Uma graduação que cobre lógica de automação, integração entre hardware e software e métodos de resolução de problemas. Foi onde adquiri a mentalidade de engenharia que trago até hoje na construção de sistemas confiáveis."
+      }
+    }
+  ],
+  "certifications": [
+    {
+      "id": "a59f777b-9691-4088-99ad-526d423f4176",
+      "title": "Full Stack Web Development",
+      "institution": "ProgramadorBR",
+      "hours": 60,
+      "status": "Completed",
+      "description": null,
+      "created_at": "2026-04-30T17:36:11.273Z",
+      "translations": null
+    },
+    {
+      "id": "99255bee-b623-403e-a037-997d41d29a3e",
+      "title": "Node.js Path",
+      "institution": "Rocketseat",
+      "hours": 50,
+      "status": "Completed",
+      "description": null,
+      "created_at": "2026-04-30T17:36:11.504Z",
+      "translations": null
+    },
+    {
+      "id": "f643ed3b-1228-4697-9301-30bc94a71a62",
+      "title": "React.js Path",
+      "institution": "Rocketseat",
+      "hours": 50,
+      "status": "Completed",
+      "description": null,
+      "created_at": "2026-04-30T17:36:11.644Z",
+      "translations": null
+    },
+    {
+      "id": "f66cb4f9-22d4-41b2-8819-a4c04367f588",
+      "title": "Advanced Project Management",
+      "institution": "Pós Descomplica",
+      "hours": 30,
+      "status": "Completed",
+      "description": null,
+      "created_at": "2026-04-30T17:36:11.912Z",
+      "translations": null
+    },
+    {
+      "id": "969c5d84-eddf-49da-8335-79f555d6321b",
+      "title": "Software Interface Design",
+      "institution": "Pós Descomplica",
+      "hours": 30,
+      "status": "Completed",
+      "description": null,
+      "created_at": "2026-04-30T17:36:12.054Z",
+      "translations": null
+    },
+    {
+      "id": "8cbc1b62-f057-4371-97dc-d91faaf0920d",
+      "title": "Programming Logic in Java",
+      "institution": "Pós Descomplica",
+      "hours": 30,
+      "status": "Completed",
+      "description": null,
+      "created_at": "2026-04-30T17:36:12.194Z",
+      "translations": null
+    },
+    {
+      "id": "27e270ad-161b-4b85-b4e9-cb2c3acacc75",
+      "title": "NestJS Path",
+      "institution": "Rocketseat",
+      "hours": 12,
+      "status": "Completed",
+      "description": null,
+      "created_at": "2026-04-30T17:36:12.334Z",
+      "translations": null
+    },
+    {
+      "id": "711a2c96-09d9-4daf-a704-5c9b47467b78",
+      "title": "React Accessibility",
+      "institution": "Rocketseat",
+      "hours": 3,
+      "status": "Completed",
+      "description": null,
+      "created_at": "2026-04-30T17:36:12.474Z",
+      "translations": null
+    },
+    {
+      "id": "3d49c6c6-33e7-466a-b8b3-a77a4167b63d",
+      "title": "Clean Code",
+      "institution": "Rocketseat",
+      "hours": 3,
+      "status": "Completed",
+      "description": null,
+      "created_at": "2026-04-30T17:36:12.614Z",
+      "translations": null
+    },
+    {
+      "id": "247c1582-97ea-459a-b095-deac7493d185",
+      "title": "Expo Router Navigation",
+      "institution": "Rocketseat",
+      "hours": 2,
+      "status": "Completed",
+      "description": null,
+      "created_at": "2026-04-30T17:36:12.754Z",
+      "translations": null
+    }
+  ],
+  "hobbies": [
+    {
+      "id": "c4fb129b-2862-444e-82ed-75c04b8772f2",
+      "title": "Playing guitar and listening to music",
+      "created_at": "2026-04-30T17:36:12.893Z"
+    },
+    {
+      "id": "b832a9e0-3356-4c91-a8f7-f92f13c5c1ca",
+      "title": "Playing video games",
+      "created_at": "2026-04-30T17:36:13.039Z"
+    },
+    {
+      "id": "b5250c9c-fcdc-4c1b-b240-548180a08dc2",
+      "title": "Practicing sports",
+      "created_at": "2026-04-30T17:36:13.207Z"
+    },
+    {
+      "id": "f3699cc0-bc26-40fc-9ff7-51104a89e5dd",
+      "title": "Watching series and movies",
+      "created_at": "2026-04-30T17:36:13.347Z"
+    },
+    {
+      "id": "69fca2c7-b40f-4e20-bb1c-3344f9591076",
+      "title": "Exploring new technologies",
+      "created_at": "2026-04-30T17:36:13.486Z"
+    }
+  ]
+}

@@ -11,7 +11,6 @@ import { Playwright } from "@/components/icons/playwright"
 import { PostgreSQL } from "@/components/icons/postgresql"
 import { React } from "@/components/icons/react"
 import { Redis } from "@/components/icons/redis"
-import { Supabase } from "@/components/icons/supabase"
 import { Tailwindcss } from "@/components/icons/tailwindcss"
 import { TanStackQuery } from "@/components/icons/tanstack"
 import { Typescript } from "@/components/icons/typescript"
@@ -40,20 +39,19 @@ export const techGroups: TechGroup[] = [
     ],
   },
   {
-    category: "Backend & Infra",
+    category: "Backend & Data",
     items: [
       { name: "NestJS", icon: <Nestjs />, featured: true },
       { name: "Node.js", icon: <Nodejs /> },
-      { name: "PostgreSQL", icon: <PostgreSQL /> },
-      { name: "Supabase", icon: <Supabase />, featured: true },
-      { name: "Docker", icon: <Docker /> },
+      { name: "PostgreSQL", icon: <PostgreSQL />, featured: true },
+      { name: "Drizzle ORM", icon: <Drizzle /> },
+      { name: "Redis", icon: <Redis /> },
     ],
   },
   {
-    category: "Tooling",
+    category: "Infra & Tooling",
     items: [
-      { name: "Drizzle ORM", icon: <Drizzle /> },
-      { name: "Redis", icon: <Redis /> },
+      { name: "Docker", icon: <Docker />, featured: true },
       { name: "Git", icon: <Git /> },
       { name: "Playwright", icon: <Playwright /> },
       { name: "Biome", icon: <Biome /> },
