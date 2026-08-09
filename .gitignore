@@ -42,7 +42,10 @@ next-env.d.ts
 .env*.local
 
 src/db/seed
-pnpm-lock*.claude/
+pnpm-lock*
+
+# ferramentas locais
+.claude/
 .remember/
 scratchpad/
 tmp/
