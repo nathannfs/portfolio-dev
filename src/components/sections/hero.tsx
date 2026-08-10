@@ -122,14 +122,14 @@ export function Hero() {
         <motion.nav
           animate={{ opacity: 1 }}
           aria-label={t("hero.socialLinks")}
-          className="flex items-center gap-5 font-mono text-sm"
+          className="-ml-2 flex items-center gap-1 font-mono text-sm"
           initial={{ opacity: 0 }}
           transition={{ duration: 0.6, delay: 0.5 }}
         >
           {socials.map((s) => (
             <Link
               aria-label={`${s.label} — Nathan Santos`}
-              className="text-muted-foreground underline-offset-4 transition-colors hover:text-aurora-cyan hover:underline"
+              className="inline-flex min-h-11 min-w-11 items-center justify-center text-muted-foreground underline-offset-4 transition-colors hover:text-aurora-cyan hover:underline"
               href={s.href}
               key={s.short}
               rel="noreferrer"

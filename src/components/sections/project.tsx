@@ -113,7 +113,7 @@ export function Project({
 
       <Magnetic className="mt-10 w-fit">
         <Link
-          className="inline-flex items-center gap-2 font-mono text-muted-foreground text-sm uppercase tracking-[0.15em] transition-colors hover:text-foreground"
+          className="inline-flex min-h-11 items-center gap-2 py-2 font-mono text-muted-foreground text-sm uppercase tracking-[0.15em] transition-colors hover:text-foreground"
           href="/projects"
         >
           {t("common.viewAll")}

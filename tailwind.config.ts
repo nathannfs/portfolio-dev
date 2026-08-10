@@ -55,7 +55,7 @@ export default {
           "5": "hsl(var(--chart-5))",
         },
         aurora: {
-          cyan: "var(--aurora-1)",
+          cyan: "var(--aurora-ink)",
           blue: "var(--aurora-2)",
           violet: "var(--aurora-3)",
         },
