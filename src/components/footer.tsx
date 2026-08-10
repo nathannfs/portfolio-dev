@@ -17,9 +17,10 @@ export function Footer() {
           </span>
         </div>
 
-        <div className="flex items-center gap-4">
+        <div className="-mr-3 flex items-center gap-1">
           <Link
             aria-label="Instagram de Nathan Santos"
+            className="inline-flex min-h-11 min-w-11 items-center justify-center"
             href="https://instagram.com/nathannfss"
             rel="noreferrer"
             target="_blank"
@@ -28,6 +29,7 @@ export function Footer() {
           </Link>
           <Link
             aria-label="LinkedIn de Nathan Santos"
+            className="inline-flex min-h-11 min-w-11 items-center justify-center"
             href="https://linkedin.com/in/nathannfs"
             rel="noreferrer"
             target="_blank"
@@ -36,6 +38,7 @@ export function Footer() {
           </Link>
           <Link
             aria-label="GitHub de Nathan Santos"
+            className="inline-flex min-h-11 min-w-11 items-center justify-center"
             href="https://github.com/nathannfs"
             rel="noreferrer"
             target="_blank"
