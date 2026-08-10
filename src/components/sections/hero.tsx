@@ -129,7 +129,7 @@ export function Hero() {
           {socials.map((s) => (
             <Link
               aria-label={`${s.label} — Nathan Santos`}
-              className="inline-flex min-h-11 min-w-11 items-center justify-center text-muted-foreground underline-offset-4 transition-colors hover:text-aurora-cyan hover:underline"
+              className="inline-flex min-h-[44px] min-w-[44px] items-center justify-center text-muted-foreground underline-offset-4 transition-colors hover:text-aurora-cyan hover:underline"
               href={s.href}
               key={s.short}
               rel="noreferrer"
@@ -145,7 +145,7 @@ export function Hero() {
       <motion.button
         animate={{ opacity: 1 }}
         aria-label={t("hero.scrollToWork")}
-        className="min-h-11 py-2 mt-14 inline-flex w-fit items-center gap-2 font-mono text-muted-foreground text-xs uppercase tracking-[0.2em] transition-colors hover:text-foreground"
+        className="min-h-[44px] py-2 mt-14 inline-flex w-fit items-center gap-2 font-mono text-muted-foreground text-xs uppercase tracking-[0.2em] transition-colors hover:text-foreground"
         initial={{ opacity: 0 }}
         onClick={scrollToWork}
         transition={{ duration: 0.6, delay: 0.7 }}
