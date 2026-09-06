@@ -85,7 +85,7 @@ export function ProjectDetailView({ project }: { project: Project }) {
                   rel="noreferrer noopener"
                   target="_blank"
                 >
-                  <Button className="gap-2" variant="default">
+                  <Button className="gap-2" variant="primary">
                     {t("projectDetail.visitProject")}
                     <ExternalLink className="size-4" />
                   </Button>
