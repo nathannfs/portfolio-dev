@@ -1,6 +1,6 @@
 "use client"
 
-import { ArrowLeft } from "lucide-react"
+import { ArrowLeft, ExternalLink } from "lucide-react"
 import Link from "next/link"
 
 import { Button } from "@/components/button"
@@ -77,6 +77,21 @@ export function ProjectDetailView({ project }: { project: Project }) {
               </div>
             ) : null}
 
+            {project.href ? (
+              <Magnetic className="inline-block">
+                <a
+                  className="inline-flex"
+                  href={project.href}
+                  rel="noreferrer noopener"
+                  target="_blank"
+                >
+                  <Button className="gap-2" variant="default">
+                    {t("projectDetail.visitProject")}
+                    <ExternalLink className="size-4" />
+                  </Button>
+                </a>
+              </Magnetic>
+            ) : null}
           </div>
         </div>
       </section>
