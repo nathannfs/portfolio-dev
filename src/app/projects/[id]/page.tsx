@@ -28,26 +28,29 @@ export async function generateMetadata({
   const project = await findProject(id)
 
   if (!project) {
-    return { title: "Project not found | Nathan Ferreira Santos" }
+    return { title: "Project not found" }
   }
 
-  const title = `${project.name} | Nathan Ferreira Santos`
+  // A aba recebe só o nome: o `template` do layout raiz é quem acrescenta
+  // " | Nathan Ferreira Santos". As redes sociais não têm template nenhum, então
+  // o título social carrega o nome completo.
+  const socialTitle = `${project.name} | Nathan Ferreira Santos`
   const description = project.description.slice(0, 160)
   const url = `/projects/${id}`
 
   return {
-    title,
+    title: project.name,
     description,
     alternates: { canonical: url },
     openGraph: {
-      title,
+      title: socialTitle,
       description,
       url,
       type: "article",
     },
     twitter: {
       card: "summary_large_image",
-      title,
+      title: socialTitle,
       description,
     },
   }
