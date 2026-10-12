@@ -1,4 +1,4 @@
-const SITE_URL = "https://www.nathannfs.com"
+const SITE_URL = "https://portfolio.nathannfs.com"
 
 const PERSON_ID = `${SITE_URL}/#person`
 const WEBSITE_ID = `${SITE_URL}/#website`

@@ -1,6 +1,6 @@
 import { getExperiences, getProjects } from "@/server/content"
 
-const BASE_URL = "https://www.nathannfs.com"
+const BASE_URL = "https://portfolio.nathannfs.com"
 
 /**
  * Generated from the database instead of kept as a static file.

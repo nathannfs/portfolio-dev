@@ -124,7 +124,7 @@ export default async function OpengraphImage({
             }}
           >
             <span style={{ color: INK }}>Nathan Ferreira Santos</span>
-            <span>nathannfs.com</span>
+            <span>portfolio.nathannfs.com</span>
           </div>
         </div>
       </div>

@@ -2,7 +2,7 @@ import type { MetadataRoute } from "next"
 
 import { getProjects } from "@/server/content"
 
-const BASE_URL = "https://www.nathannfs.com"
+const BASE_URL = "https://portfolio.nathannfs.com"
 
 /** English lives at the root, Portuguese under /pt. See src/middleware.ts. */
 function ptPath(path: string) {

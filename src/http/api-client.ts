@@ -1,7 +1,7 @@
 import ky from "ky"
 
 export const api = ky.create({
-  prefixUrl: "https://www.nathannfs.com/api",
+  prefixUrl: "https://portfolio.nathannfs.com/api",
   // hooks: {
   //   beforeRequest: [
   //     async (request) => {

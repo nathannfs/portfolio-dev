@@ -70,13 +70,13 @@ const baseMetadata: Metadata = {
     template: "%s | Nathan Ferreira Santos",
   },
   description: SITE_DESCRIPTION,
-  metadataBase: new URL("https://www.nathannfs.com"),
+  metadataBase: new URL("https://portfolio.nathannfs.com"),
   manifest: "/manifest.json",
   referrer: "strict-origin-when-cross-origin",
   openGraph: {
     title: "Nathan Ferreira Santos | Full-Stack Software Engineer",
     description: SITE_DESCRIPTION,
-    url: "https://www.nathannfs.com/",
+    url: "https://portfolio.nathannfs.com/",
     siteName: "Nathan Ferreira Santos · Full-Stack Software Engineer",
     images: [
       {
@@ -135,7 +135,7 @@ const baseMetadata: Metadata = {
     "Row Level Security",
     "Docker",
   ],
-  authors: [{ name: "Nathan Ferreira Santos", url: "https://www.nathannfs.com" }],
+  authors: [{ name: "Nathan Ferreira Santos", url: "https://portfolio.nathannfs.com" }],
   creator: "Nathan Ferreira Santos",
   publisher: "Nathan Ferreira Santos",
   category: "technology",
